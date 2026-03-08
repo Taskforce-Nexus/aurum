@@ -514,11 +514,13 @@ Nexo actualiza el Venture Profile y regenera lo afectado.
 
 **Costo proyectado:** ~$127/mes a 1,000 sesiones de 40 min. Migración futura a Qwen3-TTS cuando volumen supere ~10k sesiones/mes.
 
-**Voz de Nexo:** Cartesia "Spanish-speaking Man" — ID: `34dbb662-8e98-413c-a1ef-1a3407675fe7`
+**Voz de Nexo:** Cartesia "Pedro - Formal Speaker" — ID: `15d0c2e2-8d29-44c3-be23-d585d5f154a1`
+
+Acento mexicano, voz masculina, clara y estable. Voice design API devolvió 405 (no disponible en plan actual). Juan solicitó acento norteño/Monterrey — Cartesia no tiene voz específica de Monterrey; Pedro es el mejor disponible con acento mexicano explícito.
 
 **Implementación:**
 
-- `POST /api/voice/stt` — recibe FormData con audio webm/opus, devuelve `{ transcript }`
+- `POST /api/voice/stt` — recibe FormData con audio webm/opus, devuelve `{ transcript }`. Parámetros: `model=nova-3&language=es-419&smart_format=true&punctuate=true&utterance_end_ms=1000`
 
 - `POST /api/voice/tts` — recibe `{ text }`, devuelve `audio/mpeg` stream
 
@@ -526,31 +528,23 @@ Nexo actualiza el Venture Profile y regenera lo afectado.
 
 - VAD: SPEECH_START_THRESHOLD=20, SILENCE_THRESHOLD=12, SILENCE_DURATION=600ms
 
+- Sentence streaming: LLM stream SSE → boundary detection (min 80 chars + [.!?\n]) → TTS queue por oración → text progresivo con cursor pulsante
+
 - Interrupt: usuario habla durante SPEAKING → cancela AudioBufferSourceNode → vuelve a LISTENING
 
 **Variables de entorno requeridas:** `DEEPGRAM_API_KEY`, `CARTESIA_API_KEY`
 
-**Estado:** implementado — pendiente de API keys de Juan
+**Estado:** implementado — pendiente confirmación en browser real (Juan)
 
 ---
 
-## 25. Voice Mode Architecture
+## 25. Voice Mode Architecture (SUPERSEDIDA por #26)
 
-**Decisión:** Web Speech API con `getUserMedia` explícito antes de iniciar SpeechRecognition. Chrome auto-detiene reconocimiento en silencio — se reinicia vía `keepListeningRef` en `onend`.
+**Decisión original:** Web Speech API con `getUserMedia` explícito antes de iniciar SpeechRecognition.
 
-**Razón:** `navigator.mediaDevices` es `undefined` en contextos no-HTTPS (ej. IP local), causando TypeError silencioso. El ref pattern evita closures stale en callbacks del browser.
+**Supersedida por:** Decisión #26 — Deepgram STT + Cartesia TTS reemplaza Web Speech API completamente.
 
-**Impacto:** `VoiceModePanel.tsx`, `IncubadoraChat.tsx`
-
-**Componentes:**
-
-- `requestPermissionAndStart()` — pide `getUserMedia` primero, luego lanza SpeechRecognition
-
-- `keepListeningRef` — controla si `onend` debe reiniciar o detenerse definitivamente
-
-- `/api/voice/correct` — Haiku corrige transcripción española en final result
-
-**Estado:** activo — pendiente confirmación de Juan en browser real
+**Nota histórica:** Los patrones de `keepListeningRef` y `requestPermissionAndStart()` siguen siendo irrelevantes ya que el nuevo stack usa MediaRecorder, no SpeechRecognition.
 
 ---
 
