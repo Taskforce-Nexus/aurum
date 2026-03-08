@@ -30,6 +30,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   const [transcript, setTranscript] = useState('')
   const [nexoText, setNexoText] = useState('')
   const [supported, setSupported] = useState(true)
+  const [permissionDenied, setPermissionDenied] = useState(false)
 
   const voiceStateRef = useRef<VoiceState>('listening')
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -180,8 +181,20 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
     window.speechSynthesis.speak(utterance)
   }
 
+  async function requestPermissionAndStart() {
+    if (!navigator.mediaDevices?.getUserMedia) { startListening(); return }
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true })
+      setPermissionDenied(false)
+      startListening()
+    } catch {
+      setPermissionDenied(true)
+      setVS('paused')
+    }
+  }
+
   useEffect(() => {
-    startListening()
+    void requestPermissionAndStart()
     return () => {
       recognitionRef.current?.stop()
       window.speechSynthesis?.cancel()
@@ -274,10 +287,15 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
 
         {/* Resume button */}
         {voiceState === 'paused' && (
-          <button onClick={startListening}
-            className="bg-[#C9A84C] hover:bg-[#b8963f] text-[#0F0F11] font-semibold px-6 py-2.5 rounded-lg text-sm transition-colors">
-            Reanudar escucha
-          </button>
+          <div className="flex flex-col items-center gap-2">
+            {permissionDenied && (
+              <p className="text-xs text-[#6b6d75]">Activa el micrófono en tu navegador</p>
+            )}
+            <button type="button" onClick={() => void requestPermissionAndStart()}
+              className="bg-[#C9A84C] hover:bg-[#b8963f] text-[#0F0F11] font-semibold px-6 py-2.5 rounded-lg text-sm transition-colors">
+              Reanudar escucha
+            </button>
+          </div>
         )}
 
         {/* Nexo response text */}

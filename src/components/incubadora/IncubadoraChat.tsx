@@ -195,7 +195,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
-  function toggleVoice() {
+  async function toggleVoice() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SpeechRecognitionAPI = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
     if (!SpeechRecognitionAPI) {
@@ -208,17 +208,36 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
       setIsRecording(false)
       return
     }
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true })
+    } catch {
+      setVoiceUnavailable(true)
+      setTimeout(() => setVoiceUnavailable(false), 3000)
+      return
+    }
     const recognition = new SpeechRecognitionAPI()
     recognition.lang = 'es-ES'
     recognition.continuous = true
     recognition.interimResults = true
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    recognition.onresult = (event: any) => {
-      const transcript = Array.from(event.results)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .map((r: any) => r[0].transcript)
-        .join('')
-      setInput(transcript)
+    recognition.onresult = async (event: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const results: any[] = Array.from(event.results)
+      const last = results[results.length - 1]
+      const raw = last[0].transcript as string
+      setInput(raw)
+      if (last.isFinal) {
+        recognition.stop()
+        try {
+          const res = await fetch('/api/voice/correct', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: raw }),
+          })
+          const data = await res.json()
+          if (data.corrected) setInput(data.corrected)
+        } catch { /* keep raw */ }
+      }
     }
     recognition.onend = () => setIsRecording(false)
     recognition.onerror = () => setIsRecording(false)
@@ -436,7 +455,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
         {voiceMode && (
           <VoiceModePanel
             projectId={project.id}
-            conversationId={conversation?.id}
+            conversationId={activeConversationId}
             messages={messages}
             onMessagesUpdate={setMessages}
             onExit={() => setVoiceMode(false)}
