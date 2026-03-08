@@ -51720,130 +51720,122 @@
     {
       "type": "frame",
       "id": "Zoeeq",
-      "x": 13834,
-      "y": 1500,
+      "x": 8163,
+      "y": -5489,
       "name": "Documents__Branding__Default",
       "clip": true,
       "width": 1440,
-      "height": 5817,
+      "height": 900,
       "fill": "#0D0E11",
       "layout": "vertical",
       "children": [
         {
           "type": "frame",
-          "id": "VXB9w",
-          "name": "headerBar",
+          "id": "l8zq9",
+          "name": "newHdr",
           "width": "fill_container",
           "height": 48,
           "fill": "#111316",
           "stroke": {
             "align": "inside",
-            "thickness": 1,
+            "thickness": {
+              "bottom": 1
+            },
             "fill": "#27282B"
           },
           "padding": [
             0,
-            20
+            40
           ],
           "justifyContent": "space_between",
           "alignItems": "center",
           "children": [
             {
               "type": "frame",
-              "id": "8imVr",
-              "name": "headerLeft",
-              "layout": "vertical",
-              "gap": 2,
+              "id": "SKymm",
+              "name": "bc",
+              "gap": 6,
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "frame",
-                  "id": "Suiyl",
-                  "name": "backBtn",
-                  "fill": "#00000000",
-                  "gap": 6,
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "AStNj",
-                      "name": "label",
-                      "fill": "#8B9DB7",
-                      "content": "← FinTrack  /  Documentos  /  Branding",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 12,
-                      "fontWeight": "normal"
-                    }
-                  ]
+                  "type": "icon_font",
+                  "id": "t43mD",
+                  "name": "bcIco",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "arrow-left",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8B9DB7"
                 },
                 {
                   "type": "text",
-                  "id": "yHtw4",
-                  "name": "docTitle",
-                  "fill": "#FFFFFF",
-                  "content": "Libro de Marca y Posicionamiento",
+                  "id": "SVovj",
+                  "name": "bcTxt",
+                  "fill": "#8B9DB7",
+                  "content": "FinTrack / Documentos / Branding",
                   "fontFamily": "DM Sans",
-                  "fontSize": 16,
-                  "fontWeight": "700"
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             },
             {
               "type": "frame",
-              "id": "u2b1r",
-              "name": "headerRight",
+              "id": "GlLob",
+              "name": "acts",
               "gap": 10,
               "alignItems": "center",
               "children": [
                 {
                   "type": "frame",
-                  "id": "mqE4p",
-                  "name": "statusBadge",
-                  "fill": "#1C2A1C",
+                  "id": "mP6Qi",
+                  "name": "sBadge",
+                  "fill": "#0D1F0D",
                   "cornerRadius": 999,
-                  "gap": 6,
+                  "gap": 5,
                   "padding": [
-                    4,
+                    3,
                     10
                   ],
                   "alignItems": "center",
                   "children": [
                     {
                       "type": "ellipse",
-                      "id": "XK12R",
-                      "name": "dot",
-                      "fill": "#16A34A",
+                      "id": "a05Wa",
+                      "name": "sDot",
+                      "fill": "#4CAF50",
                       "width": 6,
                       "height": 6
                     },
                     {
                       "type": "text",
-                      "id": "BRyLX",
-                      "name": "label",
-                      "fill": "#16A34A",
-                      "content": "Generado",
+                      "id": "7BQ4z",
+                      "name": "sTxt",
+                      "fill": "#4CAF50",
+                      "content": "En curso",
                       "fontFamily": "DM Sans",
-                      "fontSize": 12,
+                      "fontSize": 11,
                       "fontWeight": "500"
                     }
                   ]
                 },
                 {
                   "type": "frame",
-                  "id": "f3Fop",
-                  "name": "exportBtn",
+                  "id": "Sz441",
+                  "name": "expBtn",
                   "fill": "#C9A84C",
                   "cornerRadius": 6,
-                  "gap": 6,
                   "padding": [
                     6,
-                    14
+                    16
                   ],
+                  "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
                     {
                       "type": "text",
-                      "id": "7gZSW",
-                      "name": "label",
+                      "id": "l69ce",
+                      "name": "expTxt",
                       "fill": "#0A0A0B",
                       "content": "Exportar",
                       "fontFamily": "DM Sans",
@@ -51858,109 +51850,148 @@
         },
         {
           "type": "frame",
-          "id": "eweCZ",
-          "name": "docNav",
+          "id": "IdWOb",
+          "name": "newTabs",
           "width": "fill_container",
           "height": 36,
           "fill": "#111316",
           "stroke": {
             "align": "inside",
-            "thickness": 1,
+            "thickness": {
+              "bottom": 1
+            },
             "fill": "#27282B"
           },
-          "gap": 8,
           "padding": [
             0,
-            16
+            40
           ],
           "alignItems": "center",
           "children": [
             {
               "type": "frame",
-              "id": "hEQNf",
+              "id": "qfMMy",
               "name": "tab1",
-              "fill": "#C9A84C20",
-              "cornerRadius": 5,
+              "height": 36,
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "bottom": 2
+                },
+                "fill": "#C9A84C"
+              },
               "padding": [
-                6,
-                12
+                0,
+                16
               ],
+              "justifyContent": "center",
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
-                  "id": "E9ljr",
-                  "name": "label",
+                  "id": "AxWT9",
+                  "name": "t1Lbl",
                   "fill": "#C9A84C",
                   "content": "Identidad",
                   "fontFamily": "DM Sans",
                   "fontSize": 13,
-                  "fontWeight": "500"
+                  "fontWeight": "600"
                 }
               ]
             },
             {
               "type": "frame",
-              "id": "Vtguu",
+              "id": "XRNw8",
               "name": "tab2",
-              "cornerRadius": 5,
+              "height": 36,
               "padding": [
-                6,
-                12
+                0,
+                16
               ],
+              "justifyContent": "center",
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
-                  "id": "cL8KD",
-                  "name": "label",
-                  "fill": "#8B9DB7",
+                  "id": "DtZLT",
+                  "name": "t2Lbl",
+                  "fill": "#4A5568",
                   "content": "Posicionamiento",
                   "fontFamily": "DM Sans",
                   "fontSize": 13,
-                  "fontWeight": "500"
+                  "fontWeight": "normal"
                 }
               ]
             },
             {
               "type": "frame",
-              "id": "u7tH0",
+              "id": "L5QJi",
               "name": "tab3",
-              "cornerRadius": 5,
+              "height": 36,
               "padding": [
-                6,
-                12
+                0,
+                16
               ],
+              "justifyContent": "center",
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
-                  "id": "mJ6LF",
-                  "name": "label",
-                  "fill": "#8B9DB7",
+                  "id": "qM4bz",
+                  "name": "t3Lbl",
+                  "fill": "#4A5568",
                   "content": "Mensajes Clave",
                   "fontFamily": "DM Sans",
                   "fontSize": 13,
-                  "fontWeight": "500"
+                  "fontWeight": "normal"
                 }
               ]
             },
             {
               "type": "frame",
-              "id": "ZOEei",
+              "id": "oBUQa",
               "name": "tab4",
-              "cornerRadius": 5,
+              "height": 36,
               "padding": [
-                6,
-                12
+                0,
+                16
               ],
+              "justifyContent": "center",
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
-                  "id": "IrZXC",
-                  "name": "label",
-                  "fill": "#8B9DB7",
-                  "content": "Identidad Visual",
+                  "id": "5fean",
+                  "name": "t4Lbl",
+                  "fill": "#4A5568",
+                  "content": "Naming",
                   "fontFamily": "DM Sans",
                   "fontSize": 13,
-                  "fontWeight": "500"
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ewn9S",
+              "name": "tab5",
+              "height": 36,
+              "padding": [
+                0,
+                16
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "833u7",
+                  "name": "t5Lbl",
+                  "fill": "#4A5568",
+                  "content": "Voz de Marca",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -51968,156 +51999,219 @@
         },
         {
           "type": "frame",
-          "id": "f88fL",
-          "name": "body",
+          "id": "uVqtU",
+          "name": "newBody",
           "width": "fill_container",
           "height": "fill_container",
+          "fill": "#0A0A0B",
           "children": [
             {
               "type": "frame",
-              "id": "7Tgcu",
-              "name": "sidebar",
-              "width": 260,
+              "id": "gVwVa",
+              "name": "mainArea",
+              "width": "fill_container",
               "height": "fill_container",
-              "fill": "#0D0E11",
-              "stroke": {
-                "align": "inside",
-                "thickness": {
-                  "right": 1
-                },
-                "fill": "#27282B"
-              },
+              "fill": "#0A0A0B",
               "layout": "vertical",
-              "gap": 8,
+              "gap": 20,
               "padding": [
-                24,
-                20
+                32,
+                40
               ],
               "children": [
                 {
                   "type": "text",
-                  "id": "zVfbf",
-                  "name": "sidebarTitle",
-                  "fill": "#4A5568",
-                  "content": "SECCIONES",
+                  "id": "twJng",
+                  "name": "secTitle",
+                  "fill": "#FFFFFF",
+                  "content": "Identidad de Marca",
                   "fontFamily": "DM Sans",
-                  "fontSize": 11,
-                  "fontWeight": "600",
-                  "letterSpacing": 1.2
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "SJqrR",
+                  "name": "secSub",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Define el propósito y los valores fundamentales de FinTrack.",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
-                  "id": "Pel6E",
-                  "name": "item1",
+                  "id": "UHUKb",
+                  "name": "cardsRow",
                   "width": "fill_container",
-                  "fill": "#C9A84C15",
-                  "cornerRadius": 6,
-                  "padding": [
-                    8,
-                    12
-                  ],
+                  "height": "fill_container",
+                  "gap": 20,
                   "children": [
                     {
-                      "type": "text",
-                      "id": "wmRxb",
-                      "name": "label",
-                      "fill": "#C9A84C",
-                      "content": "Misión, Visión y Valores",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "fHO17",
-                  "name": "item2",
-                  "width": "fill_container",
-                  "cornerRadius": 6,
-                  "padding": [
-                    8,
-                    12
-                  ],
-                  "children": [
+                      "type": "frame",
+                      "id": "arRSF",
+                      "name": "mCard",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#111316",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#27282B"
+                      },
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        24,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "LhINW",
+                          "name": "mLbl",
+                          "fill": "#C9A84C",
+                          "content": "MISIÓN",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.2
+                        },
+                        {
+                          "type": "text",
+                          "id": "cgmGc",
+                          "name": "mTxt",
+                          "fill": "#EDEDEF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Democratizar la gestión financiera para fundadores en etapas tempranas, eliminando la complejidad y permitiendo decisiones informadas desde el día uno.",
+                          "lineHeight": 1.7,
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
                     {
-                      "type": "text",
-                      "id": "of3kS",
-                      "name": "label",
-                      "fill": "#8B9DB7",
-                      "content": "Categoría de Marca",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "xqPVJ",
-                  "name": "item3",
-                  "width": "fill_container",
-                  "cornerRadius": 6,
-                  "padding": [
-                    8,
-                    12
-                  ],
-                  "children": [
+                      "type": "frame",
+                      "id": "Txicu",
+                      "name": "vCard",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#111316",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#27282B"
+                      },
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        24,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "IGEeQ",
+                          "name": "vLbl",
+                          "fill": "#C9A84C",
+                          "content": "VISIÓN",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.2
+                        },
+                        {
+                          "type": "text",
+                          "id": "Skbhq",
+                          "name": "vTxt",
+                          "fill": "#EDEDEF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Ser la plataforma de referencia donde cada founder entiende su salud financiera sin necesitar un CFO, construyendo empresas más sólidas desde la base.",
+                          "lineHeight": 1.7,
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
                     {
-                      "type": "text",
-                      "id": "Ib6yp",
-                      "name": "label",
-                      "fill": "#8B9DB7",
-                      "content": "Identidad Visual",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "n08G9",
-                  "name": "item4",
-                  "width": "fill_container",
-                  "cornerRadius": 6,
-                  "padding": [
-                    8,
-                    12
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "x7otj",
-                      "name": "label",
-                      "fill": "#8B9DB7",
-                      "content": "Propuesta de Valor de Marca",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "iRaj2",
-                  "name": "item5",
-                  "width": "fill_container",
-                  "cornerRadius": 6,
-                  "padding": [
-                    8,
-                    12
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "Mifke",
-                      "name": "label",
-                      "fill": "#8B9DB7",
-                      "content": "Mensajes Clave",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "y69e7",
+                      "name": "wCard",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#111316",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#27282B"
+                      },
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        24,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mAdNW",
+                          "name": "wLbl",
+                          "fill": "#C9A84C",
+                          "content": "VALORES",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.2
+                        },
+                        {
+                          "type": "text",
+                          "id": "fMSW0",
+                          "name": "w1",
+                          "fill": "#EDEDEF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Claridad sobre complejidad",
+                          "lineHeight": 1.6,
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WmDsD",
+                          "name": "w2",
+                          "fill": "#EDEDEF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Confianza antes que velocidad",
+                          "lineHeight": 1.6,
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "enhvg",
+                          "name": "w3",
+                          "fill": "#EDEDEF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Diseñado para fundadores reales",
+                          "lineHeight": 1.6,
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -52125,864 +52219,106 @@
             },
             {
               "type": "frame",
-              "id": "pZD8q",
-              "name": "brandMain",
-              "width": "fill_container",
+              "id": "8vrei",
+              "name": "sidebar",
+              "clip": true,
+              "width": 280,
               "height": "fill_container",
-              "fill": "#0A0A0B",
+              "fill": "#111316",
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "left": 1
+                },
+                "fill": "#27282B"
+              },
               "layout": "vertical",
-              "gap": 40,
               "padding": [
-                48,
-                64
+                28,
+                20
               ],
+              "justifyContent": "space_between",
               "children": [
                 {
-                  "type": "text",
-                  "id": "5vknv",
-                  "name": "sectionTitle",
-                  "fill": "#FFFFFF",
-                  "content": "Misión, Visión y Valores",
-                  "fontFamily": "DM Sans",
-                  "fontSize": 24,
-                  "fontWeight": "700"
-                },
-                {
                   "type": "frame",
-                  "id": "ohkOb",
-                  "name": "mvvGrid",
-                  "width": "fill_container",
-                  "gap": 24,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "E6Wi4",
-                      "name": "misionCard",
-                      "width": "fill_container",
-                      "fill": "#111113",
-                      "cornerRadius": 10,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
-                      "layout": "vertical",
-                      "gap": 12,
-                      "padding": 24,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "1kqPA",
-                          "name": "cardLabel",
-                          "fill": "#C9A84C",
-                          "content": "MISIÓN",
-                          "fontFamily": "DM Sans",
-                          "fontSize": 11,
-                          "fontWeight": "600",
-                          "letterSpacing": 1.2
-                        },
-                        {
-                          "type": "text",
-                          "id": "24RJN",
-                          "name": "cardText",
-                          "fill": "#E8E8E8",
-                          "textGrowth": "fixed-width",
-                          "width": "fill_container",
-                          "content": "Empoderar a founders con un sistema operativo de incubación guiado por IA que transforma ideas en empresas documentadas y listas para construir.",
-                          "lineHeight": 1.65,
-                          "fontFamily": "DM Sans",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "LTj3J",
-                      "name": "visionCard",
-                      "width": "fill_container",
-                      "fill": "#111113",
-                      "cornerRadius": 10,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
-                      "layout": "vertical",
-                      "gap": 12,
-                      "padding": 24,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "yKM9g",
-                          "name": "cardLabel",
-                          "fill": "#C9A84C",
-                          "content": "VISIÓN",
-                          "fontFamily": "DM Sans",
-                          "fontSize": 11,
-                          "fontWeight": "600",
-                          "letterSpacing": 1.2
-                        },
-                        {
-                          "type": "text",
-                          "id": "eDMEW",
-                          "name": "cardText",
-                          "fill": "#E8E8E8",
-                          "textGrowth": "fixed-width",
-                          "width": "fill_container",
-                          "content": "Ser el estándar global de incubación inteligente para equipos fundadores que construyen software de alto valor.",
-                          "lineHeight": 1.65,
-                          "fontFamily": "DM Sans",
-                          "fontSize": 14,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "HsnPN",
-                      "name": "valoresCard",
-                      "width": "fill_container",
-                      "fill": "#111113",
-                      "cornerRadius": 10,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
-                      "layout": "vertical",
-                      "gap": 12,
-                      "padding": 24,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "dfmXG",
-                          "name": "cardLabel",
-                          "fill": "#C9A84C",
-                          "content": "VALORES",
-                          "fontFamily": "DM Sans",
-                          "fontSize": 11,
-                          "fontWeight": "600",
-                          "letterSpacing": 1.2
-                        },
-                        {
-                          "type": "frame",
-                          "id": "LyTKD",
-                          "name": "valuesList",
-                          "width": "fill_container",
-                          "layout": "vertical",
-                          "gap": 8,
-                          "children": [
-                            {
-                              "type": "frame",
-                              "id": "K5Ldd",
-                              "name": "v1",
-                              "gap": 10,
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "ellipse",
-                                  "id": "BkRuT",
-                                  "name": "dot",
-                                  "fill": "#C9A84C",
-                                  "width": 5,
-                                  "height": 5
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "AzsIV",
-                                  "name": "text",
-                                  "fill": "#E8E8E8",
-                                  "content": "Claridad estratégica sobre velocidad arbitraria",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
-                              "id": "5YcUh",
-                              "name": "v2",
-                              "gap": 10,
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "ellipse",
-                                  "id": "fUu6k",
-                                  "name": "dot",
-                                  "fill": "#C9A84C",
-                                  "width": 5,
-                                  "height": 5
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "IF28V",
-                                  "name": "text",
-                                  "fill": "#E8E8E8",
-                                  "content": "Decisiones basadas en datos, no en intuición ciega",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
-                              "id": "3mwOk",
-                              "name": "v3",
-                              "gap": 10,
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "ellipse",
-                                  "id": "HM3qW",
-                                  "name": "dot",
-                                  "fill": "#C9A84C",
-                                  "width": 5,
-                                  "height": 5
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "SGnoZ",
-                                  "name": "text",
-                                  "fill": "#E8E8E8",
-                                  "content": "El founder siempre tiene la última palabra",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
-                              "id": "uEONm",
-                              "name": "v4",
-                              "gap": 10,
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "ellipse",
-                                  "id": "FlAzk",
-                                  "name": "dot",
-                                  "fill": "#C9A84C",
-                                  "width": 5,
-                                  "height": 5
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "ARkYC",
-                                  "name": "text",
-                                  "fill": "#E8E8E8",
-                                  "content": "Premium accesible — rigor de consultoría, precio de software",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "rectangle",
-                  "id": "jLQcu",
-                  "name": "sectionDivider",
-                  "fill": "#1E1F22",
-                  "width": "fill_container",
-                  "height": 1
-                },
-                {
-                  "type": "frame",
-                  "id": "DDOGv",
-                  "name": "posicionamientoSection",
+                  "id": "RjaZx",
+                  "name": "idxGroup",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 24,
+                  "gap": 10,
                   "children": [
                     {
                       "type": "text",
-                      "id": "uJ5h9",
-                      "name": "sectionTitle",
-                      "fill": "#FFFFFF",
+                      "id": "s2Zzt",
+                      "name": "idxLbl",
+                      "fill": "#4A5568",
+                      "content": "SECCIONES",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "text",
+                      "id": "ot070",
+                      "name": "i1",
+                      "fill": "#C9A84C",
+                      "content": "Identidad",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "iuYaA",
+                      "name": "i2",
+                      "fill": "#4A5568",
                       "content": "Posicionamiento",
                       "fontFamily": "DM Sans",
-                      "fontSize": 24,
-                      "fontWeight": "700"
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
-                      "type": "frame",
-                      "id": "Rj0Wk",
-                      "name": "posGrid",
-                      "width": "fill_container",
-                      "gap": 24,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "ISziS",
-                          "name": "categoriaCard",
-                          "width": "fill_container",
-                          "fill": "#111113",
-                          "cornerRadius": 10,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "layout": "vertical",
-                          "gap": 10,
-                          "padding": 24,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "VlRI9",
-                              "name": "cardLabel",
-                              "fill": "#C9A84C",
-                              "content": "CATEGORÍA",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "600",
-                              "letterSpacing": 1.2
-                            },
-                            {
-                              "type": "text",
-                              "id": "UprlS",
-                              "name": "cardText",
-                              "fill": "#E8E8E8",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "Sistema operativo de incubación de negocios guiado por IA",
-                              "lineHeight": 1.5,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 16,
-                              "fontWeight": "600"
-                            },
-                            {
-                              "type": "text",
-                              "id": "ORyYJ",
-                              "name": "sub",
-                              "fill": "#8B9DB7",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "Para founders que construyen software de alto valor y necesitan ir de la idea a la documentación completa sin contratar consultoría.",
-                              "lineHeight": 1.65,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 13,
-                              "fontWeight": "normal"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "gkaFX",
-                          "name": "diferenciacionCard",
-                          "width": "fill_container",
-                          "fill": "#111113",
-                          "cornerRadius": 10,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "layout": "vertical",
-                          "gap": 10,
-                          "padding": 24,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "IHGG4",
-                              "name": "cardLabel",
-                              "fill": "#C9A84C",
-                              "content": "DIFERENCIACIÓN",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "600",
-                              "letterSpacing": 1.2
-                            },
-                            {
-                              "type": "frame",
-                              "id": "A2SNr",
-                              "name": "diffItem1",
-                              "width": "fill_container",
-                              "gap": 10,
-                              "children": [
-                                {
-                                  "type": "ellipse",
-                                  "id": "OKC8g",
-                                  "name": "dot",
-                                  "fill": "#C9A84C",
-                                  "width": 5,
-                                  "height": 5
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "A9Sc5",
-                                  "name": "text",
-                                  "fill": "#E8E8E8",
-                                  "content": "Consejo asesor de 9 roles vs. chatbot genérico",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
-                              "id": "TM6X3",
-                              "name": "diffItem2",
-                              "width": "fill_container",
-                              "gap": 10,
-                              "children": [
-                                {
-                                  "type": "ellipse",
-                                  "id": "gUP6n",
-                                  "name": "dot",
-                                  "fill": "#C9A84C",
-                                  "width": 5,
-                                  "height": 5
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "2nD1c",
-                                  "name": "text",
-                                  "fill": "#E8E8E8",
-                                  "content": "Output estructurado (5 docs) vs. conversación sin artefactos",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
-                              "id": "2YqAN",
-                              "name": "diffItem3",
-                              "width": "fill_container",
-                              "gap": 10,
-                              "children": [
-                                {
-                                  "type": "ellipse",
-                                  "id": "btepA",
-                                  "name": "dot",
-                                  "fill": "#C9A84C",
-                                  "width": 5,
-                                  "height": 5
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "3jY1v",
-                                  "name": "text",
-                                  "fill": "#E8E8E8",
-                                  "content": "Debate Nexo Dual: crítico + constructivo en cada respuesta",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 14,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "rectangle",
-                  "id": "wfu9W",
-                  "name": "sectionDivider2",
-                  "fill": "#1E1F22",
-                  "width": "fill_container",
-                  "height": 1
-                },
-                {
-                  "type": "frame",
-                  "id": "rDXaw",
-                  "name": "mensajesSection",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 24,
-                  "children": [
-                    {
                       "type": "text",
-                      "id": "F2X2g",
-                      "name": "sectionTitle",
-                      "fill": "#FFFFFF",
+                      "id": "qCila",
+                      "name": "i3",
+                      "fill": "#4A5568",
                       "content": "Mensajes Clave",
                       "fontFamily": "DM Sans",
-                      "fontSize": 24,
-                      "fontWeight": "700"
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
-                    {
-                      "type": "frame",
-                      "id": "KLcWD",
-                      "name": "msgGrid",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 12,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "Ic9OD",
-                          "name": "msg1",
-                          "width": "fill_container",
-                          "fill": "#111113",
-                          "cornerRadius": 10,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "layout": "vertical",
-                          "gap": 8,
-                          "padding": [
-                            20,
-                            24
-                          ],
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "V9XKy",
-                              "name": "tag",
-                              "fill": "#C9A84C",
-                              "content": "PARA FOUNDERS",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "600",
-                              "letterSpacing": 1.2
-                            },
-                            {
-                              "type": "text",
-                              "id": "tdOnc",
-                              "name": "text",
-                              "fill": "#E8E8E8",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "\"De la idea al producto documentado en una sesión. Sin consultora, sin equipo grande, sin perder el norte.\"",
-                              "lineHeight": 1.6,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "500"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "NyZ3U",
-                          "name": "msg2",
-                          "width": "fill_container",
-                          "fill": "#111113",
-                          "cornerRadius": 10,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "layout": "vertical",
-                          "gap": 8,
-                          "padding": [
-                            20,
-                            24
-                          ],
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "xr9v0",
-                              "name": "tag",
-                              "fill": "#C9A84C",
-                              "content": "PARA INVERSIONISTAS",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "600",
-                              "letterSpacing": 1.2
-                            },
-                            {
-                              "type": "text",
-                              "id": "v4ivR",
-                              "name": "text",
-                              "fill": "#E8E8E8",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "\"El equipo fundador llegó con documentación de negocio y producto lista para construir. AURUM garantizó que validaron antes de invertir tiempo de ingeniería.\"",
-                              "lineHeight": 1.6,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "500"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "4Apct",
-                          "name": "msg3",
-                          "width": "fill_container",
-                          "fill": "#111113",
-                          "cornerRadius": 10,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "layout": "vertical",
-                          "gap": 8,
-                          "padding": [
-                            20,
-                            24
-                          ],
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "EJZ4v",
-                              "name": "tag",
-                              "fill": "#C9A84C",
-                              "content": "PARA EL EQUIPO TÉCNICO",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "600",
-                              "letterSpacing": 1.2
-                            },
-                            {
-                              "type": "text",
-                              "id": "VV1Tb",
-                              "name": "text",
-                              "fill": "#E8E8E8",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "\"Antes de escribir una línea de código, el producto estaba definido, validado y documentado. AURUM eliminó el retrabajo por especificación incompleta.\"",
-                              "lineHeight": 1.6,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "500"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "rectangle",
-                  "id": "FkHgY",
-                  "name": "sectionDivider3",
-                  "fill": "#1E1F22",
-                  "width": "fill_container",
-                  "height": 1
-                },
-                {
-                  "type": "frame",
-                  "id": "S2OGf",
-                  "name": "namingSection",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 24,
-                  "children": [
                     {
                       "type": "text",
-                      "id": "m94gp",
-                      "name": "sectionTitle",
-                      "fill": "#FFFFFF",
-                      "content": "Naming y Voz de Marca",
+                      "id": "uvUqP",
+                      "name": "i4",
+                      "fill": "#4A5568",
+                      "content": "Naming",
                       "fontFamily": "DM Sans",
-                      "fontSize": 24,
-                      "fontWeight": "700"
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
-                      "type": "frame",
-                      "id": "q3zbD",
-                      "name": "namingGrid",
-                      "width": "fill_container",
-                      "gap": 24,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "DRwpY",
-                          "name": "nameCard",
-                          "width": "fill_container",
-                          "fill": "#111113",
-                          "cornerRadius": 10,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "layout": "vertical",
-                          "gap": 10,
-                          "padding": 24,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "Ig8HJ",
-                              "name": "cardLabel",
-                              "fill": "#C9A84C",
-                              "content": "NOMBRE DE MARCA",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "600",
-                              "letterSpacing": 1.2
-                            },
-                            {
-                              "type": "text",
-                              "id": "WlrKf",
-                              "name": "name",
-                              "fill": "#FFFFFF",
-                              "content": "AURUM",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 32,
-                              "fontWeight": "700",
-                              "letterSpacing": 6
-                            },
-                            {
-                              "type": "text",
-                              "id": "uFfOD",
-                              "name": "meaning",
-                              "fill": "#8B9DB7",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "Del latín: oro. Evoca valor, permanencia y excelencia. Reminiscente de consultoría de élite sin la pretensión corporativa.",
-                              "lineHeight": 1.65,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 13,
-                              "fontWeight": "normal"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "RQGLN",
-                          "name": "voiceCard",
-                          "width": "fill_container",
-                          "fill": "#111113",
-                          "cornerRadius": 10,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "layout": "vertical",
-                          "gap": 10,
-                          "padding": 24,
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "FSR4H",
-                              "name": "cardLabel",
-                              "fill": "#C9A84C",
-                              "content": "VOZ DE MARCA",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "600",
-                              "letterSpacing": 1.2
-                            },
-                            {
-                              "type": "frame",
-                              "id": "ZiymL",
-                              "name": "voiceAttrs",
-                              "width": "fill_container",
-                              "layout": "vertical",
-                              "gap": 8,
-                              "children": [
-                                {
-                                  "type": "frame",
-                                  "id": "vDtQd",
-                                  "name": "attr1",
-                                  "width": "fill_container",
-                                  "gap": 12,
-                                  "justifyContent": "space_between",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "rDL6t",
-                                      "name": "attrName",
-                                      "fill": "#8B9DB7",
-                                      "content": "Tono",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "CNKV0",
-                                      "name": "attrVal",
-                                      "fill": "#E8E8E8",
-                                      "content": "Estratégico, preciso, sin fluff",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "214wn",
-                                  "name": "attr2",
-                                  "width": "fill_container",
-                                  "gap": 12,
-                                  "justifyContent": "space_between",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "fa7Tr",
-                                      "name": "attrName",
-                                      "fill": "#8B9DB7",
-                                      "content": "Estilo",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "cHaXP",
-                                      "name": "attrVal",
-                                      "fill": "#E8E8E8",
-                                      "content": "Consultoría de alto nivel + software serio",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "nIWP1",
-                                  "name": "attr3",
-                                  "width": "fill_container",
-                                  "gap": 12,
-                                  "justifyContent": "space_between",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "B58NC",
-                                      "name": "attrName",
-                                      "fill": "#8B9DB7",
-                                      "content": "Evitar",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "nZLTv",
-                                      "name": "attrVal",
-                                      "fill": "#E8E8E8",
-                                      "content": "Empowerment vacío, términos de startup trend, fluffery",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
+                      "type": "text",
+                      "id": "jbnFA",
+                      "name": "i5",
+                      "fill": "#4A5568",
+                      "content": "Voz de Marca",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
+                },
+                {
+                  "type": "text",
+                  "id": "pEKuc",
+                  "name": "backTxt",
+                  "fill": "#8B9DB7",
+                  "content": "← Volver al proyecto",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             }
