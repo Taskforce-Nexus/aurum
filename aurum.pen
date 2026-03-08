@@ -54371,7 +54371,7 @@
                           "id": "PMe3g",
                           "name": "current",
                           "fill": "#A0A0A6",
-                          "content": "FinTrack",
+                          "content": "Helix",
                           "fontFamily": "DM Sans",
                           "fontSize": 13,
                           "fontWeight": "normal"
@@ -54398,7 +54398,7 @@
                               "id": "lrCHJ",
                               "name": "projName",
                               "fill": "#EDEDEF",
-                              "content": "FinTrack — App de finanzas personales",
+                              "content": "Helix — Software de gestión de inventario",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 24,
                               "fontWeight": "normal"
@@ -55439,6 +55439,37 @@
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
                               "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ozLR2",
+                              "name": "dsBtnF",
+                              "width": "fill_container",
+                              "fill": "#8B5CF615",
+                              "cornerRadius": 6,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#8B5CF640"
+                              },
+                              "padding": [
+                                8,
+                                16
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "iM1uM",
+                                  "name": "dsBtnL",
+                                  "fill": "#8B5CF6",
+                                  "content": "Abrir Design Studio →",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 13,
+                                  "fontWeight": "600"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -56686,7 +56717,7 @@
                           "id": "TRHYz",
                           "name": "current",
                           "fill": "#A0A0A6",
-                          "content": "FinTrack",
+                          "content": "Crestón",
                           "fontFamily": "DM Sans",
                           "fontSize": 13,
                           "fontWeight": "normal"
@@ -56713,7 +56744,7 @@
                               "id": "DCji2",
                               "name": "projName",
                               "fill": "#EDEDEF",
-                              "content": "FinTrack — App de finanzas personales",
+                              "content": "Crestón — Desarrolladora de vivienda residencial",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 24,
                               "fontWeight": "normal"
@@ -56741,7 +56772,7 @@
                                   "id": "ldu3Y",
                                   "name": "date",
                                   "fill": "#4E4E56",
-                                  "content": "Última actividad: hace 2 horas",
+                                  "content": "Última actividad: hace 45 min",
                                   "fontFamily": "DM Sans",
                                   "fontSize": 12,
                                   "fontWeight": "normal"
@@ -56876,7 +56907,7 @@
                                       "id": "WvdRn",
                                       "name": "vp3VC",
                                       "fill": "#EDEDEF",
-                                      "content": "Desarrolladores inmobiliarios",
+                                      "content": "Compradores de vivienda media-alta",
                                       "fontFamily": "DM Sans",
                                       "fontSize": 13,
                                       "fontWeight": "500"
@@ -57342,7 +57373,7 @@
                               "textGrowth": "fixed-width-height",
                               "width": 152,
                               "height": 50,
-                              "content": "hace 2 horas · 47 mensajes",
+                              "content": "hace 45 min · 31 mensajes",
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -57409,7 +57440,7 @@
                               "id": "XcIlP",
                               "name": "count",
                               "fill": "#EDEDEF",
-                              "content": "9 asesores configurados",
+                              "content": "7 asesores configurados",
                               "fontFamily": "DM Sans",
                               "fontSize": 15,
                               "fontWeight": "600"
@@ -57540,7 +57571,7 @@
                               "id": "2RpzZ",
                               "name": "meta",
                               "fill": "#6E6E76",
-                              "content": "Última actividad hace 2 horas",
+                              "content": "Última actividad hace 45 min",
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -57620,7 +57651,7 @@
                                   "id": "LQWGb",
                                   "name": "text",
                                   "fill": "#EDEDEF",
-                                  "content": "2 de 15 documentos listos",
+                                  "content": "2 de 10 documentos listos",
                                   "fontFamily": "DM Sans",
                                   "fontSize": 15,
                                   "fontWeight": "600"
@@ -57678,7 +57709,7 @@
                               "textGrowth": "fixed-width-height",
                               "width": 291,
                               "height": 40,
-                              "content": "Propuesta de Valor · Modelo de Negocio listos. Marca, Recorrido y Plan pendientes.",
+                              "content": "Propuesta de Valor · Modelo de Negocio listos. Recorrido, Marca y Plan pendientes.",
                               "lineHeight": 1.5,
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
@@ -57721,18 +57752,18 @@
                     },
                     {
                       "type": "frame",
-                      "id": "iY5P4",
-                      "name": "newDocsC",
+                      "id": "LldkR",
+                      "name": "newDocs",
                       "width": "fill_container",
                       "layout": "vertical",
                       "gap": 16,
                       "children": [
                         {
                           "type": "text",
-                          "id": "Z0zl0",
-                          "name": "docsTitleC",
+                          "id": "9TZcp",
+                          "name": "dTitle",
                           "fill": "#A0A0A6",
-                          "content": "DOCUMENTOS AURUM · 0 / 11",
+                          "content": "DOCUMENTOS AURUM · 2 / 10",
                           "fontFamily": "DM Sans",
                           "fontSize": 11,
                           "fontWeight": "600",
@@ -57740,32 +57771,79 @@
                         },
                         {
                           "type": "frame",
-                          "id": "vAsgB",
-                          "name": "grpNeg",
+                          "id": "aFKDx",
+                          "name": "gNeg",
                           "width": "fill_container",
                           "layout": "vertical",
                           "gap": 8,
                           "children": [
                             {
                               "type": "text",
-                              "id": "cSby2",
-                              "name": "grpNegLbl",
+                              "id": "nT7oB",
+                              "name": "gNegL",
                               "fill": "#6E6E76",
-                              "content": "Negocio · 5",
+                              "content": "NEGOCIO · 5",
                               "fontFamily": "DM Sans",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "600",
                               "letterSpacing": 1.2
                             },
                             {
                               "type": "text",
-                              "id": "PFEOg",
-                              "name": "grpNegItems",
+                              "id": "NhBm0",
+                              "name": "n1",
+                              "fill": "#4CAF50",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "✓  Propuesta de Valor — Aprobado",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ZBEjq",
+                              "name": "n2",
+                              "fill": "#C9A84C",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "●  Modelo de Negocio — En progreso",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "w3cob",
+                              "name": "n3",
                               "fill": "#4A5568",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "Value Proposition · Business Model · Customer Journey · Branding · Business Plan",
-                              "lineHeight": 1.6,
+                              "content": "○  Recorrido del Cliente",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "T4AKn",
+                              "name": "n4",
+                              "fill": "#4A5568",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "○  Marca y Posicionamiento",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "bSD6b",
+                              "name": "n5",
+                              "fill": "#4A5568",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "○  Plan de Negocio",
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -57774,32 +57852,55 @@
                         },
                         {
                           "type": "frame",
-                          "id": "iSHDX",
-                          "name": "grpOps",
+                          "id": "mp0aL",
+                          "name": "gOps",
                           "width": "fill_container",
                           "layout": "vertical",
                           "gap": 8,
                           "children": [
                             {
                               "type": "text",
-                              "id": "LWRz0",
-                              "name": "grpOpsLbl",
+                              "id": "KeakN",
+                              "name": "gOpsL",
                               "fill": "#6E6E76",
-                              "content": "Operaciones · 4",
+                              "content": "OPERACIONES · 3",
                               "fontFamily": "DM Sans",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "600",
                               "letterSpacing": 1.2
                             },
                             {
                               "type": "text",
-                              "id": "kT2tx",
-                              "name": "grpOpsItems",
+                              "id": "rBmk4",
+                              "name": "o1",
                               "fill": "#4A5568",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "Gestión de Obra · Flujo de Caja · Subcontratistas · Licitaciones",
-                              "lineHeight": 1.6,
+                              "content": "○  Gestión de Obra",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "2HnVi",
+                              "name": "o2",
+                              "fill": "#4A5568",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "○  Flujo de Caja por Proyecto",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "IJJcf",
+                              "name": "o3",
+                              "fill": "#4A5568",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "○  Licitaciones y Contratos",
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -57808,32 +57909,43 @@
                         },
                         {
                           "type": "frame",
-                          "id": "SxtGt",
-                          "name": "grpEng",
+                          "id": "pUUPS",
+                          "name": "gEng",
                           "width": "fill_container",
                           "layout": "vertical",
                           "gap": 8,
                           "children": [
                             {
                               "type": "text",
-                              "id": "AsbbO",
-                              "name": "grpEngLbl",
+                              "id": "Tv10R",
+                              "name": "gEngL",
                               "fill": "#6E6E76",
-                              "content": "Ingeniería · 2",
+                              "content": "INGENIERÍA · 2",
                               "fontFamily": "DM Sans",
-                              "fontSize": 11,
+                              "fontSize": 10,
                               "fontWeight": "600",
                               "letterSpacing": 1.2
                             },
                             {
                               "type": "text",
-                              "id": "RpEdy",
-                              "name": "grpEngItems",
+                              "id": "4pwpH",
+                              "name": "e1",
                               "fill": "#4A5568",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "System Design · Backlog",
-                              "lineHeight": 1.6,
+                              "content": "○  Diseño de Sistema",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "8pfIV",
+                              "name": "e2",
+                              "fill": "#4A5568",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "○  Backlog",
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
                               "fontWeight": "normal"
@@ -57934,7 +58046,7 @@
                               "id": "UOrc8",
                               "name": "st2num",
                               "fill": "#C5A55A",
-                              "content": "47",
+                              "content": "31",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 28,
                               "fontWeight": "700"
@@ -57970,7 +58082,7 @@
                               "id": "X4e6h",
                               "name": "st3num",
                               "fill": "#C5A55A",
-                              "content": "2.5h",
+                              "content": "1.8h",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 28,
                               "fontWeight": "700"
@@ -58047,7 +58159,7 @@
                               "fill": "#A0A0A6",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "El consejo está validando canales de distribución, estructura de ingresos y economía unitaria.",
+                              "content": "El consejo está evaluando estructura de costos por obra, márgenes y ciclos de recuperación de inversión.",
                               "lineHeight": 1.5,
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
@@ -58111,7 +58223,7 @@
                               "fill": "#A0A0A6",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "\"El modelo freemium propuesto tiene riesgo de churn alto. El consejo sugiere validar con 50 usuarios pagando antes de escalar.\"",
+                              "content": "\"El margen bruto proyectado del 18% está por debajo del benchmark regional del 24%. El consejo recomienda revisar costos de subcontratistas antes de cerrar el modelo.\"",
                               "lineHeight": 1.5,
                               "fontFamily": "DM Sans",
                               "fontSize": 12,
@@ -58123,7 +58235,7 @@
                               "id": "iayzZ",
                               "name": "insightAuthor",
                               "fill": "#6E6E76",
-                              "content": "— Crítico, hace 2 horas",
+                              "content": "— Crítico, hace 45 min",
                               "fontFamily": "DM Sans",
                               "fontSize": 11,
                               "fontWeight": "normal"
@@ -58184,7 +58296,7 @@
                                   "id": "uy8ot",
                                   "name": "tokenNum",
                                   "fill": "#C5A55A",
-                                  "content": "124.3K",
+                                  "content": "89.1K",
                                   "fontFamily": "Cormorant Garamond",
                                   "fontSize": 24,
                                   "fontWeight": "700"
@@ -58206,7 +58318,7 @@
                               "id": "lP29j",
                               "name": "costUsd",
                               "fill": "#EDEDEF",
-                              "content": "≈ $0.47 USD",
+                              "content": "≈ $0.34 USD",
                               "fontFamily": "DM Sans",
                               "fontSize": 14,
                               "fontWeight": "600"
@@ -58233,7 +58345,7 @@
                                   "id": "z3KZ1",
                                   "name": "avgText",
                                   "fill": "#30A46C",
-                                  "content": "23% bajo promedio ($0.61)",
+                                  "content": "12% bajo promedio ($0.39)",
                                   "fontFamily": "DM Sans",
                                   "fontSize": 11,
                                   "fontWeight": "500"
