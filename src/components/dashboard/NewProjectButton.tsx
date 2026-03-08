@@ -6,10 +6,11 @@ import { createClient } from '@/lib/supabase/client'
 
 interface Props {
   userId: string
+  organizationId: string
   primary?: boolean
 }
 
-export default function NewProjectButton({ userId, primary }: Props) {
+export default function NewProjectButton({ userId, organizationId, primary }: Props) {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
@@ -23,6 +24,7 @@ export default function NewProjectButton({ userId, primary }: Props) {
     const { data, error } = await supabase.from('projects').insert({
       name: name.trim(),
       user_id: userId,
+      organization_id: organizationId,
       status: 'active',
       entry_level: 'raw_idea',
       current_phase: 'Semilla',

@@ -7,10 +7,20 @@ import { es } from 'date-fns/locale'
 export default async function DashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
+
+  const { data: membership } = await supabase
+    .from('organization_members')
+    .select('organization_id')
+    .eq('user_id', user!.id)
+    .eq('role', 'owner')
+    .single()
+
+  const organizationId = membership?.organization_id ?? ''
+
   const { data: projects } = await supabase
     .from('projects')
     .select('*')
-    .eq('user_id', user!.id)
+    .eq('organization_id', organizationId)
     .order('last_active_at', { ascending: false })
 
   return (
@@ -32,13 +42,13 @@ export default async function DashboardPage() {
             <h1 className="text-2xl font-bold">Mis Proyectos</h1>
             <p className="text-sm text-[#6b6d75] mt-1">{projects?.length ?? 0} proyecto{(projects?.length ?? 0) !== 1 ? 's' : ''}</p>
           </div>
-          <NewProjectButton userId={user!.id} />
+          <NewProjectButton userId={user!.id} organizationId={organizationId} />
         </div>
 
         {!projects?.length ? (
           <div className="text-center py-24 border border-dashed border-[#2a2b30] rounded-xl">
             <p className="text-[#6b6d75] mb-4">Todavía no tienes proyectos.</p>
-            <NewProjectButton userId={user!.id} primary />
+            <NewProjectButton userId={user!.id} organizationId={organizationId} primary />
           </div>
         ) : (
           <div className="grid gap-4">

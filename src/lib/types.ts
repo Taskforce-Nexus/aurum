@@ -1,7 +1,25 @@
+export type Organization = {
+  id: string
+  name: string
+  slug: string
+  owner_id: string
+  created_at: string
+  updated_at: string
+}
+
+export type OrganizationMember = {
+  id: string
+  organization_id: string
+  user_id: string
+  role: 'owner' | 'cofounder' | 'advisor' | 'member'
+  created_at: string
+}
+
 export type Project = {
   id: string
   name: string
   user_id: string
+  organization_id: string
   status: string
   incubation_mode: string | null
   founder_brief: string | null
