@@ -182,7 +182,11 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   }
 
   async function requestPermissionAndStart() {
-    if (!navigator.mediaDevices?.getUserMedia) { startListening(); return }
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setPermissionDenied(true)
+      setVS('paused')
+      return
+    }
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true })
       setPermissionDenied(false)
@@ -241,9 +245,9 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
         </p>
 
         {/* Avatar with rings */}
-        <div className="relative flex items-center justify-center" style={{ width: 128, height: 128 }}>
+        <div className="relative flex items-center justify-center w-32 h-32">
           {/* Outer ring */}
-          <div className={`absolute rounded-full border-2 ${
+          <div className={`absolute -inset-5 rounded-full border-2 ${
             voiceState === 'processing'
               ? 'border-transparent border-t-[#5a5b60] animate-spin'
               : voiceState === 'speaking'
@@ -251,15 +255,15 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
               : voiceState === 'paused'
               ? 'border-[#2a2b30]'
               : 'border-[#C9A84C]/30 animate-pulse'
-          }`} style={{ inset: -20 }} />
+          }`} />
           {/* Inner ring */}
-          <div className={`absolute rounded-full border ${
+          <div className={`absolute -inset-2 rounded-full border ${
             voiceState === 'speaking'
               ? 'border-[#C9A84C]/70 animate-pulse'
               : voiceState === 'listening'
               ? 'border-[#C9A84C]/40'
               : 'border-[#2a2b30]'
-          }`} style={{ inset: -8 }} />
+          }`} />
           {/* Avatar */}
           <div className={`w-32 h-32 rounded-full flex items-center justify-center text-4xl font-bold transition-colors ${
             voiceState === 'speaking'

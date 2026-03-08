@@ -40,6 +40,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
   const [pendingContext, setPendingContext] = useState('')
   const [isRecording, setIsRecording] = useState(false)
   const [voiceUnavailable, setVoiceUnavailable] = useState(false)
+  const [voiceErrorMsg, setVoiceErrorMsg] = useState('')
   const [voiceMode, setVoiceMode] = useState(false)
   const [extractState, setExtractState] = useState<'idle' | 'running' | 'done'>('idle')
   const [extractProgress, setExtractProgress] = useState(0) // 0–5
@@ -208,11 +209,18 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
       setIsRecording(false)
       return
     }
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setVoiceErrorMsg('Voz requiere Chrome en localhost o HTTPS')
+      setVoiceUnavailable(true)
+      setTimeout(() => setVoiceUnavailable(false), 5000)
+      return
+    }
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true })
     } catch {
+      setVoiceErrorMsg('Activa el micrófono: Chrome → candado URL → Micrófono → Permitir')
       setVoiceUnavailable(true)
-      setTimeout(() => setVoiceUnavailable(false), 3000)
+      setTimeout(() => setVoiceUnavailable(false), 5000)
       return
     }
     const recognition = new SpeechRecognitionAPI()
@@ -341,20 +349,16 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
                   <span className="text-[#9a9ba5]">Contexto del fundador</span>
                   <span className="text-[#C9A84C]">{Math.min(userMsgCount * 10, 100)}%</span>
                 </div>
-                <div className="h-1 bg-[#2a2b30] rounded-full">
-                  <div className="h-1 bg-[#C9A84C] rounded-full transition-all"
-                    style={{ width: `${Math.min(userMsgCount * 10, 100)}%` }} />
-                </div>
+                <progress value={Math.min(userMsgCount * 10, 100)} max={100}
+                  className="w-full h-1 appearance-none [&::-webkit-progress-bar]:bg-[#2a2b30] [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:bg-[#C9A84C] [&::-webkit-progress-value]:rounded-full [&::-moz-progress-bar]:bg-[#C9A84C] [&::-moz-progress-bar]:rounded-full" />
               </div>
               <div>
                 <div className="flex justify-between text-xs mb-1">
                   <span className="text-[#9a9ba5]">Idea de producto</span>
                   <span className="text-[#6b6d75]">{Math.min(userMsgCount * 5, 100)}%</span>
                 </div>
-                <div className="h-1 bg-[#2a2b30] rounded-full">
-                  <div className="h-1 bg-[#C9A84C]/50 rounded-full transition-all"
-                    style={{ width: `${Math.min(userMsgCount * 5, 100)}%` }} />
-                </div>
+                <progress value={Math.min(userMsgCount * 5, 100)} max={100}
+                  className="w-full h-1 appearance-none [&::-webkit-progress-bar]:bg-[#2a2b30] [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-value]:bg-[#C9A84C]/50 [&::-webkit-progress-value]:rounded-full [&::-moz-progress-bar]:bg-[#C9A84C]/50 [&::-moz-progress-bar]:rounded-full" />
               </div>
             </div>
           </div>
@@ -484,9 +488,9 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
                       h3: ({ children }) => <h3 className="text-[#C9A84C] font-semibold mb-2 mt-1">{children}</h3>,
                       strong: ({ children }) => <strong className="text-white font-semibold">{children}</strong>,
                       p: ({ children }) => <p className="text-[#e0e0e5] leading-7 mb-3 last:mb-0">{children}</p>,
-                      ul: ({ children }) => <ul className="space-y-1.5 mb-3 pl-1">{children}</ul>,
-                      ol: ({ children }) => <ol className="space-y-1.5 mb-3 pl-1 list-decimal list-inside">{children}</ol>,
-                      li: ({ children }) => <li className="text-[#e0e0e5] pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-[#C9A84C]">{children}</li>,
+                      ul: ({ children }) => <div className="space-y-1.5 mb-3 pl-1">{children}</div>,
+                      ol: ({ children }) => <div className="space-y-1.5 mb-3 pl-1">{children}</div>,
+                      li: ({ children }) => <div className="text-[#e0e0e5] pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-[#C9A84C]">{children}</div>,
                     }}>
                       {msg.content}
                     </ReactMarkdown>
@@ -504,9 +508,9 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
                 <div className="w-8 h-8 rounded-full bg-[#C9A84C]/20 border border-[#C9A84C]/30 flex items-center justify-center text-[#C9A84C] text-xs font-bold shrink-0">N</div>
                 <div className="bg-[#1A1B1E] border border-[#2a2b30] rounded-2xl rounded-tl-sm px-5 py-4">
                   <div className="flex gap-1.5 items-center h-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-bounce [animation-delay:0ms]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-bounce [animation-delay:150ms]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-bounce [animation-delay:300ms]" />
                   </div>
                 </div>
               </div>
@@ -525,7 +529,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
                   </>
                 )}
                 {voiceUnavailable && (
-                  <span className="text-xs text-[#6b6d75]">Voz disponible en Chrome</span>
+                  <span className="text-xs text-[#6b6d75]">{voiceErrorMsg || 'Voz disponible en Chrome'}</span>
                 )}
               </div>
             )}
