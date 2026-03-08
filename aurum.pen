@@ -51648,11 +51648,12 @@
                       "children": [
                         {
                           "type": "icon_font",
-                          "id": "kTIBI",
-                          "name": "attachIco",
+                          "id": "FfDAU",
+                          "name": "a2",
                           "width": 18,
                           "height": 18,
-                          "iconFontFamily": "Material Symbols Rounded",
+                          "iconFontName": "paperclip",
+                          "iconFontFamily": "lucide",
                           "fill": "#AAAAAA"
                         }
                       ]
@@ -51675,11 +51676,12 @@
                       "children": [
                         {
                           "type": "icon_font",
-                          "id": "V8zOz",
-                          "name": "micIco",
+                          "id": "iXEZb",
+                          "name": "m2",
                           "width": 18,
                           "height": 18,
-                          "iconFontFamily": "Material Symbols Rounded",
+                          "iconFontName": "mic",
+                          "iconFontFamily": "lucide",
                           "fill": "#AAAAAA"
                         }
                       ]
@@ -51697,11 +51699,12 @@
                       "children": [
                         {
                           "type": "icon_font",
-                          "id": "kU1im",
-                          "name": "sendIco",
+                          "id": "2gbL1",
+                          "name": "s2",
                           "width": 18,
                           "height": 18,
-                          "iconFontFamily": "Material Symbols Rounded",
+                          "iconFontName": "arrow-up",
+                          "iconFontFamily": "lucide",
                           "fill": "#0A0A0B"
                         }
                       ]
