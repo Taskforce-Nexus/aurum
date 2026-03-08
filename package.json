@@ -11,12 +11,14 @@
     "ralph:validate": "ts-node -e \"import { validateRalphSchema } from '@/lib/supabase/ralph-schema'; validateRalphSchema().then(r => console.log(JSON.stringify(r, null, 2)))\""
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
     "@octokit/rest": "^20.1.2",
     "@radix-ui/react-tabs": "^1.1.13",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.39.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "lucide-react": "^0.575.0",
     "next": "14.2.35",
     "react": "^18",
