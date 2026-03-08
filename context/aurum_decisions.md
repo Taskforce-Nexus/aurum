@@ -279,3 +279,39 @@ The Nexo Dual mechanism operates across all sub-phases:
 Three operating modes: Normal, Autopilot, Levantar Mano (raise hand).
 
 The advisory board is activated and configured by Nexo after Semilla is complete.
+
+---
+
+## 20. Modelo de Monetización y Retención
+
+**Ingresos:**
+
+Suscripción mensual fija — acceso a la plataforma.
+Saldo de tokens prepagado — consumo variable por uso real.
+El usuario nunca conecta su propia API key. AURUM controla el acceso al modelo y aplica margen sobre costo Anthropic.
+
+El costo es variable por diseño: founders con más contexto, más archivos y más conversación consumen más tokens. El saldo captura esa variabilidad sin friccionar la experiencia.
+
+**Upsells por módulo:**
+
+- Branding — identidad visual, naming, dirección de marca
+- Frames — generación de UI con Pencil para founders de producto
+- Consejo Premium — advisors especializados por industria
+- Consultoría — acceso solo al Consejo sin pipeline completo
+
+**Modelo de retención estructural:**
+
+El Consejo Asesor es el switching cost principal de AURUM.
+
+El Consejo acumula:
+
+- advisors configurados para el venture específico
+- buyer personas del mercado objetivo
+- historial de decisiones y razonamiento
+- inteligencia del negocio construida sesión a sesión
+
+Abandonar AURUM significa abandonar la memoria institucional del negocio.
+Ese costo de salida es el ancla de retención a largo plazo — no el hábito ni la interfaz.
+
+El Consejo no es producto separado — es una capa presente en todos los tiers
+con diferente profundidad según el plan.
