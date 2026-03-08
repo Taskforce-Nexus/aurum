@@ -13,6 +13,9 @@ interface Props {
   onExit: () => void
 }
 
+// Each TTS chunk carries both the decoded audio and its stripped text
+type TTSChunk = { buffer: AudioBuffer; text: string }
+
 function stripMarkdown(text: string): string {
   return text
     .replace(/#{1,6}\s+/g, '')
@@ -37,10 +40,15 @@ function getSupportedMimeType(): string {
 const SPEECH_START_THRESHOLD = 20
 const SILENCE_THRESHOLD = 12
 const SILENCE_DURATION_MS = 600
+// Bug 2 fix: interrupt threshold lowered from SPEECH_START_THRESHOLD*2 (40) to 20
+const INTERRUPT_THRESHOLD = 20
 
-// Sentence streaming: only flush when buffer ≥ this AND ends in sentence boundary
+// Sentence streaming: flush buffer when ≥ this length AND ends in boundary
 const MIN_SENTENCE_CHARS = 80
 const SENTENCE_END_RE = /[.!?\n]$/
+
+// Bug 1 fix: text reveal interval
+const REVEAL_INTERVAL_MS = 50
 
 export default function VoiceModePanel({ projectId, conversationId, messages, onMessagesUpdate, onExit }: Props) {
   const [voiceState, setVoiceState] = useState<VoiceState>('paused')
@@ -54,7 +62,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   const barsRef = useRef<number[]>(Array(24).fill(0.1))
   const messagesRef = useRef(messages)
 
-  // Audio pipeline
+  // Audio pipeline — single AudioContext for whole session (Bug 3 fix: never recreate)
   const streamRef = useRef<MediaStream | null>(null)
   const audioCtxRef = useRef<AudioContext | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
@@ -64,12 +72,19 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const vadFrameRef = useRef<number | null>(null)
 
-  // TTS queue (sentence streaming)
+  // TTS queue — stores {buffer, text} pairs
   const currentSourceRef = useRef<AudioBufferSourceNode | null>(null)
-  const audioQueueRef = useRef<AudioBuffer[]>([])
+  const audioQueueRef = useRef<TTSChunk[]>([])
   const isPlayingQueueRef = useRef(false)
-  const pendingTTSCountRef = useRef(0)  // in-flight TTS requests
-  const streamDoneRef = useRef(false)   // LLM stream finished
+  const pendingTTSCountRef = useRef(0)
+  const streamDoneRef = useRef(false)
+
+  // Bug 3 fix: turn ID — prevents stale TTS from corrupting counters after interrupt
+  const currentTurnIdRef = useRef(0)
+
+  // Bug 1 fix: text reveal state
+  const nexoDisplayedRef = useRef('')       // text from fully played sentences
+  const revealIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   function setVS(state: VoiceState) {
     voiceStateRef.current = state
@@ -172,6 +187,28 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
     }
   }
 
+  // ─── Centralized reset — called on interrupt, error, and new turn ──────────
+  // Does NOT close AudioContext or stop mic stream (those stay alive for session)
+  function resetVoiceState() {
+    // Stop text reveal animation
+    if (revealIntervalRef.current) {
+      clearInterval(revealIntervalRef.current)
+      revealIntervalRef.current = null
+    }
+    // Stop current audio source
+    try { currentSourceRef.current?.stop() } catch { /* ignore */ }
+    currentSourceRef.current = null
+    // Clear TTS queue
+    audioQueueRef.current = []
+    isPlayingQueueRef.current = false
+    // Bug 3 fix: increment turnId — all in-flight TTS for previous turn are invalidated
+    currentTurnIdRef.current++
+    pendingTTSCountRef.current = 0
+    streamDoneRef.current = false
+    // Reset text reveal accumulator
+    nexoDisplayedRef.current = ''
+  }
+
   // ─── VAD loop ─────────────────────────────────────────────────────────────
   function startVADLoop() {
     if (vadFrameRef.current) cancelAnimationFrame(vadFrameRef.current)
@@ -193,9 +230,9 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
         }
       } else if (state === 'speaking') {
         const rms = getRMS(analyser)
-        if (rms > SPEECH_START_THRESHOLD * 2) {
-          // User interrupts Nexo
-          clearAudioQueue()
+        // Bug 2 fix: threshold lowered from 40 to 20; resetVoiceState clears queue fully
+        if (rms > INTERRUPT_THRESHOLD) {
+          resetVoiceState()
           setVS('listening')
         }
       }
@@ -205,13 +242,6 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   }
 
   // ─── TTS queue ────────────────────────────────────────────────────────────
-  function clearAudioQueue() {
-    audioQueueRef.current = []
-    isPlayingQueueRef.current = false
-    currentSourceRef.current?.stop()
-    currentSourceRef.current = null
-  }
-
   function checkQueueDone() {
     if (
       streamDoneRef.current &&
@@ -219,11 +249,20 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
       audioQueueRef.current.length === 0 &&
       !isPlayingQueueRef.current
     ) {
-      if (voiceStateRef.current === 'speaking') setVS('listening')
+      if (voiceStateRef.current === 'speaking') {
+        setNexoText(nexoDisplayedRef.current)
+        setVS('listening')
+      }
     }
   }
 
   function playNextInQueue() {
+    // Clear any running reveal animation before starting next chunk
+    if (revealIntervalRef.current) {
+      clearInterval(revealIntervalRef.current)
+      revealIntervalRef.current = null
+    }
+
     const audioCtx = audioCtxRef.current
     if (!audioCtx || audioQueueRef.current.length === 0 || voiceStateRef.current !== 'speaking') {
       isPlayingQueueRef.current = false
@@ -232,44 +271,82 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
     }
 
     isPlayingQueueRef.current = true
-    const buffer = audioQueueRef.current.shift()!
+    const chunk = audioQueueRef.current.shift()!
     const source = audioCtx.createBufferSource()
-    source.buffer = buffer
+    source.buffer = chunk.buffer
     source.connect(audioCtx.destination)
     currentSourceRef.current = source
 
+    // Bug 1 fix: reveal this sentence's text progressively over its audio duration
+    const totalChars = chunk.text.length
+    const durationMs = Math.max(chunk.buffer.duration * 1000, 100)
+    const charsPerTick = Math.max(1, Math.ceil(totalChars / (durationMs / REVEAL_INTERVAL_MS)))
+    let revealed = 0
+
+    revealIntervalRef.current = setInterval(() => {
+      revealed = Math.min(revealed + charsPerTick, totalChars)
+      setNexoText(nexoDisplayedRef.current + chunk.text.slice(0, revealed))
+      if (revealed >= totalChars) {
+        clearInterval(revealIntervalRef.current!)
+        revealIntervalRef.current = null
+      }
+    }, REVEAL_INTERVAL_MS)
+
     source.onended = () => {
+      // Commit sentence to displayed text and clear interval
+      nexoDisplayedRef.current += chunk.text
+      setNexoText(nexoDisplayedRef.current)
+      if (revealIntervalRef.current) {
+        clearInterval(revealIntervalRef.current)
+        revealIntervalRef.current = null
+      }
       isPlayingQueueRef.current = false
-      if (voiceStateRef.current === 'speaking') playNextInQueue()
+      if (voiceStateRef.current === 'speaking') {
+        playNextInQueue()
+      } else {
+        checkQueueDone()
+      }
     }
+
     source.start()
   }
 
   async function addToTTSQueue(text: string) {
+    // Bug 3 fix: capture turnId at start — stale requests from interrupted turns are ignored
+    const turnId = currentTurnIdRef.current
     if (!text.trim() || voiceStateRef.current !== 'speaking') return
     const audioCtx = audioCtxRef.current
     if (!audioCtx) return
+
+    const stripped = stripMarkdown(text)
+    if (!stripped.trim()) return
 
     pendingTTSCountRef.current++
     try {
       const res = await fetch('/api/voice/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: stripMarkdown(text) }),
+        body: JSON.stringify({ text: stripped }),
       })
+      if (turnId !== currentTurnIdRef.current) return
       if (!res.ok || voiceStateRef.current !== 'speaking') return
 
       const arrayBuffer = await res.arrayBuffer()
-      if (voiceStateRef.current !== 'speaking') return
+      if (turnId !== currentTurnIdRef.current || voiceStateRef.current !== 'speaking') return
 
       const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer)
-      audioQueueRef.current.push(audioBuffer)
+      if (turnId !== currentTurnIdRef.current || voiceStateRef.current !== 'speaking') return
+
+      audioQueueRef.current.push({ buffer: audioBuffer, text: stripped })
       if (!isPlayingQueueRef.current) playNextInQueue()
     } catch {
-      // ignore TTS errors — next sentence will play
+      // ignore TTS errors — next sentence will continue
     } finally {
-      pendingTTSCountRef.current--
-      checkQueueDone()
+      // Bug 3 fix: only decrement for current turn — prevents counter going negative
+      if (turnId === currentTurnIdRef.current) {
+        pendingTTSCountRef.current--
+        checkQueueDone()
+      }
     }
   }
 
@@ -295,14 +372,13 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   async function processMessage(text: string) {
     setTranscript('')
     setNexoText('')
+
     const userMsg: Message = { role: 'user', content: text }
     const newMessages = [...messagesRef.current, userMsg]
     onMessagesUpdate(newMessages)
 
-    // Reset queue state for new turn
-    streamDoneRef.current = false
-    pendingTTSCountRef.current = 0
-    audioQueueRef.current = []
+    // Bug 3 fix: reset all voice state for new turn (increments turnId, invalidating stale TTS)
+    resetVoiceState()
 
     try {
       const res = await fetch('/api/chat', {
@@ -340,15 +416,12 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
             if (!line.startsWith('data: ')) continue
             const payload = line.slice(6).trim()
             if (payload === '[DONE]') {
-              // Flush remaining sentence buffer
               if (sentenceBuffer.trim()) {
                 void addToTTSQueue(sentenceBuffer)
                 sentenceBuffer = ''
               }
               streamDoneRef.current = true
               checkQueueDone()
-
-              // Update messages with final text
               const assistantMsg: Message = { role: 'assistant', content: fullText, author: 'Nexo' }
               onMessagesUpdate([...newMessages, assistantMsg])
               continue
@@ -356,12 +429,10 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
             try {
               const parsed = JSON.parse(payload) as { token?: string; conversationId?: string }
               if (parsed.token) {
-                const token = parsed.token
-                fullText += token
-                sentenceBuffer += token
-                setNexoText(prev => prev + token)  // Fix 4: progressive text
+                fullText += parsed.token
+                sentenceBuffer += parsed.token
+                // Bug 1 fix: do NOT setNexoText here — text reveals when audio plays
 
-                // Flush on sentence boundary
                 if (
                   sentenceBuffer.length >= MIN_SENTENCE_CHARS &&
                   SENTENCE_END_RE.test(sentenceBuffer.trimEnd())
@@ -370,7 +441,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
                   sentenceBuffer = ''
                 }
               }
-            } catch { /* ignore malformed events */ }
+            } catch { /* ignore malformed SSE events */ }
           }
         }
       } else {
@@ -379,7 +450,6 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
         if (data.message) {
           const assistantMsg: Message = { role: 'assistant', content: data.message, author: 'Nexo' }
           onMessagesUpdate([...newMessages, assistantMsg])
-          setNexoText(data.message)
           setVS('speaking')
           streamDoneRef.current = true
           void addToTTSQueue(data.message)
@@ -388,6 +458,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
         }
       }
     } catch {
+      resetVoiceState()
       setVS('listening')
     }
   }
@@ -402,6 +473,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       streamRef.current = stream
 
+      // Single AudioContext for the whole session — never recreate between turns
       const audioCtx = new AudioContext()
       audioCtxRef.current = audioCtx
       if (audioCtx.state === 'suspended') await audioCtx.resume()
@@ -426,15 +498,13 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
     if (mediaRecorderRef.current?.state !== 'inactive') {
       try { mediaRecorderRef.current?.stop() } catch { /* ignore */ }
     }
-    clearAudioQueue()
+    resetVoiceState()
     streamRef.current?.getTracks().forEach(t => t.stop())
     streamRef.current = null
     audioCtxRef.current?.close().catch(() => null)
     audioCtxRef.current = null
     analyserRef.current = null
     isCapturingRef.current = false
-    streamDoneRef.current = false
-    pendingTTSCountRef.current = 0
   }
 
   useEffect(() => {
@@ -444,6 +514,12 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   }, [])
 
   function handleExit() { stopAll(); onExit() }
+
+  // Bug 2 fix: manual interrupt button handler
+  function handleInterrupt() {
+    resetVoiceState()
+    setVS('listening')
+  }
 
   const stateLabel: Record<VoiceState, string> = {
     listening: 'Escuchando',
@@ -509,6 +585,22 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
         <canvas ref={canvasRef} width={240} height={40}
           className={`rounded transition-opacity ${voiceState === 'paused' ? 'opacity-20' : 'opacity-60'}`} />
 
+        {/* Bug 2 fix: visual interrupt button — pulsing circle, tappable */}
+        {voiceState === 'speaking' && (
+          <button
+            type="button"
+            onClick={handleInterrupt}
+            className="flex items-center gap-2.5 text-xs text-[#6b6d75] hover:text-[#C9A84C] transition-colors"
+            aria-label="Interrumpir a Nexo"
+          >
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C9A84C] opacity-50" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-[#C9A84C]/70" />
+            </span>
+            Interrumpir
+          </button>
+        )}
+
         {/* Resume button */}
         {voiceState === 'paused' && (
           <div className="flex flex-col items-center gap-2">
@@ -522,7 +614,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
           </div>
         )}
 
-        {/* Nexo response — streams in progressively */}
+        {/* Nexo response — Bug 1 fix: text reveals progressively synchronized with audio */}
         {nexoText && (
           <div className="max-w-2xl text-center text-[#e0e0e5] text-sm leading-7 bg-[#1A1B1E] border border-[#2a2b30] rounded-2xl px-6 py-4 mt-2">
             {nexoText}
