@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { NEXO_SEED_SYSTEM } from '@/lib/prompts'
@@ -84,7 +85,7 @@ async function incrementalGitHubSync(
 
 export async function POST(req: NextRequest) {
   try {
-    const { projectId, conversationId, messages, voiceMode } = await req.json()
+    const { projectId, conversationId, messages, voiceMode, stream: streamMode } = await req.json()
     const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
@@ -105,6 +106,87 @@ export async function POST(req: NextRequest) {
       messages.length === 0
         ? [{ role: 'user', content: 'Inicia la sesión semilla.' }]
         : messages.map((m: Message) => ({ role: m.role, content: m.content }))
+
+    // ── Streaming path for voice mode ────────────────────────────────────────
+    if (voiceMode && streamMode) {
+      // Resolve conversationId before streaming so we can send it to client
+      let activeConvId: string | undefined = conversationId
+      if (!activeConvId) {
+        const { data: existing } = await supabase
+          .from('conversations').select('id')
+          .eq('project_id', projectId).eq('phase', 'semilla').maybeSingle()
+        if (existing) {
+          activeConvId = existing.id
+        } else {
+          const { data: newConv } = await supabase
+            .from('conversations')
+            .insert({ project_id: projectId, phase: 'semilla', messages })
+            .select('id').single()
+          if (newConv) activeConvId = newConv.id
+        }
+      }
+
+      const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const encoder = new TextEncoder()
+      let fullResponse = ''
+
+      const readable = new ReadableStream({
+        async start(controller) {
+          try {
+            const anthropicStream = anthropic.messages.stream({
+              model: 'claude-haiku-4-5-20251001',
+              max_tokens: 512,
+              system: systemPrompt,
+              messages: claudeMessages,
+            })
+            for await (const chunk of anthropicStream) {
+              if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+                const token = chunk.delta.text
+                fullResponse += token
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ token })}\n\n`))
+              }
+            }
+          } catch (err) {
+            console.error('[chat-stream] LLM error:', err)
+          }
+
+          // Send meta then close
+          if (activeConvId) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ conversationId: activeConvId })}\n\n`))
+          }
+          controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+          controller.close()
+
+          // DB save after stream completes (server-side, non-blocking for client)
+          try {
+            const response = fullResponse.replace(/\[CONSEJO:[^\]]+\]\s*/g, '').trim()
+            const updatedMessages: Message[] = [
+              ...messages,
+              { role: 'assistant' as const, content: response, author: 'Nexo' },
+            ]
+            if (activeConvId) {
+              await supabase.from('conversations')
+                .update({ messages: updatedMessages, updated_at: new Date().toISOString() })
+                .eq('id', activeConvId)
+            }
+            await supabase.from('projects')
+              .update({ last_active_at: new Date().toISOString() })
+              .eq('id', projectId)
+          } catch (e) {
+            console.error('[chat-stream] DB save error:', e)
+          }
+        },
+      })
+
+      return new Response(readable, {
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          Connection: 'keep-alive',
+        },
+      })
+    }
+    // ── End streaming path ────────────────────────────────────────────────────
 
     const rawResponse = await callClaude(
       systemPrompt,

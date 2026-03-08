@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const contentType = audioFile.type || 'audio/webm'
 
     const dgRes = await fetch(
-      'https://api.deepgram.com/v1/listen?model=nova-3&language=es&smart_format=true&punctuate=true',
+      'https://api.deepgram.com/v1/listen?model=nova-3&language=es-419&smart_format=true&punctuate=true&utterance_end_ms=1000',
       {
         method: 'POST',
         headers: {

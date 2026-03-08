@@ -33,10 +33,14 @@ function getSupportedMimeType(): string {
   return 'audio/webm'
 }
 
-// VAD thresholds (0-127 range — getByteTimeDomainData normalized amplitude)
-const SPEECH_START_THRESHOLD = 20  // above this = speech detected → start recording
-const SILENCE_THRESHOLD = 12       // below this = silence → allow timer to expire
-const SILENCE_DURATION_MS = 600    // ms of silence after speech before sending
+// VAD thresholds (0–127 amplitude after normalization)
+const SPEECH_START_THRESHOLD = 20
+const SILENCE_THRESHOLD = 12
+const SILENCE_DURATION_MS = 600
+
+// Sentence streaming: only flush when buffer ≥ this AND ends in sentence boundary
+const MIN_SENTENCE_CHARS = 80
+const SENTENCE_END_RE = /[.!?\n]$/
 
 export default function VoiceModePanel({ projectId, conversationId, messages, onMessagesUpdate, onExit }: Props) {
   const [voiceState, setVoiceState] = useState<VoiceState>('paused')
@@ -50,7 +54,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   const barsRef = useRef<number[]>(Array(24).fill(0.1))
   const messagesRef = useRef(messages)
 
-  // Audio pipeline refs
+  // Audio pipeline
   const streamRef = useRef<MediaStream | null>(null)
   const audioCtxRef = useRef<AudioContext | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
@@ -59,7 +63,13 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   const isCapturingRef = useRef(false)
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const vadFrameRef = useRef<number | null>(null)
+
+  // TTS queue (sentence streaming)
   const currentSourceRef = useRef<AudioBufferSourceNode | null>(null)
+  const audioQueueRef = useRef<AudioBuffer[]>([])
+  const isPlayingQueueRef = useRef(false)
+  const pendingTTSCountRef = useRef(0)  // in-flight TTS requests
+  const streamDoneRef = useRef(false)   // LLM stream finished
 
   function setVS(state: VoiceState) {
     voiceStateRef.current = state
@@ -175,7 +185,6 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
 
       if (state === 'listening') {
         const rms = getRMS(analyser)
-
         if (!isCapturingRef.current && rms > SPEECH_START_THRESHOLD) {
           startCapture()
           resetSilenceTimer()
@@ -186,8 +195,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
         const rms = getRMS(analyser)
         if (rms > SPEECH_START_THRESHOLD * 2) {
           // User interrupts Nexo
-          currentSourceRef.current?.stop()
-          currentSourceRef.current = null
+          clearAudioQueue()
           setVS('listening')
         }
       }
@@ -196,12 +204,80 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
     loop()
   }
 
-  // ─── STT → Chat → TTS pipeline ────────────────────────────────────────────
+  // ─── TTS queue ────────────────────────────────────────────────────────────
+  function clearAudioQueue() {
+    audioQueueRef.current = []
+    isPlayingQueueRef.current = false
+    currentSourceRef.current?.stop()
+    currentSourceRef.current = null
+  }
+
+  function checkQueueDone() {
+    if (
+      streamDoneRef.current &&
+      pendingTTSCountRef.current === 0 &&
+      audioQueueRef.current.length === 0 &&
+      !isPlayingQueueRef.current
+    ) {
+      if (voiceStateRef.current === 'speaking') setVS('listening')
+    }
+  }
+
+  function playNextInQueue() {
+    const audioCtx = audioCtxRef.current
+    if (!audioCtx || audioQueueRef.current.length === 0 || voiceStateRef.current !== 'speaking') {
+      isPlayingQueueRef.current = false
+      checkQueueDone()
+      return
+    }
+
+    isPlayingQueueRef.current = true
+    const buffer = audioQueueRef.current.shift()!
+    const source = audioCtx.createBufferSource()
+    source.buffer = buffer
+    source.connect(audioCtx.destination)
+    currentSourceRef.current = source
+
+    source.onended = () => {
+      isPlayingQueueRef.current = false
+      if (voiceStateRef.current === 'speaking') playNextInQueue()
+    }
+    source.start()
+  }
+
+  async function addToTTSQueue(text: string) {
+    if (!text.trim() || voiceStateRef.current !== 'speaking') return
+    const audioCtx = audioCtxRef.current
+    if (!audioCtx) return
+
+    pendingTTSCountRef.current++
+    try {
+      const res = await fetch('/api/voice/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: stripMarkdown(text) }),
+      })
+      if (!res.ok || voiceStateRef.current !== 'speaking') return
+
+      const arrayBuffer = await res.arrayBuffer()
+      if (voiceStateRef.current !== 'speaking') return
+
+      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer)
+      audioQueueRef.current.push(audioBuffer)
+      if (!isPlayingQueueRef.current) playNextInQueue()
+    } catch {
+      // ignore TTS errors — next sentence will play
+    } finally {
+      pendingTTSCountRef.current--
+      checkQueueDone()
+    }
+  }
+
+  // ─── STT → Chat (streaming) → TTS pipeline ────────────────────────────────
   async function sendToSTT(audioBlob: Blob) {
     try {
       const formData = new FormData()
       formData.append('audio', audioBlob, 'audio.webm')
-
       const res = await fetch('/api/voice/stt', { method: 'POST', body: formData })
       const data = await res.json()
 
@@ -218,60 +294,99 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
 
   async function processMessage(text: string) {
     setTranscript('')
+    setNexoText('')
     const userMsg: Message = { role: 'user', content: text }
     const newMessages = [...messagesRef.current, userMsg]
     onMessagesUpdate(newMessages)
+
+    // Reset queue state for new turn
+    streamDoneRef.current = false
+    pendingTTSCountRef.current = 0
+    audioQueueRef.current = []
 
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ projectId, conversationId, messages: newMessages, phase: 'semilla', voiceMode: true }),
+        body: JSON.stringify({
+          projectId,
+          conversationId,
+          messages: newMessages,
+          phase: 'semilla',
+          voiceMode: true,
+          stream: true,
+        }),
       })
-      const data = await res.json()
-      if (data.message) {
-        const assistantMsg: Message = { role: 'assistant', content: data.message, author: 'Nexo' }
-        onMessagesUpdate([...newMessages, assistantMsg])
-        setNexoText(data.message)
-        await speakResponse(data.message)
+
+      if (!res.ok || !res.body) { setVS('listening'); return }
+
+      const contentType = res.headers.get('content-type') ?? ''
+
+      if (contentType.includes('text/event-stream')) {
+        // ── Streaming mode ──────────────────────────────────────────────────
+        setVS('speaking')
+        const reader = res.body.getReader()
+        const decoder = new TextDecoder()
+        let sentenceBuffer = ''
+        let fullText = ''
+
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
+
+          const lines = decoder.decode(value).split('\n')
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue
+            const payload = line.slice(6).trim()
+            if (payload === '[DONE]') {
+              // Flush remaining sentence buffer
+              if (sentenceBuffer.trim()) {
+                void addToTTSQueue(sentenceBuffer)
+                sentenceBuffer = ''
+              }
+              streamDoneRef.current = true
+              checkQueueDone()
+
+              // Update messages with final text
+              const assistantMsg: Message = { role: 'assistant', content: fullText, author: 'Nexo' }
+              onMessagesUpdate([...newMessages, assistantMsg])
+              continue
+            }
+            try {
+              const parsed = JSON.parse(payload) as { token?: string; conversationId?: string }
+              if (parsed.token) {
+                const token = parsed.token
+                fullText += token
+                sentenceBuffer += token
+                setNexoText(prev => prev + token)  // Fix 4: progressive text
+
+                // Flush on sentence boundary
+                if (
+                  sentenceBuffer.length >= MIN_SENTENCE_CHARS &&
+                  SENTENCE_END_RE.test(sentenceBuffer.trimEnd())
+                ) {
+                  void addToTTSQueue(sentenceBuffer)
+                  sentenceBuffer = ''
+                }
+              }
+            } catch { /* ignore malformed events */ }
+          }
+        }
       } else {
-        setVS('listening')
-      }
-    } catch {
-      setVS('listening')
-    }
-  }
-
-  async function speakResponse(text: string) {
-    const audioCtx = audioCtxRef.current
-    if (!audioCtx) { setVS('listening'); return }
-
-    setVS('speaking')
-    try {
-      if (audioCtx.state === 'suspended') await audioCtx.resume()
-
-      const res = await fetch('/api/voice/tts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: stripMarkdown(text) }),
-      })
-      if (!res.ok) throw new Error('TTS failed')
-
-      const arrayBuffer = await res.arrayBuffer()
-      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer)
-
-      currentSourceRef.current?.stop()
-      const source = audioCtx.createBufferSource()
-      source.buffer = audioBuffer
-      source.connect(audioCtx.destination)
-      currentSourceRef.current = source
-
-      source.onended = () => {
-        if (voiceStateRef.current === 'speaking') {
+        // ── Fallback: non-streaming JSON ────────────────────────────────────
+        const data = await res.json()
+        if (data.message) {
+          const assistantMsg: Message = { role: 'assistant', content: data.message, author: 'Nexo' }
+          onMessagesUpdate([...newMessages, assistantMsg])
+          setNexoText(data.message)
+          setVS('speaking')
+          streamDoneRef.current = true
+          void addToTTSQueue(data.message)
+        } else {
           setVS('listening')
         }
       }
-      source.start()
     } catch {
       setVS('listening')
     }
@@ -280,11 +395,8 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   // ─── Init / cleanup ───────────────────────────────────────────────────────
   async function initAudio() {
     stopAll()
-
     if (!navigator.mediaDevices?.getUserMedia) {
-      setPermissionDenied(true)
-      setVS('paused')
-      return
+      setPermissionDenied(true); setVS('paused'); return
     }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
@@ -304,8 +416,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
       setVS('listening')
       startVADLoop()
     } catch {
-      setPermissionDenied(true)
-      setVS('paused')
+      setPermissionDenied(true); setVS('paused')
     }
   }
 
@@ -315,14 +426,15 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
     if (mediaRecorderRef.current?.state !== 'inactive') {
       try { mediaRecorderRef.current?.stop() } catch { /* ignore */ }
     }
-    currentSourceRef.current?.stop()
-    currentSourceRef.current = null
+    clearAudioQueue()
     streamRef.current?.getTracks().forEach(t => t.stop())
     streamRef.current = null
     audioCtxRef.current?.close().catch(() => null)
     audioCtxRef.current = null
     analyserRef.current = null
     isCapturingRef.current = false
+    streamDoneRef.current = false
+    pendingTTSCountRef.current = 0
   }
 
   useEffect(() => {
@@ -331,10 +443,7 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function handleExit() {
-    stopAll()
-    onExit()
-  }
+  function handleExit() { stopAll(); onExit() }
 
   const stateLabel: Record<VoiceState, string> = {
     listening: 'Escuchando',
@@ -413,10 +522,13 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
           </div>
         )}
 
-        {/* Nexo response text */}
+        {/* Nexo response — streams in progressively */}
         {nexoText && (
           <div className="max-w-2xl text-center text-[#e0e0e5] text-sm leading-7 bg-[#1A1B1E] border border-[#2a2b30] rounded-2xl px-6 py-4 mt-2">
             {nexoText}
+            {voiceState === 'speaking' && (
+              <span className="inline-block w-0.5 h-4 bg-[#C9A84C] ml-0.5 animate-pulse align-middle" />
+            )}
           </div>
         )}
       </div>
