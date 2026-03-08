@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import NewProjectButton from '@/components/dashboard/NewProjectButton'
@@ -8,14 +10,13 @@ export default async function DashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const { data: membership } = await supabase
-    .from('organization_members')
-    .select('organization_id')
-    .eq('user_id', user!.id)
-    .eq('role', 'owner')
+  const { data: org } = await supabase
+    .from('organizations')
+    .select('id')
+    .eq('owner_id', user!.id)
     .single()
 
-  const organizationId = membership?.organization_id ?? ''
+  const organizationId = org?.id ?? ''
 
   const { data: projects } = await supabase
     .from('projects')
