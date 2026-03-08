@@ -14,14 +14,20 @@ export default function NewProjectButton({ userId, organizationId, primary }: Pr
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const router = useRouter()
   const supabase = createClient()
 
   async function createProject(e: React.FormEvent) {
     e.preventDefault()
     if (!name.trim()) return
+    if (!organizationId) {
+      setError('No se encontró tu organización. Recarga la página.')
+      return
+    }
     setLoading(true)
-    const { data, error } = await supabase.from('projects').insert({
+    setError('')
+    const { data, error: insertError } = await supabase.from('projects').insert({
       name: name.trim(),
       user_id: userId,
       organization_id: organizationId,
@@ -30,7 +36,12 @@ export default function NewProjectButton({ userId, organizationId, primary }: Pr
       current_phase: 'Semilla',
       last_active_at: new Date().toISOString(),
     }).select().single()
-    if (!error && data) {
+    if (insertError) {
+      setError(insertError.message)
+      setLoading(false)
+      return
+    }
+    if (data) {
       router.push(`/project/${data.id}/incubadora`)
       router.refresh()
     }
@@ -51,6 +62,7 @@ export default function NewProjectButton({ userId, organizationId, primary }: Pr
           className="text-[#6b6d75] hover:text-white px-3 py-2 text-sm transition-colors">
           Cancelar
         </button>
+        {error && <p className="text-xs text-red-400 self-center">{error}</p>}
       </form>
     )
   }
