@@ -8820,8 +8820,8 @@
     {
       "type": "frame",
       "id": "EkILi",
-      "x": 3076,
-      "y": 1500,
+      "x": 0,
+      "y": -2598,
       "name": "Projects__Incubator__Default",
       "width": 1440,
       "height": 900,
@@ -12292,8 +12292,8 @@
     {
       "type": "frame",
       "id": "xpOPA",
-      "x": 0,
-      "y": -1310,
+      "x": -4912,
+      "y": -1380,
       "name": "Settings__Billing__Default",
       "width": 1440,
       "height": 900,
@@ -50497,8 +50497,8 @@
     {
       "type": "frame",
       "id": "zNxsb",
-      "x": 12294,
-      "y": 1500,
+      "x": 0,
+      "y": -3802,
       "name": "Projects__SeedSession__Default",
       "width": 1440,
       "height": 900,
@@ -50601,6 +50601,47 @@
                       "content": "En curso",
                       "fontFamily": "DM Sans",
                       "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "m92PA",
+                  "name": "voiceBtn",
+                  "fill": "#00000000",
+                  "cornerRadius": 6,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#27282B"
+                  },
+                  "gap": 6,
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nIn7S",
+                      "name": "voiceIcon",
+                      "fill": "#8B9DB7",
+                      "content": "🎧",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Wvkda",
+                      "name": "voiceLabel",
+                      "fill": "#8B9DB7",
+                      "content": "Modo voz",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
                       "fontWeight": "500"
                     }
                   ]
@@ -51558,35 +51599,6 @@
                   ],
                   "alignItems": "center",
                   "children": [
-                    {
-                      "type": "frame",
-                      "id": "6uwr6",
-                      "name": "vapiBtn",
-                      "opacity": 0.7,
-                      "width": 40,
-                      "height": 40,
-                      "fill": "#1A1B1E",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#3A3B40"
-                      },
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "KjlP0",
-                          "name": "vapiBtnIcon",
-                          "fill": "#AAAAAA",
-                          "content": "📞",
-                          "fontFamily": "DM Sans",
-                          "fontSize": 15,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
                     {
                       "type": "frame",
                       "id": "kPS21",
