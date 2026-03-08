@@ -50932,61 +50932,100 @@
                       "name": "connectRow",
                       "width": "fill_container",
                       "gap": 8,
-                      "alignItems": "center",
                       "children": [
                         {
                           "type": "frame",
-                          "id": "OG83r",
-                          "name": "driveIcon",
-                          "width": 26,
-                          "height": 26,
-                          "fill": "#00000000",
-                          "cornerRadius": 6,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "justifyContent": "center",
+                          "id": "amNAo",
+                          "name": "driveWrapper",
+                          "layout": "vertical",
+                          "gap": 4,
                           "alignItems": "center",
                           "children": [
                             {
+                              "type": "frame",
+                              "id": "RU0vD",
+                              "name": "driveIconInner",
+                              "width": 26,
+                              "height": 26,
+                              "fill": "#00000000",
+                              "cornerRadius": 6,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#27282B"
+                              },
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Vh2Fy",
+                                  "name": "driveG",
+                                  "fill": "#4EA8DE",
+                                  "content": "G",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
                               "type": "text",
-                              "id": "U9ItB",
-                              "name": "driveLabel",
-                              "fill": "#4EA8DE",
-                              "content": "G",
+                              "id": "6KTqa",
+                              "name": "driveText",
+                              "fill": "#4A5568",
+                              "content": "Google Drive",
                               "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "700"
+                              "fontSize": 9,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
                         {
                           "type": "frame",
-                          "id": "WQNbQ",
-                          "name": "notionIcon",
-                          "width": 26,
-                          "height": 26,
-                          "fill": "#00000000",
-                          "cornerRadius": 6,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#27282B"
-                          },
-                          "justifyContent": "center",
+                          "id": "Kv52V",
+                          "name": "notionWrapper",
+                          "layout": "vertical",
+                          "gap": 4,
                           "alignItems": "center",
                           "children": [
                             {
+                              "type": "frame",
+                              "id": "EJQli",
+                              "name": "notionIconInner",
+                              "width": 26,
+                              "height": 26,
+                              "fill": "#00000000",
+                              "cornerRadius": 6,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#27282B"
+                              },
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Y0dZs",
+                                  "name": "notionN",
+                                  "fill": "#8B9DB7",
+                                  "content": "N",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
                               "type": "text",
-                              "id": "0mJOr",
-                              "name": "notionLabel",
-                              "fill": "#8B9DB7",
-                              "content": "N",
+                              "id": "bwEIV",
+                              "name": "notionText",
+                              "fill": "#4A5568",
+                              "content": "Notion",
                               "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "700"
+                              "fontSize": 9,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -51394,8 +51433,8 @@
                             "fill": "#27282B"
                           },
                           "padding": [
-                            16,
-                            20
+                            14,
+                            16
                           ],
                           "children": [
                             {
@@ -51524,8 +51563,8 @@
                             "fill": "#27282B"
                           },
                           "padding": [
-                            16,
-                            20
+                            14,
+                            16
                           ],
                           "children": [
                             {
@@ -51540,6 +51579,72 @@
                               "fontFamily": "DM Sans",
                               "fontSize": 14,
                               "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BvDDN",
+                      "name": "founder2Msg",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "IxLv1",
+                          "name": "founder2Bubble",
+                          "width": 520,
+                          "fill": "#1C2A3A",
+                          "cornerRadius": 12,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2A4060"
+                          },
+                          "layout": "vertical",
+                          "padding": [
+                            14,
+                            18
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "T4Mad",
+                              "name": "founder2Text",
+                              "fill": "#E8E8E8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Llevo 3 años en tecnología, trabajé en una fintech. El equipo somos yo y un diseñador. Tengo 4 meses de runway y tiempo completo.",
+                              "lineHeight": 1.65,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xWdoj",
+                          "name": "founder2Avatar",
+                          "width": 36,
+                          "height": 36,
+                          "fill": "#C9A84C",
+                          "cornerRadius": 999,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "4E4zt",
+                              "name": "founder2AvatarLbl",
+                              "fill": "#0A0A0B",
+                              "content": "J",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "700"
                             }
                           ]
                         }
@@ -51626,13 +51731,8 @@
                       "name": "voiceBtn",
                       "width": 40,
                       "height": 40,
-                      "fill": "#111113",
+                      "fill": "#1A1B1E",
                       "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
