@@ -50554,6 +50554,58 @@
                   "fontWeight": "500"
                 },
                 {
+                  "type": "rectangle",
+                  "id": "53XFj",
+                  "name": "phaseSep",
+                  "fill": "#27282B",
+                  "width": 1,
+                  "height": 16
+                },
+                {
+                  "type": "text",
+                  "id": "6sqEZ",
+                  "name": "phaseText",
+                  "fill": "#8B9DB7",
+                  "content": "Fase 1 de 13",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "OuGa7",
+                  "name": "statusBadge",
+                  "fill": "#0D1F0D",
+                  "cornerRadius": 999,
+                  "gap": 5,
+                  "padding": [
+                    3,
+                    10
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "H3WpB",
+                      "name": "statusDot",
+                      "fill": "#4CAF50",
+                      "width": 6,
+                      "height": 6
+                    },
+                    {
+                      "type": "text",
+                      "id": "b4TbK",
+                      "name": "statusText",
+                      "fill": "#4CAF50",
+                      "content": "En curso",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
                   "type": "frame",
                   "id": "xNiq3",
                   "name": "exitBtn",
@@ -50657,6 +50709,8 @@
                   "id": "0os4p",
                   "name": "goal",
                   "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
                   "content": "Entender tu idea al 100%: experiencia, recursos y visión. Al final generamos tu Resumen del Fundador.",
                   "lineHeight": 1.6,
                   "fontFamily": "DM Sans",
@@ -50957,6 +51011,196 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "type": "rectangle",
+                  "id": "2IMCq",
+                  "name": "divTemas",
+                  "fill": "#27282B",
+                  "width": "fill_container",
+                  "height": 1
+                },
+                {
+                  "type": "text",
+                  "id": "iJG2a",
+                  "name": "temasLabel",
+                  "fill": "#C9A84C",
+                  "content": "TEMAS",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "frame",
+                  "id": "HNGbc",
+                  "name": "temasFrame",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "t72Uv",
+                      "name": "t1row",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "y8H9w",
+                          "name": "t1dot",
+                          "fill": "#4CAF50",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "text",
+                          "id": "eCFTe",
+                          "name": "t1text",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Descripción del problema",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gmYsD",
+                      "name": "t2row",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "8j0ZN",
+                          "name": "t2dot",
+                          "fill": "#1E1F21",
+                          "width": 6,
+                          "height": 6,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#4A5568"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "dWvkc",
+                          "name": "t2text",
+                          "fill": "#4A5568",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Perfil del fundador",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mVV03",
+                      "name": "t3row",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "GOUgJ",
+                          "name": "t3dot",
+                          "fill": "#1E1F21",
+                          "width": 6,
+                          "height": 6,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#4A5568"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "s1BxE",
+                          "name": "t3text",
+                          "fill": "#4A5568",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Recursos disponibles",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "rectangle",
+                  "id": "sRsau",
+                  "name": "divBrief",
+                  "fill": "#27282B",
+                  "width": "fill_container",
+                  "height": 1
+                },
+                {
+                  "type": "text",
+                  "id": "4eoMr",
+                  "name": "briefLabel",
+                  "fill": "#C9A84C",
+                  "content": "RESUMEN DEL FUNDADOR",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "frame",
+                  "id": "HDugw",
+                  "name": "briefCard",
+                  "width": "fill_container",
+                  "fill": "#0D0E11",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#27282B"
+                  },
+                  "gap": 8,
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "BSvR6",
+                      "name": "briefDot",
+                      "fill": "#4A5568",
+                      "width": 8,
+                      "height": 8
+                    },
+                    {
+                      "type": "text",
+                      "id": "evPwJ",
+                      "name": "briefText",
+                      "fill": "#4A5568",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Pendiente — se genera al completar la sesión",
+                      "lineHeight": 1.5,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
                 }
               ]
             },
@@ -51036,6 +51280,8 @@
                               "id": "wEG4M",
                               "name": "text",
                               "fill": "#E8E8E8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
                               "content": "Hola, soy Nexo. Voy a acompañarte en esta primera sesión.\n\nCuéntame sobre tu idea. No hay respuesta incorrecta — quiero entenderte al 100% antes de involucrar al consejo asesor.",
                               "lineHeight": 1.65,
                               "fontFamily": "DM Sans",
@@ -51065,6 +51311,7 @@
                             "thickness": 1,
                             "fill": "#2A4060"
                           },
+                          "layout": "vertical",
                           "padding": [
                             14,
                             18
@@ -51075,6 +51322,8 @@
                               "id": "3r7p0",
                               "name": "text",
                               "fill": "#E8E8E8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
                               "content": "Quiero construir una app de finanzas personales para millennials en LATAM. El problema es que la mayoría no tiene hábitos de ahorro — la plata desaparece sin que sepan en qué se fue. Quiero que la app sea simple, sin gráficas raras, y que les diga exactamente qué hacer con su dinero cada semana.",
                               "lineHeight": 1.65,
                               "fontFamily": "DM Sans",
@@ -51159,6 +51408,8 @@
                               "id": "OEXvG",
                               "name": "text",
                               "fill": "#E8E8E8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
                               "content": "Me queda muy claro el problema. Antes de seguir, necesito entenderte a ti.\n\nCuéntame: ¿tú ya tienes experiencia construyendo productos digitales? ¿Y qué recursos tienes disponibles hoy — tiempo, equipo, capital?",
                               "lineHeight": 1.65,
                               "fontFamily": "DM Sans",
@@ -51192,7 +51443,7 @@
                         "fill": "#27282B"
                       },
                       "padding": [
-                        0,
+                        14,
                         16
                       ],
                       "alignItems": "center",
