@@ -395,6 +395,23 @@ Nexo actualiza el Venture Profile y regenera lo afectado.
 
 ---
 
+## 25. Voice Mode Architecture
+
+**Decisión:** Web Speech API con `getUserMedia` explícito antes de iniciar SpeechRecognition. Chrome auto-detiene reconocimiento en silencio — se reinicia vía `keepListeningRef` en `onend`.
+
+**Razón:** `navigator.mediaDevices` es `undefined` en contextos no-HTTPS (ej. IP local), causando TypeError silencioso. El ref pattern evita closures stale en callbacks del browser.
+
+**Impacto:** `VoiceModePanel.tsx`, `IncubadoraChat.tsx`
+
+**Componentes:**
+- `requestPermissionAndStart()` — pide `getUserMedia` primero, luego lanza SpeechRecognition
+- `keepListeningRef` — controla si `onend` debe reiniciar o detenerse definitivamente
+- `/api/voice/correct` — Haiku corrige transcripción española en final result
+
+**Estado:** activo — pendiente confirmación de Juan en browser real
+
+---
+
 ## 24. Adaptive UI Architecture
 
 La UI no se genera — se configura.

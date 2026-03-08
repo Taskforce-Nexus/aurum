@@ -34,7 +34,10 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 ANTHROPIC_API_KEY=
-CLAUDE_USE_CHEAP=        # true para Haiku, omitir para Sonnet
+CLAUDE_USE_CHEAP=              # true para Haiku, omitir para Sonnet
+NEXT_PUBLIC_APP_URL=           # ej. http://localhost:3000
+GITHUB_CLIENT_ID=              # OAuth app GitHub
+GITHUB_CLIENT_SECRET=          # OAuth app GitHub
 ```
 
 ---
@@ -56,6 +59,7 @@ CLAUDE_USE_CHEAP=        # true para Haiku, omitir para Sonnet
 | `POST /api/chat/brief` | Generar Resumen del Fundador desde conversación semilla |
 | `POST /api/extract` | Extraer 5 documentos AURUM Framework (5 llamadas Claude en oleadas de 2) |
 | `GET/POST /api/advisors` | CRUD de asesores |
+| `POST /api/voice/correct` | Corrección de transcripción española con Haiku — recibe `{ text }`, devuelve `{ corrected }` |
 
 ---
 
