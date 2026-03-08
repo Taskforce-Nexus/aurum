@@ -20,7 +20,7 @@ IDEA → INCUBADORA → BUSINESS → PRODUCT CONCEPT → UX ARCHITECTURE → DEF
 | Projects__Incubator__Default | ✅ Aprobado — listo para freeze |
 | Projects__SeedSession__Default | ✅ Aprobado — listo para freeze |
 | Projects__SeedSession__UploadModal | 🔲 Pendiente de iteración |
-| Documents__Branding__Default | 🔄 Iterado — pendiente revisión Nexo |
+| Documents__Branding__Default | 🔄 Iterado — pendiente revisión Kira |
 | Export__Center__Default | 🔲 Pendiente de iteración |
 
 ---

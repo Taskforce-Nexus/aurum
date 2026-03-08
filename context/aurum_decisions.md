@@ -284,34 +284,141 @@ The advisory board is activated and configured by Nexo after Semilla is complete
 
 ## 20. Modelo de Monetización y Retención
 
-**Ingresos:**
+Ingresos:
+- Suscripción mensual fija — acceso a la plataforma
+- Saldo de tokens prepagado — consumo variable por uso real
+- El usuario nunca conecta su propia API key
+- AURUM controla el acceso al modelo y aplica margen sobre costo Anthropic
 
-Suscripción mensual fija — acceso a la plataforma.
-Saldo de tokens prepagado — consumo variable por uso real.
-El usuario nunca conecta su propia API key. AURUM controla el acceso al modelo y aplica margen sobre costo Anthropic.
+El costo es variable por diseño: founders con más contexto, más archivos
+y más conversación consumen más tokens. El saldo captura esa variabilidad.
 
-El costo es variable por diseño: founders con más contexto, más archivos y más conversación consumen más tokens. El saldo captura esa variabilidad sin friccionar la experiencia.
-
-**Upsells por módulo:**
-
-- Branding — identidad visual, naming, dirección de marca
-- Frames — generación de UI con Pencil para founders de producto
+Tiers:
+- Core — pipeline completo
+- Branding — upsell: identidad visual, naming, dirección de marca
+- Frames — upsell: generación de UI con Pencil para founders de producto
 - Consejo Premium — advisors especializados por industria
 - Consultoría — acceso solo al Consejo sin pipeline completo
 
-**Modelo de retención estructural:**
-
+Modelo de retención estructural:
 El Consejo Asesor es el switching cost principal de AURUM.
-
-El Consejo acumula:
-
-- advisors configurados para el venture específico
-- buyer personas del mercado objetivo
-- historial de decisiones y razonamiento
-- inteligencia del negocio construida sesión a sesión
-
+El Consejo acumula advisors configurados, buyer personas, historial
+de decisiones e inteligencia del negocio construida sesión a sesión.
 Abandonar AURUM significa abandonar la memoria institucional del negocio.
-Ese costo de salida es el ancla de retención a largo plazo — no el hábito ni la interfaz.
+El valor acumulado supera el costo mensual — ese es el ancla de retención.
 
-El Consejo no es producto separado — es una capa presente en todos los tiers
-con diferente profundidad según el plan.
+El Consejo no es producto separado — es una capa presente en todos
+los tiers con diferente profundidad según el plan.
+
+---
+
+## 21. Verticalización del Pipeline — Adaptive Intelligence Architecture
+
+El pipeline visible al founder es siempre el mismo.
+La inteligencia que Nexo aplica dentro de cada etapa es específica
+al tipo de venture.
+
+Nexo construye un Venture Profile durante la Sesión Semilla:
+
+{
+  "venture_type": "saas | construccion | servicios | retail | otro",
+  "pipeline_variant": "digital | construccion | servicios | retail",
+  "doc_set": ["negocio_5", "rama_especifica", "ingenieria_x"],
+  "advisor_config": ["advisor_1", "advisor_2", "advisor_3"],
+  "confidence": 0.0-1.0
+}
+
+Con ese perfil el sistema configura automáticamente:
+- qué etapas del pipeline tienen peso real
+- qué preguntas hace Nexo en cada fase
+- qué advisors se activan y con qué énfasis
+- qué documentos se generan
+- qué benchmarks y referencias de dominio se usan
+
+Los prompts son paramétricos — un prompt base más contexto de dominio:
+
+prompts/
+  business_model/
+    base.md
+    context_saas.md
+    context_construccion.md
+    context_servicios.md
+    context_retail.md
+
+Agregar un vertical nuevo = escribir su context_[vertical].md
+y definir su doc_set y pipeline_variant. No se toca la UI ni el pipeline.
+
+Verticales v1:
+- SaaS / producto digital
+- Construcción / real estate
+- Servicios / consultoría
+- Retail / e-commerce
+- Otros — ruta genérica
+
+En v2: pipelines verticalizados con etapas distintas por industria.
+
+---
+
+## 22. Niveles de Entrada — Expansión
+
+Niveles adicionales a raw_idea / has_prd / has_partial:
+- has_brand — founder ya tiene identidad de marca.
+  Nexo salta la fase de Branding.
+- consulting_only — acceso directo al Consejo sin pipeline completo.
+
+---
+
+## 23. Principio de Operación Mínima del Founder
+
+AURUM opera como un artifact de Claude:
+el founder describe, AURUM genera, el founder corrige si algo
+no refleja su realidad.
+
+El founder habla en Semilla. Una vez.
+Después de eso AURUM trabaja. El founder solo aparece cuando
+algo necesita su ojo — no su esfuerzo.
+
+Reglas:
+- sin formularios post-Semilla
+- sin configuración manual de advisors
+- sin selección de documentos a generar
+- sin elección de pipeline o vertical
+- Nexo infiere, configura, ejecuta y presenta resultados
+- el founder aprueba o corrige en lenguaje natural
+
+El Venture Profile no es algo que el founder llena —
+es algo que AURUM construye y el founder puede contradecir.
+
+Corrección = lenguaje natural, no formulario:
+"Mis clientes no son compradores individuales, son fondos de inversión"
+Nexo actualiza el Venture Profile y regenera lo afectado.
+
+---
+
+## 24. Adaptive UI Architecture
+
+La UI no se genera — se configura.
+
+Capa 1 — Tronco común (todos los ventures, siempre):
+  Pipeline progress · Documentos de negocio · Consejo Asesor · Export Center
+
+Capa 2 — Módulos opcionales (bloques diseñados, activación variable):
+  UX Architecture    → activo para: SaaS, producto digital
+  Default Frames     → activo para: SaaS, producto digital
+  System Design      → activo para: SaaS, producto digital, tech-enabled
+  Design Studio      → activo para: SaaS, producto digital
+  Branding           → activo por defecto, skip si has_brand
+  Operaciones        → activo para: construcción, retail
+  Consultoría        → activo si consulting_only
+
+Capa 3 — Configuración en runtime:
+  La UI lee venture_profile y renderiza los módulos correctos.
+  Módulos inactivos simplemente no existen — no grayed out, no bloqueados.
+
+Escalar a un vertical nuevo:
+- diseñar sus módulos específicos una vez
+- agregar regla de activación en la configuración
+- costo marginal casi cero
+
+Nexo configura — no construye en runtime.
+La construcción ocurre en fase de diseño, no en ejecución.
