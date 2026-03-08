@@ -108,6 +108,17 @@ Cuando Anthropic habilite conexión entre productos, este protocolo se actualiza
 
 ---
 
+## Regla de sincronización automática
+
+Al finalizar cualquier sesión de trabajo que modifique archivos en /context o /prompts:
+1. git add context/ prompts/
+2. git commit -m "sync: [descripción breve de lo que cambió]"
+3. git push origin main
+
+Esta acción no requiere instrucción de Juan. Es parte del cierre estándar de cada sesión.
+
+---
+
 ## Reglas de operación
 
 - Leer aurum_current_status.md al inicio de cada sesión sin excepción
