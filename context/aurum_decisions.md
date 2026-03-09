@@ -581,27 +581,66 @@ La construcción ocurre en fase de diseño, no en ejecución.
 
 ---
 
-## 27. Tavus CVI — Nexo con cara
+## 27. Tavus CVI — archivado como spike
 
-Implementado como modal sobre Projects__SeedSession__Default.
-Activado desde el botón "Hablar con Nexo" en el top bar (solo fase 1 — Semilla).
-Replica: Daniel - Office (r72f7f7f7c8b), Phoenix-4.
-Nombre en UI: siempre "Nexo", nunca "Daniel" ni "Tavus".
-LLM: Claude Haiku vía callback_url a /api/tavus/llm.
-Cámara del founder: opcional (pip, esquina inferior izquierda del iframe).
-Grabación automática con timer visible durante la sesión.
-Transcripción copiada al chat principal al cerrar el modal.
-Fases 2-5: siguen usando Deepgram + Cartesia (VoiceModePanel).
-Costo estimado: ~$8-9 por sesión Semilla.
-Modelo de negocio: créditos por uso.
+Implementado como spike de investigación en sesión 7. Costo prohibitivo en plan gratuito (25 min/mes totales — no por sesión). Archivado en `src/_archive/tavus/`.
 
-Archivos:
+Listo para reactivar con plan Starter+ ($50/mes). Fases 2-5 siguen usando Deepgram + Cartesia (VoiceModePanel).
 
-- `src/app/api/tavus/conversation/route.ts` — POST (crear) + DELETE (terminar)
-- `src/app/api/tavus/llm/route.ts` — POST (LLM callback Tavus) + GET (polling transcript)
-- `src/components/incubadora/NexoModal.tsx` — modal completo con iframe + pip + transcripción
+Archivos archivados:
 
-Variable de entorno requerida: `TAVUS_API_KEY`
+- `src/_archive/tavus/api/conversation/route.ts`
+- `src/_archive/tavus/api/llm/route.ts`
+- `src/_archive/tavus/NexoModal.tsx`
 
-Nota: callback_url a localhost no es accesible externamente — para producción usar URL pública.
-En local, el iframe de Tavus funciona pero el LLM callback no recibirá llamadas de Tavus.
+Variable de entorno requerida: `TAVUS_API_KEY` (no activa en producción hasta reactivar).
+
+---
+
+## 28. Voice Mode — estado post sesión 7
+
+Fixes implementados en sesión 7:
+
+- Mic mute durante TTS (`track.enabled = false`) para evitar eco acústico — superior a subir INTERRUPT_THRESHOLD
+- Turn ID con `Date.now()` — evita colisión de contadores entre turnos
+- Text reveal delay 100ms + min 5 ticks — audio empieza antes de texto, sin flash en frases cortas
+- INTERRUPT_THRESHOLD=20 (revertido de 45 — 45 era demasiado alto)
+- Cooldown 100ms antes de reactivar VAD (reducido de 300ms)
+
+Voz de Nexo: Cartesia "Manuel - Newsman" — ID: `948196a7-fe02-417b-9b6d-c45ee0803565`
+Más cálida y accesible que Pedro (Formal Speaker).
+Alt disponible: Emilio - Friendly Optimist (`b0689631-eee7-4a6c-bb86-195f1d267c2e`)
+
+Pendiente post-MVP: migración STT a Deepgram WebSocket (plan aprobado, implementación diferida).
+
+---
+
+## 29. Infraestructura de deploy
+
+Railway + Vercel operativos.
+
+Variables de entorno en producción:
+
+- `DEEPGRAM_API_KEY`
+- `CARTESIA_API_KEY`
+- `ANTHROPIC_API_KEY`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `TAVUS_API_KEY` (inactiva — archivado)
+
+---
+
+## 30. MVP scope definido
+
+MVP = flujo completo end-to-end:
+
+**Semilla → Resumen del Fundador → Documentos → Project View**
+
+El founder completa una incubación sin intervención manual.
+
+Fuera de MVP v1:
+
+- Deepgram WebSocket (diferido post-MVP)
+- Tavus CVI (diferido hasta Starter+)
+- Frames completos en Pencil.dev (en paralelo, no bloqueante)
+- Backlog y Repo Blueprint
