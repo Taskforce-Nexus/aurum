@@ -7,6 +7,21 @@ import type { Message } from '@/lib/types'
 
 const GITHUB_API = 'https://api.github.com'
 
+const FOUNDER_BRIEF_SYSTEM = `Eres un asistente que extrae información estructurada de conversaciones.
+Genera un Resumen del Fundador en español con este formato exacto:
+
+## Resumen del Fundador
+
+**Idea:** [una oración]
+**Problema:** [el problema que resuelve]
+**Cliente objetivo:** [quién es]
+**Experiencia del founder:** [background relevante]
+**Recursos disponibles:** [tiempo, equipo, capital]
+**Visión a 12 meses:** [qué quiere lograr]
+**Restricciones clave:** [limitaciones importantes]
+
+Sé concreto y directo. Sin texto adicional fuera del formato.`
+
 const EXTRACTION_SYSTEM = `Eres un extractor de información de ventures. Analiza la conversación y determina si hay información nueva y significativa sobre el venture del founder que justifique actualizar un documento.
 
 Responde ÚNICAMENTE con JSON válido, sin texto adicional:
@@ -150,6 +165,27 @@ export async function POST(req: NextRequest) {
             console.error('[chat-stream] LLM error:', err)
           }
 
+          // Check for Semilla completion before sending DONE
+          const councilMatchStream = fullResponse.match(/\[CONSEJO:([^\]]+)\]/)
+          if (councilMatchStream) {
+            try {
+              const briefContext = [
+                ...messages,
+                { role: 'assistant' as const, content: fullResponse },
+              ].map(m => `${m.role === 'user' ? 'Fundador' : 'Nexo'}: ${m.content}`).join('\n\n')
+              const founderBrief = await callClaude(
+                FOUNDER_BRIEF_SYSTEM,
+                [{ role: 'user', content: briefContext }],
+                512,
+                'claude-haiku-4-5-20251001'
+              )
+              await supabase.from('projects').update({ founder_brief: founderBrief }).eq('id', projectId)
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'semilla_complete', founder_brief: founderBrief })}\n\n`))
+            } catch (e) {
+              console.error('[chat-stream] founder-brief error:', e)
+            }
+          }
+
           // Send meta then close
           if (activeConvId) {
             controller.enqueue(encoder.encode(`data: ${JSON.stringify({ conversationId: activeConvId })}\n\n`))
@@ -250,6 +286,25 @@ export async function POST(req: NextRequest) {
       .update({ last_active_at: new Date().toISOString() })
       .eq('id', projectId)
 
+    // Generate Resumen del Fundador when Semilla ends
+    let founderBrief: string | null = null
+    if (selectedCouncil) {
+      try {
+        const briefContext = updatedMessages
+          .map(m => `${m.role === 'user' ? 'Fundador' : 'Nexo'}: ${m.content}`)
+          .join('\n\n')
+        founderBrief = await callClaude(
+          FOUNDER_BRIEF_SYSTEM,
+          [{ role: 'user', content: briefContext }],
+          512,
+          'claude-haiku-4-5-20251001'
+        )
+        await supabase.from('projects').update({ founder_brief: founderBrief }).eq('id', projectId)
+      } catch (err) {
+        console.error('[founder-brief]', err)
+      }
+    }
+
     // Incremental GitHub sync — fire and forget, non-blocking
     if (project.github_repo && !voiceMode && messages.length > 0) {
       const { data: integration } = await supabase
@@ -267,6 +322,7 @@ export async function POST(req: NextRequest) {
       message: response,
       conversationId: activeConversationId,
       ...(selectedCouncil ? { council: selectedCouncil, phase: 'value_proposition' } : {}),
+      ...(founderBrief ? { semilla_complete: true, founder_brief: founderBrief } : {}),
     })
   } catch (err) {
     console.error('Chat API error:', err)

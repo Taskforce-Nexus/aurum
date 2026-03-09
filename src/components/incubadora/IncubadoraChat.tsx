@@ -49,6 +49,9 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
     (conversation?.extracted_docs as Record<string, string[]> | null)?.council ?? []
   )
   const [currentPhase, setCurrentPhase] = useState(conversation?.phase ?? 'semilla')
+  const [founderBrief, setFounderBrief] = useState<string | null>(project.founder_brief ?? null)
+  const [semillaComplete, setSemillaComplete] = useState(!!project.founder_brief)
+  const [briefExpanded, setBriefExpanded] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -170,6 +173,10 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
       }
       if (data.phase) {
         setCurrentPhase(data.phase)
+      }
+      if (data.semilla_complete && data.founder_brief) {
+        setFounderBrief(data.founder_brief)
+        setSemillaComplete(true)
       }
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Error al conectar con Nexo. Intenta de nuevo.', author: 'Nexo' }])
@@ -419,6 +426,35 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             </div>
           )}
 
+          {/* Resumen del Fundador */}
+          <div>
+            <p className="text-xs text-[#6b6d75] uppercase tracking-wider mb-2">Resumen del Fundador</p>
+            {founderBrief ? (
+              <div className="bg-[#1A1B1E] border border-[#C9A84C]/30 rounded-lg overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setBriefExpanded(prev => !prev)}
+                  className="w-full flex items-center justify-between px-3 py-2 text-xs text-[#C9A84C] hover:bg-[#C9A84C]/5 transition-colors"
+                >
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <span>✓</span> Generado
+                  </span>
+                  <span>{briefExpanded ? '▲' : '▼'}</span>
+                </button>
+                {briefExpanded && (
+                  <div className="px-3 pb-3 text-xs text-[#9a9ba5] leading-relaxed whitespace-pre-wrap border-t border-[#2a2b30]">
+                    {founderBrief}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full border border-[#3a3b40]" />
+                <span className="text-xs text-[#3a3b40]">Pendiente — al terminar Semilla</span>
+              </div>
+            )}
+          </div>
+
           {/* Generar documentos AURUM */}
           {userMsgCount >= 5 && (
             <div>
@@ -474,6 +510,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             messages={messages}
             onMessagesUpdate={setMessages}
             onExit={() => setVoiceMode(false)}
+            onSemillaComplete={(brief) => { setFounderBrief(brief); setSemillaComplete(true) }}
           />
         )}
 
@@ -528,6 +565,22 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             )}
             <div ref={bottomRef} />
           </div>
+
+          {/* Semilla complete banner */}
+          {semillaComplete && (
+            <div className="border-t border-[#C9A84C]/30 bg-[#C9A84C]/5 px-8 py-3 flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-2 text-sm text-[#C9A84C]">
+                <span>✓</span>
+                <span>Semilla completada — Resumen del Fundador generado</span>
+              </div>
+              <Link
+                href={`/project/${project.id}`}
+                className="text-sm bg-[#C9A84C] hover:bg-[#b8963f] text-[#0F0F11] font-semibold px-4 py-1.5 rounded-lg transition-colors"
+              >
+                Ver mi proyecto →
+              </Link>
+            </div>
+          )}
 
           {/* Input bar */}
           <div className="border-t border-[#2a2b30] px-8 py-4 shrink-0">

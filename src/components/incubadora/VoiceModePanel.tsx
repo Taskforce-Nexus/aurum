@@ -11,6 +11,7 @@ interface Props {
   messages: Message[]
   onMessagesUpdate: (msgs: Message[]) => void
   onExit: () => void
+  onSemillaComplete?: (founderBrief: string) => void
 }
 
 // Each TTS chunk carries both the decoded audio and its stripped text
@@ -50,7 +51,7 @@ const SENTENCE_END_RE = /[.!?\n]$/
 // Bug 1 fix: text reveal interval
 const REVEAL_INTERVAL_MS = 50
 
-export default function VoiceModePanel({ projectId, conversationId, messages, onMessagesUpdate, onExit }: Props) {
+export default function VoiceModePanel({ projectId, conversationId, messages, onMessagesUpdate, onExit, onSemillaComplete }: Props) {
   const [voiceState, setVoiceState] = useState<VoiceState>('paused')
   const [transcript, setTranscript] = useState('')
   const [nexoText, setNexoText] = useState('')
@@ -454,8 +455,10 @@ export default function VoiceModePanel({ projectId, conversationId, messages, on
               continue
             }
             try {
-              const parsed = JSON.parse(payload) as { token?: string; conversationId?: string }
-              if (parsed.token) {
+              const parsed = JSON.parse(payload) as { token?: string; conversationId?: string; type?: string; founder_brief?: string }
+              if (parsed.type === 'semilla_complete' && parsed.founder_brief) {
+                onSemillaComplete?.(parsed.founder_brief)
+              } else if (parsed.token) {
                 fullText += parsed.token
                 sentenceBuffer += parsed.token
                 // Bug 1 fix: do NOT setNexoText here — text reveals when audio plays
