@@ -5,7 +5,6 @@ import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import { createClient } from '@/lib/supabase/client'
 import VoiceModePanel from './VoiceModePanel'
-import NexoModal from './NexoModal'
 import type { Project, Conversation, Message } from '@/lib/types'
 
 interface UploadedFile {
@@ -43,7 +42,6 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
   const [voiceUnavailable, setVoiceUnavailable] = useState(false)
   const [voiceErrorMsg, setVoiceErrorMsg] = useState('')
   const [voiceMode, setVoiceMode] = useState(false)
-  const [nexoModalOpen, setNexoModalOpen] = useState(false)
   const [extractState, setExtractState] = useState<'idle' | 'running' | 'done'>('idle')
   const [extractProgress, setExtractProgress] = useState(0) // 0–5
   const [extractedRepo, setExtractedRepo] = useState<string | null>(null)
@@ -286,14 +284,14 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => currentPhase === 'semilla' ? setNexoModalOpen(true) : setVoiceMode(true)}
+            onClick={() => setVoiceMode(true)}
             className="flex items-center gap-1.5 text-sm border border-[#2a2b30] text-[#6b6d75] hover:text-white hover:border-[#3a3b40] px-3 py-1.5 rounded-lg transition-colors"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
               <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/>
             </svg>
-            {currentPhase === 'semilla' ? 'Hablar con Nexo' : 'Modo voz'}
+            Modo voz
           </button>
           <Link href={`/project/${project.id}`}
             className="text-sm text-[#6b6d75] border border-[#2a2b30] px-3 py-1.5 rounded-lg hover:text-white hover:border-[#3a3b40] transition-colors">
@@ -467,21 +465,6 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             </div>
           )}
         </aside>
-
-        {/* Nexo modal — face-to-face session (phase: semilla only) */}
-        {nexoModalOpen && (
-          <NexoModal
-            projectId={project.id}
-            projectName={project.name}
-            idea={project.founder_brief ?? undefined}
-            onClose={(transcriptMsgs) => {
-              setNexoModalOpen(false)
-              if (transcriptMsgs.length > 0) {
-                setMessages(prev => [...prev, ...transcriptMsgs])
-              }
-            }}
-          />
-        )}
 
         {/* Voice mode */}
         {voiceMode && (
