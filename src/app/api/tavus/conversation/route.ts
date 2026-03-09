@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       conversation_name: `AURUM Semilla - ${project_id}`,
       custom_greeting: NEXO_GREETING,
       properties: {
-        language: 'es',
+        language: 'Spanish',
         enable_transcription: true,
         apply_greenscreen: false,
       },
