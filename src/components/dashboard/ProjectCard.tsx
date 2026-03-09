@@ -22,18 +22,18 @@ export default function ProjectCard({ id, name, currentPhase, lastActiveAt }: Pr
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [deleted, setDeleted] = useState(false)
   const [toast, setToast] = useState('')
-  // Hydration fix: formatDistanceToNow differs between server and client render times
+  // Hydration fix: formatDistanceToNow differs between server/client render times
   const [relativeTime, setRelativeTime] = useState<string | null>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
+  const supabase = createClient()
 
   useEffect(() => {
     if (lastActiveAt) {
       setRelativeTime(formatDistanceToNow(new Date(lastActiveAt), { addSuffix: true, locale: es }))
     }
   }, [lastActiveAt])
-  const menuRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const router = useRouter()
-  const supabase = createClient()
 
   // Close menu on outside click
   useEffect(() => {
@@ -135,7 +135,7 @@ export default function ProjectCard({ id, name, currentPhase, lastActiveAt }: Pr
 
           <div className="flex items-center gap-2 shrink-0">
             <span className="text-xs text-[#6b6d75] bg-[#2a2b30] px-2 py-1 rounded-full">
-              {relativeTime ?? (lastActiveAt ? '' : 'Nuevo')}
+              {relativeTime ?? 'Nuevo'}
             </span>
 
             {/* Three-dot menu */}
