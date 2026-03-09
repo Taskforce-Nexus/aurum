@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server'
 
 // Cartesia voice selected for Nexo:
-// Name: "Pedro - Formal Speaker"
-// ID:   15d0c2e2-8d29-44c3-be23-d585d5f154a1
-// Mexican accent, male, clear and steady — best match for trusted advisor/mentor.
-// Voice design API returned 405 (not available on current plan).
-// Previous voice "Spanish-speaking Man" (34dbb662) had no accent specification.
+// Name: "Manuel - Newsman"
+// ID:   948196a7-fe02-417b-9b6d-c45ee0803565
+// Warm Spanish-language male voice — more accessible than Pedro (Formal Speaker).
+// Alt: Emilio - Friendly Optimist (b0689631-eee7-4a6c-bb86-195f1d267c2e)
 
-const NEXO_VOICE_ID = '15d0c2e2-8d29-44c3-be23-d585d5f154a1'
+const NEXO_VOICE_ID = '948196a7-fe02-417b-9b6d-c45ee0803565'
 
 export async function POST(req: Request) {
   try {
