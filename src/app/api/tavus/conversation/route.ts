@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const TAVUS_API = 'https://tavusapi.com/v2'
-const REPLICA_ID = 'r72f7f7f7c8b'
+const REPLICA_ID = 'r3a715eeff8d'
 
 const NEXO_GREETING =
   'Hola, soy Nexo. Estoy aquí para ayudarte a estructurar tu idea en un venture real. ' +
