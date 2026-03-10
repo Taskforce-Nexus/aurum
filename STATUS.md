@@ -47,7 +47,7 @@ Aprobar Auth frames iterados → freeze Auth → verificar Semilla en Railway �
 
 | Hash | Descripción |
 |---|---|
-| pendiente | fix: Auth__Login__Default — reemplazar stack por tabs (Contraseña / Enlace mágico) |
+| 120eae0 | fix: Auth__Login__Default — reemplazar stack por tabs (Contraseña / Enlace mágico) |
 | 5b41181 | iterate: Auth__Login__Default, Auth__Register__Default — copy y magic link |
 | b4bcebf | docs: CLAUDE.md — reglas obligatorias permanentes |
 | 86dde3e | docs: update CLAUDE.md — STATUS.md replaces aurum_current_status.md |
