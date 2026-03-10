@@ -7,6 +7,9 @@ Generated using Pencil.dev MCP.
 # Authentication
 Auth__Login__Default
 Auth__Register__Default
+Auth__VerifyEmail__Default
+Auth__ForgotPassword__Default
+Auth__ForgotPasswordSent__Default
 
 ---
 

@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-10
-Etapa actual: Desarrollo activo — Auth__Login__Default panel izquierdo reconstruido + tabs pill style iterados
+Etapa actual: Desarrollo activo — Auth frames completos (Login pill tabs + 3 frames nuevos: VerifyEmail, ForgotPassword, ForgotPasswordSent)
 
 ---
 
@@ -24,13 +24,12 @@ Etapa actual: Desarrollo activo — Auth__Login__Default panel izquierdo reconst
 
 ## En progreso
 
-- Auth__Login__Default panel izquierdo reconstruido (stats eliminados, título + mini cards + testimonial)
-- Auth__Login__Default tab bar reemplazado por pill style (Correo y contraseña / Enlace al correo)
+- Auth frames completos: Login (pill tabs) + VerifyEmail + ForgotPassword + ForgotPasswordSent
 - Fixes de Semilla (voice ws, temas IA, progreso, PDF) — `9b7f006` — pendiente verificación en Railway
 
 ## Siguiente paso
 
-Aprobar Auth__Login__Default → freeze Auth → verificar Semilla en Railway → avanzar a Propósito del Consejo
+Aprobar Auth frames → freeze Auth → verificar Semilla en Railway → avanzar a Propósito del Consejo
 
 ---
 
@@ -48,6 +47,7 @@ Aprobar Auth__Login__Default → freeze Auth → verificar Semilla en Railway �
 
 | Hash | Descripción |
 |---|---|
+| (pending) | feat: Auth — VerifyEmail, ForgotPassword, ForgotPasswordSent frames |
 | 93fe396 | fix: Auth__Login__Default — pill tabs, panel izquierdo reconstruido |
 | 2279030 | fix: Auth frames — stat3 eliminado, stat2 icon users, Register headline semanas |
 | 3798a6d | fix: Auth__Login__Default — stats alignment |
