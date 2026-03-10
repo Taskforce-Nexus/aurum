@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-10
-Etapa actual: Desarrollo activo — Auth frames FREEZE (5 frames) → verificar Semilla en Railway → Propósito del Consejo
+Etapa actual: Desarrollo activo — Dashboard iterado (subtítulo, stats, progreso 6 etapas, limpieza UI)
 
 ---
 
@@ -24,6 +24,7 @@ Etapa actual: Desarrollo activo — Auth frames FREEZE (5 frames) → verificar 
 
 ## En progreso
 
+- Projects__Dashboard__Default iterado — 5 correcciones Kira
 - Fixes de Semilla (voice ws, temas IA, progreso, PDF) — `9b7f006` — pendiente verificación en Railway
 
 ## Siguiente paso
@@ -46,6 +47,7 @@ Verificar Semilla en Railway → avanzar a Propósito del Consejo
 
 | Hash | Descripción |
 |---|---|
+| (pending) | fix: Dashboard — subtítulo, En progreso, denominador 6, tokens y filtros |
 | 6ed8918 | docs: freeze Auth — 5 frames |
 | 922d7ef | feat: Auth — VerifyEmail, ForgotPassword, ForgotPasswordSent frames |
 | 93fe396 | fix: Auth__Login__Default — pill tabs, panel izquierdo reconstruido |
