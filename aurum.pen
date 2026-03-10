@@ -3994,65 +3994,6 @@
                           "height": 24
                         }
                       ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "eVs5G",
-                      "name": "BalanceDropdown",
-                      "width": 220,
-                      "fill": "#1A1A1A",
-                      "cornerRadius": 8,
-                      "layout": "vertical",
-                      "gap": 12,
-                      "padding": 16,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "nBZoF",
-                          "name": "dropTitle",
-                          "fill": "#C5A55A",
-                          "content": "$46.79 disponible",
-                          "fontFamily": "DM Sans",
-                          "fontSize": 14,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "WFa2a",
-                          "name": "recargarBtn",
-                          "width": "fill_container",
-                          "fill": "#C5A55A",
-                          "cornerRadius": 6,
-                          "padding": [
-                            10,
-                            16
-                          ],
-                          "justifyContent": "center",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "4QwG1",
-                              "name": "recargarLabel",
-                              "fill": "#000000",
-                              "content": "Recargar saldo",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 14,
-                              "fontWeight": "500"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "text",
-                          "id": "urrYV",
-                          "name": "historialLink",
-                          "fill": "#6E6E76",
-                          "content": "Ver historial de uso",
-                          "textAlign": "center",
-                          "fontFamily": "DM Sans",
-                          "fontSize": 12
-                        }
-                      ]
                     }
                   ]
                 },
