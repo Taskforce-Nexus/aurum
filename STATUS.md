@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-10
-Etapa actual: Desarrollo activo — Semilla en fixes, CLAUDE.md con reglas permanentes
+Etapa actual: Desarrollo activo — Auth frames iterados, Semilla pendiente verificación
 
 ---
 
@@ -29,7 +29,7 @@ Etapa actual: Desarrollo activo — Semilla en fixes, CLAUDE.md con reglas perma
 
 ## Siguiente paso
 
-Verificar fixes de Semilla en Railway → avanzar a Propósito del Consejo
+Aprobar Auth frames iterados → freeze Auth → verificar Semilla en Railway → avanzar a Propósito del Consejo
 
 ---
 
@@ -47,6 +47,8 @@ Verificar fixes de Semilla en Railway → avanzar a Propósito del Consejo
 
 | Hash | Descripción |
 |---|---|
+| pendiente | iterate: Auth__Login__Default, Auth__Register__Default — copy y magic link |
+| b4bcebf | docs: CLAUDE.md — reglas obligatorias permanentes |
 | 86dde3e | docs: update CLAUDE.md — STATUS.md replaces aurum_current_status.md |
 | 4c26bef | docs: scope update completo — AVA suite, journey definitivo, todas las specs |
 | 35f6e7c | docs: scope update completo — AVA suite, journey definitivo |
