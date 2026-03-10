@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-10
-Etapa actual: Desarrollo activo — Dashboard FREEZE completado
+Etapa actual: Desarrollo activo — ProjectView iterado (6 fixes Kira)
 
 ---
 
@@ -24,7 +24,7 @@ Etapa actual: Desarrollo activo — Dashboard FREEZE completado
 
 ## En progreso
 
-- Projects__Dashboard__Default — FREEZE `e7c74ec`
+- Projects__ProjectView__Default iterado — 6 fixes Kira — `485713c`
 - Fixes de Semilla (voice ws, temas IA, progreso, PDF) — `9b7f006` — pendiente verificación en Railway
 
 ## Siguiente paso
@@ -47,6 +47,9 @@ Verificar Semilla en Railway → avanzar a Propósito del Consejo
 
 | Hash | Descripción |
 |---|---|
+| 485713c | fix: ProjectView — header, terminología, pipeline 6 etapas, docs, consumo, sidebar |
+| aba441f | docs: freeze Projects__Dashboard__Default |
+| e7c74ec | fix: Dashboard — cards con solo ícono ⋯, sin dropdown |
 | 5a6b995 | feat: Dashboard — menú CRUD (⋯) en project cards, dropdown abierto en FinTrack |
 | 342112a | fix: Dashboard — dropdown removido, nav muestra saldo en estado cerrado |
 | dbaec90 | fix: Dashboard — saldo dropdown integrado en saldoWrapper dentro del nav |
