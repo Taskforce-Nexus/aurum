@@ -47,7 +47,7 @@ Verificar Semilla en Railway → avanzar a Propósito del Consejo
 
 | Hash | Descripción |
 |---|---|
-| (pending) | fix: Dashboard — stats Documentos/Sesiones + pills de etapa restaurados |
+| b1877d1 | fix: Dashboard — stats Documentos/Sesiones + pills de etapa restaurados |
 | 2aa9a70 | fix: Dashboard — subtítulo, En progreso, denominador 6, tokens y filtros |
 | 6ed8918 | docs: freeze Auth — 5 frames |
 | 922d7ef | feat: Auth — VerifyEmail, ForgotPassword, ForgotPasswordSent frames |
