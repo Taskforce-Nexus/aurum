@@ -4371,7 +4371,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "LiknY",
+                      "id": "cOKK1",
                       "name": "rightCol1",
                       "layout": "vertical",
                       "gap": 8,
@@ -4379,111 +4379,13 @@
                       "children": [
                         {
                           "type": "icon_font",
-                          "id": "F5TnR",
+                          "id": "g0EfF",
                           "name": "moreIcon1",
                           "width": 16,
                           "height": 16,
                           "iconFontName": "ellipsis",
                           "iconFontFamily": "lucide",
                           "fill": "#6E6E76"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "eMo0d",
-                          "name": "crudMenu1",
-                          "width": 160,
-                          "fill": "#1A1A1A",
-                          "cornerRadius": 8,
-                          "layout": "vertical",
-                          "padding": 4,
-                          "children": [
-                            {
-                              "type": "frame",
-                              "id": "U3IeW",
-                              "name": "opt1",
-                              "width": "fill_container",
-                              "gap": 8,
-                              "padding": [
-                                8,
-                                12
-                              ],
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "icon_font",
-                                  "id": "dF6Ee",
-                                  "name": "opt1icon",
-                                  "width": 14,
-                                  "height": 14,
-                                  "iconFontName": "pencil",
-                                  "iconFontFamily": "lucide",
-                                  "fill": "#EDEDEF"
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "l9ueP",
-                                  "name": "opt1txt",
-                                  "fill": "#EDEDEF",
-                                  "content": "Renombrar",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 13,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
-                              "id": "mQLo5",
-                              "name": "menuSep",
-                              "width": "fill_container",
-                              "height": 1,
-                              "fill": "#2A2A2A"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "eo6ZM",
-                              "name": "opt2",
-                              "width": "fill_container",
-                              "gap": 8,
-                              "padding": [
-                                8,
-                                12
-                              ],
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "icon_font",
-                                  "id": "rYt55",
-                                  "name": "opt2icon",
-                                  "width": 14,
-                                  "height": 14,
-                                  "iconFontName": "trash-2",
-                                  "iconFontFamily": "lucide",
-                                  "fill": "#E53935"
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "iI8AE",
-                                  "name": "opt2txt",
-                                  "fill": "#E53935",
-                                  "content": "Eliminar",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 13,
-                                  "fontWeight": "normal"
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "icon_font",
-                          "id": "3Uxkh",
-                          "name": "arrow",
-                          "width": 20,
-                          "height": 20,
-                          "iconFontName": "chevron-right",
-                          "iconFontFamily": "lucide",
-                          "fill": "#4E4E56"
                         }
                       ]
                     }
@@ -4793,16 +4695,6 @@
                           "iconFontName": "ellipsis",
                           "iconFontFamily": "lucide",
                           "fill": "#6E6E76"
-                        },
-                        {
-                          "type": "icon_font",
-                          "id": "cEk1c",
-                          "name": "arrow",
-                          "width": 20,
-                          "height": 20,
-                          "iconFontName": "chevron-right",
-                          "iconFontFamily": "lucide",
-                          "fill": "#4E4E56"
                         }
                       ]
                     }
@@ -5028,16 +4920,6 @@
                           "iconFontName": "ellipsis",
                           "iconFontFamily": "lucide",
                           "fill": "#6E6E76"
-                        },
-                        {
-                          "type": "icon_font",
-                          "id": "v2Z9H",
-                          "name": "arrow",
-                          "width": 20,
-                          "height": 20,
-                          "iconFontName": "chevron-right",
-                          "iconFontFamily": "lucide",
-                          "fill": "#4E4E56"
                         }
                       ]
                     }
