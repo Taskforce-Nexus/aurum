@@ -2,228 +2,108 @@
 
 ## Vision
 
-AURUM is an AI-guided venture creation system that transforms a founder's idea into a structured business, product architecture, and engineering blueprint.
+AURUM es un sistema de toma de decisiones estratégicas asistido por consejo IA.
+Transforma cualquier decisión compleja en documentos estructurados y accionables.
 
-The system captures the founder's seed idea through an incubation session moderated by an AI agent called **Nexo**, and progressively converts that idea into structured outputs ready for execution.
+El ICP puede ser cualquier persona que necesite estructurar una decisión estratégica
+con perspectivas expertas: founders, dueños de empresa, directores de innovación,
+product managers, estrategas.
 
-Goal:
+El sistema extrae el contexto del usuario a través de Semilla, arma un consejo IA
+especializado según el propósito declarado, y guía una Sesión de Consejo que produce
+documentos listos para ejecutar.
 
-idea → business → product → system design → backlog → repository
-
-The founder mainly contributes:
-
-- idea
-
-- market intuition
-
-- validation of decisions
-
-AI generates:
-
-- structured thinking
-
-- business documentation
-
-- product architecture
-
-- UX design
-
-- system design
-
-- engineering backlog
+Objetivo: comprimir semanas de trabajo estratégico en horas.
 
 ---
 
-# Core Philosophy
+## Core Philosophy
 
-Most startups stall because:
+La mayoría de las decisiones estratégicas se estancan porque:
+- el decisor no tiene acceso a perspectivas expertas diversas
+- el conocimiento existe pero no está estructurado
+- no hay un proceso para convertir conversación en documentos accionables
 
-- founders lose momentum after the idea
+AURUM captura el momento de claridad y lo estructura inmediatamente.
 
-- business planning is slow
-
-- execution knowledge is missing
-
-AURUM captures the **Eureka moment** and structures it immediately.
-
-The product experience must feel like:
-
-"My idea is becoming a company in front of my eyes."
+La experiencia debe sentirse como:
+"Mi decisión se está convirtiendo en un plan ejecutable frente a mis ojos."
 
 ---
 
-# Venture Creation Pipeline
+## Journey de usuario
 
-IDEA
+REGISTRO
 ↓
-INCUBADORA
+SEMILLA — Nexo extrae contexto completo
 ↓
-BUSINESS
+PROPÓSITO DEL CONSEJO — el usuario declara su decisión
 ↓
-PRODUCT CONCEPT
+MARKETPLACE — Nexo recomienda consejeros IA relevantes
 ↓
-UX ARCHITECTURE
+DEFINICIÓN DE DOCUMENTOS — con Sesión de Clarificación si no hay spec
 ↓
-DEFAULT FRAMES
+SESIÓN DE CONSEJO — N fases, cada fase produce un documento
 ↓
-FRAME EXPANSION
-↓
-FRAME SCAFFOLDING
-↓
-DESIGN SYSTEM
-↓
-SYSTEM DESIGN
-↓
-BACKLOG
-↓
-REPO
-
-Each step generates structured artifacts.
+EXPORT CENTER — presentación interactiva + PDF / PPTX
 
 ---
 
-# Core Product Areas
+## AVA Suite
 
-## Dashboard
-Project overview and activity.
+AURUM es Producto 1 de la AVA Suite:
+- AURUM — estrategia de negocio + consejo IA
+- Branding — identidad de marca (Producto 2)
+- Agile Bot — backlog estructurado (Producto 3)
 
-## Project View
-Operational control center of a venture.
-
-Shows:
-
-- incubation progress
-
-- generated documents
-
-- access to incubator
-
-- advisory board
-
-- export center
-
-## Seed Session (Incubadora)
-
-Conversation between founder and **Nexo**.
-
-Purpose: extract full context of the idea.
-
-Topics explored:
-
-- problem
-
-- target customer
-
-- founder background
-
-- resources
-
-- constraints
-
-- opportunities
-
-Output: structured venture knowledge.
+Modelo tipo Zoho/Odoo: cada módulo funciona solo o como suite completa.
 
 ---
 
-# Advisory Board
+## Document Specification Library
 
-Panel of simulated experts:
+Biblioteca viva de specs técnicas por ICP y propósito.
+Nexo selecciona dinámicamente qué documentos proponer según el usuario.
+Si no existe spec para un ICP nuevo, se activa la Sesión de Clarificación
+y la spec resultante entra a la biblioteca.
 
-- AI cofounders
+### Specs disponibles — ICP Founder
 
-- domain advisors
-
-- buyer personas
-
-- voice of customer
-
-Used to evaluate decisions.
-
----
-
-# Venture Documents Generated
-
-AURUM automatically generates:
-
-### Value Proposition
-
-- ICP
-
-- problem
-
-- solution
-
-- product-market fit
-
-### Business Model
-
-- channels
-
-- revenue model
-
-- pricing
-
-- unit economics
-
-### Customer Journey
-
-- acquisition
-
-- activation
-
-- retention
-
-### Business Plan
-
-### Branding
-
-- mission
-
-- vision
-
-- positioning
-
-- messaging
-
-- naming
-
-### PRD
-
-### System Design
-
-### Backlog
+1. Value Proposition Canvas
+2. Business Model (incluye P&L Proforma + Business Model Canvas completo)
+3. Customer Journey (con loops de crecimiento)
+4. Business Plan (con impulsos estratégicos)
 
 ---
 
-# UX Design Workflow
+## Marketplace de Consejeros
 
-default → iterate → freeze → expand → scaffold
-
-default = generate core frames
-iterate = refine
-freeze = approve
-expand = add states
-scaffold = prepare for engineering
+Catálogo de agentes IA con perfil completo.
+Especialidades core: estrategia, finanzas, marketing, ventas, producto/UX,
+tecnología, legal, operaciones, industria específica.
+Nexo filtra y recomienda según propósito + Resumen del Fundador.
 
 ---
 
-# Technical Stack
+## Export Center
 
-- Claude Code
+Interfaz de presentación interactiva de los resultados de la Sesión de Consejo.
+El JSON generado en la sesión es la fuente de verdad.
+MVP: PDF + PPTX. v2: Google Slides.
 
-- Pencil.dev MCP
+---
 
+## Stack técnico
+
+- Claude Code + Pencil.dev MCP
 - GitHub repository
-
 - Markdown documentation
-
 - AI document generation
 
 ---
 
-# Long Term Vision
+## Visión a largo plazo
 
-AURUM becomes a **venture operating system** capable of generating complete startups from ideas.
-
-Goal: reduce the cost and complexity of creating companies by **two orders of magnitude**.
+AVA se convierte en el sistema operativo para la creación y gestión de ventures.
+AURUM es el módulo de estrategia. Cada módulo AVA reduce el costo y complejidad
+de construir empresas por dos órdenes de magnitud.

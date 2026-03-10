@@ -1,60 +1,118 @@
 # AURUM Document System
 
-AURUM generates structured venture documentation and build artifacts across three layers: Business, Product, Engineering.
+AURUM genera documentos estratégicos estructurados a través de la Sesión de Consejo.
+Los documentos se definen dinámicamente según el ICP y el propósito del usuario.
+
+La fuente de verdad es la Document Specification Library.
 
 ---
 
-## Business Layer (5)
+## Document Specification Library
 
-### 1. Value Proposition
-- ICP, customer problem, proposed solution, value hypothesis, product-market fit evaluation
-
-### 2. Business Model
-- revenue model, pricing structure, channels, acquisition logic, unit economics
-
-### 3. Customer Journey
-- discovery, evaluation, activation, retention, expansion
-
-### 4. Branding
-- mission, vision, values, positioning, messaging, naming, identity direction
-
-### 5. Business Plan
-- strategic direction, venture readiness, key risks, opportunity framing, go-to-market logic
+Biblioteca viva de specs técnicas por ICP y propósito.
+Nexo selecciona qué documentos proponer según el usuario.
+Si no existe spec para un propósito nuevo, se activa la Sesión de Clarificación
+y la spec resultante entra a la biblioteca.
 
 ---
 
-## Product Layer (7)
+## Specs disponibles — ICP Founder
 
-### 6. Product Concept
-- what the product is, who it serves, what problems it solves, product scope
+### Documento 1 — Value Proposition Canvas
 
-### 7. PRD
-- product requirements, expected behaviors, feature intentions, implementation constraints
+- Perfil del cliente: trabajos que hace, dolores, ganancias esperadas
+- Propuesta de valor: productos/servicios, aliviadores de dolor, creadores de ganancia
+- Encaje problema-solución
+- ICP definido
+- Hipótesis de valor a validar
+- 2-3 Customer Personas:
+  - Perfil detallado
+  - Lenguaje exacto que usan para describir el problema
+  - Next Best Alternatives actuales
+  - Mapa emocional y racional a través del proceso de compra
 
-### 8. UX Architecture
-- main user flows, navigation structure, screen relationships, interaction architecture
+### Documento 2 — Business Model
 
-### 9. Default Frames Inventory
-- approved default UI frames, canonical initial product surfaces
+- Business Model Canvas completo:
+  - Segmentos de clientes
+  - Propuesta de valor
+  - Canales
+  - Relación con clientes
+  - Fuentes de ingresos
+  - Recursos clave
+  - Actividades clave
+  - Socios clave
+  - Estructura de costos
+- Modelo de pricing y esquemas de cobro
+- Economía unitaria: CAC, LTV, margen por cliente
+- Palancas de crecimiento
+- P&L Proforma:
+  - Ventas
+  - Costo del bien vendido (COGS)
+  - Utilidad bruta / Margen bruto
+  - Gastos de ventas desglosados
+  - Gastos generales desglosados
+  - Gastos administrativos desglosados
+  - Utilidad operativa / Margen operativo
+  - Impuestos
+  - Depreciación
+  - Utilidad neta / Margen neto
+  - Flujo de efectivo / Margen de flujo
 
-### 10. Frame Expansion
-- derived UI states: empty, loading, error, success, other variants
+### Documento 3 — Customer Journey
 
-### 11. Frame Scaffolding
-- frame purpose, visible sections, fields, actions, data shown, component candidates, implementation notes
+- Framework compartido por todos los ICPs y personas:
+  - Descubrimiento
+  - Evaluación
+  - Decisión
+  - Activación
+  - Retención
+  - Expansión
+- Anotaciones específicas por persona donde necesita refuerzo particular
+- Balancing loops y Reinforcing loops marcados explícitamente
+- Recomendaciones de cambios en el producto para resolver loops débiles
 
-### 12. Design System
-- design tokens, colors, typography, spacing, reusable UI components
+### Documento 4 — Business Plan
+
+- Dirección estratégica
+- Evaluación de preparación — 8 dimensiones puntuadas 1-10
+- Riesgos clave y plan de mitigación
+- Decisión go / no-go con justificación
+- Impulsos estratégicos (no líneas de tiempo):
+  - Cada impulso: objetivo claro + acciones clave + condición de éxito
+  - El usuario avanza cuando cumple la condición del impulso anterior
+  - Típicamente 3-5 impulsos
 
 ---
 
-## Engineering Layer (3)
+## Specs pendientes — otros ICPs
 
-### 13. System Design
-- technical architecture, services, APIs, data models, integrations, infrastructure
+Los siguientes ICPs tienen documentos identificados pero sin spec completa.
+Se co-construyen con el usuario vía Sesión de Clarificación cuando lleguen.
 
-### 14. Backlog
-- epics, features, implementation tasks, engineering priorities
+### ICP: Dueño de empresa — estrategia de crecimiento
 
-### 15. Repo Blueprint
-- repository structure, output packaging, file layout for handoff
+Documentos candidatos:
+- Modelo comercial optimizado
+- Estrategia de comunicación
+- Modelo de incentivos de ventas
+- Plan de implementación de sistemas de venta
+
+### ICP: Director de innovación — lanzar producto interno
+
+Documentos candidatos:
+- Product Concept
+- Business Case
+- Roadmap
+- Plan de adopción interna
+
+---
+
+## Formato de export
+
+Cada documento se genera en:
+- Vista interactiva en Export Center
+- PDF
+- PPTX (via PptxGenJS)
+- JSON estructurado (para consumo por otros módulos AVA)
+- Google Slides (v2)

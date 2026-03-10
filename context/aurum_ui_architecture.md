@@ -1,29 +1,48 @@
 # AURUM UI Architecture
 
-The system should feel like an operating system for venture creation, not a traditional SaaS dashboard.
+El sistema debe sentirse como un sistema operativo para la toma de decisiones estratégicas,
+no como un dashboard de SaaS tradicional.
 
 ---
 
 ## Dashboard
-Overview of ventures. Functions: project list, activity overview, progress indicators, project creation.
+Vista general de ventures/proyectos del usuario.
+Funciones: lista de proyectos, progreso, actividad, creación de proyecto.
 
 ## Project View
-The operational hub for each venture. Acts as the control center.
-Displays: venture status, document generation progress, access to incubator, advisory board, export center.
+Hub operativo de cada proyecto. Centro de control.
+Muestra: estado del venture, documentos generados, acceso a Sesión de Consejo,
+consejo asesor, Export Center.
 
-## Seed Session (Incubadora)
-Conversation interface between founder and Nexo.
-Purpose: extract the full context of the venture idea.
-Topics: founder background, problem definition, customer profile, constraints, available resources.
+## Semilla
+Conversación 1:1 entre el usuario y Nexo.
+Propósito: extraer contexto completo del usuario y su decisión.
+Output: Resumen del Fundador.
 
-## Advisory Board
-Panel of AI and human advisors.
-Includes: AI cofounders, domain experts, invited advisors, buyer personas, voice of customer.
+## Propósito del Consejo
+Pantalla donde el usuario declara para qué necesita su consejo.
+Nexo procesa el propósito y prepara recomendaciones.
 
-## Documents
-Area where venture documentation is generated and reviewed.
-Examples: value proposition, business model, branding, PRD, system design, backlog.
+## Marketplace de Consejeros
+Catálogo de agentes IA disponibles.
+Nexo recomienda perfiles relevantes.
+El usuario puede aceptar la recomendación o explorar el catálogo completo.
+
+## Definición de Documentos
+Nexo propone los documentos a producir en la Sesión de Consejo.
+Si no hay spec previa, se activa la Sesión de Clarificación de Expectativas.
+El usuario valida antes de continuar.
+
+## Sesión de Clarificación de Expectativas
+Conversación corta donde Nexo co-construye la spec del documento con el usuario.
+Solo se activa cuando no existe spec en la biblioteca para el propósito declarado.
+
+## Sesión de Consejo
+Panel de conversación con el consejo IA activo.
+N fases según documentos definidos. Cada fase produce un documento aprobado.
+Mecanismo Nexo Dual operando en cada fase.
 
 ## Export Center
-Handoff center for venture artifacts.
-Exports: PDF documents, markdown bundles, repository templates, investor materials.
+Interfaz de presentación interactiva de los resultados de la Sesión de Consejo.
+El usuario navega los documentos generados en formato visual.
+Exporta a PDF, PPTX o JSON.

@@ -1,6 +1,11 @@
 # AURUM Venture Creation Pipeline
 
-AURUM convierte una decisión estratégica compleja en documentos estructurados y accionables a través de consejo IA especializado.
+AURUM convierte una decisión estratégica compleja en documentos estructurados
+y accionables a través de consejo IA especializado.
+
+---
+
+## Pipeline de usuario (journey)
 
 REGISTRO
 ↓
@@ -11,17 +16,16 @@ PROPÓSITO DEL CONSEJO
 MARKETPLACE DE CONSEJEROS
 ↓
 DEFINICIÓN DE DOCUMENTOS
+(Sesión de Clarificación si no hay spec previa)
 ↓
 SESIÓN DE CONSEJO
+(N fases según documentos definidos)
 ↓
 EXPORT CENTER
 
-Cada etapa genera outputs estructurados que alimentan la siguiente.
-El objetivo es comprimir semanas de trabajo estratégico en horas.
-
 ---
 
-Pipeline técnico completo (producto digital):
+## Pipeline técnico completo — producto digital
 
 IDEA
 ↓
@@ -35,7 +39,7 @@ DEFINICIÓN DE DOCUMENTOS
 ↓
 SESIÓN DE CONSEJO
 ↓
-BRANDING (módulo AVA separado)
+BRANDING (módulo AVA separado — Producto 2)
 ↓
 PRODUCT CONCEPT
 ↓
@@ -55,6 +59,13 @@ SCAFFOLD
 ↓
 SYSTEM DESIGN
 ↓
-BACKLOG (Agile Bot — módulo AVA separado)
+BACKLOG (Agile Bot — módulo AVA separado — Producto 3)
 ↓
 REPO
+
+---
+
+El pipeline visible al usuario se adapta por venture type detectado en Semilla.
+El pipeline técnico completo es la arquitectura base de producto digital.
+Cada etapa genera outputs estructurados que alimentan la siguiente.
+El objetivo es comprimir semanas de trabajo estratégico en horas.

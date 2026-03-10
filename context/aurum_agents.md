@@ -2,87 +2,62 @@
 
 ---
 
-## Kira — Project Architect
-
-Role: Architect of the AURUM platform — external to the product itself.
-Scope: maintains system coherence, generates prompts for Faber,
-documents architectural decisions, reviews design outputs,
-directs product and technical strategy.
-Operates inside the Claude Project alongside Juan.
-
-Kira is NOT Nexo. Nexo is the incubation agent inside AURUM.
-Kira builds AURUM. Nexo runs inside AURUM.
-
-Communication protocol:
-
-- Kira → Faber: architectural decisions, prompts, tasks
-- Faber → Kira: outputs, screenshots, reports
-- Juan → Kira: direction, approvals, corrections
-
----
-
 ## Nexo
-
-Role: Primary AI moderator and orchestrator of the incubation process.
-Responsibilities: guide seed session, extract founder context, structure venture idea, orchestrate other agents.
-Nexo acts as the central intelligence of the system.
-
----
-
-## Venture Architect
-
-Role: Convert the idea into a structured venture concept.
-Outputs: value proposition, business model, customer journey, business plan draft.
+Rol: Moderador principal y orquestador del sistema.
+Responsabilidades: guiar Semilla, extraer contexto, armar consejo, recomendar documentos,
+activar Sesión de Clarificación si no hay spec, moderar Sesión de Consejo.
+Nexo es la inteligencia central del sistema.
 
 ---
 
-## Product Architect
-
-Role: Translate the venture concept into a product.
-Outputs: product concept, UX architecture, product feature map.
-
----
-
-## UX Designer
-
-Role: Design the interface structure of the product.
-Tools: Pencil.dev MCP
-Outputs: UI frame architecture, product interface structure.
+## Nexo Constructivo
+Rol: Cofounder IA optimista.
+Función: redacta respuestas y documentos basados en hechos con perspectiva constructiva.
+Opera en el mecanismo Nexo Dual.
 
 ---
 
-## System Architect
-
-Role: Define the technical implementation.
-Outputs: system design document, architecture diagrams, integration strategy.
-
----
-
-## Faber — Builder Agent
-
-Role: Prepare implementation artifacts and execute in the repository.
-Named after Homo Faber — the maker, the craftsman who turns plans into form.
-Faber does not improvise. Faber reads the plan, asks when there is ambiguity, and delivers what was specified.
-Outputs: engineering backlog, development roadmap, repository scaffolding.
+## Nexo Crítico
+Rol: Cofounder IA abogado del diablo.
+Función: critica, identifica riesgos y debilidades en cada propuesta.
+Opera en el mecanismo Nexo Dual.
 
 ---
 
-## Advisor Agents
+## Marketplace de Consejeros IA
 
-Role: Simulate domain expertise.
-Examples: product advisor, marketing advisor, finance advisor, operations advisor.
+Catálogo de agentes IA especializados. 100% IA — sin consejeros humanos reales en v1.
+Nexo filtra y recomienda según propósito + Resumen del usuario.
+
+Especialidades core del catálogo:
+
+| Especialidad | Enfoque |
+|---|---|
+| Estrategia de negocio | visión, modelo de ingresos, orquestación |
+| Finanzas | economía unitaria, P&L, monetización |
+| Marketing y crecimiento | adquisición, posicionamiento, canales |
+| Ventas | modelo comercial, incentivos, pipeline |
+| Producto / UX | experiencia, features, encaje producto-mercado |
+| Tecnología | arquitectura, viabilidad técnica, MVP scope |
+| Legal / Regulatorio | riesgos, estructura, cumplimiento |
+| Operaciones | ejecución, procesos, escala |
+| Industria específica | contexto vertical del venture |
+
+Regla de participación: solo 2-3 consejeros hablan por turno.
+Nexo decide cuáles son relevantes según el contexto de cada fase.
 
 ---
 
 ## Buyer Persona Agents
-
-Role: Simulate potential customers.
-Responsibilities: evaluate product ideas, react to value proposition, validate messaging, simulate objections.
+Rol: Simular clientes potenciales del venture.
+Responsabilidades: evaluar ideas, reaccionar a propuesta de valor, validar mensajes, simular objeciones.
+Generados por Nexo basándose en el ICP detectado en Semilla.
 
 ---
 
-## Agent Collaboration Flow
+## Flujo de colaboración entre agentes
 
-Idea → Nexo → Venture Architect → Product Architect → UX Designer → System Architect → Builder Agent
+Usuario → Nexo → Marketplace (selección de consejo) → Sesión de Consejo
 
-Advisors and buyer personas may intervene at multiple stages.
+Nexo Dual opera en paralelo en cada fase de la Sesión de Consejo.
+Buyer Personas intervienen en fases de validación de propuesta de valor y customer journey.

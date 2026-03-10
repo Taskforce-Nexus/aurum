@@ -651,29 +651,33 @@ Fuera de MVP v1:
 
 AURUM es uno de tres productos independientes bajo AVA:
 - AURUM — estrategia de negocio + consejo IA
-- Branding — identidad de marca completa (a mano hasta post-AURUM)
+- Branding — identidad de marca completa (se hace a mano hasta post-AURUM)
 - Agile Bot — backlog estructurado → GitHub / Jira / Linear
 
-Cada producto tiene su propio ICP, precio y marca. Se complementan pero funcionan solos. La conexión es vía outputs exportables — no integración forzada.
+Cada producto tiene su propio ICP, precio y marca. Se complementan pero funcionan solos.
+La conexión entre productos es vía outputs exportables — no integración forzada.
+El modelo de negocio es tipo Zoho/Odoo: cada módulo se vende solo o como suite completa.
 
 ---
 
 ## 32. AURUM no es una incubadora
 
-AURUM es un sistema de toma de decisiones estratégicas asistido por consejo IA. El ICP puede ser cualquier persona que necesite estructurar una decisión compleja con perspectivas expertas. No solo founders.
+AURUM es un sistema de toma de decisiones estratégicas asistido por consejo IA.
+El ICP puede ser cualquier persona que necesite estructurar una decisión compleja.
+No está limitado a founders. El pipeline y los documentos se adaptan al ICP y al propósito declarado.
 
 ---
 
 ## 33. Journey definitivo de AURUM
 
 1. Registro
-2. Semilla — Nexo extrae contexto completo
+2. Semilla — Nexo extrae contexto completo del usuario
 3. Propósito del Consejo — el usuario declara qué decisión necesita tomar
 4. Marketplace de Consejeros — Nexo recomienda perfiles IA relevantes, usuario arma su consejo
 5. Definición de Documentos:
-   - Nexo revisa la biblioteca de specs
-   - Si existe spec → propone documentos directamente
-   - Si no existe spec → Sesión de Clarificación de Expectativas → co-construye spec con el usuario → spec entra a la biblioteca
+   - Nexo revisa la Document Specification Library
+   - Si existe spec clara → propone documentos directamente
+   - Si no existe spec → activa Sesión de Clarificación de Expectativas
    - Usuario valida documentos propuestos
 6. Sesión de Consejo — N fases, cada fase produce un documento aprobado
 7. Export Center
@@ -682,20 +686,53 @@ AURUM es un sistema de toma de decisiones estratégicas asistido por consejo IA.
 
 ## 34. Document Specification Library
 
-Biblioteca viva de specs técnicas por ICP. Cada documento tiene:
-- Nombre y ICP para el que aplica
+Biblioteca viva de specs técnicas por ICP y propósito. Cada spec contiene:
+- Nombre del documento e ICP para el que aplica
 - Decisión estratégica que resuelve
 - Pregunta central que responde
 - Secciones con descripción exacta de contenido
-- Datos que necesita extraer de la sesión
+- Datos que necesita extraer de la sesión para generarlo
 - Consejeros mejor posicionados para contribuir
-- Criterio de calidad
+- Criterio de calidad — cómo sabe AURUM que el documento está completo
 
-La biblioteca crece con cada ICP nuevo que pasa por AURUM sin spec previa.
+La biblioteca crece con cada usuario nuevo que no tiene spec previa.
 
 ---
 
-## 35. Documentos ICP Founder — spec completa
+## 35. Sesión de Clarificación de Expectativas
+
+Mecanismo que se activa cuando el usuario tiene un propósito para el que no existe spec en la biblioteca.
+Nexo co-construye la spec con el usuario:
+- ¿Qué decisión necesita resolver cada documento?
+- ¿Qué secciones necesita?
+- ¿Cómo se ve un output de calidad para este caso?
+La spec queda guardada en la biblioteca al terminar.
+
+---
+
+## 36. Proceso de construcción de specs nuevas
+
+Cuando se detecta un ICP sin spec previa, el proceso es:
+1. Discovery — identificar las 3-5 decisiones más críticas que ese ICP necesita tomar
+2. Mapeo — cada decisión se mapea a un documento que la estructura y resuelve
+3. Especificación técnica — se escribe la ficha completa del documento
+4. Validación con caso real — se prueba con un usuario real antes de entrar a la biblioteca
+5. Biblioteca — la spec entra como oficial y Nexo puede recomendarla
+
+---
+
+## 37. Marketplace de Consejeros
+
+Catálogo de agentes IA con perfil completo: nombre, especialidad, industria, estilo de comunicación.
+100% IA — sin consejeros humanos reales en v1.
+Nexo filtra y recomienda según propósito + Resumen del Fundador.
+El usuario puede aceptar la recomendación o explorar el catálogo completo.
+Especialidades core del catálogo: estrategia de negocio, finanzas, marketing, ventas, producto/UX, tecnología, legal/regulatorio, operaciones, industria específica.
+Mínimo viable para MVP: 15-20 consejeros cubriendo especialidades core.
+
+---
+
+## 38. Documentos ICP Founder — spec completa
 
 Documento 1 — Value Proposition Canvas:
 - Perfil del cliente: trabajos, dolores, ganancias esperadas
@@ -703,46 +740,58 @@ Documento 1 — Value Proposition Canvas:
 - Encaje problema-solución
 - ICP definido
 - Hipótesis de valor a validar
-- 2-3 Customer Personas con: perfil, lenguaje exacto para describir el problema, Next Best Alternatives actuales, mapa emocional y racional a través del proceso de compra
+- 2-3 Customer Personas con: perfil detallado, lenguaje exacto para describir el problema, Next Best Alternatives actuales, mapa emocional y racional a través del proceso de compra desde detección del problema hasta compra
 
 Documento 2 — Business Model:
-- Business Model Canvas completo: segmentos, propuesta de valor, canales, relación con clientes, fuentes de ingresos, recursos clave, actividades clave, socios clave, estructura de costos
+- Business Model Canvas completo: segmentos de clientes, propuesta de valor, canales, relación con clientes, fuentes de ingresos, recursos clave, actividades clave, socios clave, estructura de costos
 - Modelo de pricing y esquemas de cobro
 - Economía unitaria: CAC, LTV, margen por cliente
 - Palancas de crecimiento
-- P&L Proforma: Ventas · COGS · Utilidad bruta / Margen bruto · Gastos de ventas desglosados · Gastos generales desglosados · Gastos administrativos desglosados · Utilidad operativa / Margen operativo · Impuestos · Depreciación · Utilidad neta / Margen neto · Flujo de efectivo / Margen de flujo
+- P&L Proforma completo: Ventas · COGS · Utilidad bruta / Margen bruto · Gastos de ventas desglosados · Gastos generales desglosados · Gastos administrativos desglosados · Utilidad operativa / Margen operativo · Impuestos · Depreciación · Utilidad neta / Margen neto · Flujo de efectivo / Margen de flujo
 
 Documento 3 — Customer Journey:
 - Framework compartido por todos los ICPs y personas: Descubrimiento · Evaluación · Decisión · Activación · Retención · Expansión
-- Anotaciones por persona donde necesita refuerzo particular
-- Balancing loops y Reinforcing loops marcados explícitamente en el journey
-- Recomendaciones de cambios en el producto para resolver loops débiles
+- Anotaciones específicas por persona donde necesita refuerzo particular en el journey
+- Balancing loops y Reinforcing loops marcados explícitamente: adquisición, activación, retención, conversión
+- Recomendaciones concretas de cambios en el producto para resolver loops débiles
 
 Documento 4 — Business Plan:
 - Dirección estratégica
-- Evaluación de preparación — 8 dimensiones puntuadas
+- Evaluación de preparación — 8 dimensiones puntuadas 1-10
 - Riesgos clave y plan de mitigación
 - Decisión go / no-go con justificación
-- Impulsos estratégicos (no líneas de tiempo): cada impulso tiene objetivo, acciones clave y condición de éxito. Típicamente 3-5 impulsos.
+- Impulsos estratégicos (no líneas de tiempo): cada impulso tiene objetivo claro, acciones clave y condición de éxito. El founder avanza cuando cumple la condición del impulso anterior. Típicamente 3-5 impulsos.
 
 ---
 
-## 36. Marketplace de Consejeros
+## 39. Export Center
 
-Catálogo de agentes IA con perfil completo — nombre, especialidad, industria, estilo de comunicación. 100% IA, sin consejeros humanos reales. Nexo filtra y recomienda según propósito + Resumen del Fundador. Especialidades core: estrategia de negocio, finanzas, marketing, ventas, producto/UX, tecnología, legal/regulatorio, operaciones, industria específica.
-
----
-
-## 37. Export Center
-
-Interfaz de presentación interactiva que muestra los resultados de la Sesión de Consejo como documento visual. El JSON generado en la sesión es la fuente de verdad.
-- MVP: PDF + PPTX (via PptxGenJS)
-- v2: Google Slides
+Interfaz de presentación interactiva que muestra los resultados de la Sesión de Consejo como documento visual navegable.
+El JSON generado en la Sesión de Consejo es la fuente de verdad. El Export Center lo presenta y empaqueta.
+- MVP: PDF + PPTX via PptxGenJS
+- v2: Google Slides via Google Slides API
 
 No es solo un botón de descarga — es una interfaz de presentación completa.
 
 ---
 
-## 38. Pipeline visible al founder — renombrado
+## 40. Renombrar Sesión de Consejo
 
-La etapa "Incubadora" se renombra a "Sesión de Consejo" en la UI visible al usuario. El término "Incubadora" queda solo en código legacy si es necesario para compatibilidad.
+La etapa "Incubadora" se renombra a "Sesión de Consejo" en toda la UI visible al usuario.
+El término "incubadora" queda solo en código legacy donde sea necesario para compatibilidad.
+
+---
+
+## 41. Pipeline se adapta por venture type
+
+El pipeline base es el de producto digital. El pipeline visible al usuario se filtra según el venture type detectado en Semilla. Branding, Agile Bot y módulos AVA son externos — AURUM los orquesta pero no los contiene.
+
+---
+
+## 42. Orden de construcción AVA Suite
+
+1. AURUM completo — se construye ahora
+2. Agile Bot — siguiente módulo después de AURUM
+3. Branding — se hace a mano hasta que sea su turno
+
+No más cambios de scope hasta terminar AURUM.

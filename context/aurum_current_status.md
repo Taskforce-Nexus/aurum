@@ -94,10 +94,12 @@ Sesión 8: migración a Deepgram WebSocket Live Transcription completada — spe
 # Decisiones de scope — sesión con Porfirio Lima (2026-03-10)
 
 - AURUM es Producto 1 de la AVA Suite
-- Journey definitivo cerrado — ver decision #33
-- Document Specification Library definida — ver decision #34
-- Spec completa ICP Founder (4 documentos) — ver decision #35
+- Journey definitivo cerrado — ver decisión #33
+- Document Specification Library definida — ver decisión #34
+- Sesión de Clarificación de Expectativas definida — ver decisión #35
+- Spec completa ICP Founder (4 documentos) — ver decisión #38
+- Marketplace de Consejeros 100% IA — ver decisión #37
+- Export Center: PDF + PPTX en MVP, Google Slides en v2 — ver decisión #39
 - Branding se hace a mano hasta que AURUM esté terminado
 - Agile Bot es Producto 3 — se construye después de AURUM
-- Export Center: PDF + PPTX en MVP, Google Slides en v2
 - No más cambios de scope hasta terminar AURUM
