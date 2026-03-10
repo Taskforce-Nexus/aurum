@@ -47,7 +47,7 @@ Aprobar Auth frames iterados → freeze Auth → verificar Semilla en Railway �
 
 | Hash | Descripción |
 |---|---|
-| pendiente | iterate: Auth paneles izquierdos — Login icons + Register headline + checklist |
+| 017d3f2 | iterate: Auth paneles izquierdos — Login icons + Register headline + checklist |
 | 120eae0 | fix: Auth__Login__Default — reemplazar stack por tabs (Contraseña / Enlace mágico) |
 | 5b41181 | iterate: Auth__Login__Default, Auth__Register__Default — copy y magic link |
 | b4bcebf | docs: CLAUDE.md — reglas obligatorias permanentes |
