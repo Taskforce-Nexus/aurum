@@ -5343,7 +5343,7 @@
                               "id": "9ecgy",
                               "name": "ctr",
                               "fill": "#C5A55A",
-                              "content": "3 de 6",
+                              "content": "5 de 6",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 28,
                               "fontWeight": "700"
@@ -5365,7 +5365,7 @@
                               "id": "WrPFU",
                               "name": "barFill",
                               "fill": "#C5A55A",
-                              "width": 484,
+                              "width": 807,
                               "height": "fill_container"
                             }
                           ]
@@ -5401,31 +5401,31 @@
                               "type": "text",
                               "id": "HhOVT",
                               "name": "step3",
-                              "fill": "#EDEDEF",
-                              "content": "● Marketplace",
+                              "fill": "#C5A55A",
+                              "content": "✓ Marketplace",
                               "fontFamily": "DM Sans",
                               "fontSize": 10,
-                              "fontWeight": "700"
+                              "fontWeight": "500"
                             },
                             {
                               "type": "text",
                               "id": "0z4KC",
                               "name": "step4",
-                              "fill": "#4E4E56",
-                              "content": "○ Documentos",
+                              "fill": "#C5A55A",
+                              "content": "✓ Documentos",
                               "fontFamily": "DM Sans",
                               "fontSize": 10,
-                              "fontWeight": "normal"
+                              "fontWeight": "500"
                             },
                             {
                               "type": "text",
                               "id": "fSQSa",
                               "name": "step5",
-                              "fill": "#4E4E56",
-                              "content": "○ Sesión de Consejo",
+                              "fill": "#EDEDEF",
+                              "content": "● Sesión de Consejo",
                               "fontFamily": "DM Sans",
                               "fontSize": 10,
-                              "fontWeight": "normal"
+                              "fontWeight": "700"
                             },
                             {
                               "type": "text",
@@ -5915,272 +5915,6 @@
                           ]
                         }
                       ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "kihwR",
-                      "name": "docsSection",
-                      "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 16,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "MkUH2",
-                          "name": "docsTitle",
-                          "fill": "#A0A0A6",
-                          "content": "DOCUMENTOS AURUM · 2 / 4",
-                          "fontFamily": "DM Sans",
-                          "fontSize": 11,
-                          "fontWeight": "600",
-                          "letterSpacing": 2
-                        },
-                        {
-                          "type": "frame",
-                          "id": "F1CjP",
-                          "name": "docsGrid",
-                          "width": "fill_container",
-                          "layout": "vertical",
-                          "gap": 16,
-                          "children": [
-                            {
-                              "type": "frame",
-                              "id": "rmvqk",
-                              "name": "bizSection",
-                              "width": "fill_container",
-                              "layout": "vertical",
-                              "gap": 6,
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "1SmDN",
-                                  "name": "bizHeader",
-                                  "fill": "#C5A55A",
-                                  "content": "NEGOCIO",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 10,
-                                  "fontWeight": "600",
-                                  "letterSpacing": 1.5
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "A1D3l",
-                                  "name": "biz1",
-                                  "width": "fill_container",
-                                  "fill": "#111113",
-                                  "cornerRadius": 8,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": {
-                                      "left": 2
-                                    },
-                                    "fill": "#C5A55A"
-                                  },
-                                  "gap": 10,
-                                  "padding": [
-                                    8,
-                                    12
-                                  ],
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "icon_font",
-                                      "id": "EkRlg",
-                                      "name": "icon",
-                                      "width": 16,
-                                      "height": 16,
-                                      "iconFontName": "target",
-                                      "iconFontFamily": "lucide",
-                                      "fill": "#C5A55A"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "kewhK",
-                                      "name": "title",
-                                      "fill": "#EDEDEF",
-                                      "content": "Propuesta de Valor",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "1Sdc8",
-                                      "name": "status",
-                                      "fill": "#4CAF50",
-                                      "content": "✓ Aprobado",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 11,
-                                      "fontWeight": "500"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "pLgG2",
-                                  "name": "biz2",
-                                  "width": "fill_container",
-                                  "fill": "#111113",
-                                  "cornerRadius": 8,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": {
-                                      "left": 2
-                                    },
-                                    "fill": "#3B82F6"
-                                  },
-                                  "gap": 10,
-                                  "padding": [
-                                    8,
-                                    12
-                                  ],
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "icon_font",
-                                      "id": "113lM",
-                                      "name": "icon",
-                                      "width": 16,
-                                      "height": 16,
-                                      "iconFontName": "building-2",
-                                      "iconFontFamily": "lucide",
-                                      "fill": "#3B82F6"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "OZmnI",
-                                      "name": "title",
-                                      "fill": "#EDEDEF",
-                                      "content": "Modelo de Negocio",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "gFvX0",
-                                      "name": "status",
-                                      "fill": "#3B82F6",
-                                      "content": "En progreso",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 11,
-                                      "fontWeight": "500"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "Nwpu9",
-                                  "name": "biz3",
-                                  "width": "fill_container",
-                                  "fill": "#0D0D0F",
-                                  "cornerRadius": 8,
-                                  "gap": 10,
-                                  "padding": [
-                                    8,
-                                    12
-                                  ],
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "icon_font",
-                                      "id": "hCa2t",
-                                      "name": "icon",
-                                      "width": 16,
-                                      "height": 16,
-                                      "iconFontName": "map",
-                                      "iconFontFamily": "lucide",
-                                      "fill": "#4E4E56"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "jnkm1",
-                                      "name": "title",
-                                      "fill": "#6E6E76",
-                                      "content": "Recorrido del Cliente",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "iXIn8",
-                                  "name": "biz4",
-                                  "width": "fill_container",
-                                  "fill": "#0D0D0F",
-                                  "cornerRadius": 8,
-                                  "gap": 10,
-                                  "padding": [
-                                    8,
-                                    12
-                                  ],
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "icon_font",
-                                      "id": "IRqXW",
-                                      "name": "icon",
-                                      "width": 16,
-                                      "height": 16,
-                                      "iconFontName": "bookmark",
-                                      "iconFontFamily": "lucide",
-                                      "fill": "#4E4E56"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "YBQ7J",
-                                      "name": "title",
-                                      "fill": "#6E6E76",
-                                      "content": "Marca y Posicionamiento",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "e4cAH",
-                                  "name": "biz5",
-                                  "width": "fill_container",
-                                  "fill": "#0D0D0F",
-                                  "cornerRadius": 8,
-                                  "gap": 10,
-                                  "padding": [
-                                    8,
-                                    12
-                                  ],
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "icon_font",
-                                      "id": "3BApW",
-                                      "name": "icon",
-                                      "width": 16,
-                                      "height": 16,
-                                      "iconFontName": "trending-up",
-                                      "iconFontFamily": "lucide",
-                                      "fill": "#4E4E56"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "LNp1Y",
-                                      "name": "title",
-                                      "fill": "#6E6E76",
-                                      "content": "Plan de Negocio",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "500"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
                     }
                   ]
                 },
@@ -6238,7 +5972,7 @@
                               "id": "4XBLO",
                               "name": "st1num",
                               "fill": "#C5A55A",
-                              "content": "3/6",
+                              "content": "5/6",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 28,
                               "fontWeight": "700"
