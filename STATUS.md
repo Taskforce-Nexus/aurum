@@ -47,7 +47,7 @@ Aprobar Auth frames iterados → freeze Auth → verificar Semilla en Railway �
 
 | Hash | Descripción |
 |---|---|
-| pendiente | iterate: Auth__Login__Default, Auth__Register__Default — copy y magic link |
+| 5b41181 | iterate: Auth__Login__Default, Auth__Register__Default — copy y magic link |
 | b4bcebf | docs: CLAUDE.md — reglas obligatorias permanentes |
 | 86dde3e | docs: update CLAUDE.md — STATUS.md replaces aurum_current_status.md |
 | 4c26bef | docs: scope update completo — AVA suite, journey definitivo, todas las specs |
