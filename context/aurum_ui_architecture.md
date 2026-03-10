@@ -11,8 +11,7 @@ Funciones: lista de proyectos, progreso, actividad, creación de proyecto.
 
 ## Project View
 Hub operativo de cada proyecto. Centro de control.
-Muestra: estado del venture, documentos generados, acceso a Sesión de Consejo,
-consejo asesor, Export Center.
+Muestra: propósito del consejo, journey de 5 etapas (Semilla → Selección de Consejeros → Definición de Entregables → Sesión de Consejo → Entrega), acceso a Sesión de Consejo, consejo asesor, Export Center, link a resumen de Semilla.
 
 ## Semilla
 Conversación 1:1 entre el usuario y Nexo.

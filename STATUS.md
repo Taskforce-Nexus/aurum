@@ -24,7 +24,7 @@ Etapa actual: Desarrollo activo — ProjectView iterado (6 fixes Kira)
 
 ## En progreso
 
-- Projects__ProjectView__Default iterado — pill fantasma eliminada — `6e92c0b`
+- Projects__ProjectView__Default iterado — journey 5 etapas, propósito, semilla — `57b4e78`
 - Fixes de Semilla (voice ws, temas IA, progreso, PDF) — `9b7f006` — pendiente verificación en Railway
 
 ## Siguiente paso

@@ -7,21 +7,17 @@ y accionables a través de consejo IA especializado.
 
 ## Pipeline de usuario (journey)
 
-REGISTRO
-↓
+5 etapas visibles al usuario — nomenclatura canónica en UI:
+
 SEMILLA
 ↓
-PROPÓSITO DEL CONSEJO
+SELECCIÓN DE CONSEJEROS
 ↓
-MARKETPLACE DE CONSEJEROS
-↓
-DEFINICIÓN DE DOCUMENTOS
-(Sesión de Clarificación si no hay spec previa)
+DEFINICIÓN DE ENTREGABLES
 ↓
 SESIÓN DE CONSEJO
-(N fases según documentos definidos)
 ↓
-EXPORT CENTER
+ENTREGA
 
 ---
 
