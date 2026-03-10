@@ -5259,8 +5259,71 @@
                                   "fontFamily": "DM Sans",
                                   "fontSize": 12,
                                   "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "YzlNx",
+                                  "name": "seedLink",
+                                  "fill": "#6E6E76",
+                                  "content": "Ver resumen de Semilla →",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
                                 }
                               ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OaFWf",
+                      "name": "propositoBlock",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xP6Bj",
+                          "name": "propositoLabel",
+                          "fill": "#6E6E76",
+                          "content": "PROPÓSITO DEL CONSEJO",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "pcDFZ",
+                          "name": "propositoRow",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "S2hnr",
+                              "name": "propositoText",
+                              "fill": "#EDEDEF",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Validar el modelo de negocio y definir la estrategia de crecimiento para el primer año.",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "icon_font",
+                              "id": "FpZS3",
+                              "name": "editIcon",
+                              "width": 12,
+                              "height": 12,
+                              "iconFontName": "pencil",
+                              "iconFontFamily": "lucide",
+                              "fill": "#4E4E56"
                             }
                           ]
                         }
@@ -5328,7 +5391,7 @@
                               "id": "9ecgy",
                               "name": "ctr",
                               "fill": "#C5A55A",
-                              "content": "5 de 6",
+                              "content": "4 de 5",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 28,
                               "fontWeight": "700"
@@ -5350,7 +5413,7 @@
                               "id": "WrPFU",
                               "name": "barFill",
                               "fill": "#C5A55A",
-                              "width": 807,
+                              "width": 774,
                               "height": "fill_container"
                             }
                           ]
@@ -5377,7 +5440,7 @@
                               "id": "ly0Vm",
                               "name": "step2",
                               "fill": "#C5A55A",
-                              "content": "✓ Propósito",
+                              "content": "✓ Selección de Consejeros",
                               "fontFamily": "DM Sans",
                               "fontSize": 10,
                               "fontWeight": "500"
@@ -5387,7 +5450,7 @@
                               "id": "HhOVT",
                               "name": "step3",
                               "fill": "#C5A55A",
-                              "content": "✓ Marketplace",
+                              "content": "✓ Definición de Entregables",
                               "fontFamily": "DM Sans",
                               "fontSize": 10,
                               "fontWeight": "500"
@@ -5396,16 +5459,6 @@
                               "type": "text",
                               "id": "0z4KC",
                               "name": "step4",
-                              "fill": "#C5A55A",
-                              "content": "✓ Documentos",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 10,
-                              "fontWeight": "500"
-                            },
-                            {
-                              "type": "text",
-                              "id": "fSQSa",
-                              "name": "step5",
                               "fill": "#EDEDEF",
                               "content": "● Sesión de Consejo",
                               "fontFamily": "DM Sans",
@@ -5414,10 +5467,10 @@
                             },
                             {
                               "type": "text",
-                              "id": "dabko",
-                              "name": "step6",
+                              "id": "fSQSa",
+                              "name": "step5",
                               "fill": "#4E4E56",
-                              "content": "○ Export",
+                              "content": "○ Entrega",
                               "fontFamily": "DM Sans",
                               "fontSize": 10,
                               "fontWeight": "normal"
@@ -5957,7 +6010,7 @@
                               "id": "4XBLO",
                               "name": "st1num",
                               "fill": "#C5A55A",
-                              "content": "5/6",
+                              "content": "4/5",
                               "fontFamily": "Cormorant Garamond",
                               "fontSize": 28,
                               "fontWeight": "700"
