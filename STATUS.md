@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-10
-Etapa actual: Desarrollo activo — Auth frames completos (Login pill tabs + 3 frames nuevos: VerifyEmail, ForgotPassword, ForgotPasswordSent)
+Etapa actual: Desarrollo activo — Auth frames FREEZE (5 frames) → verificar Semilla en Railway → Propósito del Consejo
 
 ---
 
@@ -24,12 +24,11 @@ Etapa actual: Desarrollo activo — Auth frames completos (Login pill tabs + 3 f
 
 ## En progreso
 
-- Auth frames completos: Login (pill tabs) + VerifyEmail + ForgotPassword + ForgotPasswordSent
 - Fixes de Semilla (voice ws, temas IA, progreso, PDF) — `9b7f006` — pendiente verificación en Railway
 
 ## Siguiente paso
 
-Aprobar Auth frames → freeze Auth → verificar Semilla en Railway → avanzar a Propósito del Consejo
+Verificar Semilla en Railway → avanzar a Propósito del Consejo
 
 ---
 
@@ -47,6 +46,7 @@ Aprobar Auth frames → freeze Auth → verificar Semilla en Railway → avanzar
 
 | Hash | Descripción |
 |---|---|
+| (pending) | docs: freeze Auth — 5 frames |
 | 922d7ef | feat: Auth — VerifyEmail, ForgotPassword, ForgotPasswordSent frames |
 | 93fe396 | fix: Auth__Login__Default — pill tabs, panel izquierdo reconstruido |
 | 2279030 | fix: Auth frames — stat3 eliminado, stat2 icon users, Register headline semanas |

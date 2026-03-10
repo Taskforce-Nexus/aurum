@@ -5,11 +5,11 @@ Generated using Pencil.dev MCP.
 ---
 
 # Authentication
-Auth__Login__Default
-Auth__Register__Default
-Auth__VerifyEmail__Default
-Auth__ForgotPassword__Default
-Auth__ForgotPasswordSent__Default
+Auth__Login__Default — FREEZE
+Auth__Register__Default — FREEZE
+Auth__VerifyEmail__Default — FREEZE
+Auth__ForgotPassword__Default — FREEZE
+Auth__ForgotPasswordSent__Default — FREEZE
 
 ---
 
