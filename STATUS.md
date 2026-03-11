@@ -24,11 +24,11 @@ Etapa actual: Desarrollo activo — SeedSession en iteración
 
 ## En progreso
 
-- Projects__SeedSession__Default — iteración en curso (3 fixes aplicados)
+- Projects__SeedSession__Default — FREEZE ✓
 
 ## Siguiente paso
 
-Continuar iteración SeedSession → FREEZE
+Avanzar al siguiente frame del pipeline
 
 ---
 
@@ -46,7 +46,7 @@ Continuar iteración SeedSession → FREEZE
 
 | Hash | Descripción |
 |---|---|
-| latest | fix: SeedSession — Etapa 1 de 5, 1:1 con Nexo, pill Idea cruda eliminada |
+| 4cb78ac | fix: SeedSession — Etapa 1 de 5, 1:1 con Nexo, pill Idea cruda eliminada |
 | 3b6e380 | fix: ProjectView — badge 40% exportación sin traslape, topRow separado |
 | 485713c | fix: ProjectView — header, terminología, pipeline 6 etapas, docs, consumo, sidebar |
 | aba441f | docs: freeze Projects__Dashboard__Default |
