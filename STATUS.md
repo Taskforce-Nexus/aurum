@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-10
-Etapa actual: Desarrollo activo — ProjectView FREEZE — siguiente: SeedSession frame
+Etapa actual: Desarrollo activo — SeedSession en iteración
 
 ---
 
@@ -24,12 +24,11 @@ Etapa actual: Desarrollo activo — ProjectView FREEZE — siguiente: SeedSessio
 
 ## En progreso
 
-- Projects__ProjectView__Default — FREEZE ✓
-- Fixes de Semilla (voice ws, temas IA, progreso, PDF) — `9b7f006` — pendiente verificación en Railway
+- Projects__SeedSession__Default — iteración en curso (3 fixes aplicados)
 
 ## Siguiente paso
 
-Verificar Semilla en Railway → avanzar a SeedSession frame
+Continuar iteración SeedSession → FREEZE
 
 ---
 
@@ -47,6 +46,7 @@ Verificar Semilla en Railway → avanzar a SeedSession frame
 
 | Hash | Descripción |
 |---|---|
+| latest | fix: SeedSession — Etapa 1 de 5, 1:1 con Nexo, pill Idea cruda eliminada |
 | 3b6e380 | fix: ProjectView — badge 40% exportación sin traslape, topRow separado |
 | 485713c | fix: ProjectView — header, terminología, pipeline 6 etapas, docs, consumo, sidebar |
 | aba441f | docs: freeze Projects__Dashboard__Default |

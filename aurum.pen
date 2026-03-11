@@ -3981,7 +3981,8 @@
                               "fill": "#6E6E76",
                               "content": "disponible",
                               "fontFamily": "DM Sans",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -4035,7 +4036,8 @@
                       "fill": "#EDEDEF",
                       "content": "Juan Rodríguez",
                       "fontFamily": "DM Sans",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -5482,6 +5484,7 @@
                           "id": "xCmAy",
                           "name": "tile_semilla",
                           "width": "fill_container",
+                          "height": 216,
                           "fill": "#111113",
                           "cornerRadius": 10,
                           "stroke": {
@@ -5494,6 +5497,7 @@
                           "layout": "vertical",
                           "gap": 12,
                           "padding": 20,
+                          "justifyContent": "space_between",
                           "children": [
                             {
                               "type": "text",
@@ -5595,6 +5599,7 @@
                           "layout": "vertical",
                           "gap": 12,
                           "padding": 20,
+                          "justifyContent": "space_between",
                           "children": [
                             {
                               "type": "frame",
@@ -5719,6 +5724,7 @@
                           "layout": "vertical",
                           "gap": 12,
                           "padding": 20,
+                          "justifyContent": "space_between",
                           "children": [
                             {
                               "type": "text",
@@ -5923,6 +5929,7 @@
                           "layout": "vertical",
                           "gap": 12,
                           "padding": 20,
+                          "justifyContent": "space_between",
                           "children": [
                             {
                               "type": "frame",
@@ -6003,9 +6010,8 @@
                               "id": "x0AQC",
                               "name": "desc",
                               "fill": "#6E6E76",
-                              "textGrowth": "fixed-width-height",
-                              "width": 291,
-                              "height": 40,
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
                               "content": "Propuesta de Valor · Modelo de Negocio listos. Marca, Recorrido y Plan pendientes.",
                               "lineHeight": 1.5,
                               "fontFamily": "DM Sans",
@@ -6816,7 +6822,8 @@
                               "fill": "#6E6E76",
                               "content": "Enlace al correo",
                               "fontFamily": "DM Sans",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -49512,7 +49519,7 @@
                   "id": "6sqEZ",
                   "name": "phaseText",
                   "fill": "#8B9DB7",
-                  "content": "Fase 1 de 13",
+                  "content": "Etapa 1 de 5",
                   "fontFamily": "DM Sans",
                   "fontSize": 13,
                   "fontWeight": "500"
@@ -49669,7 +49676,7 @@
                   "id": "bhI08",
                   "name": "sidebarSubtitle",
                   "fill": "#8B9DB7",
-                  "content": "1:1 con Nexo Constructivo",
+                  "content": "1:1 con Nexo",
                   "fontFamily": "DM Sans",
                   "fontSize": 13,
                   "fontWeight": "normal"
@@ -49745,48 +49752,6 @@
                       "fontFamily": "DM Sans",
                       "fontSize": 15,
                       "fontWeight": "700"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "aWOgN",
-                      "name": "meta",
-                      "gap": 8,
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "9dbgV",
-                          "name": "levelBadge",
-                          "fill": "#C9A84C20",
-                          "cornerRadius": 999,
-                          "gap": 5,
-                          "padding": [
-                            3,
-                            8
-                          ],
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "ellipse",
-                              "id": "m7d6P",
-                              "name": "dot",
-                              "fill": "#C9A84C",
-                              "width": 5,
-                              "height": 5
-                            },
-                            {
-                              "type": "text",
-                              "id": "t8Mj4",
-                              "name": "text",
-                              "fill": "#C9A84C",
-                              "content": "Idea cruda",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11,
-                              "fontWeight": "500"
-                            }
-                          ]
-                        }
-                      ]
                     }
                   ]
                 },
