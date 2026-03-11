@@ -5259,16 +5259,6 @@
                                   "fontFamily": "DM Sans",
                                   "fontSize": 12,
                                   "fontWeight": "normal"
-                                },
-                                {
-                                  "type": "text",
-                                  "id": "YzlNx",
-                                  "name": "seedLink",
-                                  "fill": "#6E6E76",
-                                  "content": "Ver resumen de Semilla →",
-                                  "fontFamily": "DM Sans",
-                                  "fontSize": 12,
-                                  "fontWeight": "normal"
                                 }
                               ]
                             }
@@ -5488,9 +5478,109 @@
                       "children": [
                         {
                           "type": "frame",
+                          "id": "xCmAy",
+                          "name": "tile_semilla",
+                          "width": "fill_container",
+                          "fill": "#111113",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": {
+                              "top": 3
+                            },
+                            "fill": "#30A46C"
+                          },
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "9tZnu",
+                              "name": "semLabel",
+                              "fill": "#30A46C",
+                              "content": "SEMILLA",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 10,
+                              "fontWeight": "600",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "5iynh",
+                              "name": "semBadge",
+                              "fill": "#1A2A1C",
+                              "cornerRadius": 999,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Zr5dA",
+                                  "name": "semBadgeTxt",
+                                  "fill": "#30A46C",
+                                  "content": "● Completada",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "1obwR",
+                              "name": "semSummary",
+                              "fill": "#A0A0A6",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "FinTrack es una app de finanzas personales dirigida a millennials en LATAM que buscan controlar sus gastos sin complejidad.",
+                              "lineHeight": 1.5,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "yXkL2",
+                              "name": "semBtn",
+                              "width": "fill_container",
+                              "fill": "#0A1A0A",
+                              "cornerRadius": 6,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#30A46C40"
+                              },
+                              "layout": "vertical",
+                              "padding": [
+                                8,
+                                16
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "h3Gs5",
+                                  "name": "semBtnLbl",
+                                  "fill": "#30A46C",
+                                  "content": "Ver sesión completa →",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 13,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
                           "id": "2VHqC",
                           "name": "tile_incubadora",
-                          "width": 331,
+                          "width": "fill_container",
                           "height": 198,
                           "fill": "#111113",
                           "cornerRadius": 10,
