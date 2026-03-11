@@ -46,7 +46,7 @@ Freeze SeedSession 7 variantes → avanzar a Incubator
 
 | Hash | Descripción |
 |---|---|
-| (pendiente) | fix: ConsejoPrincipalPropuesta — NEXO + ASESORES estructura; feat: CofoundersPropuesta |
+| 4532428 | fix: ConsejoPrincipalPropuesta — NEXO + ASESORES; feat: CofoundersPropuesta |
 | d8093cb | fix: SeedSession__EntregablesPropuesta — paginación, Responde, Ver detalle, Pedir ajuste |
 | b0d342f | feat: SeedSession — 5 variantes (ConsejoPrincipal, Especialistas, ICPs, Entregables, ConsejoListo) |
 | 4cb78ac | fix: SeedSession — Etapa 1 de 5, 1:1 con Nexo, pill Idea cruda eliminada |
