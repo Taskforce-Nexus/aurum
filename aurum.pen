@@ -58318,7 +58318,7 @@
                                       "fill": "#0D1535",
                                       "cornerRadius": 6,
                                       "layout": "vertical",
-                                      "gap": 3,
+                                      "gap": 8,
                                       "padding": [
                                         8,
                                         10
@@ -58344,6 +58344,45 @@
                                           "fontFamily": "Open Sans",
                                           "fontSize": 13,
                                           "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "CJRQA",
+                                          "name": "br1",
+                                          "width": "fill_container",
+                                          "justifyContent": "end",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "f3G63",
+                                              "name": "vp_maya",
+                                              "fill": "#00000000",
+                                              "cornerRadius": 6,
+                                              "stroke": {
+                                                "align": "inside",
+                                                "thickness": 1,
+                                                "fill": "#3A3B40"
+                                              },
+                                              "padding": [
+                                                5,
+                                                10
+                                              ],
+                                              "justifyContent": "center",
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "id": "Yl0I3",
+                                                  "name": "bt1",
+                                                  "fill": "#8B9DB7",
+                                                  "content": "Ver perfil",
+                                                  "fontFamily": "Open Sans",
+                                                  "fontSize": 12,
+                                                  "fontWeight": "normal"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     },
@@ -58355,7 +58394,7 @@
                                       "fill": "#0D1535",
                                       "cornerRadius": 6,
                                       "layout": "vertical",
-                                      "gap": 3,
+                                      "gap": 8,
                                       "padding": [
                                         8,
                                         10
@@ -58381,6 +58420,45 @@
                                           "fontFamily": "Open Sans",
                                           "fontSize": 13,
                                           "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "1aSZP",
+                                          "name": "br2",
+                                          "width": "fill_container",
+                                          "justifyContent": "end",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "hk0dF",
+                                              "name": "vp_alex",
+                                              "fill": "#00000000",
+                                              "cornerRadius": 6,
+                                              "stroke": {
+                                                "align": "inside",
+                                                "thickness": 1,
+                                                "fill": "#3A3B40"
+                                              },
+                                              "padding": [
+                                                5,
+                                                10
+                                              ],
+                                              "justifyContent": "center",
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "id": "plwLL",
+                                                  "name": "bt2",
+                                                  "fill": "#8B9DB7",
+                                                  "content": "Ver perfil",
+                                                  "fontFamily": "Open Sans",
+                                                  "fontSize": 12,
+                                                  "fontWeight": "normal"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     },
@@ -58392,7 +58470,7 @@
                                       "fill": "#0D1535",
                                       "cornerRadius": 6,
                                       "layout": "vertical",
-                                      "gap": 3,
+                                      "gap": 8,
                                       "padding": [
                                         8,
                                         10
@@ -58418,6 +58496,45 @@
                                           "fontFamily": "Open Sans",
                                           "fontSize": 13,
                                           "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "H24cW",
+                                          "name": "br3",
+                                          "width": "fill_container",
+                                          "justifyContent": "end",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "PC0NR",
+                                              "name": "vp_priya",
+                                              "fill": "#00000000",
+                                              "cornerRadius": 6,
+                                              "stroke": {
+                                                "align": "inside",
+                                                "thickness": 1,
+                                                "fill": "#3A3B40"
+                                              },
+                                              "padding": [
+                                                5,
+                                                10
+                                              ],
+                                              "justifyContent": "center",
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "id": "fNKOA",
+                                                  "name": "bt3",
+                                                  "fill": "#8B9DB7",
+                                                  "content": "Ver perfil",
+                                                  "fontFamily": "Open Sans",
+                                                  "fontSize": 12,
+                                                  "fontWeight": "normal"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     }
@@ -58459,7 +58576,7 @@
                                       "fill": "#0D1535",
                                       "cornerRadius": 6,
                                       "layout": "vertical",
-                                      "gap": 3,
+                                      "gap": 8,
                                       "padding": [
                                         8,
                                         10
@@ -58485,6 +58602,45 @@
                                           "fontFamily": "Open Sans",
                                           "fontSize": 13,
                                           "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "VghZy",
+                                          "name": "br4",
+                                          "width": "fill_container",
+                                          "justifyContent": "end",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "ADfzJ",
+                                              "name": "vp_marcus",
+                                              "fill": "#00000000",
+                                              "cornerRadius": 6,
+                                              "stroke": {
+                                                "align": "inside",
+                                                "thickness": 1,
+                                                "fill": "#3A3B40"
+                                              },
+                                              "padding": [
+                                                5,
+                                                10
+                                              ],
+                                              "justifyContent": "center",
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "id": "3JlPP",
+                                                  "name": "bt4",
+                                                  "fill": "#8B9DB7",
+                                                  "content": "Ver perfil",
+                                                  "fontFamily": "Open Sans",
+                                                  "fontSize": 12,
+                                                  "fontWeight": "normal"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     },
@@ -58496,7 +58652,7 @@
                                       "fill": "#0D1535",
                                       "cornerRadius": 6,
                                       "layout": "vertical",
-                                      "gap": 3,
+                                      "gap": 8,
                                       "padding": [
                                         8,
                                         10
@@ -58522,6 +58678,45 @@
                                           "fontFamily": "Open Sans",
                                           "fontSize": 13,
                                           "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "YYWEp",
+                                          "name": "br5",
+                                          "width": "fill_container",
+                                          "justifyContent": "end",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "tKmpg",
+                                              "name": "vp_lena",
+                                              "fill": "#00000000",
+                                              "cornerRadius": 6,
+                                              "stroke": {
+                                                "align": "inside",
+                                                "thickness": 1,
+                                                "fill": "#3A3B40"
+                                              },
+                                              "padding": [
+                                                5,
+                                                10
+                                              ],
+                                              "justifyContent": "center",
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "id": "hAldE",
+                                                  "name": "bt5",
+                                                  "fill": "#8B9DB7",
+                                                  "content": "Ver perfil",
+                                                  "fontFamily": "Open Sans",
+                                                  "fontSize": 12,
+                                                  "fontWeight": "normal"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     }
@@ -58563,7 +58758,7 @@
                                       "fill": "#0D1535",
                                       "cornerRadius": 6,
                                       "layout": "vertical",
-                                      "gap": 3,
+                                      "gap": 8,
                                       "padding": [
                                         8,
                                         10
@@ -58589,6 +58784,45 @@
                                           "fontFamily": "Open Sans",
                                           "fontSize": 13,
                                           "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "E2vPG",
+                                          "name": "br6",
+                                          "width": "fill_container",
+                                          "justifyContent": "end",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "3XxDm",
+                                              "name": "vp_owen",
+                                              "fill": "#00000000",
+                                              "cornerRadius": 6,
+                                              "stroke": {
+                                                "align": "inside",
+                                                "thickness": 1,
+                                                "fill": "#3A3B40"
+                                              },
+                                              "padding": [
+                                                5,
+                                                10
+                                              ],
+                                              "justifyContent": "center",
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "id": "zqtvO",
+                                                  "name": "bt6",
+                                                  "fill": "#8B9DB7",
+                                                  "content": "Ver perfil",
+                                                  "fontFamily": "Open Sans",
+                                                  "fontSize": 12,
+                                                  "fontWeight": "normal"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     },
@@ -58600,7 +58834,7 @@
                                       "fill": "#0D1535",
                                       "cornerRadius": 6,
                                       "layout": "vertical",
-                                      "gap": 3,
+                                      "gap": 8,
                                       "padding": [
                                         8,
                                         10
@@ -58626,6 +58860,45 @@
                                           "fontFamily": "Open Sans",
                                           "fontSize": 13,
                                           "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "6cxnz",
+                                          "name": "br7",
+                                          "width": "fill_container",
+                                          "justifyContent": "end",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "DgHJi",
+                                              "name": "vp_nadia",
+                                              "fill": "#00000000",
+                                              "cornerRadius": 6,
+                                              "stroke": {
+                                                "align": "inside",
+                                                "thickness": 1,
+                                                "fill": "#3A3B40"
+                                              },
+                                              "padding": [
+                                                5,
+                                                10
+                                              ],
+                                              "justifyContent": "center",
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "id": "4ALsR",
+                                                  "name": "bt7",
+                                                  "fill": "#8B9DB7",
+                                                  "content": "Ver perfil",
+                                                  "fontFamily": "Open Sans",
+                                                  "fontSize": 12,
+                                                  "fontWeight": "normal"
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     }
@@ -61108,7 +61381,7 @@
                               "fill": "#F8F8F8",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "Tu consejo está listo. Así vamos a trabajar: yo modera cada fase, el consejo debate, y al final de cada fase tienes un documento aprobado. Tú intervienes cuando algo no refleja tu realidad — el resto lo hacemos nosotros. Si quieres ajustar algo antes de empezar, lo haces desde Consejo Asesor.",
+                              "content": "Tu consejo está listo. Así vamos a trabajar: yo modero cada fase, el consejo debate, y al final de cada fase tienes un documento aprobado. Tú intervienes cuando algo no refleja tu realidad — el resto lo hacemos nosotros. Si quieres ajustar algo antes de empezar, lo haces desde Consejo Asesor.",
                               "lineHeight": 1.6,
                               "fontFamily": "Open Sans",
                               "fontSize": 14,
@@ -61177,6 +61450,48 @@
                           "type": "rectangle",
                           "id": "Odpe9",
                           "name": "div1",
+                          "fill": "#152050",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "FvRf4",
+                          "name": "s_asesores",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ACPbS",
+                              "name": "saLbl",
+                              "fill": "#4A5568",
+                              "content": "ASESORES DEL CONSEJO",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 10,
+                              "fontWeight": "600",
+                              "letterSpacing": 1.2
+                            },
+                            {
+                              "type": "text",
+                              "id": "oXIZL",
+                              "name": "saTxt",
+                              "fill": "#8B9DB7",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Dr. Maya Singh — Lidera\nAlex Reeves — Lidera\nPriya Chen — Lidera\nMarcus Rivera — Apoya\nLena Fischer — Apoya\nOwen Park — Observa\nNadia Osei — Observa",
+                              "lineHeight": 1.8,
+                              "fontFamily": "Open Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "rectangle",
+                          "id": "104WG",
+                          "name": "div_a",
                           "fill": "#152050",
                           "width": "fill_container",
                           "height": 1
@@ -62371,6 +62686,13 @@
                               "id": "np7l9",
                               "name": "cf1Row",
                               "width": "fill_container",
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": {
+                                  "left": 2
+                                },
+                                "fill": "#B8860B"
+                              },
                               "gap": 12,
                               "alignItems": "center",
                               "children": [
@@ -62701,6 +63023,1329 @@
       },
       "width": 500,
       "height": 150
+    },
+    {
+      "type": "frame",
+      "id": "Ri7cv",
+      "x": 0,
+      "y": 16000,
+      "name": "SeedSession__CambiarCofounder__Modal",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0A1128",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "2SWUF",
+          "x": 0,
+          "y": 0,
+          "name": "overlay",
+          "fill": "#00000080",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "FsxmI",
+          "x": 460,
+          "y": 160,
+          "name": "modalCard",
+          "width": 520,
+          "fill": "#0D1535",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#27282B"
+          },
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "1K7Uc",
+              "name": "topRow",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "39Geg",
+                  "name": "tLbl1",
+                  "opacity": 0.5,
+                  "fill": "#F8F8F8",
+                  "content": "CAMBIAR COFOUNDER",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "icon_font",
+                  "id": "Viz4B",
+                  "name": "xIc1",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "x",
+                  "iconFontFamily": "lucide",
+                  "fill": "#8B9DB7"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "odDvt",
+              "name": "ttl1",
+              "fill": "#F8F8F8",
+              "content": "Elige el perfil que prefieres",
+              "fontFamily": "Outfit",
+              "fontSize": 18,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "w4lxx",
+              "name": "sub1",
+              "opacity": 0.7,
+              "fill": "#F8F8F8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "El cofounder que elijas va a trabajar contigo en todas las fases de la sesión.",
+              "fontFamily": "Open Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "rectangle",
+              "id": "EsMYA",
+              "name": "sep1",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "sRNvA",
+              "name": "opts",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "exVLq",
+                  "name": "opt1",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "TGQ4C",
+                      "name": "radio1",
+                      "fill": "#B8860B",
+                      "width": 16,
+                      "height": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "5TYP1",
+                      "name": "c1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "c4ERX",
+                          "name": "n1",
+                          "fill": "#F8F8F8",
+                          "content": "Cofounder Constructivo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UKKcB",
+                          "name": "d1",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Desarrolla propuestas con base en hechos. Perspectiva optimista y orientada a acción.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WK4n8",
+                  "name": "opt2",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "R2Lok",
+                      "name": "radio2",
+                      "fill": "#0D1535",
+                      "width": 16,
+                      "height": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#4A5568"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zNX2l",
+                      "name": "c2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qQ8Nr",
+                          "name": "n2",
+                          "fill": "#F8F8F8",
+                          "content": "Cofounder Analítico",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xZ7be",
+                          "name": "d2",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Evalúa datos y patrones antes de decidir. Perspectiva metódica y orientada a evidencia.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2iMKY",
+                  "name": "opt3",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "KQc0H",
+                      "name": "radio3",
+                      "fill": "#0D1535",
+                      "width": 16,
+                      "height": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#4A5568"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "1JlnR",
+                      "name": "c3",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mQMbC",
+                          "name": "n3",
+                          "fill": "#F8F8F8",
+                          "content": "Cofounder Creativo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "5Vk7u",
+                          "name": "d3",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Genera alternativas no convencionales. Perspectiva innovadora y orientada a posibilidades.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "e655W",
+                  "name": "opt4",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "8ltSE",
+                      "name": "radio4",
+                      "fill": "#0D1535",
+                      "width": 16,
+                      "height": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#4A5568"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "58q9u",
+                      "name": "c4",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "9owqv",
+                          "name": "n4",
+                          "fill": "#F8F8F8",
+                          "content": "Cofounder Operativo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zkfyw",
+                          "name": "d4",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Organiza procesos y recursos con precisión. Perspectiva estructurada y orientada a ejecución.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4B8N",
+                  "name": "opt5",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "nGfbT",
+                      "name": "radio5",
+                      "fill": "#0D1535",
+                      "width": 16,
+                      "height": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#4A5568"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IMJ9O",
+                      "name": "c5",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "0MDDH",
+                          "name": "n5",
+                          "fill": "#F8F8F8",
+                          "content": "Cofounder Financiero",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xQglQ",
+                          "name": "d5",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Modela el impacto económico de cada decisión. Perspectiva cuantitativa y orientada a resultados.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "fiHpi",
+              "name": "sep2",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "tAk2v",
+              "name": "ctaRow",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "tewGk",
+                  "name": "confirmBtn",
+                  "width": "fill_container",
+                  "fill": "#B8860B",
+                  "cornerRadius": 8,
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xlpax",
+                      "name": "cfTx1",
+                      "fill": "#0A1128",
+                      "content": "Confirmar cambio",
+                      "fontFamily": "Outfit",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hfLJp",
+                  "name": "cancelBtn",
+                  "width": "fill_container",
+                  "fill": "#00000000",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#3A3B40"
+                  },
+                  "padding": [
+                    10,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VemW4",
+                      "name": "cnTx1",
+                      "fill": "#8B9DB7",
+                      "content": "Cancelar",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Y4xcK",
+      "x": 1540,
+      "y": 16000,
+      "name": "SeedSession__EspecialistaDetalle__Modal",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0A1128",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "XO8LK",
+          "x": 0,
+          "y": 0,
+          "name": "overlay",
+          "fill": "#00000080",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "HXjX9",
+          "x": 440,
+          "y": 80,
+          "name": "modalCard",
+          "width": 560,
+          "fill": "#0D1535",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#27282B"
+          },
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "DBhTW",
+              "name": "pill",
+              "fill": "#1A2A40",
+              "cornerRadius": 999,
+              "padding": [
+                4,
+                12
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "C65Vj",
+                  "name": "plt2",
+                  "fill": "#007BFF",
+                  "content": "Regulación",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "crl4P",
+              "name": "ttl2",
+              "fill": "#F8F8F8",
+              "content": "Especialista en Fintech LATAM",
+              "fontFamily": "Outfit",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "rectangle",
+              "id": "ZkONX",
+              "name": "sep1",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "DAh4h",
+              "name": "sectEsp",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BqKt5",
+                  "name": "e1l2",
+                  "fill": "#B8860B",
+                  "content": "ESPECIALIDAD",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "2NY04",
+                  "name": "e1t2",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Especialista en regulación financiera con 12 años de experiencia en marcos regulatorios de América Latina. Ha trabajado con la CNBV, Banxico y bancos centrales de 6 países para diseñar normativas de fintech y dinero digital.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "t7mDy",
+              "name": "sectAreas",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "RyfGs",
+                  "name": "e2l2",
+                  "fill": "#B8860B",
+                  "content": "ÁREAS DE ENFOQUE",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "KzvaY",
+                  "name": "e2t2",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "· Regulación bancaria en México y LATAM\n· Cumplimiento normativo para fintech\n· Licencias y marcos legales para dinero electrónico\n· Regulación de pagos digitales y criptoactivos",
+                  "lineHeight": 1.8,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "h2lYT",
+              "name": "sectRol",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nfbdS",
+                  "name": "e3l2",
+                  "fill": "#B8860B",
+                  "content": "CÓMO CONTRIBUYE EN SESIÓN",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "uB5u5",
+                  "name": "e3t2",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Presionará las hipótesis de cumplimiento regulatorio y señalará los riesgos legales que podrían bloquear la operación antes de que el producto llegue al mercado.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "5IgmJ",
+              "name": "sep2",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "mO8GE",
+              "name": "ctaRow",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "0snPk",
+                  "name": "entBtn",
+                  "width": "fill_container",
+                  "fill": "#B8860B",
+                  "cornerRadius": 8,
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iNeOY",
+                      "name": "cbt2",
+                      "fill": "#0A1128",
+                      "content": "Entendido",
+                      "fontFamily": "Outfit",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VRDRA",
+                  "name": "quitBtn",
+                  "width": "fill_container",
+                  "padding": [
+                    8,
+                    0
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "azbYX",
+                      "name": "qbt2",
+                      "fill": "#EF4444",
+                      "content": "Quitar del consejo",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "H6LQX",
+      "x": 3080,
+      "y": 16000,
+      "name": "SeedSession__ICPDetalle__Modal",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0A1128",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "696Ri",
+          "x": 0,
+          "y": 0,
+          "name": "overlay",
+          "fill": "#00000080",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "WSzfL",
+          "x": 440,
+          "y": 80,
+          "name": "modalCard",
+          "width": 560,
+          "fill": "#0D1535",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#27282B"
+          },
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "klY7b",
+              "name": "ttl3",
+              "fill": "#F8F8F8",
+              "content": "Millennial Urbano",
+              "fontFamily": "Outfit",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "DrRuo",
+              "name": "sub3",
+              "opacity": 0.7,
+              "fill": "#F8F8F8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "28 años, trabaja en tecnología, ingresos estables pero sin sistema financiero claro",
+              "fontFamily": "Open Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "rectangle",
+              "id": "0JHTI",
+              "name": "sep1",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "0xBQ6",
+              "name": "sectCtx",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0c658",
+                  "name": "ecl3",
+                  "fill": "#B8860B",
+                  "content": "CONTEXTO",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "AQjQl",
+                  "name": "ect3",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Profesional en tecnología con ingreso mensual entre $25,000 y $45,000 MXN. Gana bien pero no sabe con exactitud a dónde se va su dinero. No tiene presupuesto activo ni sistema de ahorro. Su relación con las finanzas es reactiva — actúa cuando algo sale mal.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zfptj",
+              "name": "sectMot",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XKUNM",
+                  "name": "eml3",
+                  "fill": "#B8860B",
+                  "content": "MOTIVACIONES",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "QLIfE",
+                  "name": "emt3",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "· Entender a dónde va su dinero sin dedicarle tiempo\n· Tener un fondo de emergencia sin esfuerzo consciente\n· Sentir que tiene control financiero sin ser experto en finanzas",
+                  "lineHeight": 1.8,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NJ5rd",
+              "name": "sectFric",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "2DEVa",
+                  "name": "efl3",
+                  "fill": "#B8860B",
+                  "content": "FRICCIONES",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "U9KEG",
+                  "name": "eft3",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "· Las apps de finanzas le piden demasiada configuración inicial\n· No confía en dar acceso a sus cuentas bancarias a terceros\n· Siente que los dashboards financieros son para expertos, no para él",
+                  "lineHeight": 1.8,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "PBlyO",
+              "name": "sectQ",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eIhN1",
+                  "name": "eql3",
+                  "fill": "#B8860B",
+                  "content": "CÓMO CUESTIONA TU PROPUESTA",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "hFALi",
+                  "name": "eqt3",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Preguntará si el onboarding es realmente sin fricción y si el producto funciona sin que el usuario tenga que hacer nada activamente.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "dRVFn",
+              "name": "sep2",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "bI8Sc",
+              "name": "ctaRow",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YeIy3",
+                  "name": "entBtn",
+                  "width": "fill_container",
+                  "fill": "#B8860B",
+                  "cornerRadius": 8,
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kIQnT",
+                      "name": "cbt3",
+                      "fill": "#0A1128",
+                      "content": "Entendido",
+                      "fontFamily": "Outfit",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SLFDS",
+                  "name": "quitBtn",
+                  "width": "fill_container",
+                  "padding": [
+                    8,
+                    0
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wH3aC",
+                      "name": "qbt3",
+                      "fill": "#EF4444",
+                      "content": "Quitar del consejo",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "IPfVr",
+      "x": 4620,
+      "y": 16000,
+      "name": "SeedSession__EntregableDetalle__Modal",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0A1128",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "ZHufu",
+          "x": 0,
+          "y": 0,
+          "name": "overlay",
+          "fill": "#00000080",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "UaENh",
+          "x": 420,
+          "y": 80,
+          "name": "modalCard",
+          "width": 600,
+          "fill": "#0D1535",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#27282B"
+          },
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "c9qT3",
+              "name": "tl4",
+              "opacity": 0.5,
+              "fill": "#F8F8F8",
+              "content": "ENTREGABLE",
+              "fontFamily": "Open Sans",
+              "fontSize": 10,
+              "fontWeight": "600",
+              "letterSpacing": 1.2
+            },
+            {
+              "type": "text",
+              "id": "qulLw",
+              "name": "tt4",
+              "fill": "#F8F8F8",
+              "content": "Value Proposition Canvas",
+              "fontFamily": "Outfit",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "tQjd5",
+              "name": "sb4",
+              "fill": "#007BFF",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Responde: ¿A quién le resuelvo qué problema y por qué me van a elegir?",
+              "fontFamily": "Open Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "rectangle",
+              "id": "8IHmA",
+              "name": "sep1",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "E9GoA",
+              "name": "sectDec",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "RzDfm",
+                  "name": "drl4",
+                  "fill": "#B8860B",
+                  "content": "QUÉ DECISIÓN RESUELVE",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "GDvZN",
+                  "name": "drt4",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Define con precisión qué problema resuelve tu producto, para quién lo resuelve, y cuál es tu propuesta de valor diferenciada frente a alternativas existentes.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hadf9",
+              "name": "sectSec",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "NaoOa",
+                  "name": "scl4",
+                  "fill": "#B8860B",
+                  "content": "SECCIONES QUE VA A CONTENER",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "text",
+                  "id": "a8r2W",
+                  "name": "sct4",
+                  "fill": "#8B9DB7",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "· Perfil del cliente\n· Propuesta de valor\n· Encaje problema-solución\n· ICP definido\n· Customer Personas (2-3)\n· Hipótesis de valor",
+                  "lineHeight": 1.8,
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7fhq8",
+              "name": "sectCons",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mmscR",
+                  "name": "ccl4",
+                  "fill": "#B8860B",
+                  "content": "CONSEJEROS QUE CONTRIBUYEN",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                },
+                {
+                  "type": "frame",
+                  "id": "Y6zqU",
+                  "name": "pillsRow",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Aec9e",
+                      "name": "p1",
+                      "fill": "#1A2A40",
+                      "cornerRadius": 999,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "nz9ob",
+                          "name": "pt1",
+                          "fill": "#007BFF",
+                          "content": "Dr. Maya Singh",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Vps7c",
+                      "name": "p2",
+                      "fill": "#1A2A40",
+                      "cornerRadius": 999,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "6t2Gt",
+                          "name": "pt2",
+                          "fill": "#007BFF",
+                          "content": "Esp. Fintech LATAM",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Dt0D5",
+                      "name": "p3",
+                      "fill": "#1A2A40",
+                      "cornerRadius": 999,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XykMD",
+                          "name": "pt3",
+                          "fill": "#007BFF",
+                          "content": "Cofounder Constructivo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "OOJ7N",
+              "name": "sep2",
+              "fill": "#1A2644",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "G4Ipt",
+              "name": "ctaRow",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ImHIQ",
+                  "name": "entBtn",
+                  "width": "fill_container",
+                  "fill": "#B8860B",
+                  "cornerRadius": 8,
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mOTD4",
+                      "name": "cbt4",
+                      "fill": "#0A1128",
+                      "content": "Entendido",
+                      "fontFamily": "Outfit",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kysc5",
+                  "name": "pedirBtn",
+                  "width": "fill_container",
+                  "fill": "#00000000",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#3A3B40"
+                  },
+                  "padding": [
+                    10,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KjKsf",
+                      "name": "paTxt4",
+                      "fill": "#8B9DB7",
+                      "content": "Pedir ajuste",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

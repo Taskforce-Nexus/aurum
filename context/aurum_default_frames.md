@@ -49,6 +49,10 @@ Projects__AdvisoryBoard__AdvisorCatalogModal
 Projects__AdvisoryBoard__InvitedAdvisorModal
 Projects__AdvisoryBoard__BuyerPersonaModal
 Shared__ConfirmAction__Modal
+SeedSession__CambiarCofounder__Modal
+SeedSession__EspecialistaDetalle__Modal
+SeedSession__ICPDetalle__Modal
+SeedSession__EntregableDetalle__Modal
 
 ---
 

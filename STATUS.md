@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-11
-Etapa actual: Brand guidelines documentadas — SeedSession 7 variantes pendiente freeze
+Etapa actual: SeedSession fixes completos — 4 modales nuevos creados — pendiente freeze
 
 ---
 
@@ -24,11 +24,11 @@ Etapa actual: Brand guidelines documentadas — SeedSession 7 variantes pendient
 
 ## En progreso
 
-- SeedSession variantes (7 frames) — ConsejoPrincipal (rediseñado), Cofounders (nuevo), Especialistas, ICPs, Entregables, ConsejoListo
+- SeedSession fixes + 4 modales nuevos: CambiarCofounder, EspecialistaDetalle, ICPDetalle, EntregableDetalle
 
 ## Siguiente paso
 
-Freeze SeedSession 7 variantes → avanzar a Incubator
+Freeze SeedSession (7 frames + 4 modales) → avanzar a Incubator
 
 ---
 
@@ -46,6 +46,7 @@ Freeze SeedSession 7 variantes → avanzar a Incubator
 
 | Hash | Descripción |
 |---|---|
+| (pending) | feat: SeedSession fixes + 4 modales (CambiarCofounder, EspecialistaDetalle, ICPDetalle, EntregableDetalle) |
 | 4532428 | fix: ConsejoPrincipalPropuesta — NEXO + ASESORES; feat: CofoundersPropuesta |
 | d8093cb | fix: SeedSession__EntregablesPropuesta — paginación, Responde, Ver detalle, Pedir ajuste |
 | b0d342f | feat: SeedSession — 5 variantes (ConsejoPrincipal, Especialistas, ICPs, Entregables, ConsejoListo) |
