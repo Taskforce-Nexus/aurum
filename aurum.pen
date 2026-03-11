@@ -14129,26 +14129,6 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "cRKfY",
-                  "name": "modalHeader",
-                  "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "kEQk2",
-                      "name": "modalTitle",
-                      "fill": "#F8F8F8",
-                      "content": "Seleccionar Cofounder IA",
-                      "fontFamily": "Outfit",
-                      "fontSize": 20,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
                   "id": "WVgzy",
                   "name": "activeSlots",
                   "width": "fill_container",
@@ -63161,6 +63141,440 @@
       },
       "width": 500,
       "height": 150
+    },
+    {
+      "type": "frame",
+      "id": "xZxSw",
+      "x": 0,
+      "y": 16000,
+      "name": "SeedSession__CambiarCofounder__Modal",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0A112899",
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "8TsaR",
+          "name": "modalCard",
+          "width": 520,
+          "fill": "#0D1535",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#27282B"
+          },
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 28,
+          "children": [
+            {
+              "type": "frame",
+              "id": "xrmns",
+              "name": "modalHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "9Viwk",
+                  "name": "modalTitle",
+                  "content": "Cambiar Cofounder IA",
+                  "fontFamily": "Outfit",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "xEM22",
+                  "name": "closeBtn",
+                  "width": 28,
+                  "height": 28,
+                  "fill": "#142045",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "pv8q1",
+                      "name": "closeIco",
+                      "width": 14,
+                      "height": 14,
+                      "iconFontName": "x",
+                      "iconFontFamily": "lucide",
+                      "fill": "#8B9DB7"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "M66Ua",
+              "name": "subtitle",
+              "content": "Selecciona el arquetipo de cofounder IA que mejor complementa tu perfil fundador.",
+              "fontFamily": "Open Sans",
+              "fontSize": 13
+            },
+            {
+              "type": "frame",
+              "id": "hWBJ1",
+              "name": "cofList",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "rgX5y",
+                  "name": "cfCard1",
+                  "width": "fill_container",
+                  "fill": "#142045",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 2,
+                    "fill": "#B8860B"
+                  },
+                  "gap": 14,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MD0Cy",
+                      "name": "dot1",
+                      "width": 10,
+                      "height": 10,
+                      "fill": "#B8860B",
+                      "layout": "none"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "k83OX",
+                      "name": "cf1info",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "bIc4f",
+                          "name": "cf1name",
+                          "content": "Constructivo",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "2xPV4",
+                          "name": "cf1desc",
+                          "content": "Construye consenso, impulsa ejecución y sostiene el momentum del equipo.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zh7tw",
+                      "name": "sel1",
+                      "width": 18,
+                      "height": 18,
+                      "fill": "#B8860B",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "a2RYa",
+                          "name": "selDot1",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#0D1535"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PP30D",
+                  "name": "cfCard2",
+                  "width": "fill_container",
+                  "fill": "#0A1128",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#27282B"
+                  },
+                  "gap": 14,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "qnyoo",
+                      "name": "dot2",
+                      "width": 10,
+                      "height": 10,
+                      "fill": "#4A6080",
+                      "layout": "none"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DHvgT",
+                      "name": "cf2info",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "A7t0T",
+                          "name": "cf2name",
+                          "content": "Crítico",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GCfxN",
+                          "name": "cf2desc",
+                          "content": "Desafía supuestos, identifica riesgos y afina la propuesta de valor con rigor.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XEnKp",
+                      "name": "sel2",
+                      "width": 18,
+                      "height": 18,
+                      "fill": "#00000000",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 2,
+                        "fill": "#4A6080"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "BhGQm",
+                  "name": "cfCard3",
+                  "width": "fill_container",
+                  "fill": "#0A1128",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#27282B"
+                  },
+                  "gap": 14,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "TnKiv",
+                      "name": "dot3",
+                      "width": 10,
+                      "height": 10,
+                      "fill": "#4A6080",
+                      "layout": "none"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Q1oRk",
+                      "name": "cf3info",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SXSy4",
+                          "name": "cf3name",
+                          "content": "Visionario",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xot3y",
+                          "name": "cf3desc",
+                          "content": "Expande horizontes, conecta tendencias y mantiene la visión estratégica de largo plazo.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fiHOE",
+                      "name": "sel3",
+                      "width": 18,
+                      "height": 18,
+                      "fill": "#00000000",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 2,
+                        "fill": "#4A6080"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RtnB9",
+                  "name": "cfCard4",
+                  "width": "fill_container",
+                  "fill": "#0A1128",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#27282B"
+                  },
+                  "gap": 14,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "1rDPi",
+                      "name": "dot4",
+                      "width": 10,
+                      "height": 10,
+                      "fill": "#4A6080",
+                      "layout": "none"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "oYVsF",
+                      "name": "cf4info",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Nn2JS",
+                          "name": "cf4name",
+                          "content": "Técnico",
+                          "fontFamily": "Outfit",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MAvKh",
+                          "name": "cf4desc",
+                          "content": "Aporta rigor técnico, valida viabilidad y traduce producto en arquitectura ejecutable.",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dZd8x",
+                      "name": "sel4",
+                      "width": 18,
+                      "height": 18,
+                      "fill": "#00000000",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 2,
+                        "fill": "#4A6080"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Thycd",
+              "name": "modalActions",
+              "width": "fill_container",
+              "gap": 12,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "DHO7A",
+                  "name": "cancelBtn",
+                  "fill": "#00000000",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#4A6080"
+                  },
+                  "padding": [
+                    10,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QHAk0",
+                      "name": "cancelTxt",
+                      "content": "Cancelar",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cokhi",
+                  "name": "confirmBtn",
+                  "fill": "#B8860B",
+                  "padding": [
+                    10,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "3C6yw",
+                      "name": "confirmTxt",
+                      "content": "Confirmar cambio",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 13,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
