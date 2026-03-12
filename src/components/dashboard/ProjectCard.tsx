@@ -12,9 +12,11 @@ interface Props {
   name: string
   currentPhase: string | null
   lastActiveAt: string | null
+  description?: string | null
+  phasePill?: { label: string; color: string }
 }
 
-export default function ProjectCard({ id, name, currentPhase, lastActiveAt }: Props) {
+export default function ProjectCard({ id, name, currentPhase, lastActiveAt, description, phasePill }: Props) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [editing, setEditing] = useState(false)
   const [editName, setEditName] = useState(name)
@@ -129,7 +131,16 @@ export default function ProjectCard({ id, name, currentPhase, lastActiveAt }: Pr
                 <h2 className="font-semibold text-lg group-hover:text-[#C9A84C] transition-colors truncate">
                   {displayName}
                 </h2>
-                <p className="text-sm text-[#6b6d75] mt-1">{currentPhase ?? 'Semilla'}</p>
+                {description && (
+                  <p className="text-xs text-[#6b6d75] mt-1 line-clamp-2">{description}</p>
+                )}
+                {phasePill ? (
+                  <span className={`inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium ${phasePill.color}`}>
+                    {phasePill.label}
+                  </span>
+                ) : (
+                  <p className="text-sm text-[#6b6d75] mt-1">{currentPhase ?? 'Semilla'}</p>
+                )}
               </Link>
             )}
           </div>

@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-12
-Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Story 1.1 ✓ Story 1.2 COMPLETO. Siguiente: Story 1.3
+Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS. Siguiente: Story 1.5
 
 ---
 
@@ -127,9 +127,26 @@ Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Story 1.1 ✓ Story 1.2 COM
 - forgot-password-sent/page.tsx — nuevo: mensaje confirmación + link login ✓
 - api/auth/setup/route.ts — nuevo: crea profiles + token_balances + subscriptions (service role) ✓
 
+## Story 1.3 — Layout global + Routing (COMPLETO ✓)
+
+- Fix profiles/setup: `full_name`→`name`, `balance`→`balance_usd` ✓
+- (dashboard)/layout.tsx — header global: logo, balance, notificaciones, UserMenu ✓
+- UserMenu.tsx — dropdown: Configuración + Cerrar sesión (client component) ✓
+- SettingsSidebar.tsx — 6 tabs con active state via usePathname + botón signOut ✓
+- settings/layout.tsx — wrapper con sidebar ✓
+- 6 rutas placeholder: semilla, sesion-consejo, consultoria, export, documento/[docId], consejo ✓
+- 6 rutas settings placeholder: cuenta, facturacion, equipo, planes, notificaciones, conexiones ✓
+
+## Story 1.4 — Dashboard (COMPLETO ✓)
+
+- DashboardClient.tsx — grid responsive 2-3 cols, fase pill por color, empty state ✓
+- CreateProjectModal.tsx — nombre + 3 pills entry_level + INSERT projects → /project/[id]/semilla ✓
+- ProjectCard.tsx — acepta description + phasePill (additive, no breaking) ✓
+- (dashboard)/page.tsx — query por user_id directo (sin organizations) ✓
+
 ## Siguiente paso
 
-Story 1.3 — Dashboard: listar proyectos, crear proyecto, estado del proyecto
+Story 1.5 — ProjectView: vista individual del proyecto
 
 ---
 

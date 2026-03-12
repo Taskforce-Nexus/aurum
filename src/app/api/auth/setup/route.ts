@@ -19,15 +19,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid user' }, { status: 400 })
   }
 
-  // Upsert profile (trigger may have already created it)
+  // Upsert profile — column is `name` (not full_name)
   await supabase.from('profiles').upsert(
-    { id: user_id, full_name },
+    { id: user_id, name: full_name },
     { onConflict: 'id' }
   )
 
-  // Create token_balances with $0.00 initial balance
+  // Create token_balances — column is `balance_usd`
   await supabase.from('token_balances').upsert(
-    { user_id, balance: 0 },
+    { user_id, balance_usd: 0 },
     { onConflict: 'user_id' }
   )
 
