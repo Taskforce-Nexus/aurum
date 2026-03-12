@@ -80,6 +80,13 @@ Marketing__Landing__Default — FREEZE
 
 ---
 
+## Settings
+
+Settings__Account__Default
+Settings__Billing__Default
+
+---
+
 ## Modales — FREEZE
 
 Projects__CreateProject__Modal — FREEZE

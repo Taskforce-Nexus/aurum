@@ -92,6 +92,9 @@ Etapa actual: ITERATE — Marketing__Landing__Default rebuild completo (10 secci
 - InviteCollaborator__Modal — FREEZE ✓ (aprobado por Juan)
 - ConfirmAction__Modal — FREEZE ✓ (aprobado por Juan)
 
+- Settings__Account__Default — nuevo frame: nav + sidebar (Cuenta activo) + 4 secciones (Perfil, Preferencias, Seguridad, Zona de Peligro) ✓
+- Settings__Billing__Default — nuevo frame: nav + sidebar (Facturación activo) + 5 secciones (Saldo, Plan, Historial, Método de Pago, Facturas) ✓
+
 ## Siguiente paso
 
 Definir siguiente frame del pipeline con Juan
