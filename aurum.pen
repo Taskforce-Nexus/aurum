@@ -12177,9 +12177,9 @@
     {
       "type": "frame",
       "id": "cFRkE",
-      "x": -13,
-      "y": 196,
-      "name": "Projects__AdvisoryBoard__MyBoard",
+      "x": 4620,
+      "y": -2974,
+      "name": "AdvisoryBoard__MyBoard",
       "width": 1440,
       "height": 900,
       "fill": "#0A1128",
@@ -12389,7 +12389,8 @@
                         "thickness": 1,
                         "fill": "#27282B"
                       },
-                      "gap": 8,
+                      "layout": "vertical",
+                      "gap": 4,
                       "padding": [
                         6,
                         12
@@ -12397,49 +12398,200 @@
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "e2Rer",
-                          "name": "tLbl",
-                          "fill": "#6E8EAD",
-                          "content": "SOMBREROS",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 8,
-                          "fontWeight": "bold",
-                          "letterSpacing": 1
+                          "type": "frame",
+                          "id": "E94RL",
+                          "name": "htTopRow",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "e2Rer",
+                              "name": "tLbl",
+                              "fill": "#6E8EAD",
+                              "content": "SOMBREROS",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 8,
+                              "fontWeight": "bold",
+                              "letterSpacing": 1
+                            },
+                            {
+                              "type": "frame",
+                              "id": "AipC5",
+                              "name": "tDots",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "Y96xt",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "X155v",
+                                  "opacity": 0.6,
+                                  "fill": "#8B9DB7",
+                                  "content": "datos",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "XOFoR",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#152050",
+                                  "cornerRadius": 3,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#4E4E56"
+                                  }
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "s0ktN",
+                                  "opacity": 0.6,
+                                  "fill": "#8B9DB7",
+                                  "content": "cautela",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "eLZEt",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#E57373",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ze467",
+                                  "opacity": 0.6,
+                                  "fill": "#8B9DB7",
+                                  "content": "emociones",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "ZSyhU",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#FFEB3B",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "CBjzX",
+                                  "opacity": 0.6,
+                                  "fill": "#8B9DB7",
+                                  "content": "optimismo",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "BGNtB",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#4CAF50",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ODRep",
+                                  "opacity": 0.6,
+                                  "fill": "#8B9DB7",
+                                  "content": "creatividad",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "QTR88",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#5B9BD5",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "L4Xdh",
+                                  "opacity": 0.6,
+                                  "fill": "#8B9DB7",
+                                  "content": "proceso",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "FTWhM",
+                              "name": "tCount",
+                              "fill": "#4CAF50",
+                              "content": "6/6",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 10,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "mXaWi",
+                              "name": "tCheck",
+                              "fill": "#4CAF50",
+                              "content": "✓ Cubiertos",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 9,
+                              "fontWeight": "normal"
+                            }
+                          ]
                         },
                         {
                           "type": "frame",
-                          "id": "rMc8o",
-                          "name": "tDots",
-                          "gap": 4,
+                          "id": "70wke",
+                          "name": "hatLeyRw",
+                          "width": "fill_container",
+                          "gap": 6,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
-                              "id": "EDAcu",
-                              "name": "tW",
-                              "width": 12,
-                              "height": 12,
+                              "id": "io5tH",
+                              "width": 8,
+                              "height": 8,
                               "fill": "#FFFFFF",
-                              "cornerRadius": 6
+                              "cornerRadius": 3
+                            },
+                            {
+                              "type": "text",
+                              "id": "BOKV5",
+                              "fill": "#4A6080",
+                              "content": "datos",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
-                              "id": "pDGtR",
-                              "name": "tR",
-                              "width": 12,
-                              "height": 12,
-                              "fill": "#E57373",
-                              "cornerRadius": 6
-                            },
-                            {
-                              "type": "frame",
-                              "id": "EwVYT",
-                              "name": "tBk",
-                              "width": 12,
-                              "height": 12,
+                              "id": "6VTK6",
+                              "width": 8,
+                              "height": 8,
                               "fill": "#152050",
-                              "cornerRadius": 6,
+                              "cornerRadius": 3,
                               "stroke": {
                                 "align": "inside",
                                 "thickness": 1,
@@ -12447,53 +12599,83 @@
                               }
                             },
                             {
+                              "type": "text",
+                              "id": "dnFGn",
+                              "fill": "#4A6080",
+                              "content": "cautela",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
                               "type": "frame",
-                              "id": "UZ2YG",
-                              "name": "tY",
-                              "width": 12,
-                              "height": 12,
+                              "id": "SFYrU",
+                              "width": 8,
+                              "height": 8,
+                              "fill": "#E57373",
+                              "cornerRadius": 3
+                            },
+                            {
+                              "type": "text",
+                              "id": "jqt6Y",
+                              "fill": "#4A6080",
+                              "content": "emociones",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "UFK8i",
+                              "width": 8,
+                              "height": 8,
                               "fill": "#FFEB3B",
-                              "cornerRadius": 6
+                              "cornerRadius": 3
+                            },
+                            {
+                              "type": "text",
+                              "id": "gfXOv",
+                              "fill": "#4A6080",
+                              "content": "optimismo",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
-                              "id": "6nxjY",
-                              "name": "tG",
-                              "width": 12,
-                              "height": 12,
+                              "id": "yBDFa",
+                              "width": 8,
+                              "height": 8,
                               "fill": "#4CAF50",
-                              "cornerRadius": 6
+                              "cornerRadius": 3
+                            },
+                            {
+                              "type": "text",
+                              "id": "Oy98r",
+                              "fill": "#4A6080",
+                              "content": "creatividad",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
-                              "id": "hy9By",
-                              "name": "tBl",
-                              "width": 12,
-                              "height": 12,
+                              "id": "mCNZY",
+                              "width": 8,
+                              "height": 8,
                               "fill": "#5B9BD5",
-                              "cornerRadius": 6
+                              "cornerRadius": 3
+                            },
+                            {
+                              "type": "text",
+                              "id": "42MOy",
+                              "fill": "#4A6080",
+                              "content": "proceso",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
-                        },
-                        {
-                          "type": "text",
-                          "id": "FTWhM",
-                          "name": "tCount",
-                          "fill": "#4CAF50",
-                          "content": "6/6",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 10,
-                          "fontWeight": "bold"
-                        },
-                        {
-                          "type": "text",
-                          "id": "mXaWi",
-                          "name": "tCheck",
-                          "fill": "#4CAF50",
-                          "content": "✓ Cubiertos",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 9,
-                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -12554,6 +12736,19 @@
                               "fontFamily": "Open Sans",
                               "fontSize": 12,
                               "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ig3T1",
+                              "name": "mb1",
+                              "opacity": 0.5,
+                              "fill": "#F8F8F8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Analítica y basada en datos",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
@@ -12647,6 +12842,19 @@
                               "fontFamily": "Open Sans",
                               "fontSize": 12,
                               "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "37N5S",
+                              "name": "mb2",
+                              "opacity": 0.5,
+                              "fill": "#F8F8F8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Empático y colaborativo",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
@@ -12744,6 +12952,19 @@
                               "fontFamily": "Open Sans",
                               "fontSize": 12,
                               "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "RNvpO",
+                              "name": "mb3",
+                              "opacity": 0.5,
+                              "fill": "#F8F8F8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Directa y orientada a la acción",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
@@ -12854,6 +13075,19 @@
                               "fontWeight": "bold"
                             },
                             {
+                              "type": "text",
+                              "id": "KMkU9",
+                              "name": "mb4",
+                              "opacity": 0.5,
+                              "fill": "#F8F8F8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Visionario y explorador",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
                               "type": "frame",
                               "id": "wQoir",
                               "name": "hats4",
@@ -12931,6 +13165,19 @@
                               "fontFamily": "Open Sans",
                               "fontSize": 12,
                               "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "3qgbz",
+                              "name": "mb5",
+                              "opacity": 0.5,
+                              "fill": "#F8F8F8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Empática y colaborativa",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
@@ -13041,6 +13288,19 @@
                               "fontWeight": "bold"
                             },
                             {
+                              "type": "text",
+                              "id": "Jf2tF",
+                              "name": "mb6",
+                              "opacity": 0.5,
+                              "fill": "#F8F8F8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Directo y orientado a la acción",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
                               "type": "frame",
                               "id": "PmaVD",
                               "name": "hats6",
@@ -13132,6 +13392,19 @@
                               "fontFamily": "Open Sans",
                               "fontSize": 12,
                               "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "hnpv2",
+                              "name": "mb7",
+                              "opacity": 0.5,
+                              "fill": "#F8F8F8",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Analítico y basado en datos",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "frame",
@@ -16564,7 +16837,7 @@
                           "id": "ETNXJ",
                           "name": "langText",
                           "fill": "#8B9DB7",
-                          "content": "Español · Analítico y directo",
+                          "content": "Español · Directo y orientado a la acción",
                           "fontFamily": "Open Sans",
                           "fontSize": 11,
                           "fontWeight": "normal"
@@ -17182,7 +17455,7 @@
       "id": "Xpdtg",
       "x": 4614,
       "y": 196,
-      "name": "Projects__AdvisoryBoard__AdvisorCatalogModal",
+      "name": "SeedSession__AdvisorSelector__Drawer",
       "width": 1440,
       "height": 900,
       "fill": "#05050680",
@@ -17239,7 +17512,7 @@
                   "id": "5e9KM",
                   "name": "slotBanner",
                   "width": "fill_container",
-                  "fill": "$gold-dim",
+                  "fill": "#1A2550",
                   "cornerRadius": "$radius-md",
                   "stroke": {
                     "align": "inside",
@@ -17256,16 +17529,16 @@
                     {
                       "type": "text",
                       "id": "ocxJW",
-                      "fill": "$text-primary",
+                      "fill": "#F8F8F8",
                       "content": "📊 Llenando: Investigación de Mercado",
                       "fontFamily": "Open Sans",
                       "fontSize": 12,
-                      "fontWeight": "600"
+                      "fontWeight": "700"
                     },
                     {
                       "type": "text",
                       "id": "gxuGB",
-                      "fill": "$gold",
+                      "fill": "#B8860B",
                       "content": "— LÍDERA",
                       "fontFamily": "Open Sans",
                       "fontSize": 10,
@@ -17352,7 +17625,7 @@
                         {
                           "type": "frame",
                           "id": "TSCDi",
-                          "fill": "$bg-tertiary",
+                          "fill": "#0F1A3D",
                           "cornerRadius": 14,
                           "padding": [
                             4,
@@ -17362,7 +17635,7 @@
                             {
                               "type": "text",
                               "id": "CZwuJ",
-                              "fill": "$text-secondary",
+                              "fill": "#8B9DB7",
                               "content": "📊 Investigación",
                               "fontFamily": "Open Sans",
                               "fontSize": 11,
@@ -17373,7 +17646,7 @@
                         {
                           "type": "frame",
                           "id": "mRKtq",
-                          "fill": "$bg-tertiary",
+                          "fill": "#0F1A3D",
                           "cornerRadius": 14,
                           "padding": [
                             4,
@@ -17383,7 +17656,7 @@
                             {
                               "type": "text",
                               "id": "PKV2W",
-                              "fill": "$text-secondary",
+                              "fill": "#8B9DB7",
                               "content": "🎨 UX & Producto",
                               "fontFamily": "Open Sans",
                               "fontSize": 11,
@@ -17394,7 +17667,7 @@
                         {
                           "type": "frame",
                           "id": "BegnO",
-                          "fill": "$bg-tertiary",
+                          "fill": "#0F1A3D",
                           "cornerRadius": 14,
                           "padding": [
                             4,
@@ -17404,7 +17677,7 @@
                             {
                               "type": "text",
                               "id": "dAKeB",
-                              "fill": "$text-secondary",
+                              "fill": "#8B9DB7",
                               "content": "📋 Negocio",
                               "fontFamily": "Open Sans",
                               "fontSize": 11,
@@ -17415,7 +17688,7 @@
                         {
                           "type": "frame",
                           "id": "GWFWV",
-                          "fill": "$bg-tertiary",
+                          "fill": "#0F1A3D",
                           "cornerRadius": 14,
                           "padding": [
                             4,
@@ -17425,7 +17698,7 @@
                             {
                               "type": "text",
                               "id": "IVu6q",
-                              "fill": "$text-secondary",
+                              "fill": "#8B9DB7",
                               "content": "🔧 Técnico",
                               "fontFamily": "Open Sans",
                               "fontSize": 11,
@@ -17436,7 +17709,7 @@
                         {
                           "type": "frame",
                           "id": "3s1we",
-                          "fill": "$bg-tertiary",
+                          "fill": "#0F1A3D",
                           "cornerRadius": 14,
                           "padding": [
                             4,
@@ -17446,7 +17719,7 @@
                             {
                               "type": "text",
                               "id": "lYbA5",
-                              "fill": "$text-secondary",
+                              "fill": "#8B9DB7",
                               "content": "💰 Precios",
                               "fontFamily": "Open Sans",
                               "fontSize": 11,
@@ -17457,7 +17730,7 @@
                         {
                           "type": "frame",
                           "id": "2Lamg",
-                          "fill": "$bg-tertiary",
+                          "fill": "#0F1A3D",
                           "cornerRadius": 14,
                           "padding": [
                             4,
@@ -17467,7 +17740,7 @@
                             {
                               "type": "text",
                               "id": "7pBvR",
-                              "fill": "$text-secondary",
+                              "fill": "#8B9DB7",
                               "content": "★ Favoritos",
                               "fontFamily": "Open Sans",
                               "fontSize": 11,
@@ -17513,12 +17786,12 @@
                           "clip": true,
                           "width": "fill_container",
                           "height": 160,
-                          "fill": "$bg-secondary",
+                          "fill": "#0D1535",
                           "cornerRadius": 14,
                           "stroke": {
                             "align": "inside",
                             "thickness": 1,
-                            "fill": "$border"
+                            "fill": "#27282B"
                           },
                           "layout": "vertical",
                           "gap": 8,
@@ -17568,12 +17841,12 @@
                           "clip": true,
                           "width": "fill_container",
                           "height": 160,
-                          "fill": "$bg-secondary",
+                          "fill": "#0D1535",
                           "cornerRadius": 14,
                           "stroke": {
                             "align": "inside",
                             "thickness": 1,
-                            "fill": "$border"
+                            "fill": "#27282B"
                           },
                           "layout": "vertical",
                           "gap": 10,
@@ -17652,8 +17925,13 @@
                             {
                               "type": "frame",
                               "id": "CHHgo",
-                              "fill": "$success-dim",
+                              "fill": "#1A3020",
                               "cornerRadius": 8,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#27282B"
+                              },
                               "padding": [
                                 3,
                                 8
@@ -17662,7 +17940,7 @@
                                 {
                                   "type": "text",
                                   "id": "g7ddX",
-                                  "fill": "$success",
+                                  "fill": "#4CAF50",
                                   "content": "✓ Activo",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 9,
@@ -17679,12 +17957,12 @@
                           "clip": true,
                           "width": "fill_container",
                           "height": 160,
-                          "fill": "$bg-secondary",
+                          "fill": "#0D1535",
                           "cornerRadius": 14,
                           "stroke": {
                             "align": "inside",
                             "thickness": 1,
-                            "fill": "$border"
+                            "fill": "#27282B"
                           },
                           "layout": "vertical",
                           "gap": 10,
@@ -17763,8 +18041,13 @@
                             {
                               "type": "frame",
                               "id": "ofx33",
-                              "fill": "$bg-tertiary",
+                              "fill": "#0F1A3D",
                               "cornerRadius": 8,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#27282B"
+                              },
                               "padding": [
                                 3,
                                 8
@@ -17773,7 +18056,7 @@
                                 {
                                   "type": "text",
                                   "id": "fylKd",
-                                  "fill": "$text-tertiary",
+                                  "fill": "#8B9DB7",
                                   "content": "Nativo",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 9,
@@ -17799,12 +18082,12 @@
                           "clip": true,
                           "width": "fill_container",
                           "height": 160,
-                          "fill": "$bg-secondary",
+                          "fill": "#0D1535",
                           "cornerRadius": 14,
                           "stroke": {
                             "align": "inside",
                             "thickness": 1,
-                            "fill": "$border"
+                            "fill": "#27282B"
                           },
                           "layout": "vertical",
                           "gap": 10,
@@ -17883,8 +18166,13 @@
                             {
                               "type": "frame",
                               "id": "rZRId",
-                              "fill": "$bg-tertiary",
+                              "fill": "#0F1A3D",
                               "cornerRadius": 8,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#27282B"
+                              },
                               "padding": [
                                 3,
                                 8
@@ -17893,7 +18181,7 @@
                                 {
                                   "type": "text",
                                   "id": "8VPbx",
-                                  "fill": "$text-tertiary",
+                                  "fill": "#8B9DB7",
                                   "content": "Nativo",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 9,
@@ -17910,12 +18198,12 @@
                           "clip": true,
                           "width": "fill_container",
                           "height": 160,
-                          "fill": "$bg-secondary",
+                          "fill": "#0D1535",
                           "cornerRadius": 14,
                           "stroke": {
                             "align": "inside",
                             "thickness": 2,
-                            "fill": "$text-primary"
+                            "fill": "#EDEDEF"
                           },
                           "layout": "vertical",
                           "gap": 10,
@@ -17994,8 +18282,13 @@
                             {
                               "type": "frame",
                               "id": "KMLxg",
-                              "fill": "$bg-tertiary",
+                              "fill": "#0F1A3D",
                               "cornerRadius": 8,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#27282B"
+                              },
                               "padding": [
                                 3,
                                 8
@@ -18004,7 +18297,7 @@
                                 {
                                   "type": "text",
                                   "id": "XCqi0",
-                                  "fill": "$text-tertiary",
+                                  "fill": "#8B9DB7",
                                   "content": "Nativo",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 9,
@@ -18021,12 +18314,12 @@
                           "clip": true,
                           "width": "fill_container",
                           "height": 160,
-                          "fill": "$bg-secondary",
+                          "fill": "#0D1535",
                           "cornerRadius": 14,
                           "stroke": {
                             "align": "inside",
                             "thickness": 1,
-                            "fill": "$border"
+                            "fill": "#27282B"
                           },
                           "layout": "vertical",
                           "gap": 10,
@@ -18105,8 +18398,13 @@
                             {
                               "type": "frame",
                               "id": "Yke7a",
-                              "fill": "$bg-tertiary",
+                              "fill": "#0F1A3D",
                               "cornerRadius": 8,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#27282B"
+                              },
                               "padding": [
                                 3,
                                 8
@@ -18115,7 +18413,7 @@
                                 {
                                   "type": "text",
                                   "id": "RuN5H",
-                                  "fill": "$text-tertiary",
+                                  "fill": "#8B9DB7",
                                   "content": "Nativo",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 9,
@@ -18203,10 +18501,11 @@
               "name": "drawerPanel",
               "width": 400,
               "height": "fill_container",
+              "fill": "#0a1128",
               "stroke": {
                 "align": "inside",
                 "thickness": 1,
-                "fill": "$border"
+                "fill": "#0a1128"
               },
               "layout": "vertical",
               "children": [
@@ -18232,13 +18531,26 @@
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "icon_font",
-                          "id": "051uT",
-                          "width": 14,
-                          "height": 14,
-                          "iconFontName": "x",
-                          "iconFontFamily": "lucide",
-                          "fill": "$text-secondary"
+                          "type": "frame",
+                          "id": "rqYmx",
+                          "name": "closeBtn",
+                          "width": 32,
+                          "height": 32,
+                          "fill": "#152050",
+                          "cornerRadius": 8,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "rTbcU",
+                              "width": 16,
+                              "height": 16,
+                              "iconFontName": "x",
+                              "iconFontFamily": "lucide",
+                              "fill": "#2C3E50"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -18266,7 +18578,7 @@
                       "name": "profileAvatar",
                       "width": 80,
                       "height": 80,
-                      "fill": "#1A1A2A",
+                      "fill": "#142045ff",
                       "cornerRadius": 40,
                       "justifyContent": "center",
                       "alignItems": "center",
@@ -18274,7 +18586,7 @@
                         {
                           "type": "text",
                           "id": "atzEB",
-                          "fill": "$text-secondary",
+                          "fill": "#b8860bff",
                           "content": "LC",
                           "fontFamily": "Open Sans",
                           "fontSize": 24,
@@ -18301,21 +18613,12 @@
                         },
                         {
                           "type": "icon_font",
-                          "id": "x4D5j",
-                          "width": 14,
-                          "height": 14,
-                          "iconFontName": "pencil",
-                          "iconFontFamily": "lucide",
-                          "fill": "$text-tertiary"
-                        },
-                        {
-                          "type": "icon_font",
                           "id": "opie4",
                           "width": 14,
                           "height": 14,
                           "iconFontName": "star",
                           "iconFontFamily": "lucide",
-                          "fill": "$text-tertiary"
+                          "fill": "#b8860bff"
                         }
                       ]
                     },
@@ -18328,7 +18631,7 @@
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border"
+                        "fill": "#8b9db7ff"
                       },
                       "padding": [
                         6,
@@ -18375,7 +18678,7 @@
                         {
                           "type": "text",
                           "id": "hQutv",
-                          "fill": "$text-secondary",
+                          "fill": "#8b9db7ff",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "Arquitecta de software con 12 años en startups de alto crecimiento. Especializada en definir MVPs viables, evaluar deuda técnica y diseñar sistemas escalables.",
@@ -18422,7 +18725,7 @@
                                 {
                                   "type": "text",
                                   "id": "5LfFO",
-                                  "fill": "$text-secondary",
+                                  "fill": "#8b9db7ff",
                                   "content": "Arquitectura",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -18443,7 +18746,7 @@
                                 {
                                   "type": "text",
                                   "id": "palgR",
-                                  "fill": "$text-secondary",
+                                  "fill": "#8b9db7ff",
                                   "content": "MVP",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -18464,7 +18767,7 @@
                                 {
                                   "type": "text",
                                   "id": "DwEY9",
-                                  "fill": "$text-secondary",
+                                  "fill": "#8b9db7ff",
                                   "content": "Escalabilidad",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -18485,7 +18788,7 @@
                                 {
                                   "type": "text",
                                   "id": "XWy7I",
-                                  "fill": "$text-secondary",
+                                  "fill": "#8b9db7ff",
                                   "content": "DevOps",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -18534,7 +18837,7 @@
                                 {
                                   "type": "text",
                                   "id": "fxBc6",
-                                  "fill": "$text-secondary",
+                                  "fill": "#8b9db7ff",
                                   "content": "SaaS",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -18555,7 +18858,7 @@
                                 {
                                   "type": "text",
                                   "id": "7wIVz",
-                                  "fill": "$text-secondary",
+                                  "fill": "#8b9db7ff",
                                   "content": "Fintech",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -18576,7 +18879,7 @@
                                 {
                                   "type": "text",
                                   "id": "dM3fc",
-                                  "fill": "$text-secondary",
+                                  "fill": "#8b9db7ff",
                                   "content": "HealthTech",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -18609,7 +18912,7 @@
                         {
                           "type": "text",
                           "id": "rfAUE",
-                          "fill": "$text-secondary",
+                          "fill": "#8b9db7",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "• CTO en 3 startups (seed → Series B)\n• Lideró migración de monolito a microservicios\n• Evaluó +50 stacks técnicos para MVPs",
@@ -18628,6 +18931,37 @@
                       "fontFamily": "Open Sans",
                       "fontSize": 11,
                       "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wLjI9",
+                      "name": "commStyleSection",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "DF8Z8",
+                          "fill": "#6E8EAD",
+                          "content": "ESTILO DE COMUNICACIÓN",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "mjJk4",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Analítica y basada en datos",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     },
                     {
                       "type": "frame",
@@ -20038,7 +20372,7 @@
               "name": "drawerPanel",
               "width": 400,
               "height": "fill_container",
-              "fill": "#0F1011",
+              "fill": "#0A1128",
               "stroke": {
                 "align": "inside",
                 "thickness": {
@@ -20180,7 +20514,7 @@
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border"
+                        "fill": "#f8f8f8ff"
                       },
                       "padding": [
                         6,
@@ -21797,7 +22131,7 @@
               "name": "drawerPanel",
               "width": 400,
               "height": "fill_container",
-              "fill": "#0F1011",
+              "fill": "#0A1128",
               "stroke": {
                 "align": "inside",
                 "thickness": {
@@ -57576,7 +57910,7 @@
       "y": -1401,
       "name": "Projects__SeedSession__ConsejoPrincipalPropuesta",
       "width": 1440,
-      "height": 900,
+      "height": 1042,
       "fill": "#0A1128",
       "layout": "vertical",
       "children": [
@@ -57759,7 +58093,7 @@
           "id": "AqRDc",
           "name": "seedBody",
           "width": "fill_container",
-          "height": "fill_container",
+          "height": 981,
           "children": [
             {
               "type": "frame",
@@ -58509,6 +58843,129 @@
                           "gap": 12,
                           "children": [
                             {
+                              "type": "frame",
+                              "id": "wLhnq",
+                              "name": "hatLegCP",
+                              "width": "fill_container",
+                              "fill": "#0D1535",
+                              "cornerRadius": 6,
+                              "gap": 6,
+                              "padding": [
+                                4,
+                                8
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "yQfVy",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "8hoPy",
+                                  "fill": "#8B9DB7",
+                                  "content": "datos",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "p7XV8",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#152050",
+                                  "cornerRadius": 3,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#4E4E56"
+                                  }
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "s5ipz",
+                                  "fill": "#8B9DB7",
+                                  "content": "cautela",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "PNIma",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#E57373",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "thypa",
+                                  "fill": "#8B9DB7",
+                                  "content": "emociones",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Zd1SN",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#FFEB3B",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "vpR9d",
+                                  "fill": "#8B9DB7",
+                                  "content": "optimismo",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "R0GNV",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#4CAF50",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "wJO9E",
+                                  "fill": "#8B9DB7",
+                                  "content": "creatividad",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "G7X6H",
+                                  "width": 8,
+                                  "height": 8,
+                                  "fill": "#5B9BD5",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "YVVCH",
+                                  "fill": "#8B9DB7",
+                                  "content": "proceso",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
                               "type": "text",
                               "id": "VcxzM",
                               "name": "asLbl",
@@ -58581,39 +59038,173 @@
                                           "fontWeight": "700"
                                         },
                                         {
-                                          "type": "frame",
-                                          "id": "CJRQA",
-                                          "name": "br1",
+                                          "type": "text",
+                                          "id": "le6US",
+                                          "name": "cs1",
+                                          "opacity": 0.5,
+                                          "fill": "#F8F8F8",
+                                          "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "justifyContent": "end",
+                                          "content": "Analítica y basada en datos",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "GJ74X",
+                                          "name": "br1_ext",
+                                          "width": "fill_container",
+                                          "layout": "vertical",
+                                          "gap": 6,
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "f3G63",
-                                              "name": "vp_maya",
-                                              "fill": "#00000000",
-                                              "cornerRadius": 6,
-                                              "stroke": {
-                                                "align": "inside",
-                                                "thickness": 1,
-                                                "fill": "#3A3B40"
-                                              },
-                                              "padding": [
-                                                5,
-                                                10
-                                              ],
-                                              "justifyContent": "center",
+                                              "id": "edFsF",
+                                              "name": "hats_c1",
+                                              "gap": 3,
                                               "alignItems": "center",
                                               "children": [
                                                 {
-                                                  "type": "text",
-                                                  "id": "Yl0I3",
-                                                  "name": "bt1",
-                                                  "fill": "#8B9DB7",
-                                                  "content": "Ver perfil",
-                                                  "fontFamily": "Open Sans",
-                                                  "fontSize": 12,
-                                                  "fontWeight": "normal"
+                                                  "type": "frame",
+                                                  "id": "WDIN4",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#FFFFFF",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "CK82j",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#E57373"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "5DOoL",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#152050",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#4E4E56"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "U6Kfw",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFEB3B"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "W2MIE",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#4CAF50"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "kM54j",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#5B9BD5"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "cviP0",
+                                              "name": "btnRow_c1",
+                                              "width": "fill_container",
+                                              "gap": 8,
+                                              "justifyContent": "end",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "jY0ti",
+                                                  "name": "cam_c1",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "bKME6",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Cambiar",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "XXvXY",
+                                                  "name": "vp_c1",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "kQDSc",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Ver perfil",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -58657,39 +59248,168 @@
                                           "fontWeight": "700"
                                         },
                                         {
-                                          "type": "frame",
-                                          "id": "1aSZP",
-                                          "name": "br2",
+                                          "type": "text",
+                                          "id": "pSxQW",
+                                          "name": "cs2",
+                                          "opacity": 0.5,
+                                          "fill": "#F8F8F8",
+                                          "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "justifyContent": "end",
+                                          "content": "Empático y colaborativo",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "pIl1v",
+                                          "name": "br2_ext",
+                                          "width": "fill_container",
+                                          "layout": "vertical",
+                                          "gap": 6,
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "hk0dF",
-                                              "name": "vp_alex",
-                                              "fill": "#00000000",
-                                              "cornerRadius": 6,
-                                              "stroke": {
-                                                "align": "inside",
-                                                "thickness": 1,
-                                                "fill": "#3A3B40"
-                                              },
-                                              "padding": [
-                                                5,
-                                                10
-                                              ],
-                                              "justifyContent": "center",
+                                              "id": "itmXW",
+                                              "name": "hats_c2",
+                                              "gap": 3,
                                               "alignItems": "center",
                                               "children": [
                                                 {
-                                                  "type": "text",
-                                                  "id": "plwLL",
-                                                  "name": "bt2",
-                                                  "fill": "#8B9DB7",
-                                                  "content": "Ver perfil",
-                                                  "fontFamily": "Open Sans",
-                                                  "fontSize": 12,
-                                                  "fontWeight": "normal"
+                                                  "type": "frame",
+                                                  "id": "3Emxa",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFFFFF"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "ltB7a",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#E57373"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "P1QXi",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#3A4E7A"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "lpsf3",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFEB3B"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "4auGW",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#4CAF50",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "6Sp8Y",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#5B9BD5",
+                                                  "cornerRadius": 3
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "rHCBG",
+                                              "name": "btnRow_c2",
+                                              "width": "fill_container",
+                                              "gap": 8,
+                                              "justifyContent": "end",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "In6Lg",
+                                                  "name": "cam_c2",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "26utg",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Cambiar",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "Deb6H",
+                                                  "name": "vp_c2",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "78fFh",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Ver perfil",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -58733,39 +59453,168 @@
                                           "fontWeight": "700"
                                         },
                                         {
-                                          "type": "frame",
-                                          "id": "H24cW",
-                                          "name": "br3",
+                                          "type": "text",
+                                          "id": "pHrzb",
+                                          "name": "cs3",
+                                          "opacity": 0.5,
+                                          "fill": "#F8F8F8",
+                                          "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "justifyContent": "end",
+                                          "content": "Directa y orientada a la acción",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "cZJbx",
+                                          "name": "br3_ext",
+                                          "width": "fill_container",
+                                          "layout": "vertical",
+                                          "gap": 6,
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "PC0NR",
-                                              "name": "vp_priya",
-                                              "fill": "#00000000",
-                                              "cornerRadius": 6,
-                                              "stroke": {
-                                                "align": "inside",
-                                                "thickness": 1,
-                                                "fill": "#3A3B40"
-                                              },
-                                              "padding": [
-                                                5,
-                                                10
-                                              ],
-                                              "justifyContent": "center",
+                                              "id": "20QOF",
+                                              "name": "hats_c3",
+                                              "gap": 3,
                                               "alignItems": "center",
                                               "children": [
                                                 {
-                                                  "type": "text",
-                                                  "id": "fNKOA",
-                                                  "name": "bt3",
-                                                  "fill": "#8B9DB7",
-                                                  "content": "Ver perfil",
-                                                  "fontFamily": "Open Sans",
-                                                  "fontSize": 12,
-                                                  "fontWeight": "normal"
+                                                  "type": "frame",
+                                                  "id": "a6G6h",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFFFFF"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "vAsTm",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#E57373"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "GHdlx",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#3A4E7A"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "vnusJ",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#FFEB3B",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "L2vIo",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#4CAF50",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "8E25T",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#5B9BD5"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "HbRKw",
+                                              "name": "btnRow_c3",
+                                              "width": "fill_container",
+                                              "gap": 8,
+                                              "justifyContent": "end",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "NLC4y",
+                                                  "name": "cam_c3",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "ZjElJ",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Cambiar",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "Dz6cV",
+                                                  "name": "vp_c3",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "Efm7q",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Ver perfil",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -58839,39 +59688,168 @@
                                           "fontWeight": "700"
                                         },
                                         {
-                                          "type": "frame",
-                                          "id": "VghZy",
-                                          "name": "br4",
+                                          "type": "text",
+                                          "id": "gzTwa",
+                                          "name": "cs4",
+                                          "opacity": 0.5,
+                                          "fill": "#F8F8F8",
+                                          "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "justifyContent": "end",
+                                          "content": "Visionario y explorador",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "KvBfp",
+                                          "name": "br4_ext",
+                                          "width": "fill_container",
+                                          "layout": "vertical",
+                                          "gap": 6,
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "ADfzJ",
-                                              "name": "vp_marcus",
-                                              "fill": "#00000000",
-                                              "cornerRadius": 6,
-                                              "stroke": {
-                                                "align": "inside",
-                                                "thickness": 1,
-                                                "fill": "#3A3B40"
-                                              },
-                                              "padding": [
-                                                5,
-                                                10
-                                              ],
-                                              "justifyContent": "center",
+                                              "id": "pLU7R",
+                                              "name": "hats_c4",
+                                              "gap": 3,
                                               "alignItems": "center",
                                               "children": [
                                                 {
-                                                  "type": "text",
-                                                  "id": "3JlPP",
-                                                  "name": "bt4",
-                                                  "fill": "#8B9DB7",
-                                                  "content": "Ver perfil",
-                                                  "fontFamily": "Open Sans",
-                                                  "fontSize": 12,
-                                                  "fontWeight": "normal"
+                                                  "type": "frame",
+                                                  "id": "cDpKT",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFFFFF"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "mV9hG",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#E57373",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "9ZPQ3",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#152050",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#4E4E56"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "w173c",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#FFEB3B",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "4prLU",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#4CAF50"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "lJH79",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#5B9BD5"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "zIyJP",
+                                              "name": "btnRow_c4",
+                                              "width": "fill_container",
+                                              "gap": 8,
+                                              "justifyContent": "end",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "ubkyd",
+                                                  "name": "cam_c4",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "s6Baj",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Cambiar",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "FE6ud",
+                                                  "name": "vp_c4",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "wkI1c",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Ver perfil",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -58915,39 +59893,168 @@
                                           "fontWeight": "700"
                                         },
                                         {
-                                          "type": "frame",
-                                          "id": "YYWEp",
-                                          "name": "br5",
+                                          "type": "text",
+                                          "id": "JBB6F",
+                                          "name": "cs5",
+                                          "opacity": 0.5,
+                                          "fill": "#F8F8F8",
+                                          "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "justifyContent": "end",
+                                          "content": "Analítica y basada en datos",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "Vwzlo",
+                                          "name": "br5_ext",
+                                          "width": "fill_container",
+                                          "layout": "vertical",
+                                          "gap": 6,
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "tKmpg",
-                                              "name": "vp_lena",
-                                              "fill": "#00000000",
-                                              "cornerRadius": 6,
-                                              "stroke": {
-                                                "align": "inside",
-                                                "thickness": 1,
-                                                "fill": "#3A3B40"
-                                              },
-                                              "padding": [
-                                                5,
-                                                10
-                                              ],
-                                              "justifyContent": "center",
+                                              "id": "yt93B",
+                                              "name": "hats_c5",
+                                              "gap": 3,
                                               "alignItems": "center",
                                               "children": [
                                                 {
-                                                  "type": "text",
-                                                  "id": "hAldE",
-                                                  "name": "bt5",
-                                                  "fill": "#8B9DB7",
-                                                  "content": "Ver perfil",
-                                                  "fontFamily": "Open Sans",
-                                                  "fontSize": 12,
-                                                  "fontWeight": "normal"
+                                                  "type": "frame",
+                                                  "id": "M4pxl",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#FFFFFF",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "2dv0q",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#E57373"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "iv8OV",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#3A4E7A"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "pC0t5",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFEB3B"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "OF1OQ",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#4CAF50"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "EbjLW",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#5B9BD5",
+                                                  "cornerRadius": 3
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "WEbew",
+                                              "name": "btnRow_c5",
+                                              "width": "fill_container",
+                                              "gap": 8,
+                                              "justifyContent": "end",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "aH5jy",
+                                                  "name": "cam_c5",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "FDyFY",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Cambiar",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "ZQZvK",
+                                                  "name": "vp_c5",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "PPAEE",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Ver perfil",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -59021,39 +60128,168 @@
                                           "fontWeight": "700"
                                         },
                                         {
-                                          "type": "frame",
-                                          "id": "E2vPG",
-                                          "name": "br6",
+                                          "type": "text",
+                                          "id": "xWwAx",
+                                          "name": "cs6",
+                                          "opacity": 0.5,
+                                          "fill": "#F8F8F8",
+                                          "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "justifyContent": "end",
+                                          "content": "Directo y orientado a la acción",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "gnwMf",
+                                          "name": "br6_ext",
+                                          "width": "fill_container",
+                                          "layout": "vertical",
+                                          "gap": 6,
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "3XxDm",
-                                              "name": "vp_owen",
-                                              "fill": "#00000000",
-                                              "cornerRadius": 6,
-                                              "stroke": {
-                                                "align": "inside",
-                                                "thickness": 1,
-                                                "fill": "#3A3B40"
-                                              },
-                                              "padding": [
-                                                5,
-                                                10
-                                              ],
-                                              "justifyContent": "center",
+                                              "id": "C2DSR",
+                                              "name": "hats_c6",
+                                              "gap": 3,
                                               "alignItems": "center",
                                               "children": [
                                                 {
-                                                  "type": "text",
-                                                  "id": "zqtvO",
-                                                  "name": "bt6",
-                                                  "fill": "#8B9DB7",
-                                                  "content": "Ver perfil",
-                                                  "fontFamily": "Open Sans",
-                                                  "fontSize": 12,
-                                                  "fontWeight": "normal"
+                                                  "type": "frame",
+                                                  "id": "6dLMt",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFFFFF"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "lVfhj",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#E57373"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "u3FYI",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#3A4E7A"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "pta4A",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFEB3B"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "CC0hy",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#4CAF50",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "jNxY0",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#5B9BD5",
+                                                  "cornerRadius": 3
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "kVNF4",
+                                              "name": "btnRow_c6",
+                                              "width": "fill_container",
+                                              "gap": 8,
+                                              "justifyContent": "end",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "wL6xu",
+                                                  "name": "cam_c6",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "W2F95",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Cambiar",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "XRiBN",
+                                                  "name": "vp_c6",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "k4Ick",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Ver perfil",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -59097,39 +60333,173 @@
                                           "fontWeight": "700"
                                         },
                                         {
-                                          "type": "frame",
-                                          "id": "6cxnz",
-                                          "name": "br7",
+                                          "type": "text",
+                                          "id": "IY9EN",
+                                          "name": "cs7",
+                                          "opacity": 0.5,
+                                          "fill": "#F8F8F8",
+                                          "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "justifyContent": "end",
+                                          "content": "Analítica y basada en datos",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "2PCFO",
+                                          "name": "br7_ext",
+                                          "width": "fill_container",
+                                          "layout": "vertical",
+                                          "gap": 6,
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "DgHJi",
-                                              "name": "vp_nadia",
-                                              "fill": "#00000000",
-                                              "cornerRadius": 6,
-                                              "stroke": {
-                                                "align": "inside",
-                                                "thickness": 1,
-                                                "fill": "#3A3B40"
-                                              },
-                                              "padding": [
-                                                5,
-                                                10
-                                              ],
-                                              "justifyContent": "center",
+                                              "id": "e6RcM",
+                                              "name": "hats_c7",
+                                              "gap": 3,
                                               "alignItems": "center",
                                               "children": [
                                                 {
-                                                  "type": "text",
-                                                  "id": "4ALsR",
-                                                  "name": "bt7",
-                                                  "fill": "#8B9DB7",
-                                                  "content": "Ver perfil",
-                                                  "fontFamily": "Open Sans",
-                                                  "fontSize": 12,
-                                                  "fontWeight": "normal"
+                                                  "type": "frame",
+                                                  "id": "gaRg4",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#FFFFFF"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "TF9DC",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#E57373"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "vc3tH",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#152050",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#4E4E56"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "zXawd",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#FFEB3B",
+                                                  "cornerRadius": 3
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "hpvhb",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#4CAF50"
+                                                  }
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "WsVUo",
+                                                  "width": 10,
+                                                  "height": 10,
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 3,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1.5,
+                                                    "fill": "#5B9BD5"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "hv8VC",
+                                              "name": "btnRow_c7",
+                                              "width": "fill_container",
+                                              "gap": 8,
+                                              "justifyContent": "end",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "AAYv4",
+                                                  "name": "cam_c7",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "nHqWd",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Cambiar",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "KuEL9",
+                                                  "name": "vp_c7",
+                                                  "fill": "#00000000",
+                                                  "cornerRadius": 6,
+                                                  "stroke": {
+                                                    "align": "inside",
+                                                    "thickness": 1,
+                                                    "fill": "#3A3B40"
+                                                  },
+                                                  "padding": [
+                                                    5,
+                                                    10
+                                                  ],
+                                                  "justifyContent": "center",
+                                                  "alignItems": "center",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "id": "TbOb9",
+                                                      "fill": "#8B9DB7",
+                                                      "content": "Ver perfil",
+                                                      "fontFamily": "Open Sans",
+                                                      "fontSize": 12,
+                                                      "fontWeight": "normal"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }

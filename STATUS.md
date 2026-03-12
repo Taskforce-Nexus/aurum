@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-11
-Etapa actual: ITERATE — ConsejoPrincipalPropuesta + MyBoard + AdvisorSelector en progreso
+Etapa actual: ITERATE — Modales consistentes. Siguiente: CRUD en modales de asesores/ICPs
 
 ---
 
@@ -36,10 +36,11 @@ Etapa actual: ITERATE — ConsejoPrincipalPropuesta + MyBoard + AdvisorSelector 
 - AdvisoryBoard__MyBoard — leyenda inline con labels, comm style por asesor ✓
 - SeedSession__AdvisorSelector__Drawer — sección ESTILO DE COMUNICACIÓN en detail panel ✓
 - SeedSession__CofounderSelector__Drawer — Tomás Herrera estilo actualizado ✓
+- Todos los modales — estilos consistentes (variables → hex explícitos) ✓
 
 ## Siguiente paso
 
-Freeze ConsejoPrincipalPropuesta → continuar EspecialistasPropuesta, ICPsPropuesta, ConsejoListo → avanzar a Incubator
+Agregar CRUD (editar/eliminar) en modales de asesores, cofounders, invitados e ICPs → Freeze ConsejoPrincipalPropuesta → avanzar a Incubator
 
 ---
 
