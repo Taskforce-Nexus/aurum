@@ -55,6 +55,7 @@ Etapa actual: ITERATE — 3 frames freezados. Siguiente: EspecialistasPropuesta,
 - SeedSession__BuyerPersonaSelector__Drawer — FREEZE ✓
 
 - ConsejoListo — 6 fixes: ICPs 3 personas, asesores LIDERA/APOYA/OBSERVA, cofounders con nombres, especialistas con nombres, ENTREGABLES, nota Revisar consejo ✓
+- ConsejoListo — FREEZE ✓
 
 ## Siguiente paso
 

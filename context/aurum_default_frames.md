@@ -22,7 +22,7 @@ Projects__SeedSession__ConsejoPrincipalPropuesta — Paso 3 de 7 — FREEZE
 Projects__SeedSession__CofoundersPropuesta — Paso 4 de 7 — FREEZE
 Projects__SeedSession__EspecialistasPropuesta — Paso 5 de 7 — FREEZE
 Projects__SeedSession__ICPsPropuesta — Paso 6 de 7 — FREEZE
-Projects__SeedSession__ConsejoListo — Paso 7 de 7
+Projects__SeedSession__ConsejoListo — Paso 7 de 7 — FREEZE
 Projects__Incubator__Default
 AdvisoryBoard__MyBoard — FREEZE
 
