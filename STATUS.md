@@ -161,6 +161,17 @@ Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS +
 - Design tokens aplicados: bg `#0A1128`, card `#0D1535`, border `#1E2A4A`, gold `#B8860B` ✓
 - CLAUDE.md — reglas permanentes: fidelidad visual + logo ✓
 
+### Fix Auth__Login__Default — delta vs frame (2026-03-12) ✓
+
+- AuthBrandPanel: íconos SVG stroke gold (no emojis) — Semilla, Consejo IA, Documentos, Exportar
+- AuthBrandPanel: labels corregidos — Escalamiento→Documentos, Ejecutar→Exportar, Consejo AI→Consejo IA
+- AuthBrandPanel: subtítulo default actualizado al copy del frame
+- AuthBrandPanel: testimonial quote + autor (Carlos M., Fundador — SaaS B2B)
+- Login: subtítulo → "Ingresa tus credenciales para continuar."
+- Login: label "Selecciona el tipo de acceso" sobre los tabs
+- Login: tabs pill shape (rounded-full, py-1.5, text-xs, borde sutil)
+- Login: password input con ícono ojo toggle (show/hide)
+
 ## Siguiente paso
 
 Story 1.5 — ProjectView: vista individual del proyecto
