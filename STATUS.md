@@ -88,6 +88,9 @@ Etapa actual: ITERATE — Marketing__Landing__Default rebuild completo (10 secci
 - ConfirmAction__Modal — título/desc/botón contextuales (eliminar proyecto), overlay navy ✓
 - 3 modales — padding:24 añadido a modalCard (RCoeo, X4DQq, gzOh8) ✓
 - 3 modales — X close removido de todos: cierre unificado vía Cancelar ✓
+- CreateProject__Modal — FREEZE ✓ (aprobado por Juan)
+- InviteCollaborator__Modal — FREEZE ✓ (aprobado por Juan)
+- ConfirmAction__Modal — FREEZE ✓ (aprobado por Juan)
 
 ## Siguiente paso
 

@@ -80,10 +80,11 @@ Marketing__Landing__Default — FREEZE
 
 ---
 
-## Modales — pendientes de auditoría
+## Modales — FREEZE
 
-Projects__CreateProject__Modal
-Shared__ConfirmAction__Modal
+Projects__CreateProject__Modal — FREEZE
+Projects__InviteCollaborator__Modal — FREEZE
+Shared__ConfirmAction__Modal — FREEZE
 
 ---
 
@@ -96,5 +97,4 @@ SeedSession__CambiarCofounder__Modal — eliminado
 
 ## Design Status
 
-Current stage: ITERATE
-Next stage: FREEZE
+Current stage: FREEZE
