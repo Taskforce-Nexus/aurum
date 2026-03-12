@@ -811,3 +811,20 @@ No más cambios de scope hasta terminar Reason.
 - Variables internas de código (nombres de funciones, tipos TS): sin cambios
 
 **Fecha:** 2026-03-11
+
+## 22. SeedSession Step Order Decision
+
+La secuencia canónica de pasos dentro de la Sesión Semilla es:
+
+1. Default (conversación con Nexo)
+2. EntregablesPropuesta — documentos que se generarán
+3. ConsejoPrincipalPropuesta — rol de Nexo y asesores
+4. CofoundersPropuesta — cofounders IA seleccionados
+5. EspecialistasPropuesta — especialistas convocados
+6. ICPsPropuesta — buyer personas definidas
+7. ConsejoListo — confirmación y arranque
+
+El nav de cada frame muestra "Paso X de 7" acorde a esta secuencia.
+Esta decisión no debe reabrirse sin instrucción explícita de Juan o Kira.
+
+---

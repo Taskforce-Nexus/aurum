@@ -16,13 +16,13 @@ Auth__ForgotPasswordSent__Default — FREEZE
 # Core Product
 Projects__Dashboard__Default — FREEZE
 Projects__ProjectView__Default — FREEZE
-Projects__SeedSession__Default — FREEZE
-Projects__SeedSession__ConsejoPrincipalPropuesta
-Projects__SeedSession__CofoundersPropuesta — FREEZE
-Projects__SeedSession__EspecialistasPropuesta
-Projects__SeedSession__ICPsPropuesta
-Projects__SeedSession__EntregablesPropuesta
-Projects__SeedSession__ConsejoListo
+Projects__SeedSession__Default — Paso 1 de 7 — FREEZE
+Projects__SeedSession__EntregablesPropuesta — Paso 2 de 7
+Projects__SeedSession__ConsejoPrincipalPropuesta — Paso 3 de 7
+Projects__SeedSession__CofoundersPropuesta — Paso 4 de 7 — FREEZE
+Projects__SeedSession__EspecialistasPropuesta — Paso 5 de 7
+Projects__SeedSession__ICPsPropuesta — Paso 6 de 7
+Projects__SeedSession__ConsejoListo — Paso 7 de 7
 Projects__Incubator__Default
 Projects__AdvisoryBoard__MyBoard
 

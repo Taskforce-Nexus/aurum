@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-11
-Etapa actual: FREEZE — CofoundersPropuesta + CofounderSelector__Drawer aprobados
+Etapa actual: ITERATE — EntregablesPropuesta (detail expandible, reorden Paso X de 7)
 
 ---
 
@@ -26,10 +26,12 @@ Etapa actual: FREEZE — CofoundersPropuesta + CofounderSelector__Drawer aprobad
 
 - CofoundersPropuesta — FREEZE ✓
 - SeedSession__CofounderSelector__Drawer — FREEZE ✓
+- EntregablesPropuesta — detail expandible + botón renombrado ✓
+- Paso X de 7 actualizado en los 7 frames SeedSession ✓
 
 ## Siguiente paso
 
-Freeze frames restantes SeedSession → avanzar a Incubator
+Freeze EntregablesPropuesta + frames restantes SeedSession → avanzar a Incubator
 
 ---
 
@@ -47,6 +49,7 @@ Freeze frames restantes SeedSession → avanzar a Incubator
 
 | Hash | Descripción |
 | --- | --- |
+| (pendiente) | fix: EntregablesPropuesta — detail expandible, botón renombrado, Paso X de 7 |
 | ea96e7c | refactor: renombrar CatalogDrawerModal → CofounderSelector__Drawer + eliminar modal redundante |
 | fc2a1da | fix: CatalogDrawerModal — segunda ronda paleta (slots, hats, sliders, tooltip) |
 | 33350a3 | fix: CatalogDrawerModal — tonos negros y campos fantasma |

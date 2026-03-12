@@ -49532,7 +49532,7 @@
                   "id": "6sqEZ",
                   "name": "phaseText",
                   "fill": "#8B9DB7",
-                  "content": "Etapa 1 de 5",
+                  "content": "Paso 1 de 7",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "500"
@@ -54121,7 +54121,7 @@
                   "id": "of1Nu",
                   "name": "phaseText",
                   "fill": "#8B9DB7",
-                  "content": "Etapa 1 de 5",
+                  "content": "Paso 5 de 7",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "500"
@@ -55680,7 +55680,7 @@
                   "id": "HnuyZ",
                   "name": "phaseText",
                   "fill": "#8B9DB7",
-                  "content": "Etapa 1 de 5",
+                  "content": "Paso 2 de 7",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "500"
@@ -56527,7 +56527,8 @@
                               "id": "WFAUU",
                               "name": "e1r",
                               "width": "fill_container",
-                              "gap": 10,
+                              "layout": "vertical",
+                              "gap": 8,
                               "padding": [
                                 10,
                                 0
@@ -56535,89 +56536,266 @@
                               "children": [
                                 {
                                   "type": "frame",
-                                  "id": "USn0E",
-                                  "name": "e1c",
+                                  "id": "LT6qY",
+                                  "name": "e1topRow",
                                   "width": "fill_container",
+                                  "gap": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "USn0E",
+                                      "name": "e1c",
+                                      "width": "fill_container",
+                                      "layout": "vertical",
+                                      "gap": 3,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "RoDS6",
+                                          "fill": "#F8F8F8",
+                                          "content": "Value Proposition Canvas",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 13,
+                                          "fontWeight": "600"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "U9U09",
+                                          "fill": "#8B9DB7",
+                                          "textGrowth": "fixed-width",
+                                          "width": "fill_container",
+                                          "content": "Responde: ¿A quién le resuelvo qué problema y por qué me van a elegir?",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "15qw4",
+                                      "name": "e1b1",
+                                      "fill": "#00000000",
+                                      "cornerRadius": 5,
+                                      "stroke": {
+                                        "align": "inside",
+                                        "thickness": 1,
+                                        "fill": "#3A3B40"
+                                      },
+                                      "padding": [
+                                        4,
+                                        8
+                                      ],
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "NMzLg",
+                                          "fill": "#8B9DB7",
+                                          "content": "Ver detalle",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "5vBrl",
+                                      "name": "e1b2",
+                                      "fill": "#00000000",
+                                      "cornerRadius": 5,
+                                      "stroke": {
+                                        "align": "inside",
+                                        "thickness": 1,
+                                        "fill": "#3A3B40"
+                                      },
+                                      "padding": [
+                                        4,
+                                        8
+                                      ],
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "ixQZ8",
+                                          "fill": "#8B9DB7",
+                                          "content": "Pedir ajuste",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "6ZDMr",
+                                  "name": "e1detail",
+                                  "width": "fill_container",
+                                  "fill": "#0D1535",
+                                  "cornerRadius": 6,
                                   "layout": "vertical",
-                                  "gap": 3,
+                                  "gap": 10,
+                                  "padding": [
+                                    12,
+                                    12,
+                                    8,
+                                    12
+                                  ],
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "RoDS6",
-                                      "fill": "#F8F8F8",
-                                      "content": "Value Proposition Canvas",
+                                      "id": "A5Fup",
+                                      "name": "scLbl",
+                                      "fill": "#B8860B",
+                                      "content": "SECCIONES",
                                       "fontFamily": "Open Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "600"
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "FoNby",
+                                      "name": "scLst",
+                                      "width": "fill_container",
+                                      "layout": "vertical",
+                                      "gap": 4,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "1Zeh3",
+                                          "name": "sc1",
+                                          "fill": "#F8F8F8",
+                                          "content": "• Propuesta de valor única",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "T9VoU",
+                                          "name": "sc2",
+                                          "fill": "#F8F8F8",
+                                          "content": "• Segmento de clientes",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "qSAf9",
+                                          "name": "sc3",
+                                          "fill": "#F8F8F8",
+                                          "content": "• Beneficios y dolores del cliente",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "rectangle",
+                                      "id": "txgCT",
+                                      "name": "dv1",
+                                      "fill": "#152050",
+                                      "width": "fill_container",
+                                      "height": 1
                                     },
                                     {
                                       "type": "text",
-                                      "id": "U9U09",
+                                      "id": "zciNk",
+                                      "name": "dcLbl",
+                                      "fill": "#B8860B",
+                                      "content": "DECISIÓN QUE RESUELVE",
+                                      "fontFamily": "Open Sans",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "D63At",
+                                      "name": "dcTxt",
                                       "fill": "#8B9DB7",
                                       "textGrowth": "fixed-width",
                                       "width": "fill_container",
-                                      "content": "Responde: ¿A quién le resuelvo qué problema y por qué me van a elegir?",
+                                      "content": "Valida si tu oferta es real y diferenciada antes de construir.",
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
                                       "fontWeight": "normal"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "15qw4",
-                                  "name": "e1b1",
-                                  "fill": "#00000000",
-                                  "cornerRadius": 5,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": 1,
-                                    "fill": "#3A3B40"
-                                  },
-                                  "padding": [
-                                    4,
-                                    8
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
+                                    },
+                                    {
+                                      "type": "rectangle",
+                                      "id": "lHaQQ",
+                                      "name": "dv2",
+                                      "fill": "#152050",
+                                      "width": "fill_container",
+                                      "height": 1
+                                    },
                                     {
                                       "type": "text",
-                                      "id": "NMzLg",
-                                      "fill": "#8B9DB7",
-                                      "content": "Ver detalle",
+                                      "id": "FprVX",
+                                      "name": "clLbl",
+                                      "fill": "#B8860B",
+                                      "content": "CRITERIO DE CALIDAD",
                                       "fontFamily": "Open Sans",
-                                      "fontSize": 11,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "5vBrl",
-                                  "name": "e1b2",
-                                  "fill": "#00000000",
-                                  "cornerRadius": 5,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": 1,
-                                    "fill": "#3A3B40"
-                                  },
-                                  "padding": [
-                                    4,
-                                    8
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    },
                                     {
                                       "type": "text",
-                                      "id": "ixQZ8",
+                                      "id": "S7Kfw",
+                                      "name": "clTxt",
                                       "fill": "#8B9DB7",
-                                      "content": "Pedir ajuste",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "El cliente objetivo está definido y la propuesta de valor es clara y diferenciada.",
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "wlpa5",
+                                      "name": "clRow",
+                                      "width": "fill_container",
+                                      "justifyContent": "end",
+                                      "children": [
+                                        {
+                                          "type": "frame",
+                                          "id": "CzBEV",
+                                          "name": "colapsarBtn",
+                                          "fill": "#00000000",
+                                          "cornerRadius": 5,
+                                          "stroke": {
+                                            "align": "inside",
+                                            "thickness": 1,
+                                            "fill": "#3A3B40"
+                                          },
+                                          "gap": 4,
+                                          "padding": [
+                                            4,
+                                            8
+                                          ],
+                                          "alignItems": "center",
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "id": "f3TmZ",
+                                              "name": "clTx2",
+                                              "fill": "#8B9DB7",
+                                              "content": "Colapsar",
+                                              "fontFamily": "Open Sans",
+                                              "fontSize": 11,
+                                              "fontWeight": "normal"
+                                            }
+                                          ]
+                                        }
+                                      ]
                                     }
                                   ]
                                 }
@@ -57196,7 +57374,7 @@
                                   "type": "text",
                                   "id": "DTQOq",
                                   "fill": "#8B9DB7",
-                                  "content": "Quiero ajustar algo",
+                                  "content": "Agregar o quitar documentos",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 14,
                                   "fontWeight": "500"
@@ -57419,7 +57597,7 @@
                   "id": "0RsQ3",
                   "name": "phaseText",
                   "fill": "#8B9DB7",
-                  "content": "Etapa 1 de 5",
+                  "content": "Paso 3 de 7",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "500"
@@ -59181,18 +59359,10 @@
                       "type": "text",
                       "id": "PDj4L",
                       "name": "etapaLabel",
-                      "content": "Etapa 1 de 5",
+                      "content": "Paso 6 de 7",
                       "fontFamily": "Inter",
                       "fontSize": 13,
                       "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "8wRtI",
-                      "name": "pasoLabel",
-                      "content": "Paso 2 de 6",
-                      "fontFamily": "Inter",
-                      "fontSize": 11
                     }
                   ]
                 },
@@ -60630,7 +60800,7 @@
                   "id": "bNB0Y",
                   "name": "phaseText",
                   "fill": "#8B9DB7",
-                  "content": "Etapa 1 de 5",
+                  "content": "Paso 7 de 7",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "500"
@@ -61882,7 +62052,7 @@
                   "id": "ipk9j",
                   "name": "phaseText",
                   "fill": "#8B9DB7",
-                  "content": "Etapa 1 de 5",
+                  "content": "Paso 4 de 7",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "500"
