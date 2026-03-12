@@ -46,6 +46,8 @@ Etapa actual: ITERATE — 3 frames freezados. Siguiente: EspecialistasPropuesta,
 - EspecialistasPropuesta — botones Aceptar/Descartar por fila, justificación itálica, "Pedir otro especialista" ✓
 - SeedSession__EspecialistaSelector__Drawer — edit icon removido, confirm eliminación inline rojo oscuro ✓
 - SeedSession__EspecialistaSelector__Drawer — footer 2 filas: Confirmar Invitado (gold full) + Editar/Eliminar (ghost) ✓
+- EspecialistasPropuesta — FREEZE ✓
+- SeedSession__EspecialistaSelector__Drawer — FREEZE ✓
 
 ## Siguiente paso
 
