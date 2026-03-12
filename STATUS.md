@@ -77,6 +77,8 @@ Etapa actual: ITERATE — Marketing__Landing__Default rebuild completo (10 secci
 
 - Projects__ProjectView__Default — card CONSULTORÍA ACTIVA añadida (gold border top, 2 consultas badge, cita itálica, CTA gold); tiles reestructurados en 2 filas (3+2) ✓
 - Projects__Consultoria__Default — nuevo frame: nav + 3 cols (sidebar consejo, chat Nexo+asesores, sidebar docs/contexto/acciones) ✓
+- Projects__ProjectView__Default — fix tile_export: "Marca" → "Comunicación" en pendientes ✓
+- Projects__Consultoria__Default — fix input: íconos 📎 🎙 añadidos antes del botón enviar ✓
 
 ## Siguiente paso
 
