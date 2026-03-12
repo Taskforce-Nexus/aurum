@@ -23242,78 +23242,6 @@
                   "fill": "$border",
                   "width": 1,
                   "height": 20
-                },
-                {
-                  "type": "frame",
-                  "id": "tVryN",
-                  "name": "btnIncub",
-                  "cornerRadius": 6,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "$border"
-                  },
-                  "gap": 8,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "Wh4nR",
-                      "name": "label",
-                      "fill": "#F8F8F8",
-                      "content": "Sesión de Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 12,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "zVgXP",
-                  "name": "btnConsejo",
-                  "cornerRadius": 6,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "$border"
-                  },
-                  "gap": 8,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "L44Og",
-                      "name": "label",
-                      "fill": "#F8F8F8",
-                      "content": "Mi Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 12,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "ellipse",
-                  "id": "rppLR",
-                  "name": "avatar",
-                  "fill": "$bg-tertiary",
-                  "width": 28,
-                  "height": 28,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
                 }
               ]
             }
@@ -31564,78 +31492,6 @@
                   "fill": "$border",
                   "width": 1,
                   "height": 20
-                },
-                {
-                  "type": "frame",
-                  "id": "6bm42",
-                  "name": "btnIncub",
-                  "cornerRadius": 6,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "$border"
-                  },
-                  "gap": 8,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "Xb44S",
-                      "name": "label",
-                      "fill": "#F8F8F8",
-                      "content": "Sesión de Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 12,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "AfMZP",
-                  "name": "btnConsejo",
-                  "cornerRadius": 6,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "$border"
-                  },
-                  "gap": 8,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "anB5K",
-                      "name": "label",
-                      "fill": "#F8F8F8",
-                      "content": "Mi Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 12,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "ellipse",
-                  "id": "FYVwC",
-                  "name": "avatar",
-                  "fill": "$bg-tertiary",
-                  "width": 28,
-                  "height": 28,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
                 }
               ]
             }
@@ -40276,78 +40132,6 @@
                   "fill": "$border",
                   "width": 1,
                   "height": 20
-                },
-                {
-                  "type": "frame",
-                  "id": "JgoIe",
-                  "name": "btnIncub",
-                  "cornerRadius": 6,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "$border"
-                  },
-                  "gap": 8,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "RlpDy",
-                      "name": "label",
-                      "fill": "#F8F8F8",
-                      "content": "Sesión de Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 12,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "7SHM9",
-                  "name": "btnConsejo",
-                  "cornerRadius": 6,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "$border"
-                  },
-                  "gap": 8,
-                  "padding": [
-                    10,
-                    20
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "JvbSx",
-                      "name": "label",
-                      "fill": "#F8F8F8",
-                      "content": "Mi Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 12,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "ellipse",
-                  "id": "k1f7o",
-                  "name": "avatar",
-                  "fill": "$bg-tertiary",
-                  "width": 28,
-                  "height": 28,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
                 }
               ]
             }
@@ -50602,7 +50386,6 @@
       "y": -2974,
       "name": "Export__Center__Default",
       "width": 1440,
-      "height": 900,
       "fill": "#0A1128",
       "layout": "vertical",
       "children": [
@@ -50692,7 +50475,6 @@
           "id": "FFdii",
           "name": "expContent",
           "width": "fill_container",
-          "height": "fill_container",
           "layout": "vertical",
           "gap": 32,
           "padding": [
@@ -50710,6 +50492,16 @@
               "children": [
                 {
                   "type": "text",
+                  "id": "TIgvS",
+                  "name": "breadcrumb",
+                  "fill": "#6E8EAD",
+                  "content": "← FinTrack / Centro de Exportación",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
                   "id": "0I4ox",
                   "name": "title",
                   "fill": "#F8F8F8",
@@ -50723,10 +50515,81 @@
                   "id": "SbGsZ",
                   "name": "subtitle",
                   "fill": "#8B9DB7",
-                  "content": "Exporta, empaqueta y entrega tus documentos AURUM. Desde PDFs individuales hasta paquetes listos para repositorio, pitch o inversionistas.",
+                  "content": "Exporta, empaqueta y entrega tus documentos Reason. Desde PDFs individuales hasta paquetes listos para repositorio, pitch o inversionistas.",
                   "fontFamily": "Open Sans",
                   "fontSize": 15,
                   "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "mSQqI",
+              "name": "docsSectionHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "xAWMe",
+                  "name": "label",
+                  "fill": "#6E8EAD",
+                  "content": "DOCUMENTOS INDIVIDUALES",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "text",
+                  "id": "DcCVG",
+                  "name": "count",
+                  "fill": "#4A5568",
+                  "content": "5 documentos",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SIPCj",
+              "name": "progSection",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "il1as",
+                  "name": "progText",
+                  "fill": "#B8860B",
+                  "content": "3 de 5 documentos listos",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "k6LHN",
+                  "name": "progBarBg",
+                  "width": "fill_container",
+                  "height": 6,
+                  "fill": "#1A2644",
+                  "cornerRadius": 3,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "01qjM",
+                      "name": "progBarFill",
+                      "width": 528,
+                      "height": 6,
+                      "fill": "#B8860B",
+                      "cornerRadius": 3
+                    }
+                  ]
                 }
               ]
             },
@@ -50788,12 +50651,14 @@
                           ]
                         },
                         {
-                          "type": "ellipse",
-                          "id": "N8ddk",
-                          "name": "statusDot",
+                          "type": "text",
+                          "id": "Jupro",
+                          "name": "status1",
                           "fill": "#16A34A",
-                          "width": 8,
-                          "height": 8
+                          "content": "● Listo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12,
+                          "fontWeight": "600"
                         }
                       ]
                     },
@@ -50804,14 +50669,14 @@
                       "fill": "#F8F8F8",
                       "content": "Canvas de Propuesta de Valor",
                       "fontFamily": "Open Sans",
-                      "fontSize": 14,
+                      "fontSize": 16,
                       "fontWeight": "600"
                     },
                     {
                       "type": "text",
                       "id": "vO2H4",
                       "name": "desc",
-                      "fill": "#4A5568",
+                      "fill": "#8B9DB7",
                       "content": "ICP, problemas, soluciones, Modelo Kano",
                       "fontFamily": "Open Sans",
                       "fontSize": 12,
@@ -50819,27 +50684,68 @@
                     },
                     {
                       "type": "frame",
-                      "id": "Uy0T2",
-                      "name": "downloadBtn",
+                      "id": "lZRu4",
+                      "name": "ar1",
                       "width": "fill_container",
-                      "fill": "#B8860B",
-                      "cornerRadius": 6,
-                      "padding": [
-                        7,
-                        14
-                      ],
-                      "justifyContent": "center",
+                      "gap": 8,
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "72MZT",
-                          "name": "label",
-                          "fill": "#0A1128",
-                          "content": "Descargar PDF",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "600"
+                          "type": "frame",
+                          "id": "fmVkq",
+                          "name": "pbtn1",
+                          "width": "fill_container",
+                          "fill": "#0D1535",
+                          "cornerRadius": 6,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#27282B"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "atss4",
+                              "name": "pl1",
+                              "fill": "#F8F8F8",
+                              "content": "Vista previa",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "w1PR9",
+                          "name": "dbtn1",
+                          "width": "fill_container",
+                          "fill": "#B8860B",
+                          "cornerRadius": 6,
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "cUYzZ",
+                              "name": "dl1",
+                              "fill": "#0A1128",
+                              "content": "Descargar PDF",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -50896,12 +50802,14 @@
                           ]
                         },
                         {
-                          "type": "ellipse",
-                          "id": "cwKLC",
-                          "name": "statusDot",
+                          "type": "text",
+                          "id": "5wGkA",
+                          "name": "status2",
                           "fill": "#16A34A",
-                          "width": 8,
-                          "height": 8
+                          "content": "● Listo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12,
+                          "fontWeight": "600"
                         }
                       ]
                     },
@@ -50912,14 +50820,14 @@
                       "fill": "#F8F8F8",
                       "content": "Canvas de Modelo de Negocio",
                       "fontFamily": "Open Sans",
-                      "fontSize": 14,
+                      "fontSize": 16,
                       "fontWeight": "600"
                     },
                     {
                       "type": "text",
                       "id": "xWfaa",
                       "name": "desc",
-                      "fill": "#4A5568",
+                      "fill": "#8B9DB7",
                       "content": "Oferta, canales, ingresos, economía unitaria",
                       "fontFamily": "Open Sans",
                       "fontSize": 12,
@@ -50927,122 +50835,68 @@
                     },
                     {
                       "type": "frame",
-                      "id": "iz7TE",
-                      "name": "downloadBtn",
+                      "id": "JveBN",
+                      "name": "ar2",
                       "width": "fill_container",
-                      "fill": "#B8860B",
-                      "cornerRadius": 6,
-                      "padding": [
-                        7,
-                        14
-                      ],
-                      "justifyContent": "center",
+                      "gap": 8,
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "text",
-                          "id": "dcgwr",
-                          "name": "label",
-                          "fill": "#0A1128",
-                          "content": "Descargar PDF",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "ehpVX",
-                  "name": "docCard3",
-                  "width": "fill_container",
-                  "fill": "#0D1535",
-                  "cornerRadius": 10,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "#27282B"
-                  },
-                  "layout": "vertical",
-                  "gap": 14,
-                  "padding": [
-                    24,
-                    20
-                  ],
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "mboEO",
-                      "name": "badge",
-                      "width": 36,
-                      "height": 36,
-                      "fill": "#C9A84C20",
-                      "cornerRadius": 8,
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
+                          "type": "frame",
+                          "id": "IpWqy",
+                          "name": "pbtn2",
+                          "width": "fill_container",
+                          "fill": "#0D1535",
+                          "cornerRadius": 6,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#27282B"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "9WY9t",
+                              "name": "pl2",
+                              "fill": "#F8F8F8",
+                              "content": "Vista previa",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
                         {
-                          "type": "text",
-                          "id": "YKOeC",
-                          "name": "icon",
+                          "type": "frame",
+                          "id": "BKAN2",
+                          "name": "dbtn2",
+                          "width": "fill_container",
                           "fill": "#B8860B",
-                          "content": "◈",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 18,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "YidJB",
-                      "name": "title",
-                      "fill": "#F8F8F8",
-                      "content": "Libro de Marca",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 14,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "0XKwz",
-                      "name": "desc",
-                      "fill": "#4A5568",
-                      "content": "Misión, visión, naming, identidad",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 12,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "eiH75",
-                      "name": "downloadBtn",
-                      "width": "fill_container",
-                      "fill": "#0D1535",
-                      "cornerRadius": 6,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
-                      "padding": [
-                        7,
-                        14
-                      ],
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "3PWDY",
-                          "name": "label",
-                          "fill": "#4A5568",
-                          "content": "Pendiente",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "500"
+                          "cornerRadius": 6,
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "0XFGr",
+                              "name": "dl2",
+                              "fill": "#0A1128",
+                              "content": "Descargar PDF",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -51095,51 +50949,30 @@
                       "id": "6ND62",
                       "name": "title",
                       "fill": "#F8F8F8",
-                      "content": "Mapa de Recorrido",
+                      "content": "Recorrido del Cliente",
                       "fontFamily": "Open Sans",
-                      "fontSize": 14,
+                      "fontSize": 16,
                       "fontWeight": "600"
                     },
                     {
                       "type": "text",
                       "id": "Sum6m",
                       "name": "desc",
-                      "fill": "#4A5568",
+                      "fill": "#8B9DB7",
                       "content": "Recorrido ideal, fricción y mejores acciones",
                       "fontFamily": "Open Sans",
                       "fontSize": 12,
                       "fontWeight": "normal"
                     },
                     {
-                      "type": "frame",
-                      "id": "4uT0F",
-                      "name": "downloadBtn",
-                      "width": "fill_container",
-                      "fill": "#0D1535",
-                      "cornerRadius": 6,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
-                      "padding": [
-                        7,
-                        14
-                      ],
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "h2dU6",
-                          "name": "label",
-                          "fill": "#4A5568",
-                          "content": "Pendiente",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "500"
-                        }
-                      ]
+                      "type": "text",
+                      "id": "xCWBB",
+                      "name": "pend3",
+                      "fill": "#8B9DB7",
+                      "content": "Pendiente — se genera en la Sesión de Consejo",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -51192,82 +51025,104 @@
                       "fill": "#F8F8F8",
                       "content": "Plan de Negocio",
                       "fontFamily": "Open Sans",
-                      "fontSize": 14,
+                      "fontSize": 16,
                       "fontWeight": "600"
                     },
                     {
                       "type": "text",
                       "id": "alRfO",
                       "name": "desc",
-                      "fill": "#4A5568",
+                      "fill": "#8B9DB7",
                       "content": "8 evaluaciones de preparación. Decisión ir/no-ir",
                       "fontFamily": "Open Sans",
                       "fontSize": 12,
                       "fontWeight": "normal"
                     },
                     {
+                      "type": "text",
+                      "id": "QdNae",
+                      "name": "pend4",
+                      "fill": "#8B9DB7",
+                      "content": "Pendiente — se genera en la Sesión de Consejo",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ehpVX",
+                  "name": "docCard3",
+                  "width": "fill_container",
+                  "fill": "#0D1535",
+                  "cornerRadius": 10,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#27282B"
+                  },
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": [
+                    24,
+                    20
+                  ],
+                  "children": [
+                    {
                       "type": "frame",
-                      "id": "Q0Yaf",
-                      "name": "downloadBtn",
-                      "width": "fill_container",
-                      "fill": "#0D1535",
-                      "cornerRadius": 6,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
-                      "padding": [
-                        7,
-                        14
-                      ],
+                      "id": "mboEO",
+                      "name": "badge",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "#C9A84C20",
+                      "cornerRadius": 8,
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
                         {
                           "type": "text",
-                          "id": "q3Mbl",
-                          "name": "label",
-                          "fill": "#4A5568",
-                          "content": "Pendiente",
+                          "id": "YKOeC",
+                          "name": "icon",
+                          "fill": "#B8860B",
+                          "content": "◈",
                           "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "500"
+                          "fontSize": 18,
+                          "fontWeight": "normal"
                         }
                       ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "YidJB",
+                      "name": "title",
+                      "fill": "#F8F8F8",
+                      "content": "Estrategia de Comunicación",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "0XKwz",
+                      "name": "desc",
+                      "fill": "#8B9DB7",
+                      "content": "Posicionamiento, mensajes clave, canales y tono de marca",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kubV8",
+                      "name": "pend5",
+                      "fill": "#8B9DB7",
+                      "content": "Pendiente — se genera en la Sesión de Consejo",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     }
                   ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "mSQqI",
-              "name": "docsSectionHeader",
-              "width": "fill_container",
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "xAWMe",
-                  "name": "label",
-                  "fill": "#6E8EAD",
-                  "content": "DOCUMENTOS INDIVIDUALES",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "600",
-                  "letterSpacing": 1.5
-                },
-                {
-                  "type": "text",
-                  "id": "DcCVG",
-                  "name": "count",
-                  "fill": "#4A5568",
-                  "content": "5 documentos",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 12,
-                  "fontWeight": "normal"
                 }
               ]
             },
@@ -51327,6 +51182,94 @@
                   "children": [
                     {
                       "type": "frame",
+                      "id": "JCO4x",
+                      "name": "pkg0",
+                      "width": "fill_container",
+                      "fill": "#0D1535",
+                      "cornerRadius": 10,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#C9A84C40"
+                      },
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "WGUYk",
+                          "name": "badge",
+                          "width": 36,
+                          "height": 36,
+                          "fill": "#2A1A1A",
+                          "cornerRadius": 8,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "jDCFl",
+                              "name": "icon",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "file-down",
+                              "iconFontFamily": "lucide",
+                              "fill": "#E5484D"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "tEHjO",
+                          "name": "title",
+                          "fill": "#F8F8F8",
+                          "content": "Paquete PDF completo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "D1EPX",
+                          "name": "desc",
+                          "fill": "#6E8EAD",
+                          "content": "Todos tus documentos en un solo PDF",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "NeSWS",
+                          "name": "btn",
+                          "width": "fill_container",
+                          "fill": "#B8860B",
+                          "cornerRadius": 6,
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "F1zGo",
+                              "name": "label",
+                              "fill": "#0A1128",
+                              "content": "Descargar PDF",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
                       "id": "QGgwh",
                       "name": "pkg1",
                       "width": "fill_container",
@@ -51353,14 +51296,14 @@
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "text",
-                              "id": "PGqhP",
+                              "type": "icon_font",
+                              "id": "sCiaF",
                               "name": "icon",
-                              "fill": "#007BFF",
-                              "content": "{ }",
-                              "fontFamily": "Open Sans",
-                              "fontSize": 13,
-                              "fontWeight": "700"
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "file-code-2",
+                              "iconFontFamily": "lucide",
+                              "fill": "#3B82F6"
                             }
                           ]
                         },
@@ -51420,99 +51363,6 @@
                     },
                     {
                       "type": "frame",
-                      "id": "tJX71",
-                      "name": "pkg2",
-                      "width": "fill_container",
-                      "fill": "#0D1535",
-                      "cornerRadius": 10,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27282B"
-                      },
-                      "layout": "vertical",
-                      "gap": 10,
-                      "padding": 20,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "jrSIW",
-                          "name": "badge",
-                          "width": 36,
-                          "height": 36,
-                          "fill": "#1A2A1A",
-                          "cornerRadius": 8,
-                          "justifyContent": "center",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "pjiVy",
-                              "name": "icon",
-                              "fill": "#16A34A",
-                              "content": "⌥",
-                              "fontFamily": "Open Sans",
-                              "fontSize": 16,
-                              "fontWeight": "700"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "text",
-                          "id": "Kgjzk",
-                          "name": "title",
-                          "fill": "#F8F8F8",
-                          "content": "Repo Handoff",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 14,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "pixsj",
-                          "name": "desc",
-                          "fill": "#4A5568",
-                          "content": "CLAUDE.md + feature map + use cases + specs técnicas para el equipo de ingeniería",
-                          "lineHeight": 1.5,
-                          "fontFamily": "Open Sans",
-                          "fontSize": 12,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "avpCS",
-                          "name": "btn",
-                          "width": "fill_container",
-                          "fill": "#1A2A1A",
-                          "cornerRadius": 6,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1,
-                            "fill": "#16A34A40"
-                          },
-                          "padding": [
-                            7,
-                            14
-                          ],
-                          "justifyContent": "center",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "ESgIc",
-                              "name": "label",
-                              "fill": "#16A34A",
-                              "content": "Exportar para repo",
-                              "fontFamily": "Open Sans",
-                              "fontSize": 13,
-                              "fontWeight": "500"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
                       "id": "Vn9RJ",
                       "name": "pkg3",
                       "width": "fill_container",
@@ -51539,14 +51389,14 @@
                           "alignItems": "center",
                           "children": [
                             {
-                              "type": "text",
-                              "id": "W7nAY",
+                              "type": "icon_font",
+                              "id": "Jbgj2",
                               "name": "icon",
-                              "fill": "#A855F7",
-                              "content": "◻",
-                              "fontFamily": "Open Sans",
-                              "fontSize": 16,
-                              "fontWeight": "700"
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "presentation",
+                              "iconFontFamily": "lucide",
+                              "fill": "#30A46C"
                             }
                           ]
                         },
@@ -51565,7 +51415,7 @@
                           "id": "6Eg33",
                           "name": "desc",
                           "fill": "#4A5568",
-                          "content": "Deck de presentación generado desde tus documentos AURUM. Listo para demo day o clientes",
+                          "content": "Deck de presentación generado desde tus documentos. Listo para demo day o clientes",
                           "lineHeight": 1.5,
                           "fontFamily": "Open Sans",
                           "fontSize": 12,

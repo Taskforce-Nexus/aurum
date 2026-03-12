@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-12
-Etapa actual: ITERATE — Documents__Viewer__Ajustes/Contenido/Identidad iterados (5 fixes). Pendiente: FREEZE o siguiente frame
+Etapa actual: ITERATE — Export__Center__Default rediseñado (8 fixes) + FREEZE ✓. Pendiente: Documents__Branding__Default o siguiente frame
 
 ---
 
@@ -64,9 +64,12 @@ Etapa actual: ITERATE — Documents__Viewer__Ajustes/Contenido/Identidad iterado
 
 - Documents__Viewer__Ajustes/Contenido/Identidad — FREEZE ✓
 
+- Export__Center__Default — rediseño completo: breadcrumb, subtítulo, barra progreso, cards Listo/Pendiente, PDF completo, Estrategia de Comunicación, Repo Handoff eliminado ✓
+- Export__Center__Default — FREEZE ✓
+
 ## Siguiente paso
 
-Diseñar siguiente frame del pipeline (Documents__Branding__Default o Export__Center__Default)
+Diseñar siguiente frame del pipeline (Documents__Branding__Default)
 
 ---
 
