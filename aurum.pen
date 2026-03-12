@@ -56683,7 +56683,7 @@
                                               "id": "1Zeh3",
                                               "name": "sc1",
                                               "fill": "#F8F8F8",
-                                              "content": "• Propuesta de valor única",
+                                              "content": "• Perfil del cliente: trabajos, dolores, ganancias esperadas",
                                               "fontFamily": "Open Sans",
                                               "fontSize": 11,
                                               "fontWeight": "normal"
@@ -56693,7 +56693,7 @@
                                               "id": "T9VoU",
                                               "name": "sc2",
                                               "fill": "#F8F8F8",
-                                              "content": "• Segmento de clientes",
+                                              "content": "• Propuesta de valor: productos/servicios, aliviadores de dolor, creadores de ganancia",
                                               "fontFamily": "Open Sans",
                                               "fontSize": 11,
                                               "fontWeight": "normal"
@@ -56703,7 +56703,39 @@
                                               "id": "qSAf9",
                                               "name": "sc3",
                                               "fill": "#F8F8F8",
-                                              "content": "• Beneficios y dolores del cliente",
+                                              "content": "• Encaje problema-solución",
+                                              "fontFamily": "Open Sans",
+                                              "fontSize": 11,
+                                              "fontWeight": "normal"
+                                            },
+                                            {
+                                              "type": "text",
+                                              "id": "mEwlz",
+                                              "name": "sc4",
+                                              "fill": "#F8F8F8",
+                                              "content": "• ICP definido con criterios de segmentación",
+                                              "fontFamily": "Open Sans",
+                                              "fontSize": 11,
+                                              "fontWeight": "normal"
+                                            },
+                                            {
+                                              "type": "text",
+                                              "id": "omgQ7",
+                                              "name": "sc5",
+                                              "fill": "#F8F8F8",
+                                              "content": "• Hipótesis de valor a validar",
+                                              "fontFamily": "Open Sans",
+                                              "fontSize": 11,
+                                              "fontWeight": "normal"
+                                            },
+                                            {
+                                              "type": "text",
+                                              "id": "LWCX5",
+                                              "name": "sc6",
+                                              "fill": "#F8F8F8",
+                                              "textGrowth": "fixed-width",
+                                              "width": "fill_container",
+                                              "content": "• Customer Personas (2-3): lenguaje exacto, alternativas actuales, mapa emocional y racional",
                                               "fontFamily": "Open Sans",
                                               "fontSize": 11,
                                               "fontWeight": "normal"
@@ -56735,7 +56767,7 @@
                                           "fill": "#8B9DB7",
                                           "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "content": "Valida si tu oferta es real y diferenciada antes de construir.",
+                                          "content": "¿Existe un encaje real entre lo que ofrezco y lo que el cliente necesita?",
                                           "fontFamily": "Open Sans",
                                           "fontSize": 11,
                                           "fontWeight": "normal"
@@ -56765,7 +56797,7 @@
                                           "fill": "#8B9DB7",
                                           "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "content": "El cliente objetivo está definido y la propuesta de valor es clara y diferenciada.",
+                                          "content": "El documento permite identificar con precisión a quién venderle, qué decirle y por qué va a preferirte sobre sus alternativas actuales.",
                                           "fontFamily": "Open Sans",
                                           "fontSize": 11,
                                           "fontWeight": "normal"
@@ -57246,81 +57278,86 @@
                                   ]
                                 }
                               ]
-                            },
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "vO0BC",
+                          "name": "pgrow",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "padding": [
+                            4,
+                            0
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
                             {
                               "type": "frame",
-                              "id": "vO0BC",
-                              "name": "pgrow",
-                              "width": "fill_container",
-                              "gap": 12,
+                              "id": "b5lHO",
+                              "name": "prevbtn",
+                              "fill": "#00000000",
+                              "cornerRadius": 6,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#3A3B40"
+                              },
                               "padding": [
                                 4,
-                                0
+                                10
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "frame",
-                                  "id": "b5lHO",
-                                  "name": "prevbtn",
-                                  "fill": "#00000000",
-                                  "cornerRadius": 6,
-                                  "padding": [
-                                    4,
-                                    10
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "irnWg",
-                                      "fill": "#2A2B2E",
-                                      "content": "← Anterior",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 11,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                },
-                                {
                                   "type": "text",
-                                  "id": "w8PJX",
-                                  "fill": "#4A5568",
-                                  "content": "1 / 6",
+                                  "id": "irnWg",
+                                  "fill": "#4A6080",
+                                  "content": "← Anterior",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 11,
                                   "fontWeight": "normal"
-                                },
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "w8PJX",
+                              "fill": "#8B9DB7",
+                              "content": "1 / 6",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "3iSc4",
+                              "name": "nextbtn",
+                              "fill": "#00000000",
+                              "cornerRadius": 6,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#3A3B40"
+                              },
+                              "padding": [
+                                4,
+                                10
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
                                 {
-                                  "type": "frame",
-                                  "id": "3iSc4",
-                                  "name": "nextbtn",
-                                  "fill": "#00000000",
-                                  "cornerRadius": 6,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": 1,
-                                    "fill": "#3A3B40"
-                                  },
-                                  "padding": [
-                                    4,
-                                    10
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "i2uOy",
-                                      "fill": "#8B9DB7",
-                                      "content": "Siguiente →",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 11,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
+                                  "type": "text",
+                                  "id": "i2uOy",
+                                  "fill": "#8B9DB7",
+                                  "content": "Siguiente →",
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             }
