@@ -22938,7 +22938,7 @@
       "id": "hXo6q",
       "x": 0,
       "y": 3669,
-      "name": "Documents__ValueProposition__Default",
+      "name": "Documents__Viewer__Ajustes",
       "clip": true,
       "width": 1440,
       "height": 5817,
@@ -22976,7 +22976,7 @@
                   "id": "s7V8R",
                   "name": "hdrBack",
                   "fill": "$text-secondary",
-                  "content": "← AURUM",
+                  "content": "← FinTrack",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "normal"
@@ -23312,215 +23312,6 @@
                     "thickness": 1,
                     "fill": "$border"
                   }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "zXZru",
-          "name": "docNav",
-          "width": "fill_container",
-          "height": 36,
-          "fill": "$bg-secondary",
-          "stroke": {
-            "align": "inside",
-            "thickness": 1,
-            "fill": "$border"
-          },
-          "gap": 8,
-          "padding": [
-            0,
-            16
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "1vPZv",
-              "name": "pill_propValor",
-              "width": "fill_container",
-              "height": 24,
-              "fill": "$gold-dim",
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "kPky0",
-                  "name": "dot",
-                  "fill": "$gold",
-                  "width": 8,
-                  "height": 8
-                },
-                {
-                  "type": "text",
-                  "id": "OtzeG",
-                  "name": "label",
-                  "fill": "$gold",
-                  "content": "Propuesta de Valor",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "600"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "M7LTD",
-              "name": "pill_modeloNeg",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "kaBqB",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "KVxEh",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Modelo de Negocio",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "AIlpi",
-              "name": "pill_recorrido",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "rWwPA",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "3VSQ7",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Recorrido del Cliente",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "wpSdQ",
-              "name": "pill_planNeg",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "KdaDB",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "PxbzR",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Plan de Negocio",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "mkgG0",
-              "name": "pill_claudemd",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "tMdHr",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "QvSGK",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "CLAUDE.md",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
                 }
               ]
             }
@@ -24073,6 +23864,120 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "j2JVf",
+                      "name": "suggestChips",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "9W9bh",
+                          "name": "chip1",
+                          "cornerRadius": 12,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#27282B"
+                          },
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "0XQli",
+                              "fill": "#8B9DB7",
+                              "content": "Refinar ICP",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "HXtqG",
+                          "name": "chip2",
+                          "cornerRadius": 12,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#27282B"
+                          },
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "XspV1",
+                              "fill": "#8B9DB7",
+                              "content": "Agregar persona",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "KjtYd",
+                          "name": "chip3",
+                          "cornerRadius": 12,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#27282B"
+                          },
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "5AmaZ",
+                              "fill": "#8B9DB7",
+                              "content": "Revisar encaje",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "79Les",
+                          "name": "chip4",
+                          "cornerRadius": 12,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#27282B"
+                          },
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "X4bIK",
+                              "fill": "#8B9DB7",
+                              "content": "Fortalecer diferenciación",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -24466,7 +24371,7 @@
                           "id": "0H0sg",
                           "name": "s0title",
                           "fill": "$text-primary",
-                          "content": "AURUM",
+                          "content": "FinTrack",
                           "textAlign": "center",
                           "fontFamily": "Outfit",
                           "fontSize": 72,
@@ -28196,7 +28101,7 @@
                                       "id": "T5NzO",
                                       "name": "ps1",
                                       "fill": "$text-secondary",
-                                      "content": "• AURUM Incubadora (sesión IA)",
+                                      "content": "• FinTrack App (sesión IA)",
                                       "lineHeight": 1.5,
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
@@ -28207,7 +28112,7 @@
                                       "id": "bGmbR",
                                       "name": "ps2",
                                       "fill": "$text-secondary",
-                                      "content": "• 5 documentos AURUM Framework",
+                                      "content": "• 5 documentos FinTrack",
                                       "lineHeight": 1.5,
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
@@ -28417,7 +28322,7 @@
                                   "fill": "$text-primary",
                                   "textGrowth": "fixed-width",
                                   "width": "fill_container",
-                                  "content": "Documentación AURUM",
+                                  "content": "Documentación FinTrack",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 13,
                                   "fontWeight": "600"
@@ -28596,7 +28501,7 @@
                                   "id": "KZQZ2",
                                   "name": "r1n",
                                   "fill": "$gold",
-                                  "content": "AURUM",
+                                  "content": "FinTrack",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 11,
                                   "fontWeight": "700"
@@ -28937,7 +28842,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "07 — DE IDEAS A SOLUCIÓN",
+                          "content": "05 — HIPÓTESIS DE VALOR",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -28950,7 +28855,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Filtramos 8 ideas hasta encontrar las 3 correctas",
+                          "content": "Hipótesis a validar",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -29502,7 +29407,7 @@
                                           "fill": "$text-primary",
                                           "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "content": "Documentación automática AURUM",
+                                          "content": "Documentación automática FinTrack",
                                           "fontFamily": "Open Sans",
                                           "fontSize": 12,
                                           "fontWeight": "700"
@@ -29794,7 +29699,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "08 — MODELO KANO",
+                          "content": "06 — ENCAJE PROBLEMA-SOLUCIÓN",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -29807,7 +29712,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Priorización de características",
+                          "content": "Encaje entre perfil y propuesta",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -30636,7 +30541,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "09 — DEFINICIÓN DEL PRODUCTO",
+                          "content": "07 — CUSTOMER PERSONAS",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -30649,7 +30554,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Qué construimos y por qué",
+                          "content": "Customer Personas",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -30693,7 +30598,7 @@
                               "fill": "$text-primary",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "AURUM es una incubadora IA conversacional que estructura ideas de negocio en 5 documentos ejecutivos mediante un consejo asesor virtual con debate dual.",
+                              "content": "FinTrack es una plataforma fintech conversacional que estructura decisiones financieras en documentos ejecutivos mediante un consejo asesor virtual con debate dual.",
                               "lineHeight": 1.5,
                               "fontFamily": "Open Sans",
                               "fontSize": 13,
@@ -31205,7 +31110,7 @@
                                   "id": "fRtgS",
                                   "name": "m2lbl",
                                   "fill": "$text-tertiary",
-                                  "content": "Documentos AURUM",
+                                  "content": "Documentos FinTrack",
                                   "textAlign": "center",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -31302,7 +31207,7 @@
                               "id": "E6OAq",
                               "name": "s5bTxt",
                               "fill": "$gold",
-                              "content": "AURUM",
+                              "content": "FinTrack",
                               "fontFamily": "Outfit",
                               "fontSize": 14,
                               "fontWeight": "700",
@@ -31353,7 +31258,7 @@
       "id": "Ol9Fc",
       "x": 1540,
       "y": 3669,
-      "name": "Documents__ValueProposition__Contenido",
+      "name": "Documents__Viewer__Contenido",
       "clip": true,
       "width": 1440,
       "height": 5817,
@@ -31391,7 +31296,7 @@
                   "id": "QJJew",
                   "name": "hdrBack",
                   "fill": "$text-secondary",
-                  "content": "← AURUM",
+                  "content": "← FinTrack",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "normal"
@@ -31727,215 +31632,6 @@
                     "thickness": 1,
                     "fill": "$border"
                   }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "SaVUs",
-          "name": "docNav",
-          "width": "fill_container",
-          "height": 36,
-          "fill": "$bg-secondary",
-          "stroke": {
-            "align": "inside",
-            "thickness": 1,
-            "fill": "$border"
-          },
-          "gap": 8,
-          "padding": [
-            0,
-            16
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "Gl1o5",
-              "name": "pill_propValor",
-              "width": "fill_container",
-              "height": 24,
-              "fill": "$gold-dim",
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "Q0QN9",
-                  "name": "dot",
-                  "fill": "$gold",
-                  "width": 8,
-                  "height": 8
-                },
-                {
-                  "type": "text",
-                  "id": "5RJuU",
-                  "name": "label",
-                  "fill": "$gold",
-                  "content": "Propuesta de Valor",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "600"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "37NhU",
-              "name": "pill_modeloNeg",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "UBGDk",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "XqzXQ",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Modelo de Negocio",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "vZpfy",
-              "name": "pill_recorrido",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "XMEWq",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "QAmzi",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Recorrido del Cliente",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "LzGww",
-              "name": "pill_planNeg",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "MH4Gt",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "Gs5PU",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Plan de Negocio",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "RgU7b",
-              "name": "pill_claudemd",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "kyzIi",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "czsFV",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "CLAUDE.md",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
                 }
               ]
             }
@@ -33358,7 +33054,7 @@
                           "id": "0ionR",
                           "name": "s0title",
                           "fill": "$text-primary",
-                          "content": "AURUM",
+                          "content": "FinTrack",
                           "textAlign": "center",
                           "fontFamily": "Outfit",
                           "fontSize": 72,
@@ -37115,7 +36811,7 @@
                                       "id": "iDBqa",
                                       "name": "ps1",
                                       "fill": "$text-secondary",
-                                      "content": "• AURUM Incubadora (sesión IA)",
+                                      "content": "• FinTrack App (sesión IA)",
                                       "lineHeight": 1.5,
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
@@ -37126,7 +36822,7 @@
                                       "id": "uu9S7",
                                       "name": "ps2",
                                       "fill": "$text-secondary",
-                                      "content": "• 5 documentos AURUM Framework",
+                                      "content": "• 5 documentos FinTrack",
                                       "lineHeight": 1.5,
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
@@ -37336,7 +37032,7 @@
                                   "fill": "$text-primary",
                                   "textGrowth": "fixed-width",
                                   "width": "fill_container",
-                                  "content": "Documentación AURUM",
+                                  "content": "Documentación FinTrack",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 13,
                                   "fontWeight": "600"
@@ -37515,7 +37211,7 @@
                                   "id": "0o7mx",
                                   "name": "r1n",
                                   "fill": "$gold",
-                                  "content": "AURUM",
+                                  "content": "FinTrack",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 11,
                                   "fontWeight": "700"
@@ -37856,7 +37552,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "07 — DE IDEAS A SOLUCIÓN",
+                          "content": "05 — HIPÓTESIS DE VALOR",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -37869,7 +37565,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Filtramos 8 ideas hasta encontrar las 3 correctas",
+                          "content": "Hipótesis a validar",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -38421,7 +38117,7 @@
                                           "fill": "$text-primary",
                                           "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "content": "Documentación automática AURUM",
+                                          "content": "Documentación automática FinTrack",
                                           "fontFamily": "Open Sans",
                                           "fontSize": 12,
                                           "fontWeight": "700"
@@ -38713,7 +38409,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "08 — MODELO KANO",
+                          "content": "06 — ENCAJE PROBLEMA-SOLUCIÓN",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -38726,7 +38422,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Priorización de características",
+                          "content": "Encaje entre perfil y propuesta",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -39555,7 +39251,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "09 — DEFINICIÓN DEL PRODUCTO",
+                          "content": "07 — CUSTOMER PERSONAS",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -39568,7 +39264,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Qué construimos y por qué",
+                          "content": "Customer Personas",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -39612,7 +39308,7 @@
                               "fill": "$text-primary",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "AURUM es una incubadora IA conversacional que estructura ideas de negocio en 5 documentos ejecutivos mediante un consejo asesor virtual con debate dual.",
+                              "content": "FinTrack es una plataforma fintech conversacional que estructura decisiones financieras en documentos ejecutivos mediante un consejo asesor virtual con debate dual.",
                               "lineHeight": 1.5,
                               "fontFamily": "Open Sans",
                               "fontSize": 13,
@@ -40124,7 +39820,7 @@
                                   "id": "MaCGj",
                                   "name": "m2lbl",
                                   "fill": "$text-tertiary",
-                                  "content": "Documentos AURUM",
+                                  "content": "Documentos FinTrack",
                                   "textAlign": "center",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -40221,7 +39917,7 @@
                               "id": "DWer0",
                               "name": "s5bTxt",
                               "fill": "$gold",
-                              "content": "AURUM",
+                              "content": "FinTrack",
                               "fontFamily": "Outfit",
                               "fontSize": 14,
                               "fontWeight": "700",
@@ -40272,7 +39968,7 @@
       "id": "eB1Cm",
       "x": 3074,
       "y": 3669,
-      "name": "Documents__ValueProposition__Identidad",
+      "name": "Documents__Viewer__Identidad",
       "clip": true,
       "width": 1440,
       "height": 5817,
@@ -40310,7 +40006,7 @@
                   "id": "dXolx",
                   "name": "hdrBack",
                   "fill": "$text-secondary",
-                  "content": "← AURUM",
+                  "content": "← FinTrack",
                   "fontFamily": "Open Sans",
                   "fontSize": 13,
                   "fontWeight": "normal"
@@ -40646,215 +40342,6 @@
                     "thickness": 1,
                     "fill": "$border"
                   }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "HCJyv",
-          "name": "docNav",
-          "width": "fill_container",
-          "height": 36,
-          "fill": "$bg-secondary",
-          "stroke": {
-            "align": "inside",
-            "thickness": 1,
-            "fill": "$border"
-          },
-          "gap": 8,
-          "padding": [
-            0,
-            16
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "1ppd4",
-              "name": "pill_propValor",
-              "width": "fill_container",
-              "height": 24,
-              "fill": "$gold-dim",
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "xcUgt",
-                  "name": "dot",
-                  "fill": "$gold",
-                  "width": 8,
-                  "height": 8
-                },
-                {
-                  "type": "text",
-                  "id": "yvfeX",
-                  "name": "label",
-                  "fill": "$gold",
-                  "content": "Propuesta de Valor",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "600"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "9RjYR",
-              "name": "pill_modeloNeg",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "CowEa",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "F0zsP",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Modelo de Negocio",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "H7bRu",
-              "name": "pill_recorrido",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "XlyGV",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "DUHlN",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Recorrido del Cliente",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "Hh0T3",
-              "name": "pill_planNeg",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "ocXZA",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "FuJ6C",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "Plan de Negocio",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "EhGjX",
-              "name": "pill_claudemd",
-              "width": "fill_container",
-              "height": 24,
-              "cornerRadius": "$radius-sm",
-              "gap": 6,
-              "padding": [
-                4,
-                12
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "e5o2j",
-                  "name": "dot",
-                  "width": 8,
-                  "height": 8,
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border"
-                  }
-                },
-                {
-                  "type": "text",
-                  "id": "gcrv5",
-                  "name": "label",
-                  "fill": "$text-tertiary",
-                  "content": "CLAUDE.md",
-                  "fontFamily": "Open Sans",
-                  "fontSize": 11,
-                  "fontWeight": "normal"
                 }
               ]
             }
@@ -41693,7 +41180,7 @@
                                   "type": "text",
                                   "id": "sxRdt",
                                   "fill": "$gold",
-                                  "content": "Identidad AURUM",
+                                  "content": "Identidad FinTrack",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
                                   "fontWeight": "600"
@@ -43039,7 +42526,7 @@
                           "id": "nzq2B",
                           "name": "s0title",
                           "fill": "$text-primary",
-                          "content": "AURUM",
+                          "content": "FinTrack",
                           "textAlign": "center",
                           "fontFamily": "Outfit",
                           "fontSize": 72,
@@ -46769,7 +46256,7 @@
                                       "id": "Cordc",
                                       "name": "ps1",
                                       "fill": "$text-secondary",
-                                      "content": "• AURUM Incubadora (sesión IA)",
+                                      "content": "• FinTrack App (sesión IA)",
                                       "lineHeight": 1.5,
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
@@ -46780,7 +46267,7 @@
                                       "id": "HBJQi",
                                       "name": "ps2",
                                       "fill": "$text-secondary",
-                                      "content": "• 5 documentos AURUM Framework",
+                                      "content": "• 5 documentos FinTrack",
                                       "lineHeight": 1.5,
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
@@ -46990,7 +46477,7 @@
                                   "fill": "$text-primary",
                                   "textGrowth": "fixed-width",
                                   "width": "fill_container",
-                                  "content": "Documentación AURUM",
+                                  "content": "Documentación FinTrack",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 13,
                                   "fontWeight": "600"
@@ -47169,7 +46656,7 @@
                                   "id": "KfEHp",
                                   "name": "r1n",
                                   "fill": "$gold",
-                                  "content": "AURUM",
+                                  "content": "FinTrack",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 11,
                                   "fontWeight": "700"
@@ -47510,7 +46997,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "07 — DE IDEAS A SOLUCIÓN",
+                          "content": "05 — HIPÓTESIS DE VALOR",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -47523,7 +47010,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Filtramos 8 ideas hasta encontrar las 3 correctas",
+                          "content": "Hipótesis a validar",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -48075,7 +47562,7 @@
                                           "fill": "$text-primary",
                                           "textGrowth": "fixed-width",
                                           "width": "fill_container",
-                                          "content": "Documentación automática AURUM",
+                                          "content": "Documentación automática FinTrack",
                                           "fontFamily": "Open Sans",
                                           "fontSize": 12,
                                           "fontWeight": "700"
@@ -48367,7 +47854,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "08 — MODELO KANO",
+                          "content": "06 — ENCAJE PROBLEMA-SOLUCIÓN",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -48380,7 +47867,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Priorización de características",
+                          "content": "Encaje entre perfil y propuesta",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -49209,7 +48696,7 @@
                           "fill": "$gold",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "09 — DEFINICIÓN DEL PRODUCTO",
+                          "content": "07 — CUSTOMER PERSONAS",
                           "fontFamily": "Open Sans",
                           "fontSize": 10,
                           "fontWeight": "normal",
@@ -49222,7 +48709,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Qué construimos y por qué",
+                          "content": "Customer Personas",
                           "fontFamily": "Outfit",
                           "fontSize": 36,
                           "fontWeight": "700"
@@ -49266,7 +48753,7 @@
                               "fill": "$text-primary",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
-                              "content": "AURUM es una incubadora IA conversacional que estructura ideas de negocio en 5 documentos ejecutivos mediante un consejo asesor virtual con debate dual.",
+                              "content": "FinTrack es una plataforma fintech conversacional que estructura decisiones financieras en documentos ejecutivos mediante un consejo asesor virtual con debate dual.",
                               "lineHeight": 1.5,
                               "fontFamily": "Open Sans",
                               "fontSize": 13,
@@ -49778,7 +49265,7 @@
                                   "id": "IHzrr",
                                   "name": "m2lbl",
                                   "fill": "$text-tertiary",
-                                  "content": "Documentos AURUM",
+                                  "content": "Documentos FinTrack",
                                   "textAlign": "center",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 10,
@@ -49875,7 +49362,7 @@
                               "id": "kc9Wm",
                               "name": "s5bTxt",
                               "fill": "$gold",
-                              "content": "AURUM",
+                              "content": "FinTrack",
                               "fontFamily": "Outfit",
                               "fontSize": 14,
                               "fontWeight": "700",

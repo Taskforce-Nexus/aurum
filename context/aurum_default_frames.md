@@ -29,9 +29,9 @@ AdvisoryBoard__MyBoard — FREEZE
 ---
 
 # Documents
-Documents__ValueProposition__Default
-Documents__ValueProposition__Contenido
-Documents__ValueProposition__Identidad
+Documents__Viewer__Ajustes
+Documents__Viewer__Contenido
+Documents__Viewer__Identidad
 Documents__Branding__Default
 
 ---

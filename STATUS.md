@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-12
-Etapa actual: ITERATE — Projects__Incubator__Default iterado (12 fixes aplicados). Pendiente: FREEZE Incubator
+Etapa actual: ITERATE — Documents__Viewer__Ajustes/Contenido/Identidad iterados (5 fixes). Pendiente: FREEZE o siguiente frame
 
 ---
 
@@ -59,9 +59,11 @@ Etapa actual: ITERATE — Projects__Incubator__Default iterado (12 fixes aplicad
 
 - Projects__Incubator__Default — 12 fixes: header Reason, breadcrumb multi-color, FinTrack, toggle Normal, remove Sí/No, remove Etapa redundante, remove Semilla, Experto UX 0%, Experto en Producto En espera, PREVIEW sobre PROGRESO, remove thumbs replies, Responder yo ✓
 
+- Documents__Viewer__Ajustes/Contenido/Identidad — AURUM→FinTrack (31 refs), secciones spec (Hipótesis, Encaje, Customer Personas), chips sugerencias, rename frames ✓
+
 ## Siguiente paso
 
-Diseñar siguiente frame del pipeline (Documents o Export)
+FREEZE Documents__Viewer o diseñar siguiente frame
 
 ---
 
