@@ -24,30 +24,33 @@ Etapa actual: CofounderSelector Drawer renombrado + badges fixes — pendiente f
 
 ## En progreso
 
-- CofoundersPropuesta + CatalogDrawerModal: 6 correcciones aplicadas (nombres reales, Paso 2 de 6, Sombreros ⓘ, badges upper-right, edit icons hidden, star tooltip)
+- SeedSession iterate: CofounderSelector Drawer paleta corregida, badges Personalizado top-right, título restaurado
 
 ## Siguiente paso
 
-Freeze SeedSession (7 frames + 4 modales) → avanzar a Incubator
+Freeze SeedSession (7 frames + CofounderSelector Drawer) → avanzar a Incubator
 
 ---
 
 ## Entornos
 
 | Entorno | URL |
-|---|---|
-| Local | http://localhost:3000 |
-| Railway | https://aurum-production-e205.up.railway.app |
-| Vercel | https://aurum-navy.vercel.app |
+| --- | --- |
+| Local | `http://localhost:3000` |
+| Railway | `https://aurum-production-e205.up.railway.app` |
+| Vercel | `https://aurum-navy.vercel.app` |
 
 ---
 
 ## Commits recientes
 
 | Hash | Descripción |
-|---|---|
-| (pending) | fix: CofoundersPropuesta + CatalogDrawerModal — 6 correcciones (nombres, paso, sombreros, badges, icons, tooltip) |
-| (pending) | feat: SeedSession fixes + 4 modales (CambiarCofounder, EspecialistaDetalle, ICPDetalle, EntregableDetalle) |
+| --- | --- |
+| ea96e7c | refactor: renombrar CatalogDrawerModal → CofounderSelector__Drawer + eliminar modal redundante |
+| fc2a1da | fix: CatalogDrawerModal — segunda ronda paleta (slots, hats, sliders, tooltip) |
+| 33350a3 | fix: CatalogDrawerModal — tonos negros y campos fantasma |
+| 4008ab4 | feat: SeedSession__CambiarCofounder__Modal rebuild paleta correcta |
+| 1b876fa | fix: CofoundersPropuesta + CatalogDrawerModal — 6 correcciones |
 | 4532428 | fix: ConsejoPrincipalPropuesta — NEXO + ASESORES; feat: CofoundersPropuesta |
 | d8093cb | fix: SeedSession__EntregablesPropuesta — paginación, Responde, Ver detalle, Pedir ajuste |
 | b0d342f | feat: SeedSession — 5 variantes (ConsejoPrincipal, Especialistas, ICPs, Entregables, ConsejoListo) |
