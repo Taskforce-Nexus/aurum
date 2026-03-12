@@ -57,7 +57,7 @@ Freeze ConsejoPrincipalPropuesta → continuar EspecialistasPropuesta, ICPsPropu
 
 | Hash | Descripción |
 | --- | --- |
-| (pending) | feat: sistema personalidad consejeros + fixes visuales — 8 tareas |
+| 2c78c3f | feat: sistema personalidad consejeros + fixes visuales — 8 tareas |
 | a56a531 | fix: AdvisorSelector + ConsejoPrincipalPropuesta + MyBoard — 7 correcciones |
 | f002b67 | fix: ConsejoPrincipalPropuesta + MyBoard + AdvisorSelector — 6 correcciones |
 | 3e65985 | fix: EntregablesPropuesta — secciones reales, paginación restaurada, textos spec |
