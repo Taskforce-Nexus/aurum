@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import { createClient } from '@/lib/supabase/client'
+import { LOGO_DATA_URL } from '@/lib/logo'
 import VoiceModePanel from './VoiceModePanel'
 import type { Project, Conversation, Message } from '@/lib/types'
 
@@ -304,8 +305,9 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
     <div className="min-h-screen bg-[#0A1128] flex flex-col">
       {/* Header */}
       <header className="border-b border-[#1E2A4A] px-6 py-3 flex items-center justify-between shrink-0">
-        <Link href={`/project/${project.id}`} className="text-base font-bold tracking-widest text-[#B8860B] hover:opacity-80 transition-opacity">
-          Reason
+        <Link href={`/project/${project.id}`} className="hover:opacity-80 transition-opacity">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={LOGO_DATA_URL} alt="Reason" className="h-7 w-auto" />
         </Link>
         <div className="flex items-center gap-3 text-sm text-[#8892A4]">
           <span>{project.name} — {currentPhase === 'value_proposition' ? 'Propuesta de Valor' : 'Fase Semilla'}</span>
