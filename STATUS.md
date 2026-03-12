@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-11
-Etapa actual: CofounderSelector Drawer completo — pendiente freeze SeedSession
+Etapa actual: FREEZE — CofoundersPropuesta + CofounderSelector__Drawer aprobados
 
 ---
 
@@ -24,11 +24,12 @@ Etapa actual: CofounderSelector Drawer completo — pendiente freeze SeedSession
 
 ## En progreso
 
-- SeedSession iterate: CofounderSelector Drawer paleta corregida, badges Personalizado top-right, título restaurado
+- CofoundersPropuesta — FREEZE ✓
+- SeedSession__CofounderSelector__Drawer — FREEZE ✓
 
 ## Siguiente paso
 
-Freeze SeedSession (7 frames + CofounderSelector Drawer) → avanzar a Incubator
+Freeze frames restantes SeedSession → avanzar a Incubator
 
 ---
 
