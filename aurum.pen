@@ -14121,7 +14121,7 @@
               "layout": "vertical",
               "gap": 24,
               "padding": [
-                28,
+                24,
                 32,
                 32,
                 32
@@ -14138,10 +14138,11 @@
                       "type": "text",
                       "id": "0xA91",
                       "name": "drawerTitleTxt",
+                      "fill": "#F8F8F8",
                       "content": "Seleccionar Cofounder IA",
-                      "fontFamily": "Outfit",
+                      "fontFamily": "Open Sans",
                       "fontSize": 20,
-                      "fontWeight": "600"
+                      "fontWeight": "700"
                     }
                   ]
                 },
