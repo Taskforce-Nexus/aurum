@@ -37,10 +37,12 @@ Etapa actual: ITERATE — Modales consistentes. Siguiente: CRUD en modales de as
 - SeedSession__AdvisorSelector__Drawer — sección ESTILO DE COMUNICACIÓN en detail panel ✓
 - SeedSession__CofounderSelector__Drawer — Tomás Herrera estilo actualizado ✓
 - Todos los modales — estilos consistentes (variables → hex explícitos) ✓
+- InvitedAdvisorModal — CRUD: "+ Invitar" header, ✏ 🗑 detalle, ⋯ filas ✓
+- BuyerPersonaModal — CRUD: "+ Nueva Persona" header, ✏ 🗑 detalle, ⋯ filas ✓
 
 ## Siguiente paso
 
-Agregar CRUD (editar/eliminar) en modales de asesores, cofounders, invitados e ICPs → Freeze ConsejoPrincipalPropuesta → avanzar a Incubator
+Freeze ConsejoPrincipalPropuesta → continuar EspecialistasPropuesta, ICPsPropuesta, ConsejoListo → avanzar a Incubator
 
 ---
 
