@@ -31,7 +31,7 @@ Etapa actual: FREEZE — EntregablesPropuesta aprobado
 
 ## Siguiente paso
 
-Freeze EntregablesPropuesta + frames restantes SeedSession → avanzar a Incubator
+Freeze frames restantes SeedSession (ConsejoPrincipal, Especialistas, ICPs, ConsejoListo) → avanzar a Incubator
 
 ---
 
