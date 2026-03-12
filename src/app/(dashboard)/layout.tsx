@@ -46,17 +46,17 @@ export default async function DashboardLayout({
               <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
             </svg>
             {(unread ?? 0) > 0 && (
-              <span className="absolute -top-1 -right-1 bg-[#B8860B] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {unread! > 9 ? '9+' : unread}
               </span>
             )}
           </button>
 
           {/* Token balance */}
-          <span className="text-sm hidden sm:block">
-            <span className="text-white font-medium">{balanceFormatted}</span>
-            <span className="ml-1 text-xs text-[#8892A4]">Sigue</span>
-          </span>
+          <div className="hidden sm:flex flex-col items-end">
+            <span className="text-white font-medium text-sm">{balanceFormatted}</span>
+            <span className="text-[10px] text-[#8892A4]">disponible</span>
+          </div>
 
           {/* User menu */}
           <UserMenu
