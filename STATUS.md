@@ -172,9 +172,21 @@ Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS +
 - Login: tabs pill shape (rounded-full, py-1.5, text-xs, borde sutil)
 - Login: password input con ícono ojo toggle (show/hide)
 
+## Story 1.5 — ProjectView (COMPLETO ✓)
+
+- `/project/[id]/page.tsx` — reescrito completo según frame Projects__ProjectView__Default
+- Eliminado header duplicado (dashboard layout ya lo provee)
+- Journey 5 etapas con stepper: Semilla → Selección de Consejeros → Definición de Entregables → Sesión de Consejo → Entrega
+- 3 tiles superiores: Semilla (estado + CTA), Sesión de Consejo (activa/bloqueada), Consultoría Activa
+- 2 tiles inferiores: Consejo Asesor (3 cols, avatars), Exportación (2 cols, doc list + progress bar)
+- Sidebar derecho: stats (etapas/mensajes/tiempo), Fase Actual, Último Insight, Documentos count
+- Fetch defensivo de: `councils`, `project_documents`, `consultations` (maybeSingle, graceful null)
+- Design tokens correctos: #0D1535 cards, #1E2A4A borders, #B8860B gold
+- Rutas placeholder existentes: semilla, sesion-consejo, consejo, consultoria, export, documento/[docId]
+
 ## Siguiente paso
 
-Story 1.5 — ProjectView: vista individual del proyecto
+Story 1.6 — ProjectView detalle (TBD por Kira)
 
 ---
 
