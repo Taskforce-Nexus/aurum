@@ -62723,6 +62723,12 @@
                                 "fill": "#B8860B"
                               },
                               "gap": 12,
+                              "padding": [
+                                12,
+                                12,
+                                12,
+                                16
+                              ],
                               "alignItems": "center",
                               "children": [
                                 {
@@ -62836,6 +62842,12 @@
                               "name": "cf2Row",
                               "width": "fill_container",
                               "gap": 12,
+                              "padding": [
+                                12,
+                                12,
+                                12,
+                                16
+                              ],
                               "alignItems": "center",
                               "children": [
                                 {
