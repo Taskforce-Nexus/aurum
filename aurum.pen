@@ -50672,59 +50672,80 @@
                       "height": 1
                     },
                     {
-                      "type": "text",
-                      "id": "M4Wcc",
+                      "type": "frame",
+                      "id": "dA2tU",
                       "name": "thDoc",
-                      "fill": "#6E8EAD",
-                      "content": "DOCUMENTO",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 11,
-                      "fontWeight": "600",
-                      "letterSpacing": 1.5
+                      "width": 440,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "30b0n",
+                          "fill": "#6E8EAD",
+                          "content": "DOCUMENTO",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "YE7Ma",
+                      "type": "frame",
+                      "id": "csgQz",
                       "name": "thStatus",
-                      "fill": "#6E8EAD",
-                      "content": "ESTADO",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 11,
-                      "fontWeight": "600",
-                      "letterSpacing": 1.5
+                      "width": 130,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "KDEZn",
+                          "fill": "#6E8EAD",
+                          "content": "ESTADO",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "DRzg2",
-                      "name": "thFormat",
-                      "fill": "#6E8EAD",
-                      "content": "FORMATO",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 11,
-                      "fontWeight": "600",
-                      "letterSpacing": 1.5
-                    },
-                    {
-                      "type": "text",
-                      "id": "Un9ab",
+                      "type": "frame",
+                      "id": "a89RG",
                       "name": "thDate",
-                      "fill": "#6E8EAD",
-                      "content": "ÚLTIMA EDICIÓN",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 11,
-                      "fontWeight": "600",
-                      "letterSpacing": 1.5
+                      "width": 160,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "uUtmq",
+                          "fill": "#6E8EAD",
+                          "content": "ÚLTIMA EDICIÓN",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "qqCmk",
+                      "type": "frame",
+                      "id": "bEKHe",
                       "name": "thActions",
-                      "fill": "#6E8EAD",
-                      "content": "ACCIONES",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 11,
-                      "fontWeight": "600",
-                      "letterSpacing": 1.5
+                      "width": "fill_container",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "8uONU",
+                          "fill": "#6E8EAD",
+                          "content": "ACCIONES",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        }
+                      ]
                     }
                   ]
                 },
@@ -50766,7 +50787,7 @@
                       "type": "frame",
                       "id": "0CiF2",
                       "name": "docCell1",
-                      "width": 374,
+                      "width": 440,
                       "layout": "vertical",
                       "gap": 2,
                       "children": [
@@ -50793,34 +50814,40 @@
                       ]
                     },
                     {
-                      "type": "text",
-                      "id": "tgdwd",
-                      "name": "dc1status",
-                      "fill": "#16A34A",
-                      "content": "● Listo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
+                      "type": "frame",
+                      "id": "C8QZq",
+                      "name": "s1",
+                      "width": 130,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SuitZ",
+                          "fill": "#16A34A",
+                          "content": "● Listo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "H0TlU",
-                      "name": "dc1format",
-                      "fill": "#8B9DB7",
-                      "content": "PDF",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "LCPGC",
-                      "name": "dc1date",
-                      "fill": "#8B9DB7",
-                      "content": "hace 2h",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "q7mQt",
+                      "name": "d1",
+                      "width": 160,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "AUe20",
+                          "fill": "#8B9DB7",
+                          "content": "hace 2h",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     },
                     {
                       "type": "frame",
@@ -50846,16 +50873,6 @@
                           "name": "ar1dl",
                           "fill": "#8B9DB7",
                           "content": "Descargar",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "500"
-                        },
-                        {
-                          "type": "text",
-                          "id": "RGSAL",
-                          "name": "ar1ed",
-                          "fill": "#8B9DB7",
-                          "content": "Editar",
                           "fontFamily": "Open Sans",
                           "fontSize": 13,
                           "fontWeight": "500"
@@ -50912,7 +50929,7 @@
                       "type": "frame",
                       "id": "Oi1SF",
                       "name": "docCell2",
-                      "width": 374,
+                      "width": 440,
                       "layout": "vertical",
                       "gap": 2,
                       "children": [
@@ -50939,34 +50956,40 @@
                       ]
                     },
                     {
-                      "type": "text",
-                      "id": "72TOR",
-                      "name": "dc2status",
-                      "fill": "#16A34A",
-                      "content": "● Listo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
+                      "type": "frame",
+                      "id": "45l4C",
+                      "name": "s2",
+                      "width": 130,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "U98CJ",
+                          "fill": "#16A34A",
+                          "content": "● Listo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "HCCiA",
-                      "name": "dc2format",
-                      "fill": "#8B9DB7",
-                      "content": "PDF",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "iphfH",
-                      "name": "dc2date",
-                      "fill": "#8B9DB7",
-                      "content": "hace 1h",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "m6lMx",
+                      "name": "d2",
+                      "width": 160,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "RzeGg",
+                          "fill": "#8B9DB7",
+                          "content": "hace 1h",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     },
                     {
                       "type": "frame",
@@ -50992,16 +51015,6 @@
                           "name": "ar2dl",
                           "fill": "#8B9DB7",
                           "content": "Descargar",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "500"
-                        },
-                        {
-                          "type": "text",
-                          "id": "XDmOd",
-                          "name": "ar2ed",
-                          "fill": "#8B9DB7",
-                          "content": "Editar",
                           "fontFamily": "Open Sans",
                           "fontSize": 13,
                           "fontWeight": "500"
@@ -51058,7 +51071,7 @@
                       "type": "frame",
                       "id": "hScty",
                       "name": "docCell3",
-                      "width": 374,
+                      "width": 440,
                       "layout": "vertical",
                       "gap": 2,
                       "children": [
@@ -51085,34 +51098,40 @@
                       ]
                     },
                     {
-                      "type": "text",
-                      "id": "5bc2W",
-                      "name": "dc3status",
-                      "fill": "#16A34A",
-                      "content": "● Listo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
+                      "type": "frame",
+                      "id": "4P807",
+                      "name": "s3",
+                      "width": 130,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "bD7PU",
+                          "fill": "#16A34A",
+                          "content": "● Listo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "Hk6cd",
-                      "name": "dc3format",
-                      "fill": "#8B9DB7",
-                      "content": "PDF",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "SwVYW",
-                      "name": "dc3date",
-                      "fill": "#8B9DB7",
-                      "content": "hace 45min",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "eMUNo",
+                      "name": "d3",
+                      "width": 160,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "WFvO5",
+                          "fill": "#8B9DB7",
+                          "content": "hace 45min",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     },
                     {
                       "type": "frame",
@@ -51138,16 +51157,6 @@
                           "name": "ar3dl",
                           "fill": "#8B9DB7",
                           "content": "Descargar",
-                          "fontFamily": "Open Sans",
-                          "fontSize": 13,
-                          "fontWeight": "500"
-                        },
-                        {
-                          "type": "text",
-                          "id": "bRqoW",
-                          "name": "ar3ed",
-                          "fill": "#8B9DB7",
-                          "content": "Editar",
                           "fontFamily": "Open Sans",
                           "fontSize": 13,
                           "fontWeight": "500"
@@ -51204,7 +51213,7 @@
                       "type": "frame",
                       "id": "USoJt",
                       "name": "docCell4",
-                      "width": 374,
+                      "width": 440,
                       "layout": "vertical",
                       "gap": 2,
                       "children": [
@@ -51231,44 +51240,58 @@
                       ]
                     },
                     {
-                      "type": "text",
-                      "id": "Epfro",
-                      "name": "dc4status",
-                      "fill": "#4A5568",
-                      "content": "○ Pendiente",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
+                      "type": "frame",
+                      "id": "11XSG",
+                      "name": "s4",
+                      "width": 130,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Q6mcq",
+                          "fill": "#4A5568",
+                          "content": "○ Pendiente",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "JrbQd",
-                      "name": "dc4format",
-                      "fill": "#4A5568",
-                      "content": "—",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "ocxuQ",
+                      "name": "d4",
+                      "width": 160,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "DLg4N",
+                          "fill": "#4A5568",
+                          "content": "—",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "mUzue",
-                      "name": "dc4date",
-                      "fill": "#4A5568",
-                      "content": "—",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "bSWqI",
-                      "name": "dc4act",
-                      "fill": "#4A5568",
-                      "content": "Pendiente — se genera en la Sesión de Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "7doIN",
+                      "name": "actCell4",
+                      "width": "fill_container",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "UY2RS",
+                          "fill": "#4A5568",
+                          "content": "Pendiente — se genera en la Sesión de Consejo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -51303,7 +51326,7 @@
                       "type": "frame",
                       "id": "rlea9",
                       "name": "docCell5",
-                      "width": 374,
+                      "width": 440,
                       "layout": "vertical",
                       "gap": 2,
                       "children": [
@@ -51330,44 +51353,58 @@
                       ]
                     },
                     {
-                      "type": "text",
-                      "id": "cChPe",
-                      "name": "dc5status",
-                      "fill": "#4A5568",
-                      "content": "○ Pendiente",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
+                      "type": "frame",
+                      "id": "Sn4vQ",
+                      "name": "s5",
+                      "width": 130,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "vW3kK",
+                          "fill": "#4A5568",
+                          "content": "○ Pendiente",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "T8fqD",
-                      "name": "dc5format",
-                      "fill": "#4A5568",
-                      "content": "—",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "lHWZj",
+                      "name": "d5",
+                      "width": 160,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "628bE",
+                          "fill": "#4A5568",
+                          "content": "—",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "rto0w",
-                      "name": "dc5date",
-                      "fill": "#4A5568",
-                      "content": "—",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "text",
-                      "id": "PJt3F",
-                      "name": "dc5act",
-                      "fill": "#4A5568",
-                      "content": "Pendiente — se genera en la Sesión de Consejo",
-                      "fontFamily": "Open Sans",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
+                      "type": "frame",
+                      "id": "8dmao",
+                      "name": "actCell5",
+                      "width": "fill_container",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Vs1SB",
+                          "fill": "#4A5568",
+                          "content": "Pendiente — se genera en la Sesión de Consejo",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
                     }
                   ]
                 },
