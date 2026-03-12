@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-12
-Etapa actual: ITERATE — Export__Center__Default rebuild v2 (tabla escalable CRUD) + FREEZE ✓. Pendiente: Documents__Branding__Default
+Etapa actual: ITERATE — Marketing__Landing__Default rebuild completo (10 secciones). Pendiente: Documents__Branding__Default
 
 ---
 
@@ -67,6 +67,9 @@ Etapa actual: ITERATE — Export__Center__Default rebuild v2 (tabla escalable CR
 - Export__Center__Default — rediseño completo v1: breadcrumb, subtítulo, barra progreso, cards Listo/Pendiente, PDF completo, Estrategia de Comunicación ✓
 - Export__Center__Default — rebuild v2: tabla escalable CRUD con header acciones globales, 5 filas, estados Listo/Pendiente, acciones por fila, paginación ✓
 - Export__Center__Default — FREEZE ✓ (aprobado por Juan)
+
+- Marketing__Landing__Default — rebuild completo desde cero: 10 secciones (Hero, Problema, Para Quién, Cómo Funciona, Consejo IA, Documentos, Nexo Dual, Suite AVA, CTA Final, Footer) ✓
+- aurum_decisions.md — decisiones 45 (mascota pulpo Nexo) y 46 (ambient music Sesión de Consejo) registradas ✓
 
 ## Siguiente paso
 

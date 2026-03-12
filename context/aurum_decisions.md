@@ -837,3 +837,24 @@ El nav de cada frame muestra "Paso X de 7" acorde a esta secuencia.
 Esta decisión no debe reabrirse sin instrucción explícita de Juan o Kira.
 
 ---
+
+## 45. Mascota de Nexo — pulpo orquestador
+
+Nexo tendrá una representación visual como mascota tipo pulpo.
+Metáfora: 8 brazos coordinando múltiples consejeros simultáneamente.
+Scope: post-MVP. No bloquea el flujo actual.
+
+**Fecha:** 2026-03-12
+
+---
+
+## 46. Ambient music durante Sesión de Consejo
+
+La Sesión de Consejo tendrá loops lofi/instrumental sin voz como ambiente sonoro.
+Referencia: FigJam ambient sounds.
+Transforma la experiencia de herramienta a espacio de pensamiento.
+Scope: post-MVP. No bloquea el flujo actual.
+
+**Fecha:** 2026-03-12
+
+---
