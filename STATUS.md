@@ -61,7 +61,7 @@ Etapa actual: ITERATE — Projects__Incubator__Default iterado (12 fixes aplicad
 
 ## Siguiente paso
 
-FREEZE Projects__Incubator__Default → siguiente frame
+Diseñar siguiente frame del pipeline (Documents o Export)
 
 ---
 
