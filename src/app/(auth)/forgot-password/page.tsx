@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import AuthBrandPanel from '@/components/auth/AuthBrandPanel'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
@@ -31,26 +32,23 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0F0F11] flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold tracking-widest text-[#C9A84C] mb-2">Reason</h1>
-          <p className="text-sm text-[#6b6d75]">Sistema de creación de ventures</p>
-        </div>
-        <div className="bg-[#1A1B1E] border border-[#2a2b30] rounded-xl p-8">
-          <h2 className="text-lg font-semibold mb-2">Restablecer contraseña</h2>
-          <p className="text-sm text-[#6b6d75] mb-6">
-            Ingresa tu correo y te enviaremos instrucciones para restablecer tu contraseña.
+    <div className="min-h-screen flex">
+      <AuthBrandPanel variant="default" />
+
+      <div className="flex-1 flex items-center justify-center p-8 lg:p-20 border-l border-[#27282B]">
+        <div className="w-full max-w-md">
+          <h2 className="font-outfit text-3xl font-bold text-white mb-2">Recupera tu acceso</h2>
+          <p className="text-sm text-[#8892A4] mb-8">
+            Ingresa tu correo y te enviaremos un enlace para tener acceso y restablecer tu contraseña.
           </p>
-          <form onSubmit={handleSubmit} className="space-y-4">
+
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs text-[#6b6d75] uppercase tracking-wider mb-1.5">
-                Correo electrónico
-              </label>
+              <label className="block text-sm text-[#8892A4] mb-1.5">Correo electrónico</label>
               <input
                 type="email" value={email} onChange={e => setEmail(e.target.value)}
-                placeholder="tu@email.com" required
-                className="w-full bg-[#0F0F11] border border-[#2a2b30] rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#3a3b40] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                placeholder="hola@ejemplo.com" required
+                className="w-full bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-4 h-12 text-sm text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B] transition-colors"
               />
             </div>
             {error && (
@@ -59,20 +57,14 @@ export default function ForgotPasswordPage() {
               </p>
             )}
             <button type="submit" disabled={loading}
-              className="w-full bg-[#C9A84C] hover:bg-[#b8963f] text-[#0F0F11] font-semibold py-2.5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-                  </svg>
-                  Enviando...
-                </span>
-              ) : 'Enviar instrucciones'}
+              className="w-full h-12 bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-outfit">
+              {loading ? 'Enviando...' : 'Tomar enviar'}
             </button>
           </form>
-          <p className="text-center text-sm text-[#6b6d75] mt-6">
-            <Link href="/login" className="text-[#C9A84C] hover:underline">Volver al inicio de sesión</Link>
+
+          <p className="text-center text-sm text-[#8892A4] mt-8">
+            ¿Lo recuerdas?{' '}
+            <Link href="/login" className="text-[#B8860B] hover:underline">Iniciar sesión</Link>
           </p>
         </div>
       </div>

@@ -51,12 +51,12 @@ export default function CreateProjectModal({ onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A1128]/80 backdrop-blur-sm p-4">
-      <div className="bg-[#1A1B1E] border border-[#2a2b30] rounded-xl p-6 w-full max-w-md shadow-2xl">
+      <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-xl p-6 w-full max-w-md shadow-2xl">
         <h2 className="text-lg font-semibold mb-5">Nuevo proyecto</h2>
 
         <form onSubmit={handleCreate} className="space-y-5">
           <div>
-            <label className="block text-xs text-[#6b6d75] uppercase tracking-wider mb-1.5">
+            <label className="block text-xs text-[#8892A4] uppercase tracking-wider mb-1.5">
               Nombre del proyecto
             </label>
             <input
@@ -66,12 +66,12 @@ export default function CreateProjectModal({ onClose }: Props) {
               placeholder="ej. FinTrack, MiSaaS..."
               required
               autoFocus
-              className="w-full bg-[#0F0F11] border border-[#2a2b30] rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#3a3b40] focus:outline-none focus:border-[#C9A84C] transition-colors"
+              className="w-full bg-[#0F0F11] border border-[#1E2A4A] rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#3a3b40] focus:outline-none focus:border-[#B8860B] transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-xs text-[#6b6d75] uppercase tracking-wider mb-2">
+            <label className="block text-xs text-[#8892A4] uppercase tracking-wider mb-2">
               ¿Dónde estás con tu proyecto?
             </label>
             <div className="flex flex-wrap gap-2">
@@ -82,8 +82,8 @@ export default function CreateProjectModal({ onClose }: Props) {
                   onClick={() => setEntryLevel(level.value)}
                   className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
                     entryLevel === level.value
-                      ? 'bg-[#C9A84C] text-[#0F0F11] font-medium'
-                      : 'bg-[#2a2b30] text-[#6b6d75] hover:text-white'
+                      ? 'bg-[#B8860B] text-white font-medium'
+                      : 'bg-[#2a2b30] text-[#8892A4] hover:text-white'
                   }`}
                 >
                   {level.label}
@@ -103,14 +103,14 @@ export default function CreateProjectModal({ onClose }: Props) {
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-4 py-2 text-sm text-[#6b6d75] hover:text-white transition-colors"
+              className="px-4 py-2 text-sm text-[#8892A4] hover:text-white transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading || !name.trim()}
-              className="bg-[#C9A84C] hover:bg-[#b8963f] text-[#0F0F11] font-semibold px-5 py-2 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold px-5 py-2 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Creando...' : 'Crear proyecto'}
             </button>

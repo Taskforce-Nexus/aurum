@@ -1,8 +1,9 @@
-﻿import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next'
+import { Outfit, Open_Sans } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' })
+const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans' })
 
 export const metadata: Metadata = {
   title: 'Reason',
@@ -16,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="dark">
-      <body className={`${inter.className} bg-[#0F0F11] text-white antialiased`}>
+      <body className={`${outfit.variable} ${openSans.variable} font-sans bg-[#0A1128] text-white antialiased`}>
         {children}
       </body>
     </html>

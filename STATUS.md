@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-12
-Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS. Siguiente: Story 1.5
+Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS + alineación visual UI. Siguiente: Story 1.5
 
 ---
 
@@ -143,6 +143,23 @@ Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS. 
 - CreateProjectModal.tsx — nombre + 3 pills entry_level + INSERT projects → /project/[id]/semilla ✓
 - ProjectCard.tsx — acepta description + phasePill (additive, no breaking) ✓
 - (dashboard)/page.tsx — query por user_id directo (sin organizations) ✓
+
+## Alineación visual UI (COMPLETO ✓)
+
+- Fonts: Outfit (headings/buttons) + Open Sans (body) añadidos a root layout.tsx ✓
+- Tailwind: `font-outfit` y `font-sans` (Open Sans) definidos en theme ✓
+- AuthBrandPanel.tsx — componente compartido: panel izquierdo con logo imagen, headline, features/checklist ✓
+- Login — two-column layout: brandPanel + formPanel (mode toggle + Google OAuth) ✓
+- Register — two-column layout: brandPanel register variant + form (email/pass/confirm) ✓
+- VerifyEmail — two-column layout: email gold + resend button outline ✓
+- ForgotPassword — two-column layout: email input + CTA ✓
+- ForgotPasswordSent — two-column layout: email gold + expiry + back link ✓
+- Dashboard layout — logo `/branding/logo-claro-reason.png` en header (Image, no texto) ✓
+- ProjectCard — rediseñado: list-row, progress bar oro, phase pill, arrow link ✓
+- DashboardClient — layout list (flex-col gap-3), colores y tipografía actualizados ✓
+- CreateProjectModal — colores actualizados a tokens `#B8860B` / `#0D1535` ✓
+- Design tokens aplicados: bg `#0A1128`, card `#0D1535`, border `#1E2A4A`, gold `#B8860B` ✓
+- CLAUDE.md — reglas permanentes: fidelidad visual + logo ✓
 
 ## Siguiente paso
 

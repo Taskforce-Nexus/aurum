@@ -141,6 +141,28 @@ El repo es privado — las URLs raw de GitHub no funcionan para usuarios externo
 
 ---
 
+## REGLAS PERMANENTES DE UI
+
+Estas reglas aplican siempre, sin excepción, a toda tarea de UI.
+
+### Fidelidad visual
+
+Antes de marcar cualquier story o pantalla como completa:
+
+1. Tomar screenshot del frame en aurum.pen con `get_screenshot` (Pencil MCP)
+2. Comparar contra el browser en localhost:3000
+3. Corregir diferencias hasta que coincidan visualmente
+
+No marcar como completo si hay diferencias estructurales o de color.
+
+### Logo
+
+- SIEMPRE usar `<Image src="/branding/logo-claro-reason.png" ...>` para el logo
+- NUNCA usar texto "Reason" como sustituto del logo
+- El archivo está en `public/branding/logo-claro-reason.png`
+
+---
+
 ## REGLAS OBLIGATORIAS DE EJECUCIÓN
 
 Estas reglas aplican a toda tarea, siempre, sin excepción.

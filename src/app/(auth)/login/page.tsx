@@ -1,9 +1,10 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import AuthBrandPanel from '@/components/auth/AuthBrandPanel'
 
 type Mode = 'password' | 'magic'
 
@@ -61,83 +62,86 @@ export default function LoginPage() {
     setLoading(false)
   }
 
-  return (
-    <div className="min-h-screen bg-[#0F0F11] flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold tracking-widest text-[#C9A84C] mb-2">Reason</h1>
-          <p className="text-sm text-[#6b6d75]">Sistema de creación de ventures</p>
-        </div>
+  async function handleGoogle() {
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/auth/confirm` },
+    })
+  }
 
-        <div className="bg-[#1A1B1E] border border-[#2a2b30] rounded-xl p-8">
-          <div className="flex gap-1 bg-[#0F0F11] p-1 rounded-lg mb-6">
+  return (
+    <div className="min-h-screen flex">
+      <AuthBrandPanel variant="default" />
+
+      {/* Right: form panel */}
+      <div className="flex-1 flex items-center justify-center p-8 lg:p-20 border-l border-[#27282B]">
+        <div className="w-full max-w-md">
+          <h2 className="font-outfit text-3xl font-bold text-white mb-2">Iniciar Sesión</h2>
+          <p className="text-sm text-[#8892A4] mb-8">Ingresa tus datos para entrar y empezar.</p>
+
+          {/* Mode toggle */}
+          <div className="flex gap-1 bg-[#0D1535] p-1 rounded-lg mb-7">
             <button
-              type="button" onClick={() => { setMode('password'); setError(''); setSuccess('') }}
-              className={`flex-1 text-sm py-1.5 rounded-md font-medium transition-colors ${
-                mode === 'password' ? 'bg-[#2a2b30] text-white' : 'text-[#6b6d75] hover:text-white'
-              }`}>
-              Contraseña
+              type="button"
+              onClick={() => { setMode('password'); setError(''); setSuccess('') }}
+              className={`flex-1 text-sm py-2 rounded-md font-medium transition-colors ${
+                mode === 'password'
+                  ? 'bg-[#B8860B] text-white'
+                  : 'text-[#8892A4] hover:text-white'
+              }`}
+            >
+              Correo y contraseña
             </button>
             <button
-              type="button" onClick={() => { setMode('magic'); setError(''); setSuccess('') }}
-              className={`flex-1 text-sm py-1.5 rounded-md font-medium transition-colors ${
-                mode === 'magic' ? 'bg-[#2a2b30] text-white' : 'text-[#6b6d75] hover:text-white'
-              }`}>
-              Enlace mágico
+              type="button"
+              onClick={() => { setMode('magic'); setError(''); setSuccess('') }}
+              className={`flex-1 text-sm py-2 rounded-md font-medium transition-colors ${
+                mode === 'magic'
+                  ? 'bg-[#B8860B] text-white'
+                  : 'text-[#8892A4] hover:text-white'
+              }`}
+            >
+              Enlace al correo
             </button>
           </div>
 
           {mode === 'password' ? (
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-5">
               <div>
-                <label className="block text-xs text-[#6b6d75] uppercase tracking-wider mb-1.5">
-                  Correo electrónico
-                </label>
+                <label className="block text-sm text-[#8892A4] mb-1.5">Correo electrónico</label>
                 <input
                   type="email" value={email} onChange={e => setEmail(e.target.value)}
-                  placeholder="tu@email.com" required
-                  className="w-full bg-[#0F0F11] border border-[#2a2b30] rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#3a3b40] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                  placeholder="hola@ejemplo.com" required
+                  className="w-full bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-4 h-12 text-sm text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B] transition-colors"
                 />
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs text-[#6b6d75] uppercase tracking-wider">
-                    Contraseña
-                  </label>
-                  <Link href="/forgot-password" className="text-xs text-[#6b6d75] hover:text-[#C9A84C] transition-colors">
+                  <label className="text-sm text-[#8892A4]">Contraseña</label>
+                  <Link href="/forgot-password" className="text-xs text-[#B8860B] hover:underline">
                     ¿Olvidaste tu contraseña?
                   </Link>
                 </div>
                 <input
                   type="password" value={password} onChange={e => setPassword(e.target.value)}
                   placeholder="••••••••" required
-                  className="w-full bg-[#0F0F11] border border-[#2a2b30] rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#3a3b40] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                  className="w-full bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-4 h-12 text-sm text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B] transition-colors"
                 />
               </div>
               {error && <ErrorMsg msg={error} />}
               <button type="submit" disabled={loading}
-                className="w-full bg-[#C9A84C] hover:bg-[#b8963f] text-[#0F0F11] font-semibold py-2.5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                {loading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-                    </svg>
-                    Iniciando sesión...
-                  </span>
-                ) : 'Entrar'}
+                className="w-full h-12 bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-outfit">
+                {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
               </button>
             </form>
           ) : (
-            <form onSubmit={handleMagicLink} className="space-y-4">
+            <form onSubmit={handleMagicLink} className="space-y-5">
               <div>
-                <label className="block text-xs text-[#6b6d75] uppercase tracking-wider mb-1.5">
-                  Correo electrónico
-                </label>
+                <label className="block text-sm text-[#8892A4] mb-1.5">Correo electrónico</label>
                 <input
                   type="email" value={email} onChange={e => setEmail(e.target.value)}
-                  placeholder="tu@email.com" required
-                  className="w-full bg-[#0F0F11] border border-[#2a2b30] rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#3a3b40] focus:outline-none focus:border-[#C9A84C] transition-colors"
+                  placeholder="hola@ejemplo.com" required
+                  className="w-full bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-4 h-12 text-sm text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B] transition-colors"
                 />
               </div>
               {error && <ErrorMsg msg={error} />}
@@ -147,23 +151,35 @@ export default function LoginPage() {
                 </p>
               )}
               <button type="submit" disabled={loading || !!success}
-                className="w-full bg-[#C9A84C] hover:bg-[#b8963f] text-[#0F0F11] font-semibold py-2.5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                {loading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-                    </svg>
-                    Enviando...
-                  </span>
-                ) : 'Enviar enlace'}
+                className="w-full h-12 bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-outfit">
+                {loading ? 'Enviando...' : 'Enviar enlace'}
               </button>
             </form>
           )}
 
-          <p className="text-center text-sm text-[#6b6d75] mt-6">
+          {/* Divider + Google */}
+          <div className="flex items-center gap-3 my-6">
+            <div className="flex-1 h-px bg-[#1E2A4A]" />
+            <span className="text-xs text-[#4A5568]">o continuar con</span>
+            <div className="flex-1 h-px bg-[#1E2A4A]" />
+          </div>
+          <button
+            type="button"
+            onClick={handleGoogle}
+            className="w-full h-12 border border-[#1E2A4A] rounded-lg text-sm text-[#8892A4] hover:text-white hover:border-[#B8860B] transition-colors flex items-center justify-center gap-3"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+              <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+              <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+              <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+            </svg>
+            Continuar con Google
+          </button>
+
+          <p className="text-center text-sm text-[#8892A4] mt-8">
             ¿No tienes cuenta?{' '}
-            <Link href="/register" className="text-[#C9A84C] hover:underline">Regístrate</Link>
+            <Link href="/register" className="text-[#B8860B] hover:underline">Crea cuenta</Link>
           </p>
         </div>
       </div>
