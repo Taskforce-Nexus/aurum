@@ -49,6 +49,7 @@ Freeze EntregablesPropuesta + frames restantes SeedSession → avanzar a Incubat
 
 | Hash | Descripción |
 | --- | --- |
+| 3e65985 | fix: EntregablesPropuesta — secciones reales, paginación restaurada, textos spec |
 | 31461c0 | fix: EntregablesPropuesta — detail expandible, botón renombrado, Paso X de 7 |
 | ea96e7c | refactor: renombrar CatalogDrawerModal → CofounderSelector__Drawer + eliminar modal redundante |
 | fc2a1da | fix: CatalogDrawerModal — segunda ronda paleta (slots, hats, sliders, tooltip) |
