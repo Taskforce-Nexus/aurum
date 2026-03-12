@@ -62722,7 +62722,8 @@
                                 },
                                 "fill": "#B8860B"
                               },
-                              "gap": 12,
+                              "layout": "vertical",
+                              "gap": 8,
                               "padding": [
                                 12,
                                 12,
@@ -62733,98 +62734,109 @@
                               "children": [
                                 {
                                   "type": "frame",
-                                  "id": "N8Luj",
-                                  "name": "av_camila",
-                                  "width": 36,
-                                  "height": 36,
-                                  "fill": "#142045",
-                                  "cornerRadius": 18,
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "Tj0DX",
-                                      "name": "avtx1a",
-                                      "fill": "#B8860B",
-                                      "content": "CR",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "700"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "KkXOr",
-                                  "name": "cf1Text",
+                                  "id": "XH835",
+                                  "name": "cf1TopRow",
                                   "width": "fill_container",
-                                  "layout": "vertical",
-                                  "gap": 4,
+                                  "gap": 12,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
                                   "children": [
                                     {
-                                      "type": "text",
-                                      "id": "k8GPd",
-                                      "name": "cf1Name",
-                                      "fill": "#F8F8F8",
-                                      "content": "Camila Reyes",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 14,
-                                      "fontWeight": "700"
+                                      "type": "frame",
+                                      "id": "N8Luj",
+                                      "name": "av_camila",
+                                      "width": 36,
+                                      "height": 36,
+                                      "fill": "#142045",
+                                      "cornerRadius": 18,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "Tj0DX",
+                                          "name": "avtx1a",
+                                          "fill": "#B8860B",
+                                          "content": "CR",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 13,
+                                          "fontWeight": "700"
+                                        }
+                                      ]
                                     },
                                     {
-                                      "type": "text",
-                                      "id": "7F0Hg",
-                                      "name": "cf1Spec",
-                                      "fill": "#B8860B",
-                                      "content": "Constructiva · Bootstrapping & Marca",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 11,
-                                      "fontWeight": "600"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "zrbM3",
-                                      "name": "cf1Desc",
-                                      "fill": "#6E8EAD",
-                                      "textGrowth": "fixed-width",
+                                      "type": "frame",
+                                      "id": "Xw1TI",
+                                      "name": "cf1NameSpec",
                                       "width": "fill_container",
-                                      "content": "Llevó 3 proyectos de 0 a producto en 18 meses. Construye con lo que tiene: marca, comunidad y propuesta clara.",
-                                      "lineHeight": 1.5,
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "normal"
+                                      "layout": "vertical",
+                                      "gap": 3,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "k8GPd",
+                                          "name": "cf1Name",
+                                          "fill": "#F8F8F8",
+                                          "content": "Camila Reyes",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 14,
+                                          "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "7F0Hg",
+                                          "name": "cf1Spec",
+                                          "fill": "#B8860B",
+                                          "content": "Constructiva · Bootstrapping & Marca",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "2x20V",
+                                      "name": "cf1Btn",
+                                      "cornerRadius": 6,
+                                      "stroke": {
+                                        "align": "inside",
+                                        "thickness": 1,
+                                        "fill": "#3A3B40"
+                                      },
+                                      "padding": [
+                                        6,
+                                        12
+                                      ],
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "pRFYi",
+                                          "name": "cf1BtnTxt",
+                                          "fill": "#F8F8F8",
+                                          "content": "Cambiar",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 12,
+                                          "fontWeight": "500"
+                                        }
+                                      ]
                                     }
                                   ]
                                 },
                                 {
-                                  "type": "frame",
-                                  "id": "2x20V",
-                                  "name": "cf1Btn",
-                                  "cornerRadius": 6,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": 1,
-                                    "fill": "#3A3B40"
-                                  },
-                                  "padding": [
-                                    6,
-                                    12
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "pRFYi",
-                                      "name": "cf1BtnTxt",
-                                      "fill": "#F8F8F8",
-                                      "content": "Cambiar",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 12,
-                                      "fontWeight": "500"
-                                    }
-                                  ]
+                                  "type": "text",
+                                  "id": "zrbM3",
+                                  "name": "cf1Desc",
+                                  "fill": "#6E8EAD",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Llevó 3 proyectos de 0 a producto en 18 meses. Construye con lo que tiene: marca, comunidad y propuesta clara.",
+                                  "lineHeight": 1.5,
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -62841,7 +62853,8 @@
                               "id": "X4HUD",
                               "name": "cf2Row",
                               "width": "fill_container",
-                              "gap": 12,
+                              "layout": "vertical",
+                              "gap": 8,
                               "padding": [
                                 12,
                                 12,
@@ -62852,98 +62865,109 @@
                               "children": [
                                 {
                                   "type": "frame",
-                                  "id": "3c0i3",
-                                  "name": "av_andres",
-                                  "width": 36,
-                                  "height": 36,
-                                  "fill": "#142045",
-                                  "cornerRadius": 18,
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "yAUIO",
-                                      "name": "avtx2a",
-                                      "fill": "#8B9DB7",
-                                      "content": "AQ",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "700"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "0K3pr",
-                                  "name": "cf2Text",
+                                  "id": "vSOBi",
+                                  "name": "cf2TopRow",
                                   "width": "fill_container",
-                                  "layout": "vertical",
-                                  "gap": 4,
+                                  "gap": 12,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
                                   "children": [
                                     {
-                                      "type": "text",
-                                      "id": "lGyZP",
-                                      "name": "cf2Name",
-                                      "fill": "#F8F8F8",
-                                      "content": "Andrés Quiroga",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 14,
-                                      "fontWeight": "700"
+                                      "type": "frame",
+                                      "id": "3c0i3",
+                                      "name": "av_andres",
+                                      "width": 36,
+                                      "height": 36,
+                                      "fill": "#142045",
+                                      "cornerRadius": 18,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "yAUIO",
+                                          "name": "avtx2a",
+                                          "fill": "#8B9DB7",
+                                          "content": "AQ",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 13,
+                                          "fontWeight": "700"
+                                        }
+                                      ]
                                     },
                                     {
-                                      "type": "text",
-                                      "id": "x6HLR",
-                                      "name": "cf2Spec",
-                                      "fill": "#007BFF",
-                                      "content": "Crítico · Diseño & Producto",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 11,
-                                      "fontWeight": "600"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "Tg2tG",
-                                      "name": "cf2Desc",
-                                      "fill": "#6E8EAD",
-                                      "textGrowth": "fixed-width",
+                                      "type": "frame",
+                                      "id": "ChsNS",
+                                      "name": "cf2NameSpec",
                                       "width": "fill_container",
-                                      "content": "Nombra lo que no está funcionando antes de que cueste dinero. No viene a validar, viene a hacer las preguntas incómodas.",
-                                      "lineHeight": 1.5,
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "normal"
+                                      "layout": "vertical",
+                                      "gap": 3,
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "lGyZP",
+                                          "name": "cf2Name",
+                                          "fill": "#F8F8F8",
+                                          "content": "Andrés Quiroga",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 14,
+                                          "fontWeight": "700"
+                                        },
+                                        {
+                                          "type": "text",
+                                          "id": "x6HLR",
+                                          "name": "cf2Spec",
+                                          "fill": "#007BFF",
+                                          "content": "Crítico · Diseño & Producto",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "Y0yBn",
+                                      "name": "cf2Btn",
+                                      "cornerRadius": 6,
+                                      "stroke": {
+                                        "align": "inside",
+                                        "thickness": 1,
+                                        "fill": "#3A3B40"
+                                      },
+                                      "padding": [
+                                        6,
+                                        12
+                                      ],
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "TDVsb",
+                                          "name": "cf2BtnTxt",
+                                          "fill": "#F8F8F8",
+                                          "content": "Cambiar",
+                                          "fontFamily": "Open Sans",
+                                          "fontSize": 12,
+                                          "fontWeight": "500"
+                                        }
+                                      ]
                                     }
                                   ]
                                 },
                                 {
-                                  "type": "frame",
-                                  "id": "Y0yBn",
-                                  "name": "cf2Btn",
-                                  "cornerRadius": 6,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": 1,
-                                    "fill": "#3A3B40"
-                                  },
-                                  "padding": [
-                                    6,
-                                    12
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "TDVsb",
-                                      "name": "cf2BtnTxt",
-                                      "fill": "#F8F8F8",
-                                      "content": "Cambiar",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 12,
-                                      "fontWeight": "500"
-                                    }
-                                  ]
+                                  "type": "text",
+                                  "id": "Tg2tG",
+                                  "name": "cf2Desc",
+                                  "fill": "#6E8EAD",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Nombra lo que no está funcionando antes de que cueste dinero. No viene a validar, viene a hacer las preguntas incómodas.",
+                                  "lineHeight": 1.5,
+                                  "fontFamily": "Open Sans",
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             }
