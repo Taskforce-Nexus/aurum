@@ -29,8 +29,9 @@ Etapa actual: ITERATE — ConsejoPrincipalPropuesta + MyBoard + AdvisorSelector 
 - EntregablesPropuesta — FREEZE ✓
 - Paso X de 7 actualizado en los 7 frames SeedSession ✓
 - ConsejoPrincipalPropuesta — hat dots + Cambiar button en 7 cards ✓
-- AdvisoryBoard__MyBoard — leyenda de hat colors ✓ (renombrado desde Projects__AdvisoryBoard__MyBoard)
-- SeedSession__AdvisorSelector__Drawer — pencil icon eliminado ✓ (renombrado desde Projects__AdvisoryBoard__AdvisorCatalogModal)
+- ConsejoPrincipalPropuesta — leyenda sombreros + dots activos/inactivos por asesor ✓
+- AdvisoryBoard__MyBoard — leyenda de hat colors 11px ✓ (renombrado desde Projects__AdvisoryBoard__MyBoard)
+- SeedSession__AdvisorSelector__Drawer — 4 fixes (pills, cards, badges, banner) ✓
 
 ## Siguiente paso
 
@@ -52,6 +53,7 @@ Freeze ConsejoPrincipalPropuesta → continuar EspecialistasPropuesta, ICPsPropu
 
 | Hash | Descripción |
 | --- | --- |
+| (pending) | fix: AdvisorSelector + ConsejoPrincipalPropuesta + MyBoard — 7 correcciones |
 | f002b67 | fix: ConsejoPrincipalPropuesta + MyBoard + AdvisorSelector — 6 correcciones |
 | 3e65985 | fix: EntregablesPropuesta — secciones reales, paginación restaurada, textos spec |
 | 31461c0 | fix: EntregablesPropuesta — detail expandible, botón renombrado, Paso X de 7 |
