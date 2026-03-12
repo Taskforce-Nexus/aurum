@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-12
-Etapa actual: ITERATE — Marketing__Landing__Default rebuild completo (10 secciones). Pendiente: Documents__Branding__Default
+Etapa actual: IMPLEMENTATION — Epic 1 iniciado. Story 1.1 SQL escrito. Pendiente: aplicar migraciones en Supabase (requiere PAT)
 
 ---
 
@@ -109,9 +109,16 @@ Etapa actual: ITERATE — Marketing__Landing__Default rebuild completo (10 secci
 - context/aurum_default_frames.md — sincronizado: 35 frames FREEZE, 0 pendientes ✓
 - CLAUDE.md — referencias reason_entities + reason_backlog añadidas ✓
 
+## Story 1.1 — Schema de Supabase (EN PROGRESO)
+
+- supabase/migrations/005_reason_schema.sql — 23 tablas nuevas, 29 ALTER TABLE, 41 RLS policies, 20 índices ✓
+- supabase/migrations/006_seed_catalogs.sql — 7 advisors + 4 cofounders + 4 document_specs ✓
+- scripts/apply-migrations.js — script de aplicación vía Management API ✓
+- PENDIENTE: aplicar migraciones en Supabase (requiere Personal Access Token en app.supabase.com/account/tokens)
+
 ## Siguiente paso
 
-Iniciar Epic 1 — Fundación (Story 1.1: Schema de Supabase)
+Juan: ir a app.supabase.com/account/tokens → crear token → SUPABASE_ACCESS_TOKEN=sbp_xxx node scripts/apply-migrations.js
 
 ---
 
