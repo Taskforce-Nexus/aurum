@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import UserMenu from '@/components/dashboard/UserMenu'
 
@@ -30,12 +29,11 @@ export default async function DashboardLayout({
       <header className="fixed top-0 left-0 right-0 z-30 border-b border-[#1E2A4A] bg-[#0A1128]/95 backdrop-blur-sm px-6 h-14 flex items-center justify-between">
         {/* Left — Logo */}
         <Link href="/" className="shrink-0">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/branding/logo-claro-reason.png"
             alt="Reason"
-            width={100}
-            height={26}
-            priority
+            className="h-7 w-auto"
           />
         </Link>
 

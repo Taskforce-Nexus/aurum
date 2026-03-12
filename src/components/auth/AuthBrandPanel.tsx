@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 const FEATURES = [
   { icon: '🌱', label: 'Semilla' },
   { icon: '🧠', label: 'Consejo AI' },
@@ -21,13 +19,11 @@ export default function AuthBrandPanel({ variant = 'default' }: { variant?: Vari
     <div className="hidden lg:flex flex-col justify-between w-[600px] shrink-0 bg-[#0D1535] px-14 py-16">
       {/* Top: Logo + headline */}
       <div>
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/branding/logo-claro-reason.png"
           alt="Reason"
-          width={120}
-          height={32}
-          className="mb-8"
-          priority
+          className="h-8 w-auto mb-8"
         />
         <div className="w-10 h-0.5 bg-[#B8860B] mb-8" />
 
