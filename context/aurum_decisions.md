@@ -858,3 +858,24 @@ Scope: post-MVP. No bloquea el flujo actual.
 **Fecha:** 2026-03-12
 
 ---
+
+## 47. Consultoría activa post-sesión — chat vivo con tu consejo
+
+Después de completar la Sesión de Consejo y exportar documentos, el usuario
+puede regresar al proyecto y abrir un chat con su consejo armado.
+
+Funciones:
+
+- Debatir nuevas ideas con los mismos consejeros que ya tienen contexto
+- Actualizar documentos existentes con nueva información
+- Resolver dudas estratégicas posteriores
+- Consultar al consejo antes de tomar decisiones de ejecución
+
+Es el principal driver de consumo recurrente de tokens y el ancla de retención.
+El consejo acumula inteligencia sesión a sesión — abandonar Reason = perder esa memoria.
+
+Scope: post-MVP. Diseñar frame después de completar landing.
+
+**Fecha:** 2026-03-12
+
+---

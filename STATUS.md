@@ -69,7 +69,7 @@ Etapa actual: ITERATE — Marketing__Landing__Default rebuild completo (10 secci
 - Export__Center__Default — FREEZE ✓ (aprobado por Juan)
 
 - Marketing__Landing__Default — rebuild completo desde cero: 10 secciones (Hero, Problema, Para Quién, Cómo Funciona, Consejo IA, Documentos, Nexo Dual, Suite AVA, CTA Final, Footer) ✓
-- aurum_decisions.md — decisiones 45 (mascota pulpo Nexo) y 46 (ambient music Sesión de Consejo) registradas ✓
+- aurum_decisions.md — decisiones 45 (mascota pulpo Nexo), 46 (ambient music Sesión de Consejo) y 47 (consultoría activa post-sesión) registradas ✓
 
 ## Siguiente paso
 
