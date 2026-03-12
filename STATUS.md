@@ -52,7 +52,7 @@ Freeze ConsejoPrincipalPropuesta → continuar EspecialistasPropuesta, ICPsPropu
 
 | Hash | Descripción |
 | --- | --- |
-| (pending) | fix: ConsejoPrincipalPropuesta + MyBoard + AdvisorSelector — 6 correcciones |
+| f002b67 | fix: ConsejoPrincipalPropuesta + MyBoard + AdvisorSelector — 6 correcciones |
 | 3e65985 | fix: EntregablesPropuesta — secciones reales, paginación restaurada, textos spec |
 | 31461c0 | fix: EntregablesPropuesta — detail expandible, botón renombrado, Paso X de 7 |
 | ea96e7c | refactor: renombrar CatalogDrawerModal → CofounderSelector__Drawer + eliminar modal redundante |
