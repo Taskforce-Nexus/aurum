@@ -48,10 +48,13 @@ Etapa actual: ITERATE — 3 frames freezados. Siguiente: EspecialistasPropuesta,
 - SeedSession__EspecialistaSelector__Drawer — footer 2 filas: Confirmar Invitado (gold full) + Editar/Eliminar (ghost) ✓
 - EspecialistasPropuesta — FREEZE ✓
 - SeedSession__EspecialistaSelector__Drawer — FREEZE ✓
+- ICPsPropuesta — Paso 6 de 7 visible, 3 personas, Aceptar/Descartar, citas itálicas, Agregar perspectiva ✓
+- SeedSession__BuyerPersonaSelector__Drawer — ALTERNATIVAS ACTUALES + JOURNEY DE COMPRA + confirmación eliminación ✓
+- Projects__AdvisoryBoard__BuyerPersonaModal → renombrado SeedSession__BuyerPersonaSelector__Drawer ✓
 
 ## Siguiente paso
 
-Diseñar ICPsPropuesta (Paso 6), ConsejoListo (Paso 7) → Incubator
+Diseñar ConsejoListo (Paso 7 de 7) → Incubator
 
 ---
 

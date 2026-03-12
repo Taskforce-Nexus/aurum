@@ -47,7 +47,7 @@ Projects__InviteCollaborator__Modal
 SeedSession__CofounderSelector__Drawer — FREEZE
 SeedSession__AdvisorSelector__Drawer — FREEZE
 SeedSession__EspecialistaSelector__Drawer — FREEZE
-Projects__AdvisoryBoard__BuyerPersonaModal — FREEZE
+SeedSession__BuyerPersonaSelector__Drawer — FREEZE
 Shared__ConfirmAction__Modal
 SeedSession__EspecialistaDetalle__Modal
 SeedSession__ICPDetalle__Modal

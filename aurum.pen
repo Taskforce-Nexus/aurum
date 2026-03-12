@@ -19490,44 +19490,6 @@
                       "id": "gc5Dz",
                       "width": "fill_container",
                       "height": 1
-                    },
-                    {
-                      "type": "frame",
-                      "id": "6igdv",
-                      "name": "btnInv",
-                      "height": 28,
-                      "fill": "#1A1400",
-                      "cornerRadius": 6,
-                      "stroke": {
-                        "thickness": 1,
-                        "fill": "#B8860B"
-                      },
-                      "gap": 6,
-                      "padding": [
-                        0,
-                        10
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "icon_font",
-                          "id": "pxByG",
-                          "width": 12,
-                          "height": 12,
-                          "iconFontName": "plus",
-                          "iconFontFamily": "lucide",
-                          "fill": "#B8860B"
-                        },
-                        {
-                          "type": "text",
-                          "id": "4kZph",
-                          "fill": "#B8860B",
-                          "content": "Invitar",
-                          "fontFamily": "Inter",
-                          "fontSize": 11,
-                          "fontWeight": "500"
-                        }
-                      ]
                     }
                   ]
                 },
@@ -21574,7 +21536,7 @@
       "id": "qCeyT",
       "x": 7686,
       "y": 194,
-      "name": "Projects__AdvisoryBoard__BuyerPersonaModal",
+      "name": "SeedSession__BuyerPersonaSelector__Drawer",
       "width": 1440,
       "height": 900,
       "fill": "#1A2644",
@@ -21634,44 +21596,6 @@
                       "id": "gb82G",
                       "width": "fill_container",
                       "height": 1
-                    },
-                    {
-                      "type": "frame",
-                      "id": "oxgEq",
-                      "name": "btnBP",
-                      "height": 28,
-                      "fill": "#1A1400",
-                      "cornerRadius": 6,
-                      "stroke": {
-                        "thickness": 1,
-                        "fill": "#B8860B"
-                      },
-                      "gap": 6,
-                      "padding": [
-                        0,
-                        10
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "icon_font",
-                          "id": "ZT1Z1",
-                          "width": 12,
-                          "height": 12,
-                          "iconFontName": "plus",
-                          "iconFontFamily": "lucide",
-                          "fill": "#B8860B"
-                        },
-                        {
-                          "type": "text",
-                          "id": "FACDK",
-                          "fill": "#B8860B",
-                          "content": "Nueva Persona",
-                          "fontFamily": "Inter",
-                          "fontSize": 11,
-                          "fontWeight": "500"
-                        }
-                      ]
                     }
                   ]
                 },
@@ -22091,7 +22015,7 @@
                       "id": "wxbzC",
                       "name": "personaCard3",
                       "width": "fill_container",
-                      "fill": "$bg-tertiary",
+                      "fill": "#2D0000",
                       "cornerRadius": 12,
                       "stroke": {
                         "align": "inside",
@@ -22141,8 +22065,8 @@
                                 {
                                   "type": "text",
                                   "id": "miF5W",
-                                  "fill": "$text-primary",
-                                  "content": "El Técnico sin Visión de Negocio",
+                                  "fill": "#FFAAAA",
+                                  "content": "¿Eliminar El Técnico sin Visión de Negocio?",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 14,
                                   "fontWeight": "bold"
@@ -22174,61 +22098,65 @@
                               "type": "text",
                               "id": "94Ii1",
                               "fill": "$text-tertiary",
-                              "content": "Hombre, 25-35 · Desarrollador/Ingeniero · Remoto",
                               "fontFamily": "Open Sans",
                               "fontSize": 11,
                               "fontWeight": "normal"
-                            },
-                            {
-                              "type": "text",
-                              "id": "tg2FY",
-                              "fill": "$text-quaternary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "\"Sé construirlo pero no sé cómo venderlo\"",
-                              "fontFamily": "Open Sans",
-                              "fontSize": 11,
-                              "fontWeight": "normal",
-                              "fontStyle": "italic"
                             }
                           ]
                         },
                         {
                           "type": "frame",
-                          "id": "bKtPJ",
-                          "name": "btns3",
-                          "gap": 10,
-                          "alignItems": "center",
+                          "id": "tzRWA",
+                          "name": "deleteConfirmBtns",
+                          "width": "fill_container",
+                          "gap": 8,
                           "children": [
                             {
-                              "type": "text",
-                              "id": "2bgYk",
-                              "fill": "$gold",
-                              "content": "Editar",
-                              "fontFamily": "Open Sans",
-                              "fontSize": 11,
-                              "fontWeight": "500"
-                            },
-                            {
                               "type": "frame",
-                              "id": "TgKvg",
-                              "fill": "$bg-secondary",
+                              "id": "USyjm",
+                              "name": "cancelBtn",
+                              "width": "fill_container",
+                              "height": 28,
+                              "fill": "#00000000",
                               "cornerRadius": 6,
-                              "padding": [
-                                4,
-                                6
-                              ],
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#888888"
+                              },
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "type": "icon_font",
-                                  "id": "OZtAi",
-                                  "width": 10,
-                                  "height": 10,
-                                  "iconFontName": "x",
-                                  "iconFontFamily": "lucide",
-                                  "fill": "$text-tertiary"
+                                  "type": "text",
+                                  "id": "a03Og",
+                                  "fill": "#CCCCCC",
+                                  "content": "Cancelar",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Jr0Io",
+                              "name": "delBtn",
+                              "width": "fill_container",
+                              "height": 28,
+                              "fill": "#8B0000",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BQKft",
+                                  "fill": "#FFFFFF",
+                                  "content": "Eliminar",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
                                 }
                               ]
                             }
@@ -22652,6 +22580,71 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Open Sans",
                           "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ReEyO",
+                      "name": "alternativasSection",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ascvn",
+                          "fill": "$text-tertiary",
+                          "content": "ALTERNATIVAS ACTUALES",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "ic4EH",
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "• Hojas de Excel para proyecciones caseras\n• Cursos en línea de emprendimiento (Platzi, Coursera)\n• Pedir consejos a amigos que ya emprendieron\n• No hacer nada y avanzar con intuición",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Open Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "jBAve",
+                      "name": "journeySection",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ZrU1U",
+                          "fill": "$text-tertiary",
+                          "content": "JOURNEY DE COMPRA",
+                          "fontFamily": "Open Sans",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "l4jr1",
+                          "opacity": 0.7,
+                          "fill": "#8B9DB7",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Detección · \"Necesito estructura para mi idea\" · Ansiedad, urgencia · Busca en Google, pregunta en redes\n\nEvaluación · \"¿Esto me va a servir o es otro curso más?\" · Escepticismo, esperanza · Compara opciones, lee reseñas\n\nDecisión · \"Parece serio, lo pruebo\" · Entusiasmo cauteloso · Se registra, empieza trial\n\nCompra · \"Si me dio valor real, pago\" · Confianza o frustración · Upgrade o abandono",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Open Sans",
+                          "fontSize": 11,
                           "fontWeight": "normal"
                         }
                       ]
@@ -61455,6 +61448,7 @@
                       "type": "text",
                       "id": "PDj4L",
                       "name": "etapaLabel",
+                      "fill": "#F8F8F8",
                       "content": "Paso 6 de 7",
                       "fontFamily": "Inter",
                       "fontSize": 13,
@@ -62314,6 +62308,67 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "d3yEQ",
+                                      "name": "q1",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "\"Gano bien pero no sé a dónde se va mi dinero\"",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "5SjaW",
+                                  "name": "db1",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "VBNiv",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "DewvV",
+                                  "name": "ac1",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "UNw75",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -62381,6 +62436,67 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "Ux6J6",
+                                      "name": "q2",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "\"Quiero aprender a ahorrar sin complicaciones\"",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "tE1Ku",
+                                  "name": "db2",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "6yQuu",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "aPyGZ",
+                                  "name": "ac2",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "fTy75",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -62448,6 +62564,67 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "nAPdF",
+                                      "name": "q3",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "\"Necesito claridad sobre cuánto puedo gastar\"",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "9EkUX",
+                                  "name": "db3",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "6E0rl",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "pUuU1",
+                                  "name": "ac3",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "BPHYV",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -62483,138 +62660,14 @@
                               ]
                             },
                             {
-                              "type": "frame",
-                              "id": "shgof",
-                              "name": "ri4",
-                              "width": "fill_container",
-                              "gap": 10,
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "frame",
-                                  "id": "pvO8Z",
-                                  "name": "ci4",
-                                  "width": "fill_container",
-                                  "layout": "vertical",
-                                  "gap": 2,
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "fQSzF",
-                                      "fill": "#F8F8F8",
-                                      "content": "Pareja Joven",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 14,
-                                      "fontWeight": "600"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "sN4Ra",
-                                      "fill": "#8B9DB7",
-                                      "content": "27-30 años, gastos compartidos sin sistema claro",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 12,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "cRPiz",
-                                  "name": "bi4",
-                                  "fill": "#00000000",
-                                  "cornerRadius": 6,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": 1,
-                                    "fill": "#3A3B40"
-                                  },
-                                  "padding": [
-                                    5,
-                                    10
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "0tcrB",
-                                      "fill": "#8B9DB7",
-                                      "content": "Ver perfil",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 12,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
-                              "id": "yygOL",
-                              "name": "ri5",
-                              "width": "fill_container",
-                              "gap": 10,
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "frame",
-                                  "id": "qnsY9",
-                                  "name": "ci5",
-                                  "width": "fill_container",
-                                  "layout": "vertical",
-                                  "gap": 2,
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "ZXWil",
-                                      "fill": "#F8F8F8",
-                                      "content": "Profesional en Transición",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 14,
-                                      "fontWeight": "600"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "ENEP9",
-                                      "fill": "#8B9DB7",
-                                      "content": "35 años, cambio de trabajo, quiere reorganizar sus finanzas",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 12,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "frame",
-                                  "id": "UgjOZ",
-                                  "name": "bi5",
-                                  "fill": "#00000000",
-                                  "cornerRadius": 6,
-                                  "stroke": {
-                                    "align": "inside",
-                                    "thickness": 1,
-                                    "fill": "#3A3B40"
-                                  },
-                                  "padding": [
-                                    5,
-                                    10
-                                  ],
-                                  "justifyContent": "center",
-                                  "alignItems": "center",
-                                  "children": [
-                                    {
-                                      "type": "text",
-                                      "id": "QTs8z",
-                                      "fill": "#8B9DB7",
-                                      "content": "Ver perfil",
-                                      "fontFamily": "Open Sans",
-                                      "fontSize": 12,
-                                      "fontWeight": "normal"
-                                    }
-                                  ]
-                                }
-                              ]
+                              "type": "text",
+                              "id": "19hhN",
+                              "name": "addLink",
+                              "fill": "#B8860B",
+                              "content": "+ Agregar otra perspectiva",
+                              "fontFamily": "Open Sans",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -62673,7 +62726,7 @@
                                   "type": "text",
                                   "id": "01dmL",
                                   "fill": "#8B9DB7",
-                                  "content": "Quiero ajustar algo",
+                                  "content": "Pedir otra perspectiva",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 14,
                                   "fontWeight": "500"
