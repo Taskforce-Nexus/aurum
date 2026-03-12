@@ -17336,7 +17336,7 @@
     {
       "type": "frame",
       "id": "Xpdtg",
-      "x": 4614,
+      "x": 4620,
       "y": 196,
       "name": "SeedSession__AdvisorSelector__Drawer",
       "width": 1440,
@@ -19412,7 +19412,7 @@
       "id": "v1cxO",
       "x": 6154,
       "y": 196,
-      "name": "Projects__AdvisoryBoard__InvitedAdvisorModal",
+      "name": "SeedSession__EspecialistaSelector__Drawer",
       "width": 1440,
       "height": 900,
       "fill": "#05050680",
@@ -20549,15 +20549,6 @@
                         },
                         {
                           "type": "icon_font",
-                          "id": "iWeCc",
-                          "width": 14,
-                          "height": 14,
-                          "iconFontName": "pencil",
-                          "iconFontFamily": "lucide",
-                          "fill": "$text-tertiary"
-                        },
-                        {
-                          "type": "icon_font",
                           "id": "lN14f",
                           "width": 14,
                           "height": 14,
@@ -21465,6 +21456,7 @@
                           "id": "MaPa2",
                           "name": "delBtnI",
                           "height": 40,
+                          "fill": "#8B0000",
                           "cornerRadius": 6,
                           "gap": 4,
                           "padding": [
@@ -21486,7 +21478,7 @@
                               "type": "text",
                               "id": "ZYwWa",
                               "fill": "#E57373",
-                              "content": "Eliminar",
+                              "content": "¿Confirmar eliminación?",
                               "fontFamily": "Inter",
                               "fontSize": 12,
                               "fontWeight": "500"
@@ -55616,6 +55608,7 @@
                       "id": "NJMEA",
                       "name": "ec",
                       "width": "fill_container",
+                      "height": 442,
                       "fill": "#0A1128",
                       "cornerRadius": 12,
                       "stroke": {
@@ -55642,6 +55635,7 @@
                           "id": "MWpGa",
                           "name": "esl",
                           "width": "fill_container",
+                          "height": 315,
                           "layout": "vertical",
                           "gap": 10,
                           "children": [
@@ -55650,6 +55644,7 @@
                               "id": "KX8o1",
                               "name": "re1",
                               "width": "fill_container",
+                              "height": 55,
                               "gap": 10,
                               "alignItems": "center",
                               "children": [
@@ -55657,7 +55652,8 @@
                                   "type": "frame",
                                   "id": "GLY6a",
                                   "name": "ce1",
-                                  "width": "fill_container",
+                                  "width": 640,
+                                  "height": 55,
                                   "layout": "vertical",
                                   "gap": 2,
                                   "children": [
@@ -55678,6 +55674,18 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "QtLiQ",
+                                      "name": "j1",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "Tu proyecto opera en el sector fintech latinoamericano",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
                                     }
                                   ]
                                 },
@@ -55702,6 +55710,55 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
                                       "fontWeight": "500"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "d5wuI",
+                                  "name": "db1",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "wyUWf",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "CKKQL",
+                                  "name": "ac1",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "HeoIE",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -55741,6 +55798,7 @@
                               "id": "HzzkR",
                               "name": "re2",
                               "width": "fill_container",
+                              "height": 55,
                               "gap": 10,
                               "alignItems": "center",
                               "children": [
@@ -55748,7 +55806,8 @@
                                   "type": "frame",
                                   "id": "Phw1Z",
                                   "name": "ce2",
-                                  "width": "fill_container",
+                                  "width": 640,
+                                  "height": 55,
                                   "layout": "vertical",
                                   "gap": 2,
                                   "children": [
@@ -55769,6 +55828,18 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "cikLR",
+                                      "name": "j2",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "FinTrack necesita entender productos financieros para consumidores",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
                                     }
                                   ]
                                 },
@@ -55793,6 +55864,55 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
                                       "fontWeight": "500"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "NQFdC",
+                                  "name": "db2",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "bbq4K",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "O2zUd",
+                                  "name": "ac2",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "xh5lV",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -55832,6 +55952,7 @@
                               "id": "13IlF",
                               "name": "re3",
                               "width": "fill_container",
+                              "height": 55,
                               "gap": 10,
                               "alignItems": "center",
                               "children": [
@@ -55839,7 +55960,8 @@
                                   "type": "frame",
                                   "id": "cmQoa",
                                   "name": "ce3",
-                                  "width": "fill_container",
+                                  "width": 640,
+                                  "height": 55,
                                   "layout": "vertical",
                                   "gap": 2,
                                   "children": [
@@ -55860,6 +55982,18 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "JC89o",
+                                      "name": "j3",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "Tu modelo de negocio requiere estructura regulatoria",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
                                     }
                                   ]
                                 },
@@ -55884,6 +56018,55 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
                                       "fontWeight": "500"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "k6tDA",
+                                  "name": "db3",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "Fd4k3",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "r8z5l",
+                                  "name": "ac3",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "OC54J",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -55923,6 +56106,7 @@
                               "id": "dgTbb",
                               "name": "re4",
                               "width": "fill_container",
+                              "height": 55,
                               "gap": 10,
                               "alignItems": "center",
                               "children": [
@@ -55930,7 +56114,8 @@
                                   "type": "frame",
                                   "id": "vZYH5",
                                   "name": "ce4",
-                                  "width": "fill_container",
+                                  "width": 640,
+                                  "height": 55,
                                   "layout": "vertical",
                                   "gap": 2,
                                   "children": [
@@ -55951,6 +56136,18 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "DxuR1",
+                                      "name": "j4",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "Tu propuesta de valor necesita validación con datos de comportamiento",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
                                     }
                                   ]
                                 },
@@ -55975,6 +56172,55 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
                                       "fontWeight": "500"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "aLeQP",
+                                  "name": "db4",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "xoMf1",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "EUOio",
+                                  "name": "ac4",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "fxzc9",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -56014,6 +56260,7 @@
                               "id": "5PTTw",
                               "name": "re5",
                               "width": "fill_container",
+                              "height": 55,
                               "gap": 10,
                               "alignItems": "center",
                               "children": [
@@ -56021,7 +56268,8 @@
                                   "type": "frame",
                                   "id": "Z1sDy",
                                   "name": "ce5",
-                                  "width": "fill_container",
+                                  "width": 640,
+                                  "height": 55,
                                   "layout": "vertical",
                                   "gap": 2,
                                   "children": [
@@ -56042,6 +56290,18 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 12,
                                       "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "I6YYD",
+                                      "name": "j5",
+                                      "opacity": 0.5,
+                                      "fill": "#F8F8F8",
+                                      "content": "FinTrack apunta a mercados LATAM en crecimiento",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal",
+                                      "fontStyle": "italic"
                                     }
                                   ]
                                 },
@@ -56066,6 +56326,55 @@
                                       "fontFamily": "Open Sans",
                                       "fontSize": 11,
                                       "fontWeight": "500"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "BrJx3",
+                                  "name": "db5",
+                                  "width": 80,
+                                  "height": 27,
+                                  "fill": "#00000000",
+                                  "cornerRadius": 6,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#FFFFFF"
+                                  },
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "NPMat",
+                                      "fill": "#FFFFFF",
+                                      "content": "Descartar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "e2Iqh",
+                                  "name": "ac5",
+                                  "width": 72,
+                                  "height": 27,
+                                  "fill": "#B8860B",
+                                  "cornerRadius": 6,
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "9wQD3",
+                                      "fill": "#0A1128",
+                                      "content": "Aceptar",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
                                     }
                                   ]
                                 },
@@ -56157,7 +56466,7 @@
                                   "type": "text",
                                   "id": "NF98B",
                                   "fill": "#8B9DB7",
-                                  "content": "Quiero ajustar algo",
+                                  "content": "Pedir otro especialista",
                                   "fontFamily": "Open Sans",
                                   "fontSize": 14,
                                   "fontWeight": "500"

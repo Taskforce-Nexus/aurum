@@ -43,10 +43,12 @@ Etapa actual: ITERATE — 3 frames freezados. Siguiente: EspecialistasPropuesta,
 - ConsejoPrincipalPropuesta — FREEZE ✓
 - SeedSession__AdvisorSelector__Drawer — FREEZE ✓
 - AdvisoryBoard__MyBoard — FREEZE ✓
+- EspecialistasPropuesta — botones Aceptar/Descartar por fila, justificación itálica, "Pedir otro especialista" ✓
+- SeedSession__EspecialistaSelector__Drawer — edit icon removido, confirm eliminación inline rojo oscuro ✓
 
 ## Siguiente paso
 
-Diseñar EspecialistasPropuesta (Paso 5), ICPsPropuesta (Paso 6), ConsejoListo (Paso 7) → Incubator
+Diseñar ICPsPropuesta (Paso 6), ConsejoListo (Paso 7) → Incubator
 
 ---
 
