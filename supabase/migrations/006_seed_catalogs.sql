@@ -10,7 +10,7 @@ insert into public.advisors (
   name, specialty, category, level, element,
   communication_style, hats, bio,
   specialties_tags, industries_tags, experience,
-  language, is_native, created_by
+  language, is_native, created_by, advisor_type
 ) values
 (
   'Dr. Maya Singh',
@@ -19,7 +19,7 @@ insert into public.advisors (
   'lidera',
   'tierra',
   'Analítica y basada en datos',
-  '["blanco", "negro"]',
+  ARRAY['blanco', 'negro'],
   'Doctora en Comportamiento del Consumidor por la Universidad de Chicago. 18 años diseñando frameworks de validación de mercado para startups y corporativos. Ha liderado estudios de mercado para más de 200 empresas en LATAM, Europa y APAC.',
   '["Validación de mercado", "Análisis competitivo", "Segmentación de clientes", "Research cualitativo", "Jobs to be Done"]',
   '["SaaS", "Fintech", "HealthTech", "EdTech", "CPG"]',
@@ -31,7 +31,8 @@ insert into public.advisors (
   ]',
   'Español · Inglés técnico',
   true,
-  null
+  null,
+  'investigacion'
 ),
 (
   'Alex Reeves',
@@ -40,7 +41,7 @@ insert into public.advisors (
   'lidera',
   'agua',
   'Empático y colaborativo',
-  '["rojo", "verde", "azul"]',
+  ARRAY['rojo', 'verde', 'azul'],
   'Diseñador de experiencias con 14 años construyendo productos digitales centrados en el usuario. Especialista en design thinking, investigación de usuario y arquitectura de información. Ha rediseñado flujos críticos para productos con millones de usuarios activos.',
   '["Design Thinking", "User Research", "Prototipado rápido", "Arquitectura de información", "Accesibilidad"]',
   '["SaaS B2B", "Fintech", "E-commerce", "Plataformas de productividad"]',
@@ -52,7 +53,8 @@ insert into public.advisors (
   ]',
   'Español · Inglés nativo',
   true,
-  null
+  null,
+  'ux_producto'
 ),
 (
   'Priya Chen',
@@ -61,7 +63,7 @@ insert into public.advisors (
   'lidera',
   'fuego',
   'Directa y orientada a la acción',
-  '["negro", "verde", "azul"]',
+  ARRAY['negro', 'verde', 'azul'],
   'Product Manager con historial de construcción de productos 0 a 1 en entornos de alta incertidumbre. Experta en Product-Led Growth, framework OKR y roadmapping estratégico. Ha llevado tres productos a Product-Market Fit en menos de 18 meses cada uno.',
   '["Product Strategy", "Product-Led Growth", "OKRs", "Roadmapping", "Discovery continuo", "A/B testing"]',
   '["SaaS", "Plataformas B2B", "Marketplaces", "Developer Tools"]',
@@ -73,7 +75,8 @@ insert into public.advisors (
   ]',
   'Español · Inglés fluido · Mandarín básico',
   true,
-  null
+  null,
+  'product_manager'
 ),
 (
   'Marcus Rivera',
@@ -82,7 +85,7 @@ insert into public.advisors (
   'apoya',
   'aire',
   'Visionario y explorador',
-  '["rojo", "amarillo", "verde"]',
+  ARRAY['rojo', 'amarillo', 'verde'],
   'Consultor estratégico con 20 años acompañando a founders y CEOs en decisiones de alto impacto. Especialista en modelos de negocio, estrategia de entrada a mercados y estructuración de ventures. Ha asesorado a más de 80 startups desde pre-seed hasta Serie B.',
   '["Business Model Canvas", "Go-to-Market", "Estrategia competitiva", "M&A temprano", "Fundraising narrative"]',
   '["SaaS", "Fintech", "Retail Tech", "Logística", "AgriTech"]',
@@ -94,7 +97,8 @@ insert into public.advisors (
   ]',
   'Español · Inglés fluido · Portugués',
   true,
-  null
+  null,
+  'negocio'
 ),
 (
   'Lena Fischer',
@@ -103,7 +107,7 @@ insert into public.advisors (
   'apoya',
   'tierra',
   'Analítica y basada en datos',
-  '["blanco", "rojo", "azul"]',
+  ARRAY['blanco', 'rojo', 'azul'],
   'Analista financiera y de negocios con especialización en modelado financiero, unit economics y due diligence. Traduce datos complejos en decisiones accionables. Ha construido modelos financieros para más de 60 startups en etapas seed a Serie A.',
   '["Modelado financiero", "Unit economics", "Análisis de riesgos", "P&L Proforma", "Due diligence", "KPIs de negocio"]',
   '["Fintech", "SaaS", "Marketplaces", "HealthTech", "D2C"]',
@@ -115,7 +119,8 @@ insert into public.advisors (
   ]',
   'Español · Inglés nativo · Alemán',
   true,
-  null
+  null,
+  'financial_analyst'
 ),
 (
   'Owen Park',
@@ -124,7 +129,7 @@ insert into public.advisors (
   'observa',
   'fuego',
   'Directo y orientado a la acción',
-  '["blanco", "negro", "verde"]',
+  ARRAY['blanco', 'negro', 'verde'],
   'Arquitecto de software y CTO fractional con 16 años construyendo sistemas escalables. Especialista en arquitectura de producto, decisiones de stack técnico y deuda técnica estratégica. Ha escalado sistemas de 0 a 10M usuarios.',
   '["Arquitectura de sistemas", "Stack técnico", "Escalabilidad", "MVP técnico", "Seguridad", "DevOps"]',
   '["SaaS B2B", "Fintech", "Plataformas de datos", "AI/ML", "Developer Tools"]',
@@ -136,7 +141,8 @@ insert into public.advisors (
   ]',
   'Español · Inglés técnico · Coreano',
   true,
-  null
+  null,
+  'tecnico'
 ),
 (
   'Nadia Osei',
@@ -145,7 +151,7 @@ insert into public.advisors (
   'observa',
   'tierra',
   'Analítica y basada en datos',
-  '["blanco", "amarillo", "azul"]',
+  ARRAY['blanco', 'amarillo', 'azul'],
   'Especialista en estrategia de pricing y monetización para productos digitales. Ha diseñado modelos de precio para SaaS, marketplaces y plataformas de consumo. Su framework de Value-Based Pricing ha incrementado ingresos promedio en 40% en 18 meses.',
   '["Value-Based Pricing", "Monetización", "Freemium strategy", "Price elasticity", "Packaging de planes", "Experimentación de precios"]',
   '["SaaS", "Marketplaces", "Fintech", "Media digital", "E-commerce"]',
@@ -157,7 +163,8 @@ insert into public.advisors (
   ]',
   'Español · Inglés nativo · Francés',
   true,
-  null
+  null,
+  'precios'
 )
 on conflict do nothing;
 
