@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-13
-Etapa actual: IMPLEMENTATION — Story 2.2 COMPLETA. SeedSession pasos 2-7 implementados. Siguiente: verificar en browser + Story 2.x
+Etapa actual: IMPLEMENTATION — Story 4.1 + 4.2 COMPLETA. Sesión de Consejo implementada: motor Nexo Dual + UI 3 columnas.
 
 ---
 
@@ -211,9 +211,24 @@ Etapa actual: IMPLEMENTATION — Story 2.2 COMPLETA. SeedSession pasos 2-7 imple
 - IncubadoraChat.tsx: header texto "Reason" → img con LOGO_DATA_URL
 - voiceMode: arranca en false, VoiceModePanel solo renderiza on demand (ya correcto)
 
+## Story 4.1 + 4.2 — Sesión de Consejo (COMPLETO ✓)
+
+- src/lib/prompts.ts — NEXO_SESSION_QUESTION_SYSTEM, NEXO_CONSTRUCTIVO_SYSTEM, NEXO_CRITICO_SYSTEM, NEXO_SYNTHESIS_SYSTEM añadidos ✓
+- src/app/api/session/turn/route.ts — Motor Nexo Dual con acciones start/debate/resolve ✓
+  - start: crea Session + SessionPhases, genera preguntas para primer documento
+  - debate: Constructivo → Crítico → Síntesis, guarda NexoDualResponse
+  - resolve: registra resolución, avanza question_index, detecta phase/session completa
+- src/app/project/[id]/sesion-consejo/page.tsx — Server component: fetch proyecto + council + documentos + sesión activa ✓
+- src/components/sesion-consejo/SesionConsejoView.tsx — UI 3 columnas completa ✓
+  - Left sidebar: consejo por nivel + cofounders
+  - Center: pregunta activa + cards Constructivo vs Crítico + historial
+  - Right sidebar: botones de acción, progreso por documento, momentum, preview en vivo
+  - Modos: Normal / Autopiloto / Levantar Mano
+  - Estados: init → starting → question_ready → debating → debate_ready → resolving → phase_complete → session_complete
+
 ## Siguiente paso
 
-Story 2.2 — TBD por Kira
+Story 4.3 — Preview en vivo de documento (content_json + Documents Viewer con contenido parcial)
 
 ---
 
