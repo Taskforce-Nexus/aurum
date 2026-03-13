@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-13
-Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS + alineación visual UI. Siguiente: Story 1.5
+Etapa actual: IMPLEMENTATION — Story 2.2 COMPLETA. SeedSession pasos 2-7 implementados. Siguiente: verificar en browser + Story 2.x
 
 ---
 
@@ -19,7 +19,9 @@ Etapa actual: IMPLEMENTATION — Epic 1 en progreso. Stories 1.1-1.4 COMPLETAS +
 - Conexión GitHub repo por proyecto
 - Semilla con Nexo — conversación persiste en Supabase
 - Resumen del Fundador generado al terminar Semilla
-- Banner de Semilla completada
+- Banner de Semilla completada → router.refresh() → SeedSessionFlow automático
+- SeedSession pasos 2-7: Entregables, Cofounders, ConsejoPrincipal, Especialistas, ICPs, ConsejoListo
+- Modo voz VAD dos fases (waiting/processing) + interrupción a Nexo + engranaje voz/velocidad
 - Deploy activo en Railway y Vercel
 
 ## En progreso
