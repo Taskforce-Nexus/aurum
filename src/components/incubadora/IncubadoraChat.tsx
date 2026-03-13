@@ -5,6 +5,7 @@ import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import { createClient } from '@/lib/supabase/client'
 import { LOGO_DATA_URL } from '@/lib/logo'
+import VoiceModePanel from './VoiceModePanel'
 import type { Project, Conversation, Message } from '@/lib/types'
 
 interface UploadedFile {
@@ -45,6 +46,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
   const [isRecording, setIsRecording] = useState(false)
   const [voiceUnavailable, setVoiceUnavailable] = useState(false)
   const [voiceErrorMsg, setVoiceErrorMsg] = useState('')
+  const [voiceMode, setVoiceMode] = useState(false)
   const [extractState, setExtractState] = useState<'idle' | 'running' | 'done'>('idle')
   const [extractProgress, setExtractProgress] = useState(0) // 0–5
   const [extractedRepo, setExtractedRepo] = useState<string | null>(null)
@@ -317,6 +319,19 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
           </span>
         </div>
         <div className="flex items-center gap-3">
+          {!voiceMode && (
+            <button
+              type="button"
+              onClick={() => setVoiceMode(true)}
+              className="flex items-center gap-1.5 text-sm border border-[#1E2A4A] text-[#8892A4] hover:text-white px-3 py-1.5 rounded-lg transition-colors"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+                <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/>
+              </svg>
+              Modo voz
+            </button>
+          )}
           <Link href={`/project/${project.id}`}
             className="text-sm text-[#8892A4] border border-[#1E2A4A] px-3 py-1.5 rounded-lg hover:text-white hover:border-[#1E2A4A] transition-colors">
             Salir
@@ -503,6 +518,16 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
           )}
         </aside>
 
+        {voiceMode ? (
+          <VoiceModePanel
+            projectId={project.id}
+            conversationId={activeConversationId}
+            messages={messages}
+            onMessagesUpdate={setMessages}
+            onExit={() => setVoiceMode(false)}
+            onSemillaComplete={(brief) => { setFounderBrief(brief); setSemillaComplete(true) }}
+          />
+        ) : (
         <main className="flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
             {messages.map((msg, i) => (
@@ -624,6 +649,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             </form>
           </div>
         </main>
+        )}
       </div>
     </div>
   )
