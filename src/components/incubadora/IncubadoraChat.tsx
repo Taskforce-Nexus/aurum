@@ -515,7 +515,12 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
         {voiceMode ? (
           <VoiceModePanel
             projectId={project.id}
+            conversationId={activeConversationId}
+            messages={messages}
             onExit={() => setVoiceMode(false)}
+            onNewMessage={(role, content) => {
+              setMessages(prev => [...prev, { role: role as 'user' | 'assistant', content }])
+            }}
           />
         ) : (
         <main className="flex-1 flex flex-col overflow-hidden">
