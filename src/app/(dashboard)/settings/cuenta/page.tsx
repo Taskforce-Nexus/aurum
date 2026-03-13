@@ -1,8 +1,28 @@
-export default function CuentaPage() {
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import SettingsAccount from '@/components/settings/SettingsAccount'
+
+export default async function CuentaPage() {
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login')
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('name, avatar_url, language, timezone')
+    .eq('id', user.id)
+    .single()
+
   return (
-    <div>
-      <h2 className="text-lg font-semibold mb-6">Cuenta</h2>
-      <p className="text-sm text-[#6b6d75]">En construcción.</p>
-    </div>
+    <SettingsAccount
+      userId={user.id}
+      email={user.email ?? ''}
+      profile={{
+        name: profile?.name ?? '',
+        avatar_url: profile?.avatar_url ?? null,
+        language: profile?.language ?? 'es',
+        timezone: profile?.timezone ?? 'America/Mexico_City',
+      }}
+    />
   )
 }

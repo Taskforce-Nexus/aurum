@@ -6,14 +6,14 @@ export default function SettingsLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
-      <h1 className="text-xl font-bold mb-8">Configuración</h1>
-      <div className="flex gap-8">
-        <SettingsSidebar />
-        <main className="flex-1 min-w-0">
-          {children}
-        </main>
-      </div>
+    <div className="flex min-h-screen bg-[#0A1128]">
+      {/* Sidebar */}
+      <SettingsSidebar />
+
+      {/* Main content */}
+      <main className="flex-1 min-w-0 overflow-y-auto py-10 px-[210px]">
+        {children}
+      </main>
     </div>
   )
 }

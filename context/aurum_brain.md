@@ -20,7 +20,10 @@ Objetivo: comprimir semanas de trabajo estratégico en horas.
 ## Core Philosophy
 
 La mayoría de las decisiones estratégicas se estancan porque:
-- el decisor no tiene acceso a perspectivas expertas diversas
+
+
+
+
 - el conocimiento existe pero no está estructurado
 - no hay un proceso para convertir conversación en documentos accionables
 

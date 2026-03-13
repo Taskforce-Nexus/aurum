@@ -245,9 +245,58 @@ Etapa actual: IMPLEMENTATION — Story 4.3 COMPLETA. Sesión de Consejo: generac
   - phase_complete reemplazado por awaiting_approval — muestra documento completo + "Aprobar documento →"
   - Preview en Vivo en sidebar derecho usa DocumentPreview real
 
+## Story 5.1 — Documents Viewer + Export Center (COMPLETO ✓)
+
+- /project/[id]/documento/[docId] — viewer 3 tabs (💬 Ajustar / ✏️ Contenido / 🎨 Identidad) ✓
+  - Header: breadcrumb + dots nav + export buttons (PDF/PPT/Slides)
+  - Left: slide sidebar (40px) + main slide viewer (section cards)
+  - Right: tabbed panel (chat mock / section list + nav / branding)
+- /project/[id]/export — Centro de Exportación ✓
+  - Progress bar (X/Y listos), table con estado/fecha/acciones, bulk PDF download
+- POST /api/export/pdf — jspdf dark-theme PDF (cover + section slides) ✓
+- POST /api/export/pptx — pptxgenjs WIDE PPTX con paleta Reason ✓
+- jspdf + pptxgenjs instalados ✓
+
+## Story 6.1 — Consultoría Activa (COMPLETO ✓)
+
+- /project/[id]/consultoria — gate (current_phase !== 'completado' → locked view) ✓
+- Layout 3 columnas: sidebar consejo (280px, #070E20) | chat (fill) | sidebar docs/contexto/acciones (300px) ✓
+- Chat: burbujas Nexo (azul), Advisor (gold border), User (gold bg, derecha) ✓
+- Input: text + 📎 🎙 + botón gold enviar ✓
+- Acciones rápidas: 4 chips clicables que envían directamente ✓
+- POST /api/consultoria/chat ✓
+  - Verifica project.current_phase === 'completado'
+  - Fetch documentos aprobados como contexto
+  - Fetch consejeros del council
+  - Genera respuesta multi-advisor con NEXO_CONSULTORIA_SYSTEM (Sonnet)
+  - Persiste en consultations.messages (JSONB)
+  - Soporta crear nueva consulta o continuar existente
+- NEXO_CONSULTORIA_SYSTEM prompt añadido a src/lib/prompts.ts ✓
+
+## Story 7.1 — Settings funcionales (COMPLETO ✓)
+
+- Settings layout reescrito: full-width, sidebar #070E20 (220px) + main con padding correcto ✓
+- SettingsSidebar actualizado: design tokens correctos (#070E20 bg, #B8860B active, #8B9DB7 inactivo) ✓
+- Settings Account (/settings/cuenta) ✓
+  - Fetch profiles (name, avatar_url, language, timezone)
+  - Form editable: nombre + idioma + timezone
+  - Email readonly + badge "Verificado"
+  - Toggles notificaciones/voz
+  - Seguridad: cambiar contraseña + cerrar sesiones
+  - Zona de Peligro: botón eliminar con modal confirmación
+  - PATCH /api/settings/profile — UPDATE profiles ✓
+- Settings Billing (/settings/facturacion) ✓
+  - Fetch token_balances, subscriptions, token_usage, invoices, payment_methods
+  - Saldo + plan actual + historial consumo + método de pago + facturas
+  - Todo readonly (pagos post-MVP)
+- Settings Team (/settings/equipo) ✓
+  - Tabla miembros (owner + council advisors como proxy)
+  - Modal "Invitar colaborador" con email + rol + descripción de permisos
+  - Confirmación inline eliminación por fila
+
 ## Siguiente paso
 
-Story 5.1 — Documents Viewer (3 tabs: Ajustes, Contenido, Identidad)
+Story 8.x — A definir por Kira (ProjectView refinements, Advisory Board updates, o pipeline completion)
 
 ---
 
