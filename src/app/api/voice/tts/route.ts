@@ -11,7 +11,13 @@ const NEXO_VOICE_ID = '948196a7-fe02-417b-9b6d-c45ee0803565'
 
 export async function POST(req: Request) {
   try {
-    const { text } = (await req.json()) as { text: string }
+    const { text, voiceId: overrideVoiceId, speed: overrideSpeed } = (await req.json()) as {
+      text: string
+      voiceId?: string
+      speed?: number
+    }
+    const effectiveVoiceId = overrideVoiceId ?? NEXO_VOICE_ID
+    const effectiveSpeed   = overrideSpeed   ?? 1.15
 
     if (!text?.trim()) {
       return NextResponse.json({ error: 'No text provided' }, { status: 400 })
@@ -27,9 +33,9 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model_id: 'sonic-3',
         transcript: text,
-        voice: { mode: 'id', id: NEXO_VOICE_ID },
+        voice: { mode: 'id', id: effectiveVoiceId },
         language: 'es',
-        speed: 1.15,
+        speed: effectiveSpeed,
         output_format: {
           container: 'mp3',
           sample_rate: 44100,

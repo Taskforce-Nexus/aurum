@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Voice mode progress ring */
+.voice-ring-fill {
+  transition: stroke-dashoffset 1700ms linear;
+}
+.voice-ring-reset {
+  transition: none;
+}
+
 :root {
   --background: 0 0% 7%;
   --foreground: 0 0% 95%;
