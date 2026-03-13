@@ -1,7 +1,9 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import type { Message } from '@/lib/types'
+
+type VoiceStatus = 'idle' | 'listening' | 'user_speaking' | 'processing' | 'speaking'
 
 interface VoiceModePanelProps {
   projectId: string
@@ -11,6 +13,34 @@ interface VoiceModePanelProps {
   messages?: Message[]
 }
 
+// ── Orbe animado ────────────────────────────────────────────────────────────
+function VoiceOrb({ status }: { status: VoiceStatus }) {
+  const colors: Record<VoiceStatus, string> = {
+    idle:          'border-[#1E2A4A] bg-[#0D1535]',
+    listening:     'border-[#B8860B] bg-[#0D1535]',
+    user_speaking: 'border-green-500 bg-[#0D1535]',
+    processing:    'border-[#B8860B] bg-[#0D1535]',
+    speaking:      'border-[#007BFF] bg-[#0D1535]',
+  }
+  const pulse: Record<VoiceStatus, string> = {
+    idle:          '',
+    listening:     'animate-pulse',
+    user_speaking: 'animate-bounce',
+    processing:    'animate-spin',
+    speaking:      'animate-pulse',
+  }
+  return (
+    <div className={`w-32 h-32 rounded-full border-4 flex items-center justify-center mb-6 transition-colors duration-300 ${colors[status]} ${pulse[status]}`}>
+      <span className={`text-5xl font-bold transition-colors duration-300 ${
+        status === 'user_speaking' ? 'text-green-500' :
+        status === 'speaking' ? 'text-[#007BFF]' :
+        'text-[#B8860B]'
+      }`}>N</span>
+    </div>
+  )
+}
+
+// ── Panel principal ─────────────────────────────────────────────────────────
 export default function VoiceModePanel({
   projectId,
   conversationId,
@@ -18,179 +48,222 @@ export default function VoiceModePanel({
   onNewMessage,
   messages = [],
 }: VoiceModePanelProps) {
-  const [status, setStatus] = useState<'idle' | 'listening' | 'processing' | 'speaking'>('idle')
+  const [status, setStatus] = useState<VoiceStatus>('idle')
   const [transcript, setTranscript] = useState('')
   const [nexoResponse, setNexoResponse] = useState('')
-  const [errorMsg, setErrorMsg] = useState('')
 
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
-  const chunksRef = useRef<Blob[]>([])
-  const audioContextRef = useRef<AudioContext | null>(null)
-  const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null)
-  const messagesRef = useRef<Message[]>(messages)
-  messagesRef.current = messages
+  const statusRef     = useRef<VoiceStatus>('idle')
+  const streamRef     = useRef<MediaStream | null>(null)
+  const audioCtxRef   = useRef<AudioContext | null>(null)
+  const messagesRef   = useRef<Message[]>(messages)
 
-  const startListening = useCallback(async () => {
-    setErrorMsg('')
+  useEffect(() => { statusRef.current = status }, [status])
+  useEffect(() => { messagesRef.current = messages }, [messages])
+
+  const setStatusSync = (s: VoiceStatus) => {
+    statusRef.current = s
+    setStatus(s)
+  }
+
+  // ── Procesar audio grabado ────────────────────────────────────────────────
+  const processAudio = useCallback(async (blob: Blob) => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-        ? 'audio/webm;codecs=opus'
-        : 'audio/webm'
-      const mediaRecorder = new MediaRecorder(stream, { mimeType })
-      mediaRecorderRef.current = mediaRecorder
-      chunksRef.current = []
+      // STT
+      const formData = new FormData()
+      formData.append('audio', blob, 'recording.webm')
+      const sttRes  = await fetch('/api/voice/stt', { method: 'POST', body: formData })
+      const sttData = await sttRes.json() as { transcript?: string }
+      const userText = sttData.transcript?.trim() ?? ''
 
-      mediaRecorder.ondataavailable = (e) => {
-        if (e.data.size > 0) chunksRef.current.push(e.data)
+      setTranscript(userText)
+
+      if (!userText) {
+        setStatusSync('listening')
+        return
       }
 
-      mediaRecorder.onstop = async () => {
-        stream.getTracks().forEach(t => t.stop())
-        const audioBlob = new Blob(chunksRef.current, { type: mimeType })
+      onNewMessage?.('user', userText)
 
-        if (audioBlob.size < 100) {
-          setErrorMsg('No se capturó audio. Verifica tu micrófono.')
-          setStatus('idle')
-          return
-        }
+      // Chat
+      const updatedMessages: Message[] = [
+        ...messagesRef.current,
+        { role: 'user', content: userText },
+      ]
+      const chatRes  = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          projectId,
+          conversationId,
+          messages: updatedMessages,
+          voiceMode: true,
+        }),
+      })
+      const chatData = await chatRes.json() as { message?: string }
+      const nexoText = chatData.message?.trim() ?? ''
 
-        setStatus('processing')
-
-        try {
-          // STT — Deepgram via /api/voice/stt
-          const formData = new FormData()
-          formData.append('audio', audioBlob, 'recording.webm')
-          const sttRes = await fetch('/api/voice/stt', { method: 'POST', body: formData })
-          const sttData = await sttRes.json() as { transcript?: string; error?: string }
-
-          if (!sttRes.ok) {
-            setErrorMsg(`Error STT (${sttRes.status}): ${sttData.error ?? 'sin respuesta'}`)
-            setStatus('idle')
-            return
-          }
-
-          const userText = sttData.transcript?.trim() ?? ''
-          if (!userText) {
-            setErrorMsg('No se detectó voz. Habla más cerca del micrófono.')
-            setStatus('idle')
-            return
-          }
-
-          setTranscript(userText)
-          onNewMessage?.('user', userText)
-
-          // Chat — /api/chat con historial completo + mensaje nuevo
-          const updatedMessages: Message[] = [
-            ...messagesRef.current,
-            { role: 'user', content: userText },
-          ]
-
-          const chatRes = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              projectId,
-              conversationId,
-              messages: updatedMessages,
-              voiceMode: true,
-            }),
-          })
-          const chatData = await chatRes.json() as { message?: string; error?: string }
-
-          if (!chatRes.ok) {
-            setErrorMsg(`Error Chat (${chatRes.status}): ${chatData.error ?? 'sin respuesta'}`)
-            setStatus('idle')
-            return
-          }
-
-          const nexoText = chatData.message?.trim() ?? ''
-          if (!nexoText) {
-            setErrorMsg('Nexo no devolvió respuesta.')
-            setStatus('idle')
-            return
-          }
-
-          setNexoResponse(nexoText)
-          onNewMessage?.('assistant', nexoText)
-
-          // TTS — Cartesia via /api/voice/tts
-          setStatus('speaking')
-          const ttsRes = await fetch('/api/voice/tts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: nexoText }),
-          })
-
-          if (!ttsRes.ok) {
-            // TTS falló pero ya tenemos la respuesta escrita — mostrarla sin audio
-            setErrorMsg('TTS no disponible — respuesta escrita arriba.')
-            setStatus('idle')
-            return
-          }
-
-          const audioBuffer = await ttsRes.arrayBuffer()
-          if (!audioContextRef.current || audioContextRef.current.state === 'closed') {
-            audioContextRef.current = new AudioContext()
-          }
-          const ctx = audioContextRef.current
-          if (ctx.state === 'suspended') await ctx.resume()
-
-          const decoded = await ctx.decodeAudioData(audioBuffer)
-          const source = ctx.createBufferSource()
-          source.buffer = decoded
-          source.connect(ctx.destination)
-          sourceNodeRef.current = source
-
-          source.onended = () => {
-            setStatus('idle')
-            setTranscript('')
-            setNexoResponse('')
-          }
-          source.start()
-
-        } catch (err) {
-          console.error('[VoiceMode] pipeline error:', err)
-          setErrorMsg('Error en el pipeline de voz. Intenta de nuevo.')
-          setStatus('idle')
-        }
+      if (!nexoText) {
+        setStatusSync('listening')
+        return
       }
 
-      mediaRecorder.start(250) // flush chunks cada 250ms
-      setStatus('listening')
+      setNexoResponse(nexoText)
+      onNewMessage?.('assistant', nexoText)
+
+      // TTS — mutear mic mientras Nexo habla
+      streamRef.current?.getAudioTracks().forEach(t => { t.enabled = false })
+      setStatusSync('speaking')
+
+      const ttsRes = await fetch('/api/voice/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: nexoText }),
+      })
+
+      if (!ttsRes.ok) {
+        // Sin audio pero respuesta visible — volver a escuchar
+        streamRef.current?.getAudioTracks().forEach(t => { t.enabled = true })
+        setStatusSync('listening')
+        return
+      }
+
+      const audioBuffer = await ttsRes.arrayBuffer()
+      if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
+        audioCtxRef.current = new AudioContext()
+      }
+      const ctx = audioCtxRef.current
+      if (ctx.state === 'suspended') await ctx.resume()
+
+      const decoded = await ctx.decodeAudioData(audioBuffer)
+      const source  = ctx.createBufferSource()
+      source.buffer = decoded
+      source.connect(ctx.destination)
+      source.onended = () => {
+        streamRef.current?.getAudioTracks().forEach(t => { t.enabled = true })
+        setStatusSync('listening')
+        setTranscript('')
+        setNexoResponse('')
+      }
+      source.start()
 
     } catch (err) {
-      console.error('[VoiceMode] mic error:', err)
-      setErrorMsg('No se pudo acceder al micrófono. Actívalo en el navegador.')
-      setStatus('idle')
+      console.error('[VoiceMode] pipeline error:', err)
+      streamRef.current?.getAudioTracks().forEach(t => { t.enabled = true })
+      setStatusSync('listening')
     }
   }, [projectId, conversationId, onNewMessage])
 
-  const stopListening = useCallback(() => {
-    if (mediaRecorderRef.current?.state === 'recording') {
-      mediaRecorderRef.current.stop()
+  // ── VAD loop — arranca al montar ─────────────────────────────────────────
+  useEffect(() => {
+    const SPEECH_THRESHOLD  = 20
+    const SILENCE_THRESHOLD = 12
+    const SILENCE_DURATION  = 600
+
+    let cancelled      = false
+    let mediaRecorder: MediaRecorder | null = null
+    let chunks: Blob[] = []
+    let isSpeaking     = false
+    let silenceTimer:  ReturnType<typeof setTimeout> | null = null
+    let rafId:         number
+
+    async function start() {
+      let stream: MediaStream
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      } catch {
+        setStatusSync('idle')
+        return
+      }
+      if (cancelled) { stream.getTracks().forEach(t => t.stop()); return }
+
+      streamRef.current = stream
+
+      const audioCtx  = new AudioContext()
+      audioCtxRef.current = audioCtx
+      const source    = audioCtx.createMediaStreamSource(stream)
+      const analyser  = audioCtx.createAnalyser()
+      analyser.fftSize = 512
+      source.connect(analyser)
+
+      const mimeType  = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+        ? 'audio/webm;codecs=opus' : 'audio/webm'
+
+      function newRecorder() {
+        const mr = new MediaRecorder(stream, { mimeType })
+        mr.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data) }
+        mr.onstop = async () => {
+          if (cancelled) return
+          const blob = new Blob(chunks, { type: mimeType })
+          chunks = []
+          if (blob.size < 500) { setStatusSync('listening'); return }
+          setStatusSync('processing')
+          await processAudio(blob)
+        }
+        return mr
+      }
+
+      mediaRecorder = newRecorder()
+
+      const dataArray = new Uint8Array(analyser.frequencyBinCount)
+
+      function checkAudio() {
+        if (cancelled) return
+        rafId = requestAnimationFrame(checkAudio)
+
+        // No detectar voz mientras Nexo habla o procesa
+        const s = statusRef.current
+        if (s === 'processing' || s === 'speaking') return
+
+        analyser.getByteFrequencyData(dataArray)
+        const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length
+
+        if (avg > SPEECH_THRESHOLD && !isSpeaking && s === 'listening') {
+          isSpeaking = true
+          setStatusSync('user_speaking')
+          chunks = []
+          mediaRecorder = newRecorder()
+          mediaRecorder.start(250)
+          if (silenceTimer) { clearTimeout(silenceTimer); silenceTimer = null }
+        }
+
+        if (isSpeaking) {
+          if (avg < SILENCE_THRESHOLD) {
+            if (!silenceTimer) {
+              silenceTimer = setTimeout(() => {
+                silenceTimer = null
+                if (isSpeaking && mediaRecorder?.state === 'recording') {
+                  isSpeaking = false
+                  mediaRecorder.stop()
+                }
+              }, SILENCE_DURATION)
+            }
+          } else {
+            if (silenceTimer) { clearTimeout(silenceTimer); silenceTimer = null }
+          }
+        }
+      }
+
+      setStatusSync('listening')
+      checkAudio()
     }
+
+    void start()
+
+    return () => {
+      cancelled = true
+      if (silenceTimer) clearTimeout(silenceTimer)
+      cancelAnimationFrame(rafId)
+      try { mediaRecorder?.stop() } catch { /* ignore */ }
+      streamRef.current?.getTracks().forEach(t => t.stop())
+      streamRef.current = null
+      audioCtxRef.current?.close().catch(() => null)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const stopSpeaking = useCallback(() => {
-    try {
-      sourceNodeRef.current?.stop()
-    } catch { /* already stopped */ }
-    sourceNodeRef.current = null
-    setStatus('idle')
-    setTranscript('')
-    setNexoResponse('')
-  }, [])
-
-  const handleMainButton = () => {
-    if (status === 'idle') void startListening()
-    else if (status === 'listening') stopListening()
-    else if (status === 'speaking') stopSpeaking()
-  }
-
+  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <main className="flex-1 flex flex-col items-center justify-center bg-[#0A1128] relative">
-      {/* Salir */}
       <button
         type="button"
         onClick={onExit}
@@ -199,87 +272,27 @@ export default function VoiceModePanel({
         Salir del modo voz
       </button>
 
-      {/* Avatar Nexo */}
-      <div className={`w-32 h-32 rounded-full border-4 ${
-        status === 'speaking' ? 'border-[#007BFF] animate-pulse' : 'border-[#B8860B]'
-      } bg-[#0D1535] flex items-center justify-center mb-6 transition-colors`}>
-        <span className="text-5xl font-bold text-[#B8860B]">N</span>
-      </div>
+      <VoiceOrb status={status} />
 
-      {/* Status */}
-      <div className="flex items-center gap-2 mb-6">
-        <div className={`w-2 h-2 rounded-full transition-colors ${
-          status === 'listening' ? 'bg-green-500 animate-pulse' :
-          status === 'processing' ? 'bg-[#B8860B] animate-pulse' :
-          status === 'speaking' ? 'bg-[#007BFF] animate-pulse' :
-          'bg-[#8892A4]'
-        }`} />
-        <span className="text-sm text-[#8892A4]">
-          {status === 'listening' ? 'Escuchando...' :
-           status === 'processing' ? 'Procesando...' :
-           status === 'speaking' ? 'Nexo habla...' :
-           'Listo para escuchar'}
-        </span>
-      </div>
+      <span className="text-sm text-[#8892A4] mb-6">
+        {status === 'listening'     ? 'Te escucho...'         :
+         status === 'user_speaking' ? 'Escuchando...'         :
+         status === 'processing'    ? 'Pensando...'           :
+         status === 'speaking'      ? 'Nexo:'                 :
+                                      'Conectando micrófono...'}
+      </span>
 
-      {/* Error */}
-      {errorMsg && (
-        <p className="text-xs text-red-400 mb-4 max-w-xs text-center">{errorMsg}</p>
-      )}
-
-      {/* Transcript del usuario */}
       {transcript && (
-        <div className="max-w-lg px-5 py-3 bg-[#0D1535] border border-[#1E2A4A] rounded-lg mb-3">
-          <p className="text-xs text-[#8892A4] mb-1">Tú:</p>
-          <p className="text-sm text-[#F8F8F8]">{transcript}</p>
+        <div className="max-w-lg px-6 py-3 bg-[#0D1535] border border-[#1E2A4A] rounded-lg mb-3">
+          <p className="text-sm text-[#F8F8F8] italic">&ldquo;{transcript}&rdquo;</p>
         </div>
       )}
 
-      {/* Respuesta de Nexo */}
       {nexoResponse && (
-        <div className="max-w-lg px-5 py-3 bg-[#0D1535] border border-[#B8860B]/30 rounded-lg mb-6">
-          <p className="text-xs text-[#B8860B] mb-1">Nexo:</p>
+        <div className="max-w-lg px-6 py-3 bg-[#0D1535] border border-[#B8860B]/30 rounded-lg">
           <p className="text-sm text-[#F8F8F8]">{nexoResponse}</p>
         </div>
       )}
-
-      {/* Botón principal */}
-      <button
-        type="button"
-        onClick={handleMainButton}
-        disabled={status === 'processing'}
-        className={`w-16 h-16 rounded-full flex items-center justify-center transition-colors ${
-          status === 'listening' ? 'bg-red-600 hover:bg-red-700' :
-          status === 'speaking' ? 'bg-[#007BFF] hover:bg-[#0066DD]' :
-          status === 'processing' ? 'bg-[#8892A4] cursor-wait' :
-          'bg-[#B8860B] hover:bg-[#9A7209]'
-        }`}
-      >
-        {status === 'listening' ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <rect x="6" y="6" width="12" height="12" rx="2" />
-          </svg>
-        ) : status === 'speaking' ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <rect x="4" y="4" width="6" height="16" rx="1" />
-            <rect x="14" y="4" width="6" height="16" rx="1" />
-          </svg>
-        ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-            <line x1="12" y1="19" x2="12" y2="23"/>
-            <line x1="8" y1="23" x2="16" y2="23"/>
-          </svg>
-        )}
-      </button>
-
-      <p className="text-xs text-[#8892A4] mt-3">
-        {status === 'listening' ? 'Toca para detener' :
-         status === 'speaking' ? 'Toca para interrumpir' :
-         status === 'processing' ? 'Procesando...' :
-         'Toca para hablar'}
-      </p>
     </main>
   )
 }
