@@ -516,8 +516,8 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
           )}
         </aside>
 
-        {/* Voice mode */}
-        {voiceMode && (
+        {/* Voice mode — solo visible cuando el usuario activa "Modo voz" */}
+        {voiceMode ? (
           <VoiceModePanel
             projectId={project.id}
             conversationId={activeConversationId}
@@ -526,10 +526,9 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             onExit={() => setVoiceMode(false)}
             onSemillaComplete={(brief) => { setFounderBrief(brief); setSemillaComplete(true) }}
           />
-        )}
-
-        {/* Chat area */}
-        <main className={`flex-1 flex flex-col overflow-hidden ${voiceMode ? 'hidden' : ''}`}>
+        ) : (
+        /* Chat area — vista por defecto */
+        <main className="flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
             {messages.map((msg, i) => (
               <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -650,6 +649,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             </form>
           </div>
         </main>
+        )}
       </div>
     </div>
   )
