@@ -53,3 +53,46 @@ export type Message = {
   timestamp?: string
   author?: string
 }
+
+export type DocumentSpec = {
+  id: string
+  name: string
+  icp: string
+  strategic_decision: string | null
+  sections: { nombre: string; descripcion: string }[]
+  required_data: string[]
+  key_advisors: string[]
+  quality_criteria: string | null
+  is_custom: boolean
+  created_at: string
+}
+
+export type Advisor = {
+  id: string
+  name: string
+  specialty: string | null
+  category: string | null
+  level: 'lidera' | 'apoya' | 'observa'
+  element: 'fuego' | 'agua' | 'tierra' | 'aire' | null
+  communication_style: string | null
+  hats: string[]
+  bio: string | null
+  language: string | null
+  is_native: boolean
+  advisor_type: string | null
+  created_at: string
+}
+
+export type Cofounder = {
+  id: string
+  name: string
+  role: 'constructivo' | 'critico'
+  specialty: string | null
+  element: 'fuego' | 'agua' | 'tierra' | 'aire' | null
+  communication_style: string | null
+  hats: string[]
+  bio: string | null
+  language: string | null
+  is_native: boolean
+  created_at: string
+}

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import { createClient } from '@/lib/supabase/client'
 import { LOGO_DATA_URL } from '@/lib/logo'
@@ -37,6 +38,7 @@ function formatBytes(bytes: number): string {
 }
 
 export default function IncubadoraChat({ project, conversation, userEmail }: Props) {
+  const router = useRouter()
   const [messages, setMessages] = useState<Message[]>(conversation?.messages ?? [])
   const [activeConversationId, setActiveConversationId] = useState<string | undefined>(conversation?.id)
   const [input, setInput] = useState('')
@@ -182,6 +184,8 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
       if (data.semilla_complete && data.founder_brief) {
         setFounderBrief(data.founder_brief)
         setSemillaComplete(true)
+        // Transicionar a SeedSessionFlow (pasos 2-7)
+        setTimeout(() => router.refresh(), 1500)
       }
       // Background: update covered topics (non-blocking)
       void fetch('/api/chat/topics', {
