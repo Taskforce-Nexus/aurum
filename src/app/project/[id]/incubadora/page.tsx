@@ -35,14 +35,8 @@ export default async function IncubadoraPage({ params }: { params: { id: string 
     conversation = newConv
   }
 
-  // Forzar remount en cada visita para limpiar estado de voice mode preservado
-  // por Next.js Router Cache. Sin este key, navegar de vuelta a la incubadora
-  // después de activar modo voz restauraría voiceMode=true desde el cache.
-  const visitKey = `${params.id}-${Date.now()}`
-
   return (
     <IncubadoraChat
-      key={visitKey}
       project={project as Project}
       conversation={conversation}
       userEmail={user.email ?? ''}
