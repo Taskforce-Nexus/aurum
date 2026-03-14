@@ -11,20 +11,20 @@ export default async function LandingPage() {
   return (
     <div className="bg-[#0A1128] text-white min-h-screen font-sans">
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-16 border-b border-[#1E2A4A] bg-[#0A1128]/95 backdrop-blur-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-4 md:px-8 lg:px-16 border-b border-[#1E2A4A] bg-[#0A1128]/95 backdrop-blur-sm">
         <Link href="/" className="shrink-0">
           <Image src="/branding/logo-claro-reason.png" alt="Reason" width={90} height={28} />
         </Link>
-        <div className="flex items-center gap-8">
-          <a href="#caracteristicas" className="text-[14px] text-[#8B9DB7] hover:text-white transition-colors">
+        <div className="flex items-center gap-4 md:gap-8">
+          <a href="#caracteristicas" className="hidden md:block text-[14px] text-[#8B9DB7] hover:text-white transition-colors">
             Características
           </a>
-          <a href="#precio" className="text-[14px] text-[#8B9DB7] hover:text-white transition-colors">
+          <a href="#precio" className="hidden md:block text-[14px] text-[#8B9DB7] hover:text-white transition-colors">
             Precio
           </a>
           <Link
             href="/login"
-            className="text-[14px] text-[#8B9DB7] hover:text-white transition-colors"
+            className="hidden md:block text-[14px] text-[#8B9DB7] hover:text-white transition-colors"
           >
             Iniciar sesión
           </Link>
@@ -38,29 +38,29 @@ export default async function LandingPage() {
       </nav>
 
       {/* HERO */}
-      <section className="pt-40 pb-24 px-16 bg-[#0A1128]">
+      <section className="pt-28 md:pt-40 pb-16 md:pb-24 px-4 md:px-8 lg:px-16 bg-[#0A1128]">
         <div className="max-w-[900px] mx-auto text-center space-y-8">
           <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">
             Sistema de Creación de Proyectos
           </p>
-          <h1 className="text-[48px] font-bold font-outfit leading-[1.15] text-white">
+          <h1 className="text-[32px] md:text-[48px] font-bold font-outfit leading-[1.15] text-white">
             Los negocios no mueren en el campo de batalla.
             <br />
             <span className="text-[#B8860B]">Mueren en la imaginación.</span>
           </h1>
-          <p className="text-[18px] text-[#8B9DB7] leading-relaxed max-w-[680px] mx-auto font-open-sans">
+          <p className="text-[16px] md:text-[18px] text-[#8B9DB7] leading-relaxed max-w-[680px] mx-auto font-open-sans">
             Reason transforma tu idea en un proyecto estructurado con consejo asesor, documentos estratégicos y arquitectura de producto lista para construir.
           </p>
-          <div className="flex items-center justify-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 pt-2">
             <Link
               href="/register"
-              className="px-6 py-3 bg-[#B8860B] hover:bg-[#A07710] text-black font-semibold text-[15px] rounded-lg transition-colors"
+              className="w-full sm:w-auto px-6 py-3 bg-[#B8860B] hover:bg-[#A07710] text-black font-semibold text-[15px] rounded-lg transition-colors text-center"
             >
               Crear cuenta gratis →
             </Link>
             <a
               href="#como-funciona"
-              className="px-6 py-3 border border-[#1E2A4A] hover:border-[#4A5568] text-[#8B9DB7] hover:text-white text-[15px] rounded-lg transition-colors"
+              className="w-full sm:w-auto px-6 py-3 border border-[#1E2A4A] hover:border-[#4A5568] text-[#8B9DB7] hover:text-white text-[15px] rounded-lg transition-colors text-center"
             >
               Ver cómo funciona
             </a>
@@ -121,11 +121,11 @@ export default async function LandingPage() {
       </section>
 
       {/* PROBLEMA */}
-      <section id="caracteristicas" className="py-24 px-16 bg-[#0D1535]">
+      <section id="caracteristicas" className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#0D1535]">
         <div className="max-w-[900px] mx-auto space-y-12">
           <div className="space-y-4">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">El problema real</p>
-            <h2 className="text-[36px] font-bold font-outfit text-white leading-tight">
+            <h2 className="text-[28px] md:text-[36px] font-bold font-outfit text-white leading-tight">
               La mayoría de founders piensan que fracasan
               <br className="hidden md:block" /> por falta de capital. No es así.
             </h2>
@@ -134,7 +134,7 @@ export default async function LandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[
               { stat: '90%', label: 'de startups fracasan en los primeros 3 años', color: '#E53E3E' },
               { stat: '42%', label: 'mueren por falta de mercado — idea sin validar', color: '#B8860B' },
@@ -152,15 +152,15 @@ export default async function LandingPage() {
       </section>
 
       {/* PARA QUIÉN */}
-      <section className="py-24 px-16 bg-[#0A1128]">
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#0A1128]">
         <div className="max-w-[900px] mx-auto space-y-10">
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Para quién es Reason</p>
-            <h2 className="text-[32px] font-bold font-outfit text-white">
+            <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
               Diseñado para founders que piensan antes de construir
             </h2>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { title: 'Emprendedor con idea', desc: 'Tienes una idea clara pero no sabes cómo estructurarla ni validarla.' },
               { title: 'Fundador técnico', desc: 'Sabes construir pero necesitas claridad estratégica antes de escribir código.' },
@@ -177,15 +177,15 @@ export default async function LandingPage() {
       </section>
 
       {/* CÓMO FUNCIONA */}
-      <section id="como-funciona" className="py-24 px-16 bg-[#0D1535]">
+      <section id="como-funciona" className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#0D1535]">
         <div className="max-w-[900px] mx-auto space-y-10">
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Cómo funciona</p>
-            <h2 className="text-[32px] font-bold font-outfit text-white">
+            <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
               De idea a proyecto estructurado en 5 pasos
             </h2>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {[
               { n: '01', title: 'Incubación', desc: 'Nexo te entrevista y extrae la esencia de tu idea con preguntas estratégicas.' },
               { n: '02', title: 'Tu Consejo', desc: 'Seleccionas 6-9 consejeros especializados que guiarán tu proyecto.' },
@@ -193,7 +193,7 @@ export default async function LandingPage() {
               { n: '04', title: 'Documentos', desc: '15 documentos estratégicos generados: VPC, plan de negocio, arquitectura técnica.' },
               { n: '05', title: 'Consultoría', desc: 'Chatea con tu consejo cuando quieras para tomar decisiones informadas.' },
             ].map((step) => (
-              <div key={step.n} className="flex-1 bg-[#0A1128] border border-[#1E2A4A] rounded-xl p-5 space-y-2">
+              <div key={step.n} className="bg-[#0A1128] border border-[#1E2A4A] rounded-xl p-5 space-y-2">
                 <p className="text-[28px] font-bold font-outfit text-[#B8860B]/30">{step.n}</p>
                 <p className="text-[14px] text-white font-semibold">{step.title}</p>
                 <p className="text-[12px] text-[#6E8EAD] leading-relaxed">{step.desc}</p>
@@ -204,18 +204,18 @@ export default async function LandingPage() {
       </section>
 
       {/* CONSEJO */}
-      <section className="py-24 px-16 bg-[#0A1128]">
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#0A1128]">
         <div className="max-w-[900px] mx-auto space-y-10">
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Tu consejo asesor</p>
-            <h2 className="text-[32px] font-bold font-outfit text-white">
+            <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
               Un equipo de expertos IA siempre disponible
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
               Cada consejero tiene especialidad, estilo de comunicación y perspectiva única. Juntos cubren todos los ángulos de tu proyecto.
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
               { specialty: 'Investigación de Mercado', name: 'Dr. Maya Singh', style: 'Analítica y basada en datos', hat: '#F5F5F5' },
               { specialty: 'Estrategia de Negocios', name: 'Carlos Mendez', style: 'Directo y orientado a resultados', hat: '#B8860B' },
@@ -239,18 +239,18 @@ export default async function LandingPage() {
       </section>
 
       {/* DOCUMENTOS */}
-      <section className="py-24 px-16 bg-[#0D1535]">
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#0D1535]">
         <div className="max-w-[900px] mx-auto space-y-10">
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Documentos estratégicos</p>
-            <h2 className="text-[32px] font-bold font-outfit text-white">
+            <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
               15 documentos que definen tu negocio
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
               Generados por tu consejo con IA, editables y exportables a PDF y PowerPoint.
             </p>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { name: 'Value Proposition Canvas', category: 'Estrategia' },
               { name: 'Business Model Canvas', category: 'Negocio' },
@@ -271,18 +271,18 @@ export default async function LandingPage() {
       </section>
 
       {/* NEXO DUAL */}
-      <section className="py-24 px-16 bg-[#0A1128]">
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#0A1128]">
         <div className="max-w-[900px] mx-auto space-y-10">
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Nexo</p>
-            <h2 className="text-[32px] font-bold font-outfit text-white">
+            <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
               El moderador que no tiene miedo de disentir
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
               Nexo opera en dos modos simultáneos para darte perspectiva completa.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="bg-[#0D1535] border border-[#48BB78]/30 rounded-xl p-6 space-y-3">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#48BB78]" />
@@ -311,15 +311,15 @@ export default async function LandingPage() {
       </section>
 
       {/* SUITE AVA */}
-      <section className="py-24 px-16 bg-[#0D1535]">
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#0D1535]">
         <div className="max-w-[900px] mx-auto space-y-10">
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Parte de la Suite AVA</p>
-            <h2 className="text-[32px] font-bold font-outfit text-white">
+            <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
               Reason es el primer módulo del sistema AVA
             </h2>
           </div>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[
               {
                 name: 'Reason',
@@ -365,9 +365,9 @@ export default async function LandingPage() {
       </section>
 
       {/* CTA FINAL */}
-      <section id="precio" className="py-32 px-16 bg-[#0A1128]">
+      <section id="precio" className="py-24 md:py-32 px-4 md:px-8 lg:px-16 bg-[#0A1128]">
         <div className="max-w-[700px] mx-auto text-center space-y-8">
-          <h2 className="text-[36px] font-bold font-outfit text-white leading-tight">
+          <h2 className="text-[28px] md:text-[36px] font-bold font-outfit text-white leading-tight">
             Tu próxima decisión estratégica
             <br />
             <span className="text-[#B8860B]">merece estructura.</span>
@@ -386,8 +386,8 @@ export default async function LandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-10 px-16 border-t border-[#1E2A4A] bg-[#0A1128]">
-        <div className="max-w-[900px] mx-auto flex items-center justify-between">
+      <footer className="py-10 px-4 md:px-8 lg:px-16 border-t border-[#1E2A4A] bg-[#0A1128]">
+        <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link href="/">
             <Image src="/branding/logo-claro-reason.png" alt="Reason" width={70} height={22} />
           </Link>

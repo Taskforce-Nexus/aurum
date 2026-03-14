@@ -34,8 +34,8 @@ export default function DashboardClient({ projects }: Props) {
   const [showModal, setShowModal] = useState(false)
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10">
-      <div className="flex items-center justify-between mb-4">
+    <main className="max-w-4xl mx-auto px-4 md:px-6 py-10">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div>
           <h1 className="font-outfit text-2xl font-bold text-white">Mis Proyectos</h1>
           <p className="text-sm text-[#8892A4] mt-1">
