@@ -1,6 +1,6 @@
-﻿# Venture Builder — Reason Framework
+# Reason
 
-Herramienta interna de incubación de negocios. Permite concebir y documentar productos de alto valor usando el Reason Framework, guiado por un consejo asesor de IA.
+Sistema de creación de proyectos guiado por IA. Transforma una idea en un negocio estructurado con consejo asesor, documentos estratégicos y arquitectura de producto.
 
 ## Requisitos previos
 
@@ -13,21 +13,21 @@ Herramienta interna de incubación de negocios. Permite concebir y documentar pr
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/Taskforce-Nexus/venture-builder.git
-cd venture-builder
+git clone https://github.com/Taskforce-Nexus/reason.git
+cd reason
 
 # 2. Instalar dependencias
 npm install
 
 # 3. Configurar variables de entorno
 cp .env.example .env.local
-# Editar .env.local con las claves reales (te las pasa el fundador por separado)
+# Editar .env.local con las claves reales
 
 # 4. Levantar el servidor de desarrollo
-npm run dev -- -p 3047
+npm run dev
 ```
 
-La app corre en **http://localhost:3047**
+La app corre en **http://localhost:3000**
 
 ## Variables de entorno
 
@@ -36,58 +36,88 @@ Copia `.env.example` como `.env.local` y rellena con los valores reales:
 ```
 NEXT_PUBLIC_SUPABASE_URL=        # URL del proyecto Supabase
 NEXT_PUBLIC_SUPABASE_ANON_KEY=   # Clave pública Supabase
-SUPABASE_SERVICE_ROLE_KEY=       # Clave de servicio Supabase (solo servidor)
-ANTHROPIC_API_KEY=               # Clave de Claude API
-CLAUDE_USE_CHEAP=true            # true = usa Haiku (pruebas), omitir = Sonnet (produccion)
+SUPABASE_SERVICE_ROLE_KEY=       # Clave de servicio (solo servidor)
+SUPABASE_ACCESS_TOKEN=           # Token CLI de Supabase
+NEXT_PUBLIC_APP_URL=             # URL base (http://localhost:3000 en dev)
+ANTHROPIC_API_KEY=               # Clave Claude API
+CLAUDE_USE_CHEAP=true            # true = Haiku (dev), omitir = Sonnet (prod)
+GITHUB_CLIENT_ID=                # OAuth App GitHub
+GITHUB_CLIENT_SECRET=            # OAuth App GitHub secret
+DEEPGRAM_API_KEY=                # STT (voz)
+CARTESIA_API_KEY=                # TTS (voz)
 ```
 
-> Las claves reales NO estan en el repo. El fundador te las pasa por separado.
+## Ver los diseños en Pencil
 
-## Ver los disenos en Pencil
+Los archivos `.pen` contienen los mockups y pantallas del sistema. Para abrirlos:
 
-Los archivos `.pen` contienen los mockups y pantallas del sistema:
-
-- `Reason.pen` — Pantallas del Reason Framework
-- `venture-builder.pen` — Pantallas de la Incubadora
-
-Para abrirlos:
-1. Instala la extension **Pencil** en VS Code
+1. Instala la extensión **Pencil** en VS Code
 2. Abre VS Code en la carpeta del proyecto
-3. Haz clic derecho sobre el archivo `.pen` y selecciona **Abrir con Pencil**
+3. Haz clic derecho sobre `aurum.pen` y selecciona **Abrir con Pencil**
 
 ## Estructura del proyecto
 
 ```
 src/
   app/
-    (auth)/           # Login y registro
-    (dashboard)/      # Panel principal y proyectos
-    api/              # Rutas de API (chat, extract, advisors)
+    (auth)/              # Login, registro, verify-email, forgot-password
+    (dashboard)/         # Panel principal, proyectos, settings
+    project/[id]/        # Incubadora, sesión de consejo, Export Center
+    api/                 # Rutas de API (chat, session, consultoria, export)
+    page.tsx             # Landing page pública
   components/
-    incubadora/       # Componentes de La Incubadora
-    dashboard/        # Componentes del panel
-    ui/               # Componentes shadcn/ui
+    auth/                # AuthBrandPanel
+    consejo/             # MyBoard (Advisory Board)
+    consultoria/         # ConsultoriaView (chat post-sesión)
+    dashboard/           # ProjectCard, DashboardClient, UserMenu
+    export/              # ExportCenter
+    incubadora/          # IncubadoraChat
+    seed-session/        # SeedSessionFlow (7 pasos)
+    sesion-consejo/      # SesionConsejoView
+    settings/            # SettingsBilling, SettingsAccount, SettingsTeam
   lib/
-    claude.ts         # Wrapper Claude API con reintentos
-    prompts.ts        # Prompts del sistema
-    advisors.ts       # Configuracion de 9 asesores
-    types.ts          # Tipos TypeScript
+    claude.ts            # Wrapper Claude API
+    prompts.ts           # Prompts del sistema
+    types.ts             # Tipos TypeScript
 ```
 
 ## Rutas principales
 
-| Ruta | Descripcion |
+| Ruta | Descripción |
 |------|-------------|
-| `/` | Landing / redireccion |
-| `/login` | Inicio de sesion |
+| `/` | Landing page pública |
+| `/login` | Inicio de sesión |
 | `/register` | Registro |
-| `/(dashboard)` | Lista de proyectos |
-| `/project/[id]` | Vista del proyecto |
-| `/project/[id]/incubadora` | Sesion de La Incubadora |
+| `/dashboard` | Lista de proyectos |
+| `/project/[id]` | Vista del proyecto (journey 5 etapas) |
+| `/project/[id]/incubadora` | Sesión Semilla con Nexo |
+| `/project/[id]/export` | Centro de Exportación |
+| `/project/[id]/consejo` | Advisory Board |
+| `/project/[id]/consultoria` | Consultoría Activa |
+| `/settings/cuenta` | Configuración de cuenta |
+| `/settings/facturacion` | Facturación y saldo |
+| `/settings/equipo` | Equipo |
+| `/settings/planes` | Planes |
+| `/settings/notificaciones` | Notificaciones |
+| `/settings/conexiones` | Integraciones |
 
 ## Stack
 
-- **Frontend:** Next.js 14, TypeScript, Tailwind CSS, shadcn/ui
-- **Base de datos:** Supabase (Postgres + Auth)
-- **IA:** Claude API (Anthropic) — Sonnet para produccion, Haiku para pruebas
-- **Diseno:** Pencil (archivos `.pen`)
+- **Frontend:** Next.js 14, TypeScript, Tailwind CSS
+- **Base de datos:** Supabase (Postgres + Auth + Storage)
+- **IA:** Claude API (Anthropic) — Sonnet para producción, Haiku para desarrollo
+- **Voz:** Deepgram (STT) + Cartesia (TTS)
+- **Diseño:** Pencil (archivos `.pen`)
+- **Tests E2E:** Playwright
+
+## Tests E2E
+
+```bash
+# Requiere servidor corriendo en localhost:3000
+npm run dev
+
+# En otra terminal
+npx playwright test --headed
+```
+
+Los tests usan el usuario `e2e@reason.test` y generan fixtures automáticamente con `seedTestData()`.

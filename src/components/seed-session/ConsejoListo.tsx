@@ -47,7 +47,7 @@ export default function ConsejoListo({ project, documentSpecs, advisors, cofound
         <div className="flex gap-3">
           <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-1">N</div>
           <div className="max-w-2xl bg-[#0D1535] border border-[#1E2A4A] rounded-2xl rounded-tl-sm px-5 py-4 text-sm text-[#e0e0e5] leading-relaxed">
-            Tu consejo está listo. A partir de ahora, cada miembro del consejo va a trabajar contigo para construir tu venture. Los primeros documentos estarán listos después de la Sesión de Consejo. Puedes revisar el consejo antes de arrancar si quieres hacer algún cambio.
+            Tu consejo está listo. A partir de ahora, cada miembro del consejo va a trabajar contigo para construir tu proyecto. Los primeros documentos estarán listos después de la Sesión de Consejo. Puedes revisar el consejo antes de arrancar si quieres hacer algún cambio.
           </div>
         </div>
 

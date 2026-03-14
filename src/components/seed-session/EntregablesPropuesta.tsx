@@ -46,7 +46,7 @@ export default function EntregablesPropuesta({ project, documentSpecs, acceptedI
         <div className="flex gap-3">
           <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-1">N</div>
           <div className="max-w-2xl bg-[#0D1535] border border-[#1E2A4A] rounded-2xl rounded-tl-sm px-5 py-4 text-sm text-[#e0e0e5] leading-relaxed">
-            Basándome en tu proyecto y el contexto que me compartiste, estos son los documentos que tu Consejo va a producir. Están diseñados para responder las decisiones de alto impacto de tu venture.
+            Basándome en tu proyecto y el contexto que me compartiste, estos son los documentos que tu Consejo va a producir. Están diseñados para responder las decisiones de alto impacto de tu negocio.
           </div>
         </div>
 

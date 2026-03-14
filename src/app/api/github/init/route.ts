@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         name,
-        description: `Venture creado con Reason — ${project.name}`,
+        description: `Proyecto creado con Reason — ${project.name}`,
         private: true,
         auto_init: false,
       }),
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Push custom README as initial commit
-    const readmeContent = `# ${project.name}\n\nGenerado por Reason — venture creation system\n`
+    const readmeContent = `# ${project.name}\n\nGenerado por Reason — sistema de creación de proyectos\n`
     await fetch(`${GITHUB_API}/repos/${fullRepo}/contents/README.md`, {
       method: 'PUT',
       headers: {

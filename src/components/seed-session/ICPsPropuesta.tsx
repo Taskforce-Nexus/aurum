@@ -82,7 +82,7 @@ export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, 
         <div className="flex gap-3">
           <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-1">N</div>
           <div className="max-w-2xl bg-[#0D1535] border border-[#1E2A4A] rounded-2xl rounded-tl-sm px-5 py-4 text-sm text-[#e0e0e5] leading-relaxed">
-            Identifiqué las perspectivas de clientes relevantes para tu venture. Estos van a ayudarte a construir desde el lado del cliente real. Agrega o descarta según lo que sabes de tu mercado.
+            Identifiqué las perspectivas de clientes relevantes para tu proyecto. Estos van a ayudarte a construir desde el lado del cliente real. Agrega o descarta según lo que sabes de tu mercado.
           </div>
         </div>
 

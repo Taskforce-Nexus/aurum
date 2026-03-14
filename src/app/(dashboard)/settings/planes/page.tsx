@@ -5,7 +5,7 @@ export default function PlanesPage() {
       name: 'Core',
       price: '$29',
       period: '/mes',
-      description: 'Para founders que están comenzando su primer venture.',
+      description: 'Para founders que están comenzando su primer proyecto.',
       features: [
         '1 proyecto activo',
         'Sesión de Consejo completa',

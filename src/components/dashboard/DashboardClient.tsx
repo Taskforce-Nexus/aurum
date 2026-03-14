@@ -6,7 +6,7 @@ import CreateProjectModal from './CreateProjectModal'
 
 const PHASE_LABELS: Record<string, { label: string; color: string }> = {
   semilla:       { label: 'Semilla',       color: 'bg-amber-500/20 text-amber-400' },
-  incubadora:    { label: 'Incubadora',    color: 'bg-blue-500/20 text-blue-400' },
+  incubadora:    { label: 'Sesión Semilla', color: 'bg-blue-500/20 text-blue-400' },
   build:         { label: 'Build',         color: 'bg-purple-500/20 text-purple-400' },
   launched:      { label: 'Lanzado',       color: 'bg-green-500/20 text-green-400' },
 }

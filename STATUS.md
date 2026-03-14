@@ -7,8 +7,8 @@ Faber lo actualiza después de cada sesión de trabajo.
 
 ## Estado general
 
-Fecha última actualización: 2026-03-13
-Etapa actual: IMPLEMENTATION — Story 4.3 COMPLETA. Sesión de Consejo: generación de secciones en vivo + DocumentPreview + flujo de aprobación.
+Fecha última actualización: 2026-03-14
+Etapa actual: POLISH — Epic 9 completado. Pre-demo: copy consistency, favicon, loading states, E2E suite 9/9 pass, README actualizado.
 
 ---
 
@@ -326,9 +326,22 @@ Etapa actual: IMPLEMENTATION — Story 4.3 COMPLETA. Sesión de Consejo: generac
 - /settings/notificaciones — toggles por categoría (Actividad + Email) ✓
 - /settings/conexiones — GitHub disponible + 4 próximamente ✓
 
+## Epic 9 — Polish pre-demo (COMPLETO ✓)
+
+- 9.1 Screenshots Pencil — BLOQUEADO (MCP Pencil no respondía en sesión). Pendiente para siguiente sesión.
+- 9.2 Known fixes verificados: Register AuthBrandPanel variant="register" ✓, CTAs landing → /register ✓, token balance lee de BD ✓, settings sidebar 6 tabs + active state ✓
+- 9.3 Copy consistency:
+  - DashboardClient: 'Incubadora' → 'Sesión Semilla' ✓
+  - planes/page.tsx: 'venture' → 'proyecto' ✓
+  - seed-session: ConsejoListo/ConsejoPrincipal/Entregables/ICPs — 'venture' → 'proyecto'/'negocio' ✓
+  - page.tsx landing: 7 instancias 'venture' → 'proyecto'/'negocio' ✓
+  - github/init: 'Venture creado' → 'Proyecto creado' ✓
+- 9.4 UX: favicon añadido a layout.tsx (/branding/favicon-claro-reason.png) ✓, loading.tsx creados para (dashboard) y project/[id] ✓, empty states existentes verificados (dashboard ✓, export ✓, MyBoard ✓)
+- 9.5 Cleanup: console.logs solo en _archive (no acción) ✓, .env.example actualizado con todas las variables ✓, README.md actualizado (rutas, setup, stack, E2E) ✓
+
 ## Siguiente paso
 
-Story 9.x — A definir por Kira
+Story 9.1 — Screenshots Pencil (requiere MCP activo) + comparación browser
 
 ---
 

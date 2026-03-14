@@ -7,7 +7,8 @@ const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans' })
 
 export const metadata: Metadata = {
   title: 'Reason',
-  description: 'Sistema de creación de ventures guiado por IA',
+  description: 'Sistema de creación de proyectos guiado por IA',
+  icons: { icon: '/branding/favicon-claro-reason.png' },
 }
 
 export default function RootLayout({

@@ -41,7 +41,7 @@ export default async function LandingPage() {
       <section className="pt-40 pb-24 px-16 bg-[#0A1128]">
         <div className="max-w-[900px] mx-auto text-center space-y-8">
           <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">
-            Sistema de Creación de Ventures
+            Sistema de Creación de Proyectos
           </p>
           <h1 className="text-[48px] font-bold font-outfit leading-[1.15] text-white">
             Los negocios no mueren en el campo de batalla.
@@ -49,7 +49,7 @@ export default async function LandingPage() {
             <span className="text-[#B8860B]">Mueren en la imaginación.</span>
           </h1>
           <p className="text-[18px] text-[#8B9DB7] leading-relaxed max-w-[680px] mx-auto font-open-sans">
-            Reason transforma tu idea en un venture estructurado con consejo asesor, documentos estratégicos y arquitectura de producto lista para construir.
+            Reason transforma tu idea en un proyecto estructurado con consejo asesor, documentos estratégicos y arquitectura de producto lista para construir.
           </p>
           <div className="flex items-center justify-center gap-4 pt-2">
             <Link
@@ -182,13 +182,13 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Cómo funciona</p>
             <h2 className="text-[32px] font-bold font-outfit text-white">
-              De idea a venture estructurado en 5 pasos
+              De idea a proyecto estructurado en 5 pasos
             </h2>
           </div>
           <div className="flex gap-4">
             {[
               { n: '01', title: 'Incubación', desc: 'Nexo te entrevista y extrae la esencia de tu idea con preguntas estratégicas.' },
-              { n: '02', title: 'Tu Consejo', desc: 'Seleccionas 6-9 consejeros especializados que guiarán tu venture.' },
+              { n: '02', title: 'Tu Consejo', desc: 'Seleccionas 6-9 consejeros especializados que guiarán tu proyecto.' },
               { n: '03', title: 'Sesión de Consejo', desc: 'Sesión de trabajo guiada por IA donde el consejo analiza tu propuesta.' },
               { n: '04', title: 'Documentos', desc: '15 documentos estratégicos generados: VPC, plan de negocio, arquitectura técnica.' },
               { n: '05', title: 'Consultoría', desc: 'Chatea con tu consejo cuando quieras para tomar decisiones informadas.' },
@@ -212,7 +212,7 @@ export default async function LandingPage() {
               Un equipo de expertos IA siempre disponible
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
-              Cada consejero tiene especialidad, estilo de comunicación y perspectiva única. Juntos cubren todos los ángulos de tu venture.
+              Cada consejero tiene especialidad, estilo de comunicación y perspectiva única. Juntos cubren todos los ángulos de tu proyecto.
             </p>
           </div>
           <div className="grid grid-cols-3 gap-4">
@@ -244,7 +244,7 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Documentos estratégicos</p>
             <h2 className="text-[32px] font-bold font-outfit text-white">
-              15 documentos que definen tu venture
+              15 documentos que definen tu negocio
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
               Generados por tu consejo con IA, editables y exportables a PDF y PowerPoint.
@@ -323,7 +323,7 @@ export default async function LandingPage() {
             {[
               {
                 name: 'Reason',
-                desc: 'Estrategia, consejo asesor y documentos para tu venture.',
+                desc: 'Estrategia, consejo asesor y documentos para tu negocio.',
                 active: true,
               },
               {
@@ -373,7 +373,7 @@ export default async function LandingPage() {
             <span className="text-[#B8860B]">merece estructura.</span>
           </h2>
           <p className="text-[16px] text-[#8B9DB7] leading-relaxed">
-            Empieza gratis. Sin tarjeta de crédito. Tu primer venture estructurado en menos de una hora.
+            Empieza gratis. Sin tarjeta de crédito. Tu primer proyecto estructurado en menos de una hora.
           </p>
           <Link
             href="/register"
