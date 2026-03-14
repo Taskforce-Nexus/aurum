@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { LOGO_DATA_URL } from '@/lib/logo'
 import type { Project, DocumentSpec, Advisor, Cofounder } from '@/lib/types'
@@ -57,22 +57,43 @@ export const HAT_COLORS: Record<string, string> = {
 }
 
 export default function SeedSessionFlow({ project, documentSpecs, advisors, cofounders, userEmail }: Props) {
+  const STORAGE_KEY = `sesion_consejo_${project.id}`
+
   const [currentStep, setCurrentStep] = useState<SeedStep>('entregables')
 
   // Selections across steps
-  const [acceptedDocIds,   setAcceptedDocIds]   = useState<string[]>(documentSpecs.map(d => d.id))
-  const [acceptedAdvIds,   setAcceptedAdvIds]   = useState<string[]>(advisors.map(a => a.id))
-  const [acceptedCofIds,   setAcceptedCofIds]   = useState<string[]>(
+  const [acceptedDocIds,     setAcceptedDocIds]     = useState<string[]>(documentSpecs.map(d => d.id))
+  const [acceptedAdvIds,     setAcceptedAdvIds]     = useState<string[]>(advisors.map(a => a.id))
+  const [acceptedCofIds,     setAcceptedCofIds]     = useState<string[]>(
     cofounders.filter(c => c.role === 'constructivo' || c.role === 'critico').slice(0, 2).map(c => c.id)
   )
-  const [acceptedSpecIds, setAcceptedSpecIds]   = useState<string[]>([])
+  const [acceptedSpecIds,    setAcceptedSpecIds]    = useState<string[]>([])
   const [acceptedPersonaIds, setAcceptedPersonaIds] = useState<string[]>([])
+
+  // Restore persisted step from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_step`)
+      if (saved && STEPS.includes(saved as SeedStep)) {
+        setCurrentStep(saved as SeedStep)
+      }
+    } catch { /* localStorage unavailable */ }
+  }, [])
+
+  // Persist step on every change
+  useEffect(() => {
+    try { localStorage.setItem(`${STORAGE_KEY}_step`, currentStep) } catch { /* ignore */ }
+  }, [currentStep])
 
   const stepNum = STEP_NUMBERS[currentStep]
 
   function advance() {
     const idx = STEPS.indexOf(currentStep)
     if (idx < STEPS.length - 1) setCurrentStep(STEPS[idx + 1])
+  }
+
+  function clearStorage() {
+    try { localStorage.removeItem(`${STORAGE_KEY}_step`) } catch { /* ignore */ }
   }
 
   const sharedProps = { project, stepNumber: stepNum, onNext: advance }
@@ -86,7 +107,7 @@ export default function SeedSessionFlow({ project, documentSpecs, advisors, cofo
           <img src={LOGO_DATA_URL} alt="Reason" className="h-7 w-auto" />
         </Link>
         <div className="flex items-center gap-3 text-sm text-[#8892A4]">
-          <span>{project.name} — Fase Semilla</span>
+          <span>{project.name} — Sesión Semilla</span>
           <span className="text-[#1E2A4A]">|</span>
           <span>Paso {stepNum} de 7</span>
           <span className="flex items-center gap-1.5 text-xs bg-green-500/20 text-green-400 border border-green-500/30 px-2.5 py-0.5 rounded-full">
@@ -207,6 +228,7 @@ export default function SeedSessionFlow({ project, documentSpecs, advisors, cofo
             cofounders={cofounders.filter(c => acceptedCofIds.includes(c.id))}
             specialistCount={acceptedSpecIds.length}
             personaCount={acceptedPersonaIds.length}
+            onComplete={clearStorage}
           />
         )}
       </div>

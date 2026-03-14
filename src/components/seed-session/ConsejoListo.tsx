@@ -13,9 +13,10 @@ interface Props {
   specialistCount: number
   personaCount: number
   onNext: () => void
+  onComplete?: () => void
 }
 
-export default function ConsejoListo({ project, documentSpecs, advisors, cofounders, specialistCount, personaCount }: Props) {
+export default function ConsejoListo({ project, documentSpecs, advisors, cofounders, specialistCount, personaCount, onComplete }: Props) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
@@ -31,7 +32,7 @@ export default function ConsejoListo({ project, documentSpecs, advisors, cofound
         }),
       })
     } catch { /* non-blocking */ }
-    // Redirect to sesion-consejo (future route)
+    onComplete?.()
     router.push(`/project/${project.id}`)
   }
 
