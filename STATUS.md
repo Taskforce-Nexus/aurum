@@ -339,9 +339,29 @@ Etapa actual: POLISH — Epic 9 completado. Pre-demo: copy consistency, favicon,
 - 9.4 UX: favicon añadido a layout.tsx (/branding/favicon-claro-reason.png) ✓, loading.tsx creados para (dashboard) y project/[id] ✓, empty states existentes verificados (dashboard ✓, export ✓, MyBoard ✓)
 - 9.5 Cleanup: console.logs solo en _archive (no acción) ✓, .env.example actualizado con todas las variables ✓, README.md actualizado (rutas, setup, stack, E2E) ✓
 
+## Epic 9.1 continuación — Responsive + Route fix (COMPLETO ✓)
+
+- Tarea 1 — Responsive landing page: breakpoints 375/768/1024/1440px
+  - nav: links hidden en mobile, px-4/md:px-8/lg:px-16 ✓
+  - hero: text-[32px] md:text-[48px], CTAs flex-col → sm:flex-row, full-width en xs ✓
+  - secciones: grids 1→2→3/4 cols con sm:/md: breakpoints ✓
+  - footer: flex-col en mobile ✓
+- Tarea 2 — Auth responsive: AuthBrandPanel ya tiene `hidden lg:flex`, form panel toma full-width en mobile ✓
+- Tarea 3 — Dashboard responsive: DashboardClient header flex-wrap gap-3 ✓
+- Tarea 4 — Off-palette colors: auth/confirm/page.tsx — #0F0F11→#0A1128, #C9A84C→#B8860B, #1A1B1E→#0D1535, #2a2b30→#1E2A4A ✓
+- Tarea 5 — Rutas restauradas:
+  - export: ExportCenter con fetch real documents ✓
+  - consultoria: ConsultoriaView con fetch real (advisors, docs, consultations) ✓
+  - sesion-consejo: SesionConsejoView con fetch real (council, session, phases) ✓
+  - consejo: MyBoard con fetch real (advisors, cofounders, specialists, buyerPersonas) ✓
+  - documento/[docId]: DocumentoViewer con fetch real ✓
+  - ConsultoriaView import path: project/[id]/ → (dashboard)/project/[id]/ ✓
+  - MyBoard import path: project/[id]/ → (dashboard)/project/[id]/ ✓
+  - Eliminado project/[id]/documento/[docId]/page.tsx (duplicado) ✓
+
 ## Siguiente paso
 
-Story 9.1 — Screenshots Pencil (requiere MCP activo) + comparación browser
+Screenshots Pencil (requiere MCP activo) + comparación browser
 
 ---
 
