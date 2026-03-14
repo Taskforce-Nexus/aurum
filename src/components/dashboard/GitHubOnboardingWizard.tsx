@@ -120,7 +120,7 @@ export default function GitHubOnboardingWizard({
       }
     }
 
-    router.push(`/project/${project.id}/incubadora`)
+    router.push(`/project/${project.id}/seed-session`)
     router.refresh()
   }
 

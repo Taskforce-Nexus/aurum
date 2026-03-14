@@ -6,7 +6,7 @@ import { es } from 'date-fns/locale'
 import type { Project } from '@/lib/types'
 
 const JOURNEY_STAGES = [
-  'Semilla',
+  'Seed Session',
   'Selección de Consejeros',
   'Definición de Entregables',
   'Sesión de Consejo',
