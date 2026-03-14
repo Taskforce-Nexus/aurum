@@ -145,7 +145,7 @@ export default async function ProjectPage({ params }: { params: { id: string } }
             {p.founder_brief && <div className="h-0.5 bg-[#22c55e]" />}
             <div className="p-5 flex flex-col flex-1">
               <div className="flex items-center justify-between mb-3">
-                <span className={`text-xs font-semibold uppercase tracking-widest ${p.founder_brief ? 'text-green-400' : 'text-[#8892A4]'}`}>Semilla</span>
+                <span className={`text-xs font-semibold uppercase tracking-widest ${p.founder_brief ? 'text-green-400' : 'text-[#8892A4]'}`}>Seed Session</span>
                 {p.founder_brief
                   ? <span className="flex items-center gap-1 text-xs text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full"><span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />Completada</span>
                   : <span className="flex items-center gap-1 text-xs text-[#8892A4]"><span className="w-1.5 h-1.5 rounded-full bg-[#3A4560] inline-block" />Pendiente</span>

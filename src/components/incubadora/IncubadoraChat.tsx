@@ -464,7 +464,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             ) : (
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full border border-[#1E2A4A]" />
-                <span className="text-xs text-[#1E2A4A]">Pendiente — al terminar Semilla</span>
+                <span className="text-xs text-[#1E2A4A]">Pendiente — al terminar Seed Session</span>
               </div>
             )}
           </div>
@@ -583,7 +583,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             <div className="border-t border-[#B8860B]/30 bg-[#B8860B]/5 px-8 py-3 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2 text-sm text-[#B8860B]">
                 <span>✓</span>
-                <span>Semilla completada — Resumen del Fundador generado</span>
+                <span>Seed Session completada — Resumen del Fundador generado</span>
               </div>
               <Link
                 href={`/project/${project.id}`}
