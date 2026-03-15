@@ -137,8 +137,8 @@ export default async function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[
               { stat: '90%', label: 'de startups fracasan en los primeros 3 años', colorClass: 'text-[#E53E3E]' },
-              { stat: '42%', label: 'mueren por falta de mercado — idea sin validar', colorClass: 'text-[#B8860B]' },
-              { stat: '6×', label: 'más caro arreglar el rumbo después de lanzar', colorClass: 'text-[#4299E1]' },
+              { stat: '6-12 sem.', label: 'el tiempo promedio que se pierde construyendo sin validar', colorClass: 'text-[#B8860B]' },
+              { stat: '$50K+', label: 'el costo promedio de un pivot por falta de estructura', colorClass: 'text-[#4299E1]' },
             ].map((item) => (
               <div key={item.stat} className="bg-[#0A1128] border border-[#1E2A4A] rounded-xl p-6 space-y-2">
                 <p className={`text-[40px] font-bold font-outfit ${item.colorClass}`}>
@@ -157,7 +157,7 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Para quién es Reason</p>
             <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
-              Diseñado para founders que piensan antes de construir
+              Para cualquier persona que necesite estructurar una decisión compleja.
             </h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -182,7 +182,7 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Cómo funciona</p>
             <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
-              De idea a proyecto estructurado en 5 pasos
+              5 fases. Una mesa. Nadie se levanta hasta resolver.
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -209,7 +209,7 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Tu consejo asesor</p>
             <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
-              Un equipo de expertos IA siempre disponible
+              No es un chatbot. Es un consejo que piensa desde todos los ángulos.
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
               Cada consejero tiene especialidad, estilo de comunicación y perspectiva única. Juntos cubren todos los ángulos de tu proyecto.
@@ -241,7 +241,7 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Documentos estratégicos</p>
             <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
-              15 documentos que definen tu negocio
+              Documentos que resuelven decisiones. No decks que llenan slides.
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
               Generados por tu consejo con IA, editables y exportables a PDF y PowerPoint.
@@ -273,7 +273,7 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Nexo</p>
             <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
-              El moderador que no tiene miedo de disentir
+              La diferencia entre una idea y un negocio es quién se sienta contigo a resolverlo.
             </h2>
             <p className="text-[16px] text-[#8B9DB7] leading-relaxed max-w-[560px]">
               Nexo opera en dos modos simultáneos para darte perspectiva completa.
@@ -313,7 +313,7 @@ export default async function LandingPage() {
           <div className="space-y-3">
             <p className="text-[11px] text-[#B8860B] uppercase tracking-[3px] font-semibold">Parte de la Suite AVA</p>
             <h2 className="text-[26px] md:text-[32px] font-bold font-outfit text-white">
-              Reason es el primer módulo del sistema AVA
+              Reason es el primer módulo. La suite completa está en camino.
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">

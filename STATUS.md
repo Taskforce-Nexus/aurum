@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-15
-Etapa actual: POLISH — Alineación visual frame vs browser completada. 6 fixes de copy aplicados ("Seed Session" → "Sesión Semilla" en 6 archivos, phase chips formateados). Landing: frame desactualizado vs código — pendiente decisión Kira.
+Etapa actual: POLISH — Alineación visual frame vs browser COMPLETA. Landing sincronizada con frame (7 headlines + stats). "Sesión Semilla" consistente en toda la app. Phase chips formateados.
 
 ---
 
