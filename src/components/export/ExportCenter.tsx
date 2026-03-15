@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Project } from '@/lib/types'
@@ -32,6 +32,14 @@ export default function ExportCenter({ project, documents }: Props) {
 
   const readyDocs = documents.filter(d => d.status === 'aprobado' || d.status === 'generado')
   const readyCount = readyDocs.length
+  const progressBarRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (progressBarRef.current) {
+      const pct = documents.length > 0 ? (readyCount / documents.length) * 100 : 0
+      progressBarRef.current.style.width = `${pct}%`
+    }
+  }, [readyCount, documents.length])
 
   async function downloadDoc(doc: ExportDocument, format: 'pdf' | 'pptx') {
     const sections = doc.content_json?.sections ?? []
@@ -126,8 +134,8 @@ export default function ExportCenter({ project, documents }: Props) {
           </p>
           <div className="w-full h-1.5 bg-[#1A2644] rounded-full">
             <div
+              ref={progressBarRef}
               className="h-1.5 bg-[#B8860B] rounded-full transition-all"
-              style={{ width: documents.length > 0 ? `${(readyCount / documents.length) * 100}%` : '0%' }}
             />
           </div>
         </div>

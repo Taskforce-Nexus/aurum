@@ -25,6 +25,15 @@ const HAT_COLORS: Record<HatKey, string> = {
   azul: '#4299E1',
 }
 
+const HAT_BG_CLASSES: Record<HatKey, string> = {
+  blanco: 'bg-[#F5F5F5]',
+  negro: 'bg-[#374151]',
+  rojo: 'bg-[#EF4444]',
+  amarillo: 'bg-[#B8860B]',
+  verde: 'bg-[#48BB78]',
+  azul: 'bg-[#4299E1]',
+}
+
 const HAT_LABELS: Record<HatKey, string> = {
   blanco: 'datos',
   negro: 'cautela',
@@ -83,11 +92,7 @@ export default function MyBoard({ project, advisors, cofounders, specialists, bu
                 {ALL_HATS.map(hat => (
                   <div key={hat} className="flex flex-col items-center gap-1">
                     <div
-                      className="w-[6px] h-[6px] rounded-sm"
-                      style={{
-                        backgroundColor: HAT_COLORS[hat],
-                        opacity: coveredHats.has(hat) ? 1 : 0.25,
-                      }}
+                      className={`w-[6px] h-[6px] rounded-sm ${HAT_BG_CLASSES[hat]} ${coveredHats.has(hat) ? 'opacity-100' : 'opacity-25'}`}
                     />
                     <span className="text-[9px] text-[#4A5568]">{HAT_LABELS[hat]}</span>
                   </div>
@@ -345,11 +350,7 @@ function AdvisorCard({ advisor, level }: { advisor: Advisor; level: string }) {
           {ALL_HATS.map(hat => (
             <div
               key={hat}
-              className="w-[6px] h-[6px] rounded-sm"
-              style={{
-                backgroundColor: HAT_COLORS[hat],
-                opacity: coveredHats.includes(hat) ? 1 : 0.15,
-              }}
+              className={`w-[6px] h-[6px] rounded-sm ${HAT_BG_CLASSES[hat]} ${coveredHats.includes(hat) ? 'opacity-100' : 'opacity-15'}`}
               title={HAT_LABELS[hat]}
             />
           ))}

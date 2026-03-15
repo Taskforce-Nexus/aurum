@@ -136,12 +136,12 @@ export default async function LandingPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[
-              { stat: '90%', label: 'de startups fracasan en los primeros 3 años', color: '#E53E3E' },
-              { stat: '42%', label: 'mueren por falta de mercado — idea sin validar', color: '#B8860B' },
-              { stat: '6×', label: 'más caro arreglar el rumbo después de lanzar', color: '#4299E1' },
+              { stat: '90%', label: 'de startups fracasan en los primeros 3 años', colorClass: 'text-[#E53E3E]' },
+              { stat: '42%', label: 'mueren por falta de mercado — idea sin validar', colorClass: 'text-[#B8860B]' },
+              { stat: '6×', label: 'más caro arreglar el rumbo después de lanzar', colorClass: 'text-[#4299E1]' },
             ].map((item) => (
               <div key={item.stat} className="bg-[#0A1128] border border-[#1E2A4A] rounded-xl p-6 space-y-2">
-                <p className="text-[40px] font-bold font-outfit" style={{ color: item.color }}>
+                <p className={`text-[40px] font-bold font-outfit ${item.colorClass}`}>
                   {item.stat}
                 </p>
                 <p className="text-[13px] text-[#8B9DB7] leading-relaxed">{item.label}</p>
@@ -217,21 +217,18 @@ export default async function LandingPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { specialty: 'Investigación de Mercado', name: 'Dr. Maya Singh', style: 'Analítica y basada en datos', hat: '#F5F5F5' },
-              { specialty: 'Estrategia de Negocios', name: 'Carlos Mendez', style: 'Directo y orientado a resultados', hat: '#B8860B' },
-              { specialty: 'UX & Producto', name: 'Sofia Chen', style: 'Empática y centrada en usuario', hat: '#4299E1' },
-              { specialty: 'Tecnología & Arquitectura', name: 'Arjun Patel', style: 'Pragmático y escalable', hat: '#48BB78' },
-              { specialty: 'Finanzas & Modelos', name: 'Elena Vasquez', style: 'Rigurosa y conservadora', hat: '#374151' },
-              { specialty: 'Legal & Compliance', name: 'Marco Rossi', style: 'Preciso y preventivo', hat: '#EF4444' },
+              { specialty: 'Investigación de Mercado', name: 'Dr. Maya Singh', style: 'Analítica y basada en datos', hatBg: 'bg-[#F5F5F5]' },
+              { specialty: 'Estrategia de Negocios', name: 'Carlos Mendez', style: 'Directo y orientado a resultados', hatBg: 'bg-[#B8860B]' },
+              { specialty: 'UX & Producto', name: 'Sofia Chen', style: 'Empática y centrada en usuario', hatBg: 'bg-[#4299E1]' },
+              { specialty: 'Tecnología & Arquitectura', name: 'Arjun Patel', style: 'Pragmático y escalable', hatBg: 'bg-[#48BB78]' },
+              { specialty: 'Finanzas & Modelos', name: 'Elena Vasquez', style: 'Rigurosa y conservadora', hatBg: 'bg-[#374151]' },
+              { specialty: 'Legal & Compliance', name: 'Marco Rossi', style: 'Preciso y preventivo', hatBg: 'bg-[#EF4444]' },
             ].map((advisor) => (
               <div key={advisor.name} className="bg-[#0D1535] border border-[#1E2A4A] rounded-xl p-4 space-y-1.5">
                 <p className="text-[10px] text-[#6E8EAD] uppercase tracking-wider font-medium">{advisor.specialty}</p>
                 <p className="text-[14px] text-white font-bold font-outfit">{advisor.name}</p>
                 <p className="text-[11px] text-[#4A5568]">{advisor.style}</p>
-                <div
-                  className="w-[6px] h-[6px] rounded-sm mt-1"
-                  style={{ backgroundColor: advisor.hat }}
-                />
+                <div className={`w-[6px] h-[6px] rounded-sm mt-1 ${advisor.hatBg}`} />
               </div>
             ))}
           </div>
