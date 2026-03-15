@@ -71,27 +71,29 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
   }, [messages])
 
   useEffect(() => {
-    if (!conversation?.id) {
-      sendInitialMessage()
-      return
-    }
-    // Always fetch fresh from DB — bypasses Next.js client router cache stale data
-    supabase
-      .from('conversations')
-      .select('messages')
-      .eq('id', conversation.id)
-      .single()
-      .then(({ data }) => {
+    const loadMessages = async () => {
+      if (!conversation?.id) {
+        sendInitialMessage()
+        return
+      }
+      // Always fetch fresh from DB — bypasses Next.js client router cache stale data
+      try {
+        const { data } = await supabase
+          .from('conversations')
+          .select('messages')
+          .eq('id', conversation.id)
+          .single()
         const fresh = (data?.messages ?? []) as Message[]
         if (fresh.length > 0) {
           setMessages(fresh)
         } else {
           sendInitialMessage()
         }
-      })
-      .catch(() => {
+      } catch {
         if ((conversation?.messages ?? []).length === 0) sendInitialMessage()
-      })
+      }
+    }
+    void loadMessages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
