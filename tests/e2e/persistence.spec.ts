@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 const BASE = 'http://localhost:3000'
 const TEST_EMAIL = 'e2e@reason.test'
-const TEST_PASSWORD = 'test123456'
+const TEST_PASSWORD = 'E2eReason2026x'
 
 test.describe('Session Persistence', () => {
 
@@ -20,7 +20,7 @@ test.describe('Session Persistence', () => {
     await page.waitForTimeout(2000)
 
     // Go to Seed Session
-    const seedLink = page.locator('a[href*="seed-session"], a[href*="incubadora"], text=Ver sesión completa, text=Seed Session').first()
+    const seedLink = page.locator('a[href*="seed-session"], a[href*="incubadora"]').first()
     if (await seedLink.isVisible()) {
       await seedLink.click()
       await page.waitForTimeout(3000)
@@ -44,7 +44,7 @@ test.describe('Session Persistence', () => {
     }
 
     // Navigate away to ProjectView
-    const backLink = page.locator('a[href*="/project/"], text=Salir, button:has-text("Salir")').first()
+    const backLink = page.locator('a[href*="/project/"]').first()
     if (await backLink.isVisible()) {
       await backLink.click()
       await page.waitForTimeout(2000)
@@ -56,7 +56,7 @@ test.describe('Session Persistence', () => {
     await page.screenshot({ path: 'tests/screenshots/persist-03-project-view.png' })
 
     // Return to Seed Session
-    const seedLink2 = page.locator('a[href*="seed-session"], a[href*="incubadora"], text=Ver sesión completa, text=Seed Session').first()
+    const seedLink2 = page.locator('a[href*="seed-session"], a[href*="incubadora"]').first()
     if (await seedLink2.isVisible()) {
       await seedLink2.click()
       await page.waitForTimeout(3000)
@@ -90,7 +90,7 @@ test.describe('Session Persistence', () => {
     await projectLink.click()
     await page.waitForTimeout(2000)
 
-    const seedLink = page.locator('a[href*="seed-session"], a[href*="incubadora"], text=Ver sesión completa, text=Seed Session').first()
+    const seedLink = page.locator('a[href*="seed-session"], a[href*="incubadora"]').first()
     if (await seedLink.isVisible()) {
       await seedLink.click()
       await page.waitForTimeout(3000)
