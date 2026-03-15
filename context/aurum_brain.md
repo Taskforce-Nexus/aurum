@@ -21,9 +21,6 @@ Objetivo: comprimir semanas de trabajo estratégico en horas.
 
 La mayoría de las decisiones estratégicas se estancan porque:
 
-
-
-
 - el conocimiento existe pero no está estructurado
 - no hay un proceso para convertir conversación en documentos accionables
 
@@ -55,6 +52,7 @@ EXPORT CENTER — presentación interactiva + PDF / PPTX
 ## AVA Suite
 
 Reason es Producto 1 de la AVA Suite:
+
 - Reason — estrategia de negocio + consejo IA
 - Branding — identidad de marca (Producto 2)
 - Agile Bot — backlog estructurado (Producto 3)
