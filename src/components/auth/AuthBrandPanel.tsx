@@ -4,7 +4,7 @@ import { LOGO_DATA_URL } from '@/lib/logo'
 
 const FEATURES = [
   {
-    label: 'Seed Session',
+    label: 'Sesión Semilla',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8860B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22V12"/>

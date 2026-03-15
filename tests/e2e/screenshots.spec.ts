@@ -42,8 +42,19 @@ test('Screenshot all screens', async ({ page }) => {
     }
   }
 
-  // Landing
-  await page.goto(BASE)
+  // Landing (logged-in user redirects to dashboard — skip here)
+})
+
+test('Landing page (no auth)', async ({ browser }) => {
+  test.setTimeout(30000)
+
+  // Fresh context — no cookies, no session
+  const context = await browser.newContext()
+  const page = await context.newPage()
+
+  await page.goto('http://localhost:3000')
   await page.waitForTimeout(2000)
-  await page.screenshot({ path: 'tests/screenshots/screen-landing.png', fullPage: true })
+  await page.screenshot({ path: 'tests/screenshots/screen-landing-real.png', fullPage: true })
+
+  await context.close()
 })
