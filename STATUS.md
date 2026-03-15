@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-15
-Etapa actual: POLISH — Voice mode VAD verificado E2E. E2E suite: voice-mode 1/1, viewer-consultoria 2/2, sesion-consejo 2/2, persistence 2/2.
+Etapa actual: POLISH — Alineación visual frame vs browser completada. 2 fixes de copy aplicados. E2E suite: voice-mode 1/1, viewer-consultoria 2/2, sesion-consejo 2/2, persistence 2/2.
 
 ---
 

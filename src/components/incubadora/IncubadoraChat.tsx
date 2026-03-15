@@ -310,7 +310,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
           <img src={LOGO_DATA_URL} alt="Reason" className="h-7 w-auto" />
         </Link>
         <div className="flex items-center gap-3 text-sm text-[#8892A4]">
-          <span>{project.name} — Seed Session</span>
+          <span>{project.name} — Sesión Semilla</span>
           <span className="text-[#1E2A4A]">|</span>
           <span>Paso {Math.min(coveredTopics.length + 1, 7)} de {TOPICS.length}</span>
           <span className="flex items-center gap-1.5 text-xs bg-green-500/20 text-green-400 border border-green-500/30 px-2.5 py-0.5 rounded-full">
@@ -337,7 +337,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
         {/* Left sidebar */}
         <aside className="w-72 border-r border-[#1E2A4A] p-5 flex flex-col gap-5 overflow-y-auto shrink-0">
           <div>
-            <h2 className="font-semibold text-sm mb-0.5">Seed Session</h2>
+            <h2 className="font-semibold text-sm mb-0.5">Sesión Semilla</h2>
             <p className="text-xs text-[#8892A4]">1:1 con Nexo Constructivo</p>
           </div>
 
@@ -460,7 +460,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             ) : (
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full border border-[#1E2A4A]" />
-                <span className="text-xs text-[#1E2A4A]">Pendiente — al terminar Seed Session</span>
+                <span className="text-xs text-[#1E2A4A]">Pendiente — al terminar Sesión Semilla</span>
               </div>
             )}
           </div>
@@ -579,7 +579,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             <div className="border-t border-[#B8860B]/30 bg-[#B8860B]/5 px-8 py-3 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2 text-sm text-[#B8860B]">
                 <span>✓</span>
-                <span>Seed Session completada — Resumen del Fundador generado</span>
+                <span>Sesión Semilla completada — Resumen del Fundador generado</span>
               </div>
               <Link
                 href={`/project/${project.id}`}
