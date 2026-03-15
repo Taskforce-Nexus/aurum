@@ -212,9 +212,38 @@ async function fixFinTrackDocuments() {
   console.log(`Fixed ${docs.length} FinTrack documents → status: aprobado + content_json`)
 }
 
+async function fixFinTrackPhase() {
+  // Ensure FinTrack has current_phase: 'completado' so Consultoría Activa is unlocked
+  const { data: fintrack } = await supabase
+    .from('projects')
+    .select('id, current_phase')
+    .eq('user_id', TEST_USER_ID)
+    .eq('name', 'FinTrack')
+    .maybeSingle()
+
+  if (!fintrack) {
+    console.log('FinTrack not found — skipping phase fix')
+    return
+  }
+
+  if (fintrack.current_phase === 'completado') {
+    console.log('FinTrack already completado — no fix needed')
+    return
+  }
+
+  const { error } = await supabase
+    .from('projects')
+    .update({ current_phase: 'completado' })
+    .eq('id', fintrack.id)
+
+  if (error) console.error('Phase fix error:', error.message)
+  else console.log('FinTrack phase updated → completado')
+}
+
 async function main() {
   await createTestUser()
   await fixFinTrackDocuments()
+  await fixFinTrackPhase()
   await setupSessionTest()
 }
 
