@@ -388,6 +388,13 @@ Etapa actual: POLISH — Epic 9 completado. Pre-demo: copy consistency, favicon,
 - TypeScript: 0 errores ✓
 - ESLint: 0 errores, 4 warnings intencionales ✓
 
+## Fix no-inline-styles (COMPLETO ✓)
+
+- page.tsx: stat colors + advisor hat dots → propiedades `colorClass`/`hatBg` con Tailwind completo ✓
+- MyBoard.tsx: `HAT_BG_CLASSES` map con strings Tailwind estáticos + `opacity-*` en className ✓
+- ExportCenter.tsx: progress bar → `useRef` + `useEffect` elimina `style=` del JSX ✓
+- 5 errores PROBLEMS panel → 0 ✓
+
 ## Fix crítico — Session persistence (COMPLETO ✓)
 
 - seed-session/page.tsx: `.single()` → `.order('updated_at').limit(1)` + `conversations?.[0] ?? null` ✓
