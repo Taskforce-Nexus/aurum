@@ -395,18 +395,26 @@ Etapa actual: POLISH — Epic 9 completado. Pre-demo: copy consistency, favicon,
 - ExportCenter.tsx: progress bar → `useRef` + `useEffect` elimina `style=` del JSX ✓
 - 5 errores PROBLEMS panel → 0 ✓
 
-## Fix bug — project_documents order('created_at') (COMPLETO ✓)
+## Fix bug — project_documents columnas inexistentes (COMPLETO ✓)
+
+- `created_at` no existe en `project_documents` — corregido en 4 archivos → `.order('generated_at', nullsFirst: true)` ✓
+  - `sesion-consejo/page.tsx`, `api/session/turn/route.ts` (fix anterior)
+  - `export/page.tsx`, `consultoria/page.tsx`, `documento/[docId]/page.tsx` (fix actual)
+- `updated_at` no existe en `project_documents` — corregido → `last_edited_at` en `export/page.tsx` + `ExportCenter.tsx` ✓
+- `create-user.js` actualizado con `fixFinTrackDocuments()` — asegura docs `status: aprobado` + `content_json` para tests ✓
+
+## Fix bug — project_documents order('created_at') (COMPLETO — incluido arriba)
 
 - `sesion-consejo/page.tsx` + `api/session/turn/route.ts`: `.order('created_at')` → `.order('generated_at', nullsFirst: true)` ✓
   - `project_documents` no tiene columna `created_at` — query fallaba silenciosamente → "No hay documentos configurados"
   - Detectado via E2E smoke test de Sesión de Consejo
 
-## Smoke test — Sesión de Consejo E2E (COMPLETO ✓)
+## Smoke test — Debate completo + Export PDF E2E (COMPLETO ✓)
 
-- `tests/e2e/sesion-consejo.spec.ts` creado — flujo completo: login → TestCo → sesion-consejo → Iniciar → debate IA ✓
-- `tests/e2e/create-user.js` actualizado con `setupSessionTest()` — crea proyecto TestCo con council + 4 docs pendientes ✓
-- **1/1 PASS** ✓
-- Screenshots: layout 3 columnas ✓, pregunta generada ✓, 4 documentos en sidebar ✓, PREVIEW EN VIVO ✓
+- `tests/e2e/sesion-consejo.spec.ts` — 2 tests, **2/2 PASS** ✓
+- **Test 1 — Full debate flow**: Iniciar → pregunta IA → Iniciar Debate → Constructivo + Crítico → Elegir Constructiva → sección generada → progreso sidebar ✓
+- **Test 2 — Export PDF**: Centro de Exportación 4/4 Listo → Descargar → `Value_Proposition_Canvas.pdf` descargado ✓
+- `create-user.js` actualizado: `fixFinTrackDocuments()` + `setupSessionTest()` ✓
 
 ## Fix crítico — Session persistence (COMPLETO ✓)
 

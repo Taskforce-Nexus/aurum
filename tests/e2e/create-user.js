@@ -164,8 +164,57 @@ async function setupSessionTest() {
   return projectId
 }
 
+async function fixFinTrackDocuments() {
+  // Ensure FinTrack has approved documents with content_json sections (for Export test)
+  const { data: fintrack } = await supabase
+    .from('projects')
+    .select('id')
+    .eq('user_id', TEST_USER_ID)
+    .eq('name', 'FinTrack')
+    .maybeSingle()
+
+  if (!fintrack) {
+    console.log('FinTrack not found — skipping document fix')
+    return
+  }
+
+  const { data: docs } = await supabase
+    .from('project_documents')
+    .select('id, name')
+    .eq('project_id', fintrack.id)
+
+  if (!docs?.length) {
+    console.log('No FinTrack documents found')
+    return
+  }
+
+  for (const doc of docs) {
+    await supabase.from('project_documents').update({
+      status: 'aprobado',
+      content_json: {
+        sections: [
+          {
+            section_name: 'Resumen ejecutivo',
+            content: `Sección de ${doc.name} para FinTrack — app de finanzas para millennials LATAM.`,
+            key_points: ['CAC objetivo $12 USD', 'LTV mínimo $80 USD', 'Retención mes 1 > 60%'],
+          },
+          {
+            section_name: 'Análisis de mercado',
+            content: 'Mercado TAM estimado en $2.4B USD para LATAM. SAM enfocado en México y Colombia = $420M.',
+            key_points: ['TAM $2.4B LATAM', 'SAM $420M MX+CO', '18M usuarios potenciales'],
+          },
+        ],
+      },
+      generated_at: new Date().toISOString(),
+      approved_at: new Date().toISOString(),
+    }).eq('id', doc.id)
+  }
+  console.log(`Fixed ${docs.length} FinTrack documents → status: aprobado + content_json`)
+}
+
 async function main() {
   await createTestUser()
+  await fixFinTrackDocuments()
   await setupSessionTest()
 }
 

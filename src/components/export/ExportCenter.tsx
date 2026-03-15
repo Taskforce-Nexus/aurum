@@ -16,7 +16,7 @@ interface ExportDocument {
   name: string
   status: string
   generated_at: string | null
-  updated_at: string
+  last_edited_at: string | null
   content_json: { sections?: DocumentSection[] } | null
   document_specs: { name: string } | null
 }
@@ -258,7 +258,7 @@ function TableRow({
 
       {/* Date */}
       <div className="w-[160px] text-[13px] text-[#4A5568]">
-        {formatDate(doc.generated_at ?? doc.updated_at)}
+        {formatDate(doc.generated_at ?? doc.last_edited_at ?? '')}
       </div>
 
       {/* Actions */}

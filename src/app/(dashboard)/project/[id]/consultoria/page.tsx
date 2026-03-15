@@ -28,7 +28,7 @@ export default async function ConsultoriaPage({ params }: { params: { id: string
       .from('project_documents')
       .select('id, name, status, content_json')
       .eq('project_id', params.id)
-      .order('created_at'),
+      .order('generated_at', { ascending: true, nullsFirst: true }),
     supabase
       .from('consultations')
       .select('*')

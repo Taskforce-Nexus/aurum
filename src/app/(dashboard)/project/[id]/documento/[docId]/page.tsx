@@ -37,7 +37,7 @@ export default async function DocumentoPage({
     .from('project_documents')
     .select('id, name, status')
     .eq('project_id', params.id)
-    .order('created_at')
+    .order('generated_at', { ascending: true, nullsFirst: true })
 
   return (
     <DocumentoViewer
