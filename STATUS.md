@@ -326,6 +326,23 @@ Etapa actual: POLISH — Epic 9 completado. Pre-demo: copy consistency, favicon,
 - /settings/notificaciones — toggles por categoría (Actividad + Email) ✓
 - /settings/conexiones — GitHub disponible + 4 próximamente ✓
 
+## Epic 9.6 — Nomenclatura + Persistencia + Fix TS (COMPLETO ✓)
+
+- Rename `/incubadora` → `/seed-session`: nueva página + redirect backwards-compat ✓
+- Nomenclatura UI: "Incubadora"/"Semilla" → "Seed Session" (Nexo chat), "Sesión de Consejo" (pasos 2-7) ✓
+  - IncubadoraChat.tsx: header, sidebar h2, banner, pending text ✓
+  - SeedSessionFlow.tsx: header, sidebar h2 ✓
+  - AuthBrandPanel.tsx: feature label ✓
+  - DashboardClient.tsx: phase label ✓
+  - ProjectView page.tsx: tile label + JOURNEY_STAGES ✓
+  - semilla/page.tsx: redirect target actualizado ✓
+  - GitHubOnboardingWizard.tsx: push URL actualizado ✓
+- SeedSessionFlow localStorage persistence: estado persiste entre page refreshes (key: `sesion_consejo_${projectId}`) ✓
+- ConsejoListo: onComplete? → clearStorage antes de redirect ✓
+- TypeScript fix: `Set<string>` spread → `Array.from()` en settings/notificaciones ✓
+- E2E test 5: URL `/incubadora` → `/seed-session`, texto `Sesión Semilla` → detecta `Seed Session` o `Sesión de Consejo` ✓
+- TypeScript check: 0 errores ✓
+
 ## Epic 9 — Polish pre-demo (COMPLETO ✓)
 
 - 9.1 Screenshots Pencil — BLOQUEADO (MCP Pencil no respondía en sesión). Pendiente para siguiente sesión.

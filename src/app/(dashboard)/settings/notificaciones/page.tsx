@@ -71,7 +71,7 @@ export default function NotificacionesPage() {
     setTimeout(() => setSaved(false), 2000)
   }
 
-  const categories = [...new Set(NOTIFICATIONS.map(n => n.category))]
+  const categories = Array.from(new Set(NOTIFICATIONS.map(n => n.category)))
 
   return (
     <div className="space-y-8">

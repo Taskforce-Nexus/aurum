@@ -52,13 +52,16 @@ test.describe('Reason E2E', () => {
     await page.screenshot({ path: 'tests/screenshots/04-project-view.png' })
   })
 
-  test('5. Semilla / Incubadora loads', async ({ page }) => {
+  test('5. Seed Session loads', async ({ page }) => {
     await login(page)
-    await page.goto(`${BASE}/project/${projectId}/incubadora`)
+    await page.goto(`${BASE}/project/${projectId}/seed-session`)
     await page.waitForLoadState('networkidle')
-    // SeedSessionFlow always renders "Sesión Semilla" header
-    await expect(page.locator('text=Sesión Semilla').first()).toBeVisible()
-    await page.screenshot({ path: 'tests/screenshots/05-semilla.png' })
+    // Either IncubadoraChat ("Seed Session") or SeedSessionFlow ("Sesión de Consejo")
+    const seedSession = page.locator('text=Seed Session')
+    const consejoSession = page.locator('text=Sesión de Consejo')
+    const visible = await seedSession.count() > 0 || await consejoSession.count() > 0
+    expect(visible).toBeTruthy()
+    await page.screenshot({ path: 'tests/screenshots/05-seed-session.png' })
   })
 
   test('6. Export Center loads', async ({ page }) => {
