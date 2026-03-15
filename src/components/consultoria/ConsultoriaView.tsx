@@ -269,6 +269,7 @@ export default function ConsultoriaView({
           <div className="flex items-center gap-3 px-6 h-[60px] border-t border-[#27282B] shrink-0 bg-[#0A1128]">
             <input
               type="text"
+              aria-label="Pregunta al consejo"
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleSend()}

@@ -600,6 +600,7 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
                   <p className="text-xs text-[#B8860B] uppercase tracking-wider font-medium mb-2">Tu respuesta directa</p>
                   <textarea
                     ref={inputRef}
+                    aria-label="Tu respuesta directa al consejo"
                     value={founderInput}
                     onChange={e => setFounderInput(e.target.value)}
                     rows={3}

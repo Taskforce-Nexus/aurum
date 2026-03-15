@@ -146,8 +146,9 @@ export default function GitHubOnboardingWizard({
 
           {/* Project name input — always visible */}
           <div className="mt-4">
-            <label className="text-xs text-[#6b6d75] block mb-1.5">Nombre del proyecto</label>
+            <label htmlFor="wizard-project-name" className="text-xs text-[#6b6d75] block mb-1.5">Nombre del proyecto</label>
             <input
+              id="wizard-project-name"
               value={projectName}
               onChange={e => onSetProjectName(e.target.value)}
               placeholder="Ej: Elevon"
@@ -215,8 +216,9 @@ export default function GitHubOnboardingWizard({
 
               {repoMode === 'create' ? (
                 <div>
-                  <label className="text-xs text-[#6b6d75] block mb-1.5">Nombre del repositorio</label>
+                  <label htmlFor="wizard-repo-name" className="text-xs text-[#6b6d75] block mb-1.5">Nombre del repositorio</label>
                   <input
+                    id="wizard-repo-name"
                     value={repoName}
                     onChange={e => setRepoName(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
                     className="w-full bg-[#0F0F11] border border-[#2a2b30] focus:border-[#C9A84C] rounded-lg px-4 py-2.5 text-white text-sm placeholder-[#3a3b40] focus:outline-none transition-colors"
@@ -229,11 +231,12 @@ export default function GitHubOnboardingWizard({
                 </div>
               ) : (
                 <div>
-                  <label className="text-xs text-[#6b6d75] block mb-1.5">Seleccionar repositorio</label>
+                  <label htmlFor="wizard-existing-repo" className="text-xs text-[#6b6d75] block mb-1.5">Seleccionar repositorio</label>
                   {reposLoading ? (
                     <p className="text-xs text-[#3a3b40] py-3">Cargando repos…</p>
                   ) : (
                     <select
+                      id="wizard-existing-repo"
                       value={selectedRepo}
                       onChange={e => setSelectedRepo(e.target.value)}
                       className="w-full bg-[#0F0F11] border border-[#2a2b30] focus:border-[#C9A84C] rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none transition-colors"

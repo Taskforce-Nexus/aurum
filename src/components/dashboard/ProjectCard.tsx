@@ -122,6 +122,7 @@ export default function ProjectCard({ id, name, currentPhase, lastActiveAt, desc
             {editing ? (
               <input
                 ref={inputRef}
+                aria-label="Nombre del proyecto"
                 value={editName}
                 onChange={e => setEditName(e.target.value)}
                 onBlur={saveEdit}
