@@ -129,13 +129,13 @@ export async function POST(req: NextRequest) {
       if (!activeConvId) {
         const { data: existing } = await supabase
           .from('conversations').select('id')
-          .eq('project_id', projectId).eq('phase', 'semilla').maybeSingle()
+          .eq('project_id', projectId).eq('type', 'semilla').maybeSingle()
         if (existing) {
           activeConvId = existing.id
         } else {
           const { data: newConv } = await supabase
             .from('conversations')
-            .insert({ project_id: projectId, phase: 'semilla', messages })
+            .insert({ project_id: projectId, type: 'semilla', messages })
             .select('id').single()
           if (newConv) activeConvId = newConv.id
         }
@@ -263,7 +263,7 @@ export async function POST(req: NextRequest) {
         .from('conversations')
         .select('id')
         .eq('project_id', projectId)
-        .eq('phase', 'semilla')
+        .eq('type', 'semilla')
         .maybeSingle()
       if (existing) {
         activeConversationId = existing.id
@@ -273,7 +273,8 @@ export async function POST(req: NextRequest) {
       } else {
         const { data: newConv } = await supabase.from('conversations').insert({
           project_id: projectId,
-          phase: selectedCouncil ? 'value_proposition' : 'semilla',
+          type: 'semilla',
+          ...(selectedCouncil ? { phase: 'value_proposition' } : {}),
           messages: updatedMessages,
           ...(selectedCouncil ? { extracted_docs: { council: selectedCouncil } } : {}),
         }).select('id').single()

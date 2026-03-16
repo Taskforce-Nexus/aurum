@@ -42,7 +42,7 @@ export default async function SeedSessionPage({ params }: { params: { id: string
     .from('conversations')
     .select('*')
     .eq('project_id', params.id)
-    .eq('phase', 'semilla')
+    .eq('type', 'semilla')
     .order('updated_at', { ascending: false })
     .limit(1)
   let conversation = conversations?.[0] ?? null
@@ -50,7 +50,7 @@ export default async function SeedSessionPage({ params }: { params: { id: string
   if (!conversation) {
     const { data: newConv } = await supabase.from('conversations').insert({
       project_id: params.id,
-      phase: 'semilla',
+      type: 'semilla',
       messages: [],
       progress: { founder_context: 0, product_idea: 0 },
     }).select().single()
