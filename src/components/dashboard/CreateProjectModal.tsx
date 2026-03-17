@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 
 const ENTRY_LEVELS = [
   { value: 'idea', label: 'Tengo una idea' },
@@ -20,7 +19,6 @@ export default function CreateProjectModal({ onClose }: Props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
-  const supabase = createClient()
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault()
@@ -28,25 +26,25 @@ export default function CreateProjectModal({ onClose }: Props) {
     setLoading(true)
     setError('')
 
-    const { data, error } = await supabase
-      .from('projects')
-      .insert({
+    const res = await fetch('/api/projects', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         name: name.trim(),
         entry_level: entryLevel,
         current_phase: 'semilla',
         status: 'active',
-        last_active_at: new Date().toISOString(),
-      })
-      .select('id')
-      .single()
+      }),
+    })
+    const json = await res.json()
 
-    if (error) {
-      setError(error.message)
+    if (!res.ok || !json.project) {
+      setError(json.error ?? 'Error creando proyecto')
       setLoading(false)
       return
     }
 
-    router.push(`/project/${data.id}/semilla`)
+    router.push(`/project/${json.project.id}/semilla`)
   }
 
   return (

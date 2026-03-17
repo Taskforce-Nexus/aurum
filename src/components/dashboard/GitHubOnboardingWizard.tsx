@@ -87,28 +87,30 @@ export default function GitHubOnboardingWizard({
     setLoading(true)
     setError('')
 
-    const { data: project, error: insertError } = await supabase.from('projects').insert({
-      name: projectName.trim(),
-      user_id: userId,
-      organization_id: organizationId,
-      status: 'active',
-      entry_level: 'raw_idea',
-      current_phase: 'Semilla',
-      last_active_at: new Date().toISOString(),
-    }).select().single()
+    const createRes = await fetch('/api/projects', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: projectName.trim(),
+        organization_id: organizationId,
+        status: 'active',
+        entry_level: 'raw_idea',
+        current_phase: 'Semilla',
+        ...(repoMode === 'existing' && selectedRepo ? { github_repo: selectedRepo } : {}),
+      }),
+    })
+    const createJson = await createRes.json()
 
-    if (insertError || !project) {
-      setError(insertError?.message ?? 'Error creando proyecto')
+    if (!createRes.ok || !createJson.project) {
+      setError(createJson.error ?? 'Error creando proyecto')
       setLoading(false)
       return
     }
 
-    // Set github_repo on the project
-    if (repoMode === 'existing' && selectedRepo) {
-      // Just link existing repo — update projects.github_repo directly
-      await supabase.from('projects').update({ github_repo: selectedRepo }).eq('id', project.id)
-    } else {
-      // Create new repo via init endpoint
+    const project = createJson.project
+
+    // Create new repo via init endpoint (only for create mode)
+    if (repoMode !== 'existing') {
       try {
         await fetch('/api/github/init', {
           method: 'POST',
