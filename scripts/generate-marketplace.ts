@@ -15,6 +15,20 @@ const ELEMENTS = ['fuego', 'agua', 'tierra', 'aire'] as const
 const HATS = ['blanco', 'rojo', 'negro', 'amarillo', 'verde', 'azul'] as const
 const LEVELS = ['lidera', 'apoya', 'observa'] as const
 
+// Map from script categories to DB CHECK constraint values
+// DB constraint allows: 'investigacion' | 'ux_producto' | 'negocio' | 'tecnico' | 'precios'
+const CATEGORY_DB_MAP: Record<string, string> = {
+  estrategia:  'negocio',
+  finanzas:    'negocio',
+  marketing:   'negocio',
+  ventas:      'negocio',
+  producto:    'ux_producto',
+  tecnologia:  'tecnico',
+  legal:       'negocio',
+  operaciones: 'negocio',
+  industria:   'investigacion',
+}
+
 // ==================== ADVISORS (1,000) ====================
 
 const ADVISOR_CATEGORIES = [
@@ -313,8 +327,8 @@ async function main() {
         const rows = batch.map(a => ({
           name: a.name,
           specialty: a.specialty,
-          category: cat.category,
-          advisor_type: cat.category,
+          category: CATEGORY_DB_MAP[cat.category] || 'negocio', // mapped to constraint values
+          advisor_type: cat.category, // original rich category stored here
           level: a.level || LEVELS[Math.floor(Math.random() * 3)],
           element: a.element || ELEMENTS[Math.floor(Math.random() * 4)],
           communication_style: a.communication_style,
