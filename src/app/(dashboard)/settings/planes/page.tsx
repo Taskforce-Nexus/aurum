@@ -1,59 +1,90 @@
 'use client'
 
+import { useState } from 'react'
 import { toast } from '@/components/ui/Toast'
 
+const PRICE_IDS: Record<string, string> = {
+  pro: 'price_pro_monthly',
+  enterprise: 'price_enterprise_monthly',
+}
+
+const plans = [
+  {
+    id: 'core',
+    name: 'Core',
+    price: '$29',
+    period: '/mes',
+    description: 'Para founders que están comenzando su primer proyecto.',
+    features: [
+      '1 proyecto activo',
+      'Sesión de Consejo completa',
+      'Hasta 6 consejeros IA',
+      '10 documentos generados',
+      'Export PDF',
+      'Consultoría básica (50 consultas/mes)',
+    ],
+    current: true,
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: '$79',
+    period: '/mes',
+    description: 'Para founders en modo ejecución con múltiples proyectos.',
+    features: [
+      'Proyectos ilimitados',
+      'Sesiones de Consejo ilimitadas',
+      'Hasta 12 consejeros IA',
+      '15 documentos + personalizados',
+      'Export PDF y PowerPoint',
+      'Consultoría avanzada (ilimitada)',
+      'Prioridad en modelos IA',
+    ],
+    current: false,
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    price: 'Personalizado',
+    period: '',
+    description: 'Para equipos y aceleradoras con necesidades específicas.',
+    features: [
+      'Todo lo de Pro',
+      'Múltiples usuarios por cuenta',
+      'Consejeros personalizados',
+      'Integraciones con herramientas externas',
+      'SLA garantizado',
+      'Onboarding dedicado',
+    ],
+    current: false,
+  },
+]
+
 export default function PlanesPage() {
-  const plans = [
-    {
-      id: 'core',
-      name: 'Core',
-      price: '$29',
-      period: '/mes',
-      description: 'Para founders que están comenzando su primer proyecto.',
-      features: [
-        '1 proyecto activo',
-        'Sesión de Consejo completa',
-        'Hasta 6 consejeros IA',
-        '10 documentos generados',
-        'Export PDF',
-        'Consultoría básica (50 consultas/mes)',
-      ],
-      current: true,
-    },
-    {
-      id: 'pro',
-      name: 'Pro',
-      price: '$79',
-      period: '/mes',
-      description: 'Para founders en modo ejecución con múltiples proyectos.',
-      features: [
-        'Proyectos ilimitados',
-        'Sesiones de Consejo ilimitadas',
-        'Hasta 12 consejeros IA',
-        '15 documentos + personalizados',
-        'Export PDF y PowerPoint',
-        'Consultoría avanzada (ilimitada)',
-        'Prioridad en modelos IA',
-      ],
-      current: false,
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise',
-      price: 'Personalizado',
-      period: '',
-      description: 'Para equipos y aceleradoras con necesidades específicas.',
-      features: [
-        'Todo lo de Pro',
-        'Múltiples usuarios por cuenta',
-        'Consejeros personalizados',
-        'Integraciones con herramientas externas',
-        'SLA garantizado',
-        'Onboarding dedicado',
-      ],
-      current: false,
-    },
-  ]
+  const [loading, setLoading] = useState<string | null>(null)
+
+  async function handleUpgrade(planId: string) {
+    const priceId = PRICE_IDS[planId]
+    if (!priceId) {
+      toast('Próximamente — escríbenos a hola@reason.dev para hablar con ventas.')
+      return
+    }
+    setLoading(planId)
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, mode: 'subscription' }),
+      })
+      const { url, error } = await res.json()
+      if (error) { toast('Error iniciando checkout. Intenta de nuevo.'); return }
+      if (url) window.location.href = url
+    } catch {
+      toast('Error iniciando checkout. Intenta de nuevo.')
+    } finally {
+      setLoading(null)
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -108,18 +139,20 @@ export default function PlanesPage() {
             ) : plan.id === 'enterprise' ? (
               <button
                 type="button"
-                onClick={() => toast('Próximamente — escríbenos a hola@reason.dev para hablar con ventas.')}
-                className="w-full py-2.5 border border-[#1E2A4A] hover:border-[#4A5568] rounded-lg text-[13px] text-[#8B9DB7] hover:text-white transition-colors"
+                onClick={() => handleUpgrade('enterprise')}
+                disabled={loading === 'enterprise'}
+                className="w-full py-2.5 border border-[#1E2A4A] hover:border-[#4A5568] rounded-lg text-[13px] text-[#8B9DB7] hover:text-white transition-colors disabled:opacity-50"
               >
-                Hablar con ventas
+                {loading === 'enterprise' ? 'Redirigiendo...' : 'Hablar con ventas'}
               </button>
             ) : (
               <button
                 type="button"
-                onClick={() => toast(`Próximamente — el cambio al plan ${plan.name} estará disponible pronto.`)}
-                className="w-full py-2.5 bg-[#B8860B] hover:bg-[#A07710] text-black font-semibold text-[13px] rounded-lg transition-colors"
+                onClick={() => handleUpgrade(plan.id)}
+                disabled={loading === plan.id}
+                className="w-full py-2.5 bg-[#B8860B] hover:bg-[#A07710] text-black font-semibold text-[13px] rounded-lg transition-colors disabled:opacity-50"
               >
-                Cambiar a {plan.name}
+                {loading === plan.id ? 'Redirigiendo...' : `Cambiar a ${plan.name}`}
               </button>
             )}
           </div>

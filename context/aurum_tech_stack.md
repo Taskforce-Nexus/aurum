@@ -11,6 +11,7 @@
 | Estilos | Tailwind CSS + shadcn/ui |
 | Base de datos | Supabase (Postgres + Auth) |
 | IA | Anthropic Claude API |
+| Pagos | Stripe (test mode) |
 | Repositorio | GitHub (Taskforce-Nexus/venture-builder) |
 
 ---
@@ -38,6 +39,9 @@ CLAUDE_USE_CHEAP=              # true para Haiku, omitir para Sonnet
 NEXT_PUBLIC_APP_URL=           # ej. http://localhost:3000
 GITHUB_CLIENT_ID=              # OAuth app GitHub
 GITHUB_CLIENT_SECRET=          # OAuth app GitHub
+STRIPE_SECRET_KEY=             # sk_test_... — Stripe secret key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=  # pk_test_... — Stripe publishable key
+STRIPE_WEBHOOK_SECRET=         # whsec_... — webhook signing secret
 ```
 
 ---
@@ -60,6 +64,8 @@ GITHUB_CLIENT_SECRET=          # OAuth app GitHub
 | `POST /api/extract` | Extraer 5 documentos Reason Framework (5 llamadas Claude en oleadas de 2) |
 | `GET/POST /api/advisors` | CRUD de asesores |
 | `POST /api/voice/correct` | Corrección de transcripción española con Haiku — recibe `{ text }`, devuelve `{ corrected }` |
+| `POST /api/stripe/checkout` | Crea sesión Stripe Checkout (subscription o payment) |
+| `POST /api/stripe/webhook` | Webhook Stripe — actualiza subscriptions + token_balances |
 
 ---
 

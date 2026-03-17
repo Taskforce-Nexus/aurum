@@ -7,8 +7,8 @@ Faber lo actualiza después de cada sesión de trabajo.
 
 ## Estado general
 
-Fecha última actualización: 2026-03-15
-Etapa actual: POLISH — Alineación visual frame vs browser COMPLETA. Landing sincronizada con frame (7 headlines + stats). "Sesión Semilla" consistente en toda la app. Phase chips formateados.
+Fecha última actualización: 2026-03-17
+Etapa actual: STRIPE + PAYMENTS — Integración Stripe (test mode) completa. Checkout sessions para subscripciones y recargas de tokens. Webhook handler. UI conectada.
 
 ---
 
@@ -435,9 +435,40 @@ Etapa actual: POLISH — Alineación visual frame vs browser COMPLETA. Landing s
 - Persistencia localStorage en SeedSessionFlow
 - Auth completo (login/register/verify/forgot)
 
+## Epic Stripe — Pagos integrados (COMPLETO ✓)
+
+- `npm install stripe @stripe/stripe-js` ✓
+- `src/lib/stripe.ts` — cliente lazy (getStripe()) para evitar error build sin env var ✓
+- `src/app/api/stripe/checkout/route.ts` — POST: crea Stripe Checkout session (subscription/payment) ✓
+- `src/app/api/stripe/webhook/route.ts` — POST: verifica firma, maneja checkout.session.completed + subscription.updated/deleted ✓
+- `src/app/(dashboard)/settings/planes/page.tsx` — cliente, botones "Cambiar a Pro/Enterprise" → checkout real ✓
+- `src/components/settings/SettingsBilling.tsx` — "Recargar saldo" expande selector $10/$50/$100 → checkout payment ✓
+- `src/components/ui/Toast.tsx` — global toast system (ToastProvider en layout) ✓
+- `.env.example` — STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, STRIPE_WEBHOOK_SECRET añadidas ✓
+- `npm run build` → EXIT:0 ✓
+
+Acciones pendientes para Juan:
+
+1. Crear Products + Prices en Stripe Dashboard (test mode) → reemplazar placeholders en planes/page.tsx + SettingsBilling.tsx
+2. Configurar webhook endpoint en Stripe → URL: `https://<railway-url>/api/stripe/webhook`
+3. Copiar `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` a Railway env vars
+4. SQL migration en Supabase: `ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS stripe_subscription_id text; ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS stripe_customer_id text;`
+
+## Epic Toast + Dead Buttons — UI funcional (COMPLETO ✓)
+
+- Toast system global: Toast.tsx + ToastProvider en layout.tsx ✓
+- 16/19 botones muertos resueltos: toasts contextuales + handlers reales ✓
+- GitHub OAuth: conexiones/page.tsx → /api/auth/github ✓
+- Cambiar contraseña: supabase.auth.resetPasswordForEmail ✓
+- Fuentes locales: Outfit + OpenSans woff2 en public/fonts (fix Railway build) ✓
+
+## Fix crítico — conversations.phase constraint (COMPLETO ✓)
+
+- `phase: 'semilla'` violaba CHECK constraint — corregido a `phase: 'seed'` en 3 archivos ✓
+
 ## Siguiente paso
 
-Screenshots Pencil (requiere MCP activo) + comparación browser
+Configurar Google OAuth en Supabase Dashboard (Google Cloud Console) + confirmar reason.guru CNAME en Railway
 
 ---
 
