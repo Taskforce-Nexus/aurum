@@ -1,9 +1,18 @@
 import type { Metadata } from 'next'
-import { Outfit, Open_Sans } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 
-const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' })
-const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans' })
+const outfit = localFont({
+  src: '../../public/fonts/Outfit-VariableFont.woff2',
+  variable: '--font-outfit',
+  display: 'swap',
+})
+
+const openSans = localFont({
+  src: '../../public/fonts/OpenSans-VariableFont.woff2',
+  variable: '--font-open-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Reason',
