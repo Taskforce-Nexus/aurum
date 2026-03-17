@@ -2,6 +2,9 @@
   "name": "venture-builder",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0 <22.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -36,6 +39,7 @@
     "@types/pdf-parse": "^1.1.5",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "dotenv": "^17.3.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
     "postcss": "^8",
