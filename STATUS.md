@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-17
-Etapa actual: SESSION ENGINE REDESIGN — Kira 12-fix + Fix 13 ProjectView post-sesión. Preguntas prediseñadas (Game Theory), max_tokens aumentados, perspectivas independientes, fix 13 (markdown, contadores, unlock Consultoría).
+Etapa actual: SESSION ENGINE REDESIGN — CofounderSwapDrawer + AdvisorSwapDrawer funcionales. callClaude 3 tiers (fast/strong/reasoning). Botones Cambiar conectados al catálogo real de Supabase.
 
 ---
 
@@ -58,6 +58,11 @@ Etapa actual: SESSION ENGINE REDESIGN — Kira 12-fix + Fix 13 ProjectView post-
 
 - ConsejoListo — 6 fixes: ICPs 3 personas, asesores LIDERA/APOYA/OBSERVA, cofounders con nombres, especialistas con nombres, ENTREGABLES, nota Revisar consejo ✓
 - ConsejoListo — FREEZE ✓
+- CofounderSwapDrawer — drawer funcional, carga por role desde Supabase, filtra actual ✓
+- AdvisorSwapDrawer — drawer funcional, carga advisors desde Supabase, excluye actual ✓
+- CofoundersPropuesta — botón Cambiar conectado a CofounderSwapDrawer ✓
+- ConsejoPrincipalPropuesta — botón Cambiar por card conectado a AdvisorSwapDrawer ✓
+- "Ver perfil" ya funcional en ConsejoPrincipalPropuesta, EspecialistasPropuesta, ICPsPropuesta ✓
 
 - Projects__Incubator__Default — 12 fixes: header Reason, breadcrumb multi-color, FinTrack, toggle Normal, remove Sí/No, remove Etapa redundante, remove Semilla, Experto UX 0%, Experto en Producto En espera, PREVIEW sobre PROGRESO, remove thumbs replies, Responder yo ✓
 
