@@ -54,13 +54,7 @@ const PLAN_PRICE: Record<string, string> = {
   enterprise: 'Personalizado',
 }
 
-const FUND_AMOUNTS = [10, 50, 100]
-
-const PRICE_MAP: Record<number, string> = {
-  10: 'price_tokens_10',
-  50: 'price_tokens_50',
-  100: 'price_tokens_100',
-}
+const QUICK_AMOUNTS = [10, 25, 50, 100]
 
 export default function SettingsBilling({
   balance,
@@ -70,7 +64,8 @@ export default function SettingsBilling({
   paymentMethod,
 }: Props) {
   const [showFunds, setShowFunds] = useState(false)
-  const [loadingAmount, setLoadingAmount] = useState<number | null>(null)
+  const [amount, setAmount] = useState('')
+  const [loadingFunds, setLoadingFunds] = useState(false)
 
   const planId = subscription?.plan_id ?? 'core'
   const planName = PLAN_NAMES[planId] ?? 'Plan Core'
@@ -84,21 +79,24 @@ export default function SettingsBilling({
       })
     : null
 
-  async function handleAddFunds(amount: number) {
-    setLoadingAmount(amount)
+  async function handleAddFunds() {
+    const num = parseFloat(amount)
+    if (!num || num < 5) { toast('Monto mínimo: $5 USD'); return }
+    if (num > 1000) { toast('Monto máximo: $1,000 USD'); return }
+    setLoadingFunds(true)
     try {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ priceId: PRICE_MAP[amount], mode: 'payment' }),
+        body: JSON.stringify({ amount: num, mode: 'payment' }),
       })
       const { url, error } = await res.json()
-      if (error) { toast('Error iniciando checkout. Intenta de nuevo.'); return }
+      if (error) { toast(error || 'Error al procesar'); return }
       if (url) window.location.href = url
     } catch {
       toast('Error iniciando checkout. Intenta de nuevo.')
     } finally {
-      setLoadingAmount(null)
+      setLoadingFunds(false)
     }
   }
 
@@ -118,25 +116,53 @@ export default function SettingsBilling({
             </p>
           </div>
           {showFunds ? (
-            <div className="flex items-center gap-2">
-              {FUND_AMOUNTS.map(amount => (
+            <div className="flex flex-col gap-3 min-w-[220px]">
+              <div className="flex gap-2">
+                {QUICK_AMOUNTS.map(val => (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => setAmount(String(val))}
+                    className={`px-3 py-1.5 rounded-lg text-[12px] transition-colors ${
+                      amount === String(val)
+                        ? 'bg-[#B8860B] text-black font-semibold'
+                        : 'border border-[#1E2A4A] text-[#8892A4] hover:bg-[#1E2A4A]'
+                    }`}
+                  >
+                    ${val}
+                  </button>
+                ))}
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#8892A4] text-[13px]">$</span>
+                <input
+                  type="number"
+                  min="5"
+                  max="1000"
+                  value={amount}
+                  onChange={e => setAmount(e.target.value)}
+                  placeholder="Otro monto"
+                  className="flex-1 px-3 py-1.5 bg-[#0A1128] border border-[#1E2A4A] rounded-lg text-[#F8F8F8] text-[13px] focus:outline-none focus:border-[#B8860B]/50"
+                />
+                <span className="text-[11px] text-[#4A5568]">USD</span>
+              </div>
+              <div className="flex gap-2">
                 <button
-                  key={amount}
                   type="button"
-                  onClick={() => handleAddFunds(amount)}
-                  disabled={loadingAmount !== null}
-                  className="px-4 py-2 bg-[#B8860B] hover:bg-[#A07710] disabled:opacity-50 text-black font-semibold text-[13px] rounded-lg transition-colors"
+                  onClick={handleAddFunds}
+                  disabled={loadingFunds || !amount}
+                  className="flex-1 py-2 bg-[#B8860B] hover:bg-[#A07710] disabled:opacity-50 text-black font-semibold text-[13px] rounded-lg transition-colors"
                 >
-                  {loadingAmount === amount ? '...' : `$${amount}`}
+                  {loadingFunds ? 'Redirigiendo...' : `Recargar $${amount || '0'} USD`}
                 </button>
-              ))}
-              <button
-                type="button"
-                onClick={() => setShowFunds(false)}
-                className="px-3 py-2 border border-[#1E2A4A] text-[13px] text-[#4A5568] hover:text-white rounded-lg transition-colors"
-              >
-                ✕
-              </button>
+                <button
+                  type="button"
+                  onClick={() => { setShowFunds(false); setAmount('') }}
+                  className="px-3 py-2 border border-[#1E2A4A] text-[13px] text-[#4A5568] hover:text-white rounded-lg transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
           ) : (
             <button
