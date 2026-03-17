@@ -32,7 +32,7 @@ export async function proxy(request: NextRequest) {
     request.nextUrl.pathname.startsWith('/verify-email') ||
     request.nextUrl.pathname.startsWith('/forgot-password') ||
     request.nextUrl.pathname.startsWith('/forgot-password-sent') ||
-    request.nextUrl.pathname.startsWith('/auth/confirm')
+    request.nextUrl.pathname.startsWith('/auth')
 
   const isPublicPage = request.nextUrl.pathname === '/'
 
@@ -52,5 +52,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|branding).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|branding|auth).*)'],
 }
