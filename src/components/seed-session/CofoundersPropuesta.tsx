@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { Cofounder, Project } from '@/lib/types'
 import { HAT_COLORS } from './SeedSessionFlow'
+import CofounderSwapDrawer from './CofounderSwapDrawer'
 
 interface Props {
   project: Project
@@ -27,11 +28,27 @@ const ELEMENT_LABEL: Record<string, string> = {
 
 export default function CofoundersPropuesta({ project, cofounders, acceptedIds, onAcceptedChange, onNext }: Props) {
   const [loading, setLoading] = useState(false)
+  const [localCofounders, setLocalCofounders] = useState<Cofounder[]>(cofounders)
+  const [swapDrawer, setSwapDrawer] = useState<{ open: boolean; role: 'constructivo' | 'critico'; currentId: string }>({
+    open: false, role: 'constructivo', currentId: '',
+  })
 
   // Show one constructivo + one critico
-  const constructivo = cofounders.find(c => c.role === 'constructivo')
-  const critico      = cofounders.find(c => c.role === 'critico')
+  const constructivo = localCofounders.find(c => c.role === 'constructivo')
+  const critico      = localCofounders.find(c => c.role === 'critico')
   const pair = [constructivo, critico].filter(Boolean) as Cofounder[]
+
+  function handleSwap(newCofounder: Cofounder) {
+    setLocalCofounders(prev => {
+      const updated = prev.filter(c => c.role !== newCofounder.role)
+      return [...updated, newCofounder]
+    })
+    onAcceptedChange(
+      acceptedIds
+        .filter(id => !pair.find(c => c.role === newCofounder.role && c.id === id))
+        .concat(newCofounder.id)
+    )
+  }
 
   async function handleConfirm() {
     setLoading(true)
@@ -42,7 +59,7 @@ export default function CofoundersPropuesta({ project, cofounders, acceptedIds, 
         body: JSON.stringify({
           step: 'cofounders',
           projectId: project.id,
-          cofounderIds: acceptedIds,
+          cofounderIds: localCofounders.map(c => c.id),
         }),
       })
     } catch { /* non-blocking */ }
@@ -51,6 +68,14 @@ export default function CofoundersPropuesta({ project, cofounders, acceptedIds, 
   }
 
   return (
+    <>
+    <CofounderSwapDrawer
+      isOpen={swapDrawer.open}
+      onClose={() => setSwapDrawer(prev => ({ ...prev, open: false }))}
+      role={swapDrawer.role}
+      currentCofounderId={swapDrawer.currentId}
+      onSelect={handleSwap}
+    />
     <main className="flex-1 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto px-8 py-6 space-y-5">
         {/* Nexo message */}
@@ -109,6 +134,7 @@ export default function CofoundersPropuesta({ project, cofounders, acceptedIds, 
 
                   <button
                     type="button"
+                    onClick={() => setSwapDrawer({ open: true, role: cf.role, currentId: cf.id })}
                     className="text-xs text-[#8892A4] border border-[#1E2A4A] px-3 py-1.5 rounded-lg hover:text-white transition-colors"
                   >
                     Cambiar
@@ -132,5 +158,6 @@ export default function CofoundersPropuesta({ project, cofounders, acceptedIds, 
         </button>
       </div>
     </main>
+    </>
   )
 }

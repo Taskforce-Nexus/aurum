@@ -4,6 +4,7 @@ import { useState } from 'react'
 import type { Advisor, Project } from '@/lib/types'
 import { HAT_COLORS } from './SeedSessionFlow'
 import AdvisorProfileDrawer from './AdvisorProfileDrawer'
+import AdvisorSwapDrawer from './AdvisorSwapDrawer'
 
 interface Props {
   project: Project
@@ -29,9 +30,24 @@ const LEVEL_COLORS: Record<string, string> = {
 export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedIds, onAcceptedChange, onNext }: Props) {
   const [loading, setLoading] = useState(false)
   const [profileAdvisor, setProfileAdvisor] = useState<Advisor | null>(null)
+  const [localAdvisors, setLocalAdvisors] = useState<Advisor[]>(advisors)
+  const [swapDrawer, setSwapDrawer] = useState<{ open: boolean; currentId: string }>({
+    open: false, currentId: '',
+  })
+
+  function handleAdvisorSwap(newAdvisor: Advisor) {
+    setLocalAdvisors(prev => {
+      const replaced = prev.find(a => a.id === swapDrawer.currentId)
+      if (!replaced) return [...prev, newAdvisor]
+      return prev.map(a => a.id === swapDrawer.currentId ? { ...newAdvisor, level: replaced.level } : a)
+    })
+    onAcceptedChange(
+      acceptedIds.filter(id => id !== swapDrawer.currentId).concat(newAdvisor.id)
+    )
+  }
 
   const grouped: Record<string, Advisor[]> = { lidera: [], apoya: [], observa: [] }
-  for (const a of advisors) {
+  for (const a of localAdvisors) {
     if (grouped[a.level]) grouped[a.level].push(a)
   }
 
@@ -65,6 +81,12 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
       isOpen={profileAdvisor !== null}
       onClose={() => setProfileAdvisor(null)}
       type="advisor"
+    />
+    <AdvisorSwapDrawer
+      isOpen={swapDrawer.open}
+      onClose={() => setSwapDrawer(prev => ({ ...prev, open: false }))}
+      currentAdvisorId={swapDrawer.currentId}
+      onSelect={(newAdvisor) => { handleAdvisorSwap(newAdvisor); setSwapDrawer(prev => ({ ...prev, open: false })) }}
     />
     <main className="flex-1 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto px-8 py-6 space-y-5">
@@ -119,6 +141,13 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
                             }`}
                           >
                             {isSelected ? 'Quitar' : 'Agregar'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setSwapDrawer({ open: true, currentId: advisor.id })}
+                            className="text-xs text-[#8892A4] border border-[#1E2A4A] px-2 py-1 rounded hover:text-white transition-colors"
+                          >
+                            Cambiar
                           </button>
                           <button
                             type="button"
