@@ -10,7 +10,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-const OPUS = 'claude-opus-4-20250514'
+const MODEL = 'claude-sonnet-4-20250514'
 const ELEMENTS = ['fuego', 'agua', 'tierra', 'aire'] as const
 const HATS = ['blanco', 'rojo', 'negro', 'amarillo', 'verde', 'azul'] as const
 const LEVELS = ['lidera', 'apoya', 'observa'] as const
@@ -132,7 +132,7 @@ Responde SOLO en JSON array:
 Batch ${batchIndex + 1}. No repetir nombres de batches anteriores. Generar exactamente ${batchSize} perfiles.`
 
   const response = await anthropic.messages.create({
-    model: OPUS,
+    model: MODEL,
     max_tokens: 8192,
     messages: [{ role: 'user', content: prompt }],
   })
@@ -145,7 +145,7 @@ Batch ${batchIndex + 1}. No repetir nombres de batches anteriores. Generar exact
   } catch {
     // Retry once
     const retry = await anthropic.messages.create({
-      model: OPUS,
+      model: MODEL,
       max_tokens: 8192,
       messages: [{ role: 'user', content: prompt }],
     })
@@ -192,7 +192,7 @@ Responde SOLO en JSON array:
 ]`
 
   const response = await anthropic.messages.create({
-    model: OPUS,
+    model: MODEL,
     max_tokens: 8192,
     messages: [{ role: 'user', content: prompt }],
   })
@@ -231,7 +231,7 @@ Responde SOLO en JSON array:
 ]`
 
   const response = await anthropic.messages.create({
-    model: OPUS,
+    model: MODEL,
     max_tokens: 8192,
     messages: [{ role: 'user', content: prompt }],
   })
@@ -239,7 +239,19 @@ Responde SOLO en JSON array:
   const text = response.content[0].type === 'text' ? response.content[0].text : ''
   const jsonMatch = text.match(/\[[\s\S]*\]/)
   if (!jsonMatch) throw new Error(`Failed to parse specialist batch ${industry}`)
-  return JSON.parse(jsonMatch[0])
+  try {
+    return JSON.parse(jsonMatch[0])
+  } catch {
+    const retry = await anthropic.messages.create({
+      model: MODEL,
+      max_tokens: 8192,
+      messages: [{ role: 'user', content: prompt }],
+    })
+    const retryText = retry.content[0].type === 'text' ? retry.content[0].text : ''
+    const retryMatch = retryText.match(/\[[\s\S]*\]/)
+    if (!retryMatch) throw new Error(`Failed to parse specialist batch ${industry} after retry`)
+    return JSON.parse(retryMatch[0])
+  }
 }
 
 async function generatePersonaBatch(segment: string, count: number, context: string): Promise<any[]> {
@@ -276,7 +288,7 @@ Responde SOLO en JSON array:
 ]`
 
   const response = await anthropic.messages.create({
-    model: OPUS,
+    model: MODEL,
     max_tokens: 8192,
     messages: [{ role: 'user', content: prompt }],
   })
@@ -284,14 +296,26 @@ Responde SOLO en JSON array:
   const text = response.content[0].type === 'text' ? response.content[0].text : ''
   const jsonMatch = text.match(/\[[\s\S]*\]/)
   if (!jsonMatch) throw new Error(`Failed to parse persona batch ${segment}`)
-  return JSON.parse(jsonMatch[0])
+  try {
+    return JSON.parse(jsonMatch[0])
+  } catch {
+    const retry = await anthropic.messages.create({
+      model: MODEL,
+      max_tokens: 8192,
+      messages: [{ role: 'user', content: prompt }],
+    })
+    const retryText = retry.content[0].type === 'text' ? retry.content[0].text : ''
+    const retryMatch = retryText.match(/\[[\s\S]*\]/)
+    if (!retryMatch) throw new Error(`Failed to parse persona batch ${segment} after retry`)
+    return JSON.parse(retryMatch[0])
+  }
 }
 
 // ==================== MAIN ====================
 
 async function main() {
-  console.log('🚀 Generating marketplace catalog — 1,440 profiles')
-  console.log('Using model:', OPUS)
+  console.log('🚀 Generating marketplace catalog — 1,440 profiles (resumable)')
+  console.log('Using model:', MODEL)
   console.log('')
 
   const logFile = 'scripts/marketplace-generation.log'
@@ -300,12 +324,7 @@ async function main() {
     fs.appendFileSync(logFile, msg + '\n')
   }
 
-  // Clean previous partial run
-  const { error: cleanErr } = await supabase.from('advisors').delete().eq('is_native', true)
-  if (cleanErr) log(`⚠️ Clean error: ${cleanErr.message}`)
-  else log('🧹 Cleaned previous advisors')
-
-  // Track totals
+  // Track totals (will be initialized from DB)
   let totalAdvisors = 0
   let totalCofounders = 0
   let totalSpecialists = 0
@@ -313,22 +332,54 @@ async function main() {
 
   // ---- ADVISORS ----
   log('========== ADVISORS (1,000) ==========')
+
+  // Query existing advisor counts per advisor_type for resume
+  const { data: existingAdvisorRows } = await supabase
+    .from('advisors')
+    .select('advisor_type')
+    .eq('is_native', true)
+
+  const advisorCountByType: Record<string, number> = {}
+  existingAdvisorRows?.forEach(a => {
+    if (a.advisor_type) {
+      advisorCountByType[a.advisor_type] = (advisorCountByType[a.advisor_type] || 0) + 1
+    }
+  })
+  const existingAdvisorTotal = existingAdvisorRows?.length || 0
+  log(`  📊 Existing advisors: ${existingAdvisorTotal}`)
+  Object.entries(advisorCountByType).forEach(([type, count]) => {
+    log(`     ${type}: ${count}`)
+  })
+
   for (const cat of ADVISOR_CATEGORIES) {
-    const perSub = Math.ceil(cat.count / cat.subs.length)
+    const existingForCat = advisorCountByType[cat.category] || 0
+
+    if (existingForCat >= cat.count) {
+      log(`  ⏭️ Skipping ${cat.category} — already has ${existingForCat} records`)
+      totalAdvisors += existingForCat
+      continue
+    }
+
+    let addedForCat = 0
+    const neededForCat = cat.count - existingForCat
+    log(`  📂 Category ${cat.category}: need ${neededForCat} more (have ${existingForCat}/${cat.count})`)
+
+    const perSub = Math.ceil(neededForCat / cat.subs.length)
+
     for (const sub of cat.subs) {
-      const remaining = cat.count - totalAdvisors
+      const remaining = neededForCat - addedForCat
       if (remaining <= 0) break
-      const batchSize = Math.min(perSub, 5, remaining) // Max 5 per API call to avoid truncated JSON
+      const batchSize = Math.min(perSub, 5, remaining)
 
       try {
         log(`  Generating ${batchSize} advisors: ${cat.category} / ${sub}`)
-        const batch = await generateAdvisorBatch(cat.category, sub, batchSize, totalAdvisors)
+        const batch = await generateAdvisorBatch(cat.category, sub, batchSize, existingForCat + addedForCat)
 
         const rows = batch.map(a => ({
           name: a.name,
           specialty: a.specialty,
-          category: CATEGORY_DB_MAP[cat.category] || 'negocio', // mapped to constraint values
-          advisor_type: cat.category, // requires: DROP CONSTRAINT advisors_advisor_type_unique + DROP NOT NULL
+          category: CATEGORY_DB_MAP[cat.category] || 'negocio',
+          advisor_type: cat.category,
           level: a.level || LEVELS[Math.floor(Math.random() * 3)],
           element: a.element || ELEMENTS[Math.floor(Math.random() * 4)],
           communication_style: a.communication_style,
@@ -344,61 +395,67 @@ async function main() {
         const { error } = await supabase.from('advisors').insert(rows)
         if (error) log(`    ❌ Insert error: ${error.message}`)
         else {
-          totalAdvisors += rows.length
-          log(`    ✅ Inserted ${rows.length} — Total: ${totalAdvisors}`)
+          addedForCat += rows.length
+          log(`    ✅ Inserted ${rows.length} — Category total: ${existingForCat + addedForCat}/${cat.count}`)
         }
 
-        // Rate limit
-        await new Promise(r => setTimeout(r, 2000))
+        await new Promise(r => setTimeout(r, 1000))
       } catch (e: any) {
         log(`    ❌ Generation error: ${e.message}`)
       }
     }
+
+    totalAdvisors += existingForCat + addedForCat
   }
   log(`\nAdvisors total: ${totalAdvisors}`)
 
-  // ---- COFOUNDERS ----
-  log('\n========== COFOUNDERS (40) ==========')
-  for (const role of ['constructivo', 'critico'] as const) {
-    const config = COFOUNDER_CONFIG[role]
-    try {
-      log(`  Generating ${config.count} ${role} cofounders`)
-      const batch = await generateCofounderBatch(role, config.specialties)
+  // ---- COFOUNDERS — skip, already complete (40/40) ----
+  log('\n========== COFOUNDERS (40) — checking ==========')
+  const { count: cofoundersCount } = await supabase
+    .from('cofounders')
+    .select('id', { count: 'exact', head: true })
+    .eq('is_native', true)
 
-      const rows = batch.map(c => ({
-        name: c.name,
-        role: c.role || role,
-        specialty: c.specialty,
-        element: c.element || ELEMENTS[Math.floor(Math.random() * 4)],
-        communication_style: c.communication_style,
-        hats: c.hats || [HATS[0], HATS[2]],
-        bio: c.bio,
-        specialties_tags: c.specialties_tags || [],
-        industries_tags: c.industries_tags || [],
-        experience: c.experience || [],
-        language: c.language || 'Español',
-        is_native: true,
-      }))
-
-      const { error } = await supabase.from('cofounders').insert(rows)
-      if (error) log(`    ❌ Insert error: ${error.message}`)
-      else {
-        totalCofounders += rows.length
-        log(`    ✅ Inserted ${rows.length} — Total: ${totalCofounders}`)
-      }
-      await new Promise(r => setTimeout(r, 2000))
-    } catch (e: any) {
-      log(`    ❌ Generation error: ${e.message}`)
-    }
+  totalCofounders = cofoundersCount || 0
+  if (totalCofounders >= 40) {
+    log(`  ⏭️ Skipping cofounders — already has ${totalCofounders}/40 records`)
+  } else {
+    log(`  ⚠️ Cofounders incomplete: ${totalCofounders}/40 — manual check needed`)
   }
   log(`\nCofounders total: ${totalCofounders}`)
 
   // ---- ESPECIALISTAS ----
   log('\n========== ESPECIALISTAS (200) ==========')
+
+  // Query existing specialist counts per industry via industries_tags
+  const { data: existingSpecialistRows } = await supabase
+    .from('specialists')
+    .select('industries_tags')
+    .eq('is_template', true)
+
+  const specialistCountByIndustry: Record<string, number> = {}
+  existingSpecialistRows?.forEach(s => {
+    if (s.industries_tags && s.industries_tags.length > 0) {
+      const primaryIndustry = s.industries_tags[0]
+      specialistCountByIndustry[primaryIndustry] = (specialistCountByIndustry[primaryIndustry] || 0) + 1
+    }
+  })
+  const existingSpecialistTotal = existingSpecialistRows?.length || 0
+  log(`  📊 Existing specialists: ${existingSpecialistTotal}`)
+
   for (const ind of SPECIALIST_INDUSTRIES) {
+    const existingForInd = specialistCountByIndustry[ind.industry] || 0
+
+    if (existingForInd >= ind.count) {
+      log(`  ⏭️ Skipping ${ind.industry} — already has ${existingForInd} records`)
+      totalSpecialists += existingForInd
+      continue
+    }
+
     try {
-      log(`  Generating ${ind.count} specialists: ${ind.industry}`)
-      const batch = await generateSpecialistBatch(ind.industry, ind.count)
+      const needed = ind.count - existingForInd
+      log(`  Generating ${needed} specialists: ${ind.industry} (have ${existingForInd}/${ind.count})`)
+      const batch = await generateSpecialistBatch(ind.industry, needed)
 
       const rows = batch.map(s => ({
         name: s.name,
@@ -407,25 +464,22 @@ async function main() {
         justification: s.justification,
         bio: s.bio,
         specialties_tags: s.specialties_tags || [],
-        industries_tags: s.industries_tags || [],
+        industries_tags: s.industries_tags || [ind.industry],
         experience: s.experience || [],
         language: s.language || 'Español',
         is_confirmed: false,
         is_template: true,
-        project_id: null, // Template — no attached to project
+        project_id: null,
       }))
 
-      // Specialists need project_id (NOT NULL). Insert as templates in a different way
-      // Check schema first — if project_id is NOT NULL, we need a template project
       const { error } = await supabase.from('specialists').insert(rows)
       if (error) {
         log(`    ⚠️ Insert error: ${error.message}`)
-        log(`    Note: specialists table may require project_id — templates may need schema change`)
       } else {
-        totalSpecialists += rows.length
-        log(`    ✅ Inserted ${rows.length} — Total: ${totalSpecialists}`)
+        totalSpecialists += existingForInd + rows.length
+        log(`    ✅ Inserted ${rows.length} — Industry total: ${existingForInd + rows.length}/${ind.count}`)
       }
-      await new Promise(r => setTimeout(r, 2000))
+      await new Promise(r => setTimeout(r, 1000))
     } catch (e: any) {
       log(`    ❌ Generation error: ${e.message}`)
     }
@@ -434,37 +488,51 @@ async function main() {
 
   // ---- BUYER PERSONAS ----
   log('\n========== BUYER PERSONAS (200) ==========')
-  for (const seg of PERSONA_SEGMENTS) {
-    try {
-      log(`  Generating ${seg.count} personas: ${seg.segment}`)
-      const batch = await generatePersonaBatch(seg.segment, seg.count, seg.context)
 
-      const rows = batch.map(p => ({
-        name: p.name,
-        archetype_label: p.archetype_label,
-        demographics: p.demographics,
-        quote: p.quote,
-        needs: p.needs || [],
-        fears_objections: p.fears_objections || [],
-        discovery_channels: p.discovery_channels || [],
-        current_alternatives: p.current_alternatives || [],
-        behavior_tags: p.behavior_tags || [],
-        is_confirmed: false,
-        is_template: true,
-        project_id: null, // Template
-      }))
+  const { count: existingPersonasCount } = await supabase
+    .from('buyer_personas')
+    .select('id', { count: 'exact', head: true })
+    .eq('is_template', true)
 
-      const { error } = await supabase.from('buyer_personas').insert(rows)
-      if (error) {
-        log(`    ⚠️ Insert error: ${error.message}`)
-        log(`    Note: buyer_personas table may require project_id — templates may need schema change`)
-      } else {
-        totalPersonas += rows.length
-        log(`    ✅ Inserted ${rows.length} — Total: ${totalPersonas}`)
+  const existingPersonas = existingPersonasCount || 0
+  log(`  📊 Existing personas: ${existingPersonas}`)
+
+  if (existingPersonas >= 200) {
+    log(`  ⏭️ Skipping personas — already has ${existingPersonas}/200 records`)
+    totalPersonas = existingPersonas
+  } else {
+    // Generate all segments (personas = 0, generate from scratch)
+    for (const seg of PERSONA_SEGMENTS) {
+      try {
+        log(`  Generating ${seg.count} personas: ${seg.segment}`)
+        const batch = await generatePersonaBatch(seg.segment, seg.count, seg.context)
+
+        const rows = batch.map(p => ({
+          name: p.name,
+          archetype_label: p.archetype_label,
+          demographics: p.demographics,
+          quote: p.quote,
+          needs: p.needs || [],
+          fears_objections: p.fears_objections || [],
+          discovery_channels: p.discovery_channels || [],
+          current_alternatives: p.current_alternatives || [],
+          behavior_tags: p.behavior_tags || [],
+          is_confirmed: false,
+          is_template: true,
+          project_id: null,
+        }))
+
+        const { error } = await supabase.from('buyer_personas').insert(rows)
+        if (error) {
+          log(`    ⚠️ Insert error: ${error.message}`)
+        } else {
+          totalPersonas += rows.length
+          log(`    ✅ Inserted ${rows.length} — Total: ${totalPersonas}`)
+        }
+        await new Promise(r => setTimeout(r, 1000))
+      } catch (e: any) {
+        log(`    ❌ Generation error: ${e.message}`)
       }
-      await new Promise(r => setTimeout(r, 2000))
-    } catch (e: any) {
-      log(`    ❌ Generation error: ${e.message}`)
     }
   }
   log(`\nBuyer Personas total: ${totalPersonas}`)
