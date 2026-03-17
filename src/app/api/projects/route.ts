@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
   const { data, error } = await admin.from('projects').insert({
     ...body,
     user_id: user.id,
+    owner_id: user.id,
     last_active_at: new Date().toISOString(),
   }).select().single()
 
