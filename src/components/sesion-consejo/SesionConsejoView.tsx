@@ -32,12 +32,20 @@ interface Session {
   total_documents: number
 }
 
+interface AdvisorResponse {
+  advisor_name: string
+  specialty: string
+  content: string
+  hat: string
+}
+
 interface Debate {
   responseId: string
   constructive: string
   critical: string
   agreement: boolean
   synthesis: string | null
+  advisor_responses?: AdvisorResponse[]
 }
 
 type UIState = 'init' | 'starting' | 'question_ready' | 'debating' | 'debate_ready' | 'resolving' | 'awaiting_approval' | 'session_complete'
@@ -100,6 +108,13 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
   const [pendingApprovalDocId, setPendingApprovalDocId] = useState<string | null>(null)
   const [pendingApprovalPhaseIndex, setPendingApprovalPhaseIndex] = useState<number | null>(null)
   const [isApproving, setIsApproving] = useState(false)
+
+  // Local momentum state (updated on each resolve without waiting for DB)
+  const [localMomentum, setLocalMomentum] = useState<{ resolved: number; constructivo_count: number; critico_count: number } | null>(null)
+
+  // Revision state
+  const [showRevisionInput, setShowRevisionInput] = useState(false)
+  const [revisionSection, setRevisionSection] = useState('')
 
   const currentDoc = docs[currentDocIndex]
   const currentDocName = currentDoc?.name ?? ''
@@ -172,7 +187,7 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
     }
   }
 
-  async function handleResolve(resolution: 'constructiva' | 'critico' | 'responder_yo' | 'acuerdo') {
+  async function handleResolve(resolution: 'constructiva' | 'critico' | 'responder_yo' | 'acuerdo' | 'find_common_ground') {
     if (!debate || !session || !currentPhaseId) return
     setUiState('resolving')
     setIsGeneratingSection(true)
@@ -210,6 +225,18 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
       if (data.generatedSection) {
         addSection(currentDocId, data.generatedSection)
       }
+
+      // Update local momentum immediately (Fix 7)
+      setLocalMomentum(prev => {
+        const base = prev ?? { resolved: 0, constructivo_count: 0, critico_count: 0 }
+        return {
+          resolved: base.resolved + 1,
+          constructivo_count: ['constructiva', 'acuerdo', 'find_common_ground'].includes(resolution)
+            ? base.constructivo_count + 1 : base.constructivo_count,
+          critico_count: ['critico', 'find_common_ground'].includes(resolution)
+            ? base.critico_count + 1 : base.critico_count,
+        }
+      })
 
       setResolvedList(prev => [...prev, { question: currentQuestion ?? '', resolution }])
       setDebate(null)
@@ -268,6 +295,7 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
       setTotalQuestions(data.totalQuestions)
       setSession(s => s ? { ...s, current_document_index: data.nextDocumentIndex, current_question_index: 0 } : s)
       setResolvedList([])
+      setLocalMomentum(null)
       setUiState('question_ready')
     } catch {
       setError('Error aprobando el documento. Inténtalo de nuevo.')
@@ -275,8 +303,20 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
     }
   }
 
+  async function handleRevision() {
+    if (!revisionSection.trim()) return
+    setShowRevisionInput(false)
+    const sectionName = revisionSection.trim()
+    setRevisionSection('')
+    setCurrentQuestion(`Revisemos la sección "${sectionName}". ¿Qué aspectos deberían mejorarse, profundizarse o corregirse basándose en lo que ya hemos discutido?`)
+    setUiState('question_ready')
+  }
+
   const currentPhase = phases.find(p => p.id === currentPhaseId)
-  const momentum = currentPhase?.momentum ?? { total_questions: 0, resolved: 0, constructivo_count: 0, critico_count: 0 }
+  const dbMomentum = currentPhase?.momentum ?? { total_questions: 0, resolved: 0, constructivo_count: 0, critico_count: 0 }
+  const momentum = localMomentum
+    ? { ...dbMomentum, resolved: localMomentum.resolved, constructivo_count: localMomentum.constructivo_count, critico_count: localMomentum.critico_count }
+    : dbMomentum
 
   const grouped: Record<string, Advisor[]> = { lidera: [], apoya: [], observa: [] }
   for (const a of advisors) {
@@ -487,13 +527,34 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
                   </button>
                   <button
                     type="button"
-                    disabled
-                    className="px-4 py-3 text-sm text-[#8892A4]/40 border border-[#1E2A4A]/40 rounded-xl cursor-not-allowed"
-                    title="Post-MVP"
+                    onClick={() => setShowRevisionInput(v => !v)}
+                    className="px-4 py-3 text-sm text-[#8892A4] border border-[#1E2A4A] rounded-xl hover:text-white hover:border-[#8892A4] transition-colors"
                   >
                     Pedir revisión
                   </button>
                 </div>
+
+                {/* Revision input (Fix 5) */}
+                {showRevisionInput && (
+                  <div className="flex gap-2 mt-2">
+                    <input
+                      type="text"
+                      value={revisionSection}
+                      onChange={e => setRevisionSection(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && handleRevision()}
+                      placeholder="¿Qué sección revisar? (ej. Propuesta de Valor)"
+                      className="flex-1 px-3 py-2 bg-[#0A1128] border border-[#1E2A4A] rounded-lg text-sm text-[#F8F8F8] placeholder-[#8892A4] focus:outline-none focus:border-[#B8860B]/50"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRevision}
+                      disabled={!revisionSection.trim()}
+                      className="px-3 py-2 bg-[#B8860B]/20 text-[#B8860B] border border-[#B8860B]/30 rounded-lg text-sm disabled:opacity-40 hover:bg-[#B8860B]/30 transition-colors"
+                    >
+                      →
+                    </button>
+                  </div>
+                )}
               </div>
             )
           })()}
@@ -546,6 +607,29 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
                 <div className="bg-[#0D1535] border border-[#B8860B]/20 rounded-xl px-5 py-4">
                   <p className="text-[10px] text-[#B8860B] uppercase tracking-wider font-medium mb-2">Pregunta {questionIndex + 1} de {totalQuestions}</p>
                   <p className="text-base text-white font-medium leading-relaxed">{currentQuestion}</p>
+                </div>
+              )}
+
+              {/* Advisor response cards (Fix 1) */}
+              {(uiState === 'debate_ready' || uiState === 'resolving') && debate?.advisor_responses && debate.advisor_responses.length > 0 && (
+                <div className="space-y-3">
+                  <p className="text-[10px] text-[#8892A4] uppercase tracking-wider font-medium">Tu Consejo Opina</p>
+                  {debate.advisor_responses.map((adv, i) => (
+                    <div key={i} className="p-4 bg-[#0D1535] border border-[#1E2A4A] rounded-xl">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-7 h-7 rounded-full bg-[#1E2A4A] flex items-center justify-center text-[10px] text-[#B8860B] font-bold shrink-0">
+                          {adv.advisor_name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()}
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-[#F8F8F8] leading-tight">{adv.advisor_name}</p>
+                          <p className="text-[10px] text-[#8892A4]">{adv.specialty}</p>
+                        </div>
+                      </div>
+                      <div className="text-xs text-[#e0e0e5] prose prose-invert prose-sm max-w-none">
+                        <ReactMarkdown>{adv.content}</ReactMarkdown>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
 
@@ -687,6 +771,13 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
                   </button>
                 </>
               )}
+
+              <button
+                onClick={() => handleResolve('find_common_ground')}
+                className="w-full text-sm text-[#B8860B] border border-[#B8860B]/30 py-2 rounded-xl hover:bg-[#B8860B]/10 transition-colors"
+              >
+                ⚖ Buscar punto medio
+              </button>
 
               <button
                 onClick={() => {

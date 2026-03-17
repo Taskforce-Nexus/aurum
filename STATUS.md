@@ -499,12 +499,13 @@ Kira 12-fix session engine redesign + Porfirio feedback fixes + Fix 13 ProjectVi
 - Fix 13.3: docsReady desde project\_documents.status === 'aprobado' (no project columns) ✓
 - Fix 13.4: Consultoría se desbloquea si session.status === 'completada' (no solo consultation) ✓
 
-**Pendiente:**
+**Fixes adicionales (sesión 2):**
 
-- Fix 1: Advisors participan en el debate (requiere diseño adicional)
-- Fix 5: Botón "Pedir revisión" (requiere UI nueva)
-- Fix 7: Momentum state updates en UI (requiere SesionConsejoView update)
-- Fix 8: Nombres de sección en sidebar
+- Fix 1: Advisors en el debate — Haiku selecciona 2-3 consejeros relevantes, genera respuestas; cards antes de cofounders ✓
+- Fix 5: Pedir revisión — input inline en awaiting\_approval; genera pregunta de revisión para sección específica ✓
+- Fix 7: Momentum UI — localMomentum state que se actualiza en cada resolve sin esperar DB ✓
+- Fix 12 UI: "Buscar punto medio" en sidebar debate\_ready → find\_common\_ground resolution ✓
+- Fix 8: Nombres en sidebar ya correctos (spread ca.advisors en page.tsx) — no requería fix
 
 ## Siguiente paso
 

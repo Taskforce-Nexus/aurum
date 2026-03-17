@@ -35,10 +35,15 @@ export async function POST(req: NextRequest) {
     const admin = createAdminClient()
 
     switch (action) {
-      case 'start':   return await handleStart(admin, project)
-      case 'debate':  return await handleDebate(admin, body)
-      case 'resolve': return await handleResolve(admin, project, body)
-      case 'approve': return await handleApprove(admin, project, body)
+      case 'start':    return await handleStart(admin, project)
+      case 'debate':   return await handleDebate(admin, body)
+      case 'resolve':  return await handleResolve(admin, project, body)
+      case 'approve':  return await handleApprove(admin, project, body)
+      case 'revision': {
+        const { sectionToRevise } = body
+        const question = `Revisemos la sección "${sectionToRevise ?? 'del documento'}". ¿Qué aspectos deberían mejorarse, profundizarse o corregirse basándose en lo que ya hemos discutido y decidido?`
+        return NextResponse.json({ question, isRevision: true })
+      }
       default: return NextResponse.json({ error: 'Acción inválida' }, { status: 400 })
     }
   } catch (err) {
@@ -100,14 +105,81 @@ async function handleStart(admin: Admin, project: { id: string; founder_brief: s
 
 // ─── Run Nexo Dual Debate ─────────────────────────────────────────────────────
 
+interface AdvisorResponse {
+  advisor_name: string
+  specialty: string
+  content: string
+  hat: string
+}
+
 async function handleDebate(admin: Admin, body: {
+  projectId: string
   phaseId: string
   questionIndex: number
   question: string
   founderBrief: string
   documentName: string
 }) {
-  const { phaseId, questionIndex, question, founderBrief, documentName } = body
+  const { projectId, phaseId, questionIndex, question, founderBrief, documentName } = body
+
+  // Step 1: Generate advisor responses (non-blocking if fails)
+  const advisorResponses: AdvisorResponse[] = []
+  try {
+    const { data: council } = await admin
+      .from('councils').select('id').eq('project_id', projectId).maybeSingle()
+    if (council) {
+      const { data: councilAdvisors } = await admin
+        .from('council_advisors')
+        .select('level, advisors(id, name, specialty, communication_style, hats)')
+        .eq('council_id', council.id)
+        .limit(7)
+
+      if (councilAdvisors?.length) {
+        const advisorList = (councilAdvisors as any[])
+          .map(ca => ({
+            name: ca.advisors?.name,
+            specialty: ca.advisors?.specialty,
+            communication_style: ca.advisors?.communication_style,
+            hats: ca.advisors?.hats,
+            level: ca.level,
+          }))
+          .filter(a => a.name)
+
+        const advisorSystemPrompt = `Eres Nexo, moderador del consejo asesor. Selecciona 2-3 consejeros relevantes para esta pregunta y genera sus respuestas desde su expertise específico.
+
+CONSEJEROS DISPONIBLES:
+${advisorList.map(a => `- ${a.name} (${a.specialty}, estilo: ${a.communication_style}, sombreros: ${Array.isArray(a.hats) ? a.hats.join(', ') : ''}, nivel: ${a.level})`).join('\n')}
+
+REGLA RACIONAL: Cuando menciones números o métricas, incluye siempre el racional detrás.
+
+Responde SOLO en JSON válido:
+{
+  "advisor_responses": [
+    { "advisor_name": "...", "specialty": "...", "content": "...", "hat": "amarillo" }
+  ]
+}`
+
+        const advisorRaw = await callClaude(
+          advisorSystemPrompt,
+          [{ role: 'user', content: `Contexto del Fundador:\n${founderBrief}\n\nDocumento: ${documentName}\n\nPregunta: ${question}` }],
+          2048,
+          'claude-haiku-4-5-20251001'
+        )
+        const cleanAdv = advisorRaw.trim().replace(/^```json\s*/i, '').replace(/\s*```$/, '')
+        const parsedAdv = JSON.parse(cleanAdv)
+        if (Array.isArray(parsedAdv.advisor_responses)) {
+          advisorResponses.push(...parsedAdv.advisor_responses)
+        }
+      }
+    }
+  } catch {
+    // non-blocking — cofounders debate still runs
+  }
+
+  // Step 2: Constructivo and Crítico with advisor context
+  const advisorContext = advisorResponses.length > 0
+    ? `\n\nLos siguientes consejeros ya opinaron sobre esta pregunta:\n${advisorResponses.map(a => `${a.advisor_name} (${a.specialty}): ${a.content}`).join('\n\n')}\n\nConsidera sus perspectivas al dar la tuya.`
+    : ''
 
   const context = `Resumen del Fundador:
 ${founderBrief}
@@ -115,7 +187,7 @@ ${founderBrief}
 Documento en construcción: ${documentName}
 
 Pregunta estratégica para el debate:
-${question}`
+${question}${advisorContext}`
 
   const [constructiveContent, criticalContent] = await Promise.all([
     callClaude(NEXO_CONSTRUCTIVO_SYSTEM, [{ role: 'user', content: context }], 4096),
@@ -158,6 +230,7 @@ ${question}`
     critical: criticalContent,
     agreement,
     synthesis,
+    advisor_responses: advisorResponses,
   })
 }
 
