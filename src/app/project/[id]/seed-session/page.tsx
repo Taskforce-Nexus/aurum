@@ -55,6 +55,7 @@ export default async function SeedSessionPage({ params }: { params: Promise<{ id
     const { data: newConv } = await admin.from('conversations').insert({
       project_id: id,
       type: 'semilla',
+      phase: 'semilla',
       messages: [],
       status: 'activa',
     }).select().single()

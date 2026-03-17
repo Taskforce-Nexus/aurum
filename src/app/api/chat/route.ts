@@ -137,7 +137,7 @@ export async function POST(req: NextRequest) {
         } else {
           const { data: newConv } = await admin
             .from('conversations')
-            .insert({ project_id: projectId, type: 'semilla', messages })
+            .insert({ project_id: projectId, type: 'semilla', phase: 'semilla', messages })
             .select('id').single()
           if (newConv) activeConvId = newConv.id
         }
@@ -277,7 +277,7 @@ export async function POST(req: NextRequest) {
         const { data: newConv } = await adminNS.from('conversations').insert({
           project_id: projectId,
           type: 'semilla',
-          ...(selectedCouncil ? { phase: 'value_proposition' } : {}),
+          phase: selectedCouncil ? 'value_proposition' : 'semilla',
           messages: updatedMessages,
           ...(selectedCouncil ? { extracted_docs: { council: selectedCouncil } } : {}),
         }).select('id').single()
