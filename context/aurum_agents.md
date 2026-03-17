@@ -29,19 +29,75 @@ Opera en el mecanismo Nexo Dual.
 Catálogo de agentes IA especializados. 100% IA — sin consejeros humanos reales en v1.
 Nexo filtra y recomienda según propósito + Resumen del usuario.
 
-Especialidades core del catálogo:
+### Tamaño del catálogo (objetivo post-generación)
 
-| Especialidad | Enfoque |
-|---|---|
-| Estrategia de negocio | visión, modelo de ingresos, orquestación |
-| Finanzas | economía unitaria, P&L, monetización |
-| Marketing y crecimiento | adquisición, posicionamiento, canales |
-| Ventas | modelo comercial, incentivos, pipeline |
-| Producto / UX | experiencia, features, encaje producto-mercado |
-| Tecnología | arquitectura, viabilidad técnica, MVP scope |
-| Legal / Regulatorio | riesgos, estructura, cumplimiento |
-| Operaciones | ejecución, procesos, escala |
-| Industria específica | contexto vertical del venture |
+| Tabla | Cantidad | Estado |
+|---|---|---|
+| `advisors` | 1,000 | Script listo — pendiente ejecución |
+| `cofounders` | 40 (20 constructivos + 20 críticos) | Script listo — pendiente ejecución |
+| `specialists` | 200 (plantillas por industria) | Script listo — requiere migración SQL |
+| `buyer_personas` | 200 (arquetipos reutilizables) | Script listo — requiere migración SQL |
+| **Total** | **1,440** | |
+
+Script: `scripts/generate-marketplace.ts`
+Modelo: `claude-opus-4-20250514` (reasoning tier)
+Tiempo estimado: ~30-45 min (144 llamadas con rate limiting)
+
+### Migraciones SQL requeridas antes de correr el script
+
+```sql
+-- Specialists: hacer project_id nullable para templates
+ALTER TABLE specialists ALTER COLUMN project_id DROP NOT NULL;
+
+-- Buyer Personas: hacer project_id nullable para templates
+ALTER TABLE buyer_personas ALTER COLUMN project_id DROP NOT NULL;
+
+-- Add is_template flag para diferenciar templates de instancias de proyecto
+ALTER TABLE specialists ADD COLUMN IF NOT EXISTS is_template boolean DEFAULT false;
+ALTER TABLE buyer_personas ADD COLUMN IF NOT EXISTS is_template boolean DEFAULT false;
+```
+
+### Comando de ejecución
+
+```bash
+npx tsx scripts/generate-marketplace.ts
+```
+
+### Verificación post-ejecución
+
+```bash
+node -e "
+require('dotenv').config({ path: '.env.local' })
+const { createClient } = require('@supabase/supabase-js')
+const s = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
+Promise.all([
+  s.from('advisors').select('id', { count: 'exact', head: true }),
+  s.from('cofounders').select('id', { count: 'exact', head: true }),
+  s.from('specialists').select('id', { count: 'exact', head: true }),
+  s.from('buyer_personas').select('id', { count: 'exact', head: true }),
+]).then(([a, c, sp, bp]) => {
+  console.log('Advisors:', a.count)
+  console.log('Cofounders:', c.count)
+  console.log('Specialists:', sp.count)
+  console.log('Buyer Personas:', bp.count)
+  console.log('Total:', (a.count||0) + (c.count||0) + (sp.count||0) + (bp.count||0))
+})
+"
+```
+
+### Especialidades core del catálogo
+
+| Categoría | Subcategorías | Total |
+|---|---|---|
+| estrategia | Corporate Strategy, Growth, M&A, Market Entry, +6 | 100 |
+| finanzas | VC & Fundraising, Unit Economics, CFO Advisory, +7 | 100 |
+| marketing | Brand, Performance, Content, PLG, SEO, +7 | 120 |
+| ventas | Enterprise, SMB, Inside, Channel, +6 | 100 |
+| producto | Product Strategy, UX Research, Design Systems, +9 | 120 |
+| tecnologia | Architecture, AI/ML, DevOps, Security, +8 | 120 |
+| legal | IP, Privacy, Fintech Reg, Healthcare Reg, +4 | 80 |
+| operaciones | Supply Chain, HR, Process Opt, +5 | 80 |
+| industria | Fintech, Healthtech, Edtech, Ecommerce, +14 | 180 |
 
 Regla de participación: solo 2-3 consejeros hablan por turno.
 Nexo decide cuáles son relevantes según el contexto de cada fase.
