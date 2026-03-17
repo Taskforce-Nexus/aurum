@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Project, Advisor, Cofounder } from '@/lib/types'
 import DocumentPreview, { type DocumentSection } from './DocumentPreview'
+import ReactMarkdown from 'react-markdown'
 
 interface Document {
   id: string
@@ -558,7 +559,7 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
                         <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-xs font-bold">✓</div>
                         <p className="text-xs text-green-400 font-medium uppercase tracking-wider">Acuerdo del Consejo</p>
                       </div>
-                      <p className="text-sm text-[#e0e0e5] leading-relaxed whitespace-pre-wrap">{debate.synthesis}</p>
+                      <div className="text-sm text-[#e0e0e5] prose prose-invert prose-sm max-w-none"><ReactMarkdown>{debate.synthesis}</ReactMarkdown></div>
                     </div>
                   ) : (
                     <>
@@ -573,7 +574,7 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
                             <span className="text-[9px] text-[#8892A4] bg-[#1E2A4A] px-1.5 rounded">Sombrero Amarillo</span>
                           </div>
                         </div>
-                        <p className="text-sm text-[#e0e0e5] leading-relaxed whitespace-pre-wrap">{debate.constructive}</p>
+                        <div className="text-sm text-[#e0e0e5] prose prose-invert prose-sm max-w-none"><ReactMarkdown>{debate.constructive}</ReactMarkdown></div>
                       </div>
 
                       {/* Crítico */}
@@ -587,7 +588,7 @@ export default function SesionConsejoView({ project, advisors, cofounders, docum
                             <span className="text-[9px] text-[#8892A4] bg-[#1E2A4A] px-1.5 rounded">Sombrero Negro</span>
                           </div>
                         </div>
-                        <p className="text-sm text-[#e0e0e5] leading-relaxed whitespace-pre-wrap">{debate.critical}</p>
+                        <div className="text-sm text-[#e0e0e5] prose prose-invert prose-sm max-w-none"><ReactMarkdown>{debate.critical}</ReactMarkdown></div>
                       </div>
                     </>
                   )}

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { Advisor, Project } from '@/lib/types'
 import { HAT_COLORS } from './SeedSessionFlow'
+import AdvisorProfileDrawer from './AdvisorProfileDrawer'
 
 interface Props {
   project: Project
@@ -27,6 +28,7 @@ const LEVEL_COLORS: Record<string, string> = {
 
 export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedIds, onAcceptedChange, onNext }: Props) {
   const [loading, setLoading] = useState(false)
+  const [profileAdvisor, setProfileAdvisor] = useState<Advisor | null>(null)
 
   const grouped: Record<string, Advisor[]> = { lidera: [], apoya: [], observa: [] }
   for (const a of advisors) {
@@ -57,6 +59,13 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
   }
 
   return (
+    <>
+    <AdvisorProfileDrawer
+      profile={profileAdvisor}
+      isOpen={profileAdvisor !== null}
+      onClose={() => setProfileAdvisor(null)}
+      type="advisor"
+    />
     <main className="flex-1 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto px-8 py-6 space-y-5">
         {/* Nexo message */}
@@ -103,12 +112,17 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
                           <button
                             type="button"
                             onClick={() => toggleAdvisor(advisor.id)}
-                            className="text-xs text-[#8892A4] border border-[#1E2A4A] px-2 py-1 rounded hover:text-white transition-colors"
+                            className={`text-xs border px-2 py-1 rounded transition-colors ${
+                              isSelected
+                                ? 'text-[#8892A4] border-[#1E2A4A] hover:text-white'
+                                : 'text-[#B8860B] border-[#B8860B]/30 hover:bg-[#B8860B]/10'
+                            }`}
                           >
-                            Cambiar
+                            {isSelected ? 'Quitar' : 'Agregar'}
                           </button>
                           <button
                             type="button"
+                            onClick={() => setProfileAdvisor(advisor)}
                             className="text-xs text-[#8892A4] border border-[#1E2A4A] px-2 py-1 rounded hover:text-white transition-colors"
                           >
                             Ver perfil
@@ -136,5 +150,6 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
         </button>
       </div>
     </main>
+    </>
   )
 }

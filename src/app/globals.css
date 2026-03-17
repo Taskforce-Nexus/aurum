@@ -48,3 +48,31 @@ body {
   background: #2a2b30;
   border-radius: 4px;
 }
+
+/* Markdown prose — Reason palette */
+.prose-invert h1, .prose-invert h2, .prose-invert h3 {
+  color: #F8F8F8;
+  font-family: var(--font-outfit);
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+.prose-invert strong {
+  color: #B8860B;
+  font-weight: 600;
+}
+.prose-invert p {
+  margin-bottom: 0.5rem;
+}
+.prose-invert ul, .prose-invert ol {
+  margin-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.prose-invert li {
+  margin-bottom: 0.2rem;
+}
+.prose-invert code {
+  background: #1E2A4A;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+}

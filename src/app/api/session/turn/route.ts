@@ -356,9 +356,10 @@ Decisión estratégica: ${spec?.strategic_decision ?? ''}
 Secciones del documento:
 ${sectionsText || '- Contenido general del documento'}
 
-Genera exactamente 3 preguntas estratégicas para extraer la información necesaria para construir este documento.
+Genera exactamente 6 preguntas estratégicas para extraer la información necesaria para construir este documento.
 Las preguntas deben ser específicas al contexto del founder descrito arriba, no genéricas.
-Responde SOLO con un JSON array de 3 strings.`
+Deben cubrir TODAS las secciones del documento listadas arriba y girar alrededor del problema y solución específica del founder.
+Responde SOLO con un JSON array de 6 strings.`
 
   try {
     const response = await callClaude(
@@ -370,15 +371,18 @@ Responde SOLO con un JSON array de 3 strings.`
     const clean = response.trim().replace(/^```json\s*/i, '').replace(/\s*```$/, '')
     const parsed = JSON.parse(clean)
     if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed.slice(0, 3).map(q => ({ pregunta: String(q), resolucion: null }))
+      return parsed.slice(0, 6).map(q => ({ pregunta: String(q), resolucion: null }))
     }
   } catch {
     // fallback below
   }
 
   return [
-    { pregunta: `¿Cuál es la propuesta central del "${document?.name ?? 'documento'}" para tu venture?`, resolucion: null },
+    { pregunta: `¿Cuál es la propuesta central del "${document?.name ?? 'documento'}" para tu proyecto?`, resolucion: null },
+    { pregunta: '¿Qué problema específico resuelves y para quién exactamente?', resolucion: null },
     { pregunta: '¿Qué diferencia tu propuesta de las alternativas que ya existen en el mercado?', resolucion: null },
+    { pregunta: '¿Cuál es el perfil detallado de tu cliente ideal y cómo llega a tu solución?', resolucion: null },
+    { pregunta: '¿Qué métricas de éxito usarías para validar que estás resolviendo el problema correctamente?', resolucion: null },
     { pregunta: '¿Cuáles son los 3 riesgos principales y cómo los mitigarías desde el inicio?', resolucion: null },
   ]
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { Project } from '@/lib/types'
+import AdvisorProfileDrawer from './AdvisorProfileDrawer'
 
 interface SpecialistExample {
   id: string
@@ -10,7 +11,7 @@ interface SpecialistExample {
   justification: string
 }
 
-const EXAMPLE_SPECIALISTS: SpecialistExample[] = [
+export const EXAMPLE_SPECIALISTS: SpecialistExample[] = [
   {
     id: 'esp-1',
     name: 'Especialista en Finanzas LATAM',
@@ -47,6 +48,29 @@ interface Props {
 
 export default function EspecialistasPropuesta({ project, acceptedIds, onAcceptedChange, onNext }: Props) {
   const [loading, setLoading] = useState(false)
+  const [generating, setGenerating] = useState(false)
+  const [specialists, setSpecialists] = useState<SpecialistExample[]>(EXAMPLE_SPECIALISTS)
+  const [profileItem, setProfileItem] = useState<SpecialistExample | null>(null)
+
+  async function handleRequestSpecialist() {
+    setGenerating(true)
+    try {
+      const res = await fetch('/api/seed-session/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'specialist',
+          projectId: project.id,
+          existingItems: specialists,
+        }),
+      })
+      const { item, error } = await res.json()
+      if (error || !item) return
+      setSpecialists(prev => [...prev, item])
+      onAcceptedChange([...acceptedIds, item.id])
+    } catch { /* non-blocking */ }
+    setGenerating(false)
+  }
 
   function accept(id: string) {
     if (!acceptedIds.includes(id)) onAcceptedChange([...acceptedIds, id])
@@ -64,7 +88,7 @@ export default function EspecialistasPropuesta({ project, acceptedIds, onAccepte
         body: JSON.stringify({
           step: 'especialistas',
           projectId: project.id,
-          specialists: EXAMPLE_SPECIALISTS.filter(s => acceptedIds.includes(s.id)).map(s => ({
+          specialists: specialists.filter(s => acceptedIds.includes(s.id)).map(s => ({
             name: s.name,
             specialty: s.specialty,
             justification: s.justification,
@@ -77,6 +101,13 @@ export default function EspecialistasPropuesta({ project, acceptedIds, onAccepte
   }
 
   return (
+    <>
+    <AdvisorProfileDrawer
+      profile={profileItem ? { name: profileItem.name, specialty: profileItem.specialty, justification: profileItem.justification } : null}
+      isOpen={profileItem !== null}
+      onClose={() => setProfileItem(null)}
+      type="specialist"
+    />
     <main className="flex-1 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto px-8 py-6 space-y-5">
         {/* Nexo message */}
@@ -93,7 +124,7 @@ export default function EspecialistasPropuesta({ project, acceptedIds, onAccepte
             Posibles Lista de Industria
           </p>
           <div className="space-y-3">
-            {EXAMPLE_SPECIALISTS.map(specialist => {
+            {specialists.map(specialist => {
               const isAccepted = acceptedIds.includes(specialist.id)
               return (
                 <div key={specialist.id} className={`bg-[#0D1535] border rounded-xl px-5 py-4 transition-colors ${isAccepted ? 'border-[#B8860B]/40' : 'border-[#1E2A4A]'}`}>
@@ -128,6 +159,7 @@ export default function EspecialistasPropuesta({ project, acceptedIds, onAccepte
                       </button>
                       <button
                         type="button"
+                        onClick={() => setProfileItem(specialist)}
                         className="text-xs px-2.5 py-1 rounded border border-[#1E2A4A] text-[#8892A4] hover:text-white transition-colors"
                       >
                         Ver perfil
@@ -153,11 +185,14 @@ export default function EspecialistasPropuesta({ project, acceptedIds, onAccepte
         </button>
         <button
           type="button"
-          className="px-4 py-3 text-sm text-[#8892A4] border border-[#1E2A4A] rounded-xl hover:text-white transition-colors"
+          onClick={handleRequestSpecialist}
+          disabled={generating}
+          className="px-4 py-3 text-sm text-[#8892A4] border border-[#1E2A4A] rounded-xl hover:text-white transition-colors disabled:opacity-50"
         >
-          Pedir otro especialista
+          {generating ? 'Generando...' : 'Pedir otro especialista'}
         </button>
       </div>
     </main>
+    </>
   )
 }

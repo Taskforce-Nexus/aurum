@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { Project } from '@/lib/types'
+import AdvisorProfileDrawer from './AdvisorProfileDrawer'
 
 interface PersonaExample {
   id: string
@@ -11,7 +12,7 @@ interface PersonaExample {
   quote: string
 }
 
-const EXAMPLE_PERSONAS: PersonaExample[] = [
+export const EXAMPLE_PERSONAS: PersonaExample[] = [
   {
     id: 'icp-1',
     name: 'Millennial Urbano',
@@ -45,6 +46,29 @@ interface Props {
 
 export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, onNext }: Props) {
   const [loading, setLoading] = useState(false)
+  const [generating, setGenerating] = useState(false)
+  const [personas, setPersonas] = useState<PersonaExample[]>(EXAMPLE_PERSONAS)
+  const [profileItem, setProfileItem] = useState<PersonaExample | null>(null)
+
+  async function handleRequestPersona() {
+    setGenerating(true)
+    try {
+      const res = await fetch('/api/seed-session/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'buyer_persona',
+          projectId: project.id,
+          existingItems: personas,
+        }),
+      })
+      const { item, error } = await res.json()
+      if (error || !item) return
+      setPersonas(prev => [...prev, item])
+      onAcceptedChange([...acceptedIds, item.id])
+    } catch { /* non-blocking */ }
+    setGenerating(false)
+  }
 
   function accept(id: string) {
     if (!acceptedIds.includes(id)) onAcceptedChange([...acceptedIds, id])
@@ -62,7 +86,7 @@ export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, 
         body: JSON.stringify({
           step: 'icps',
           projectId: project.id,
-          personas: EXAMPLE_PERSONAS.filter(p => acceptedIds.includes(p.id)).map(p => ({
+          personas: personas.filter(p => acceptedIds.includes(p.id)).map(p => ({
             name: p.name,
             archetype_label: p.archetype,
             demographics: p.demographics,
@@ -76,6 +100,13 @@ export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, 
   }
 
   return (
+    <>
+    <AdvisorProfileDrawer
+      profile={profileItem ? { name: profileItem.name, archetype: profileItem.archetype, demographics: profileItem.demographics, quote: profileItem.quote } : null}
+      isOpen={profileItem !== null}
+      onClose={() => setProfileItem(null)}
+      type="persona"
+    />
     <main className="flex-1 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto px-8 py-6 space-y-5">
         {/* Nexo message */}
@@ -92,7 +123,7 @@ export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, 
             Perspectivas del Cliente
           </p>
           <div className="space-y-3">
-            {EXAMPLE_PERSONAS.map(persona => {
+            {personas.map(persona => {
               const isAccepted = acceptedIds.includes(persona.id)
               return (
                 <div key={persona.id} className={`bg-[#0D1535] border rounded-xl px-5 py-4 transition-colors ${isAccepted ? 'border-[#B8860B]/40' : 'border-[#1E2A4A]'}`}>
@@ -130,6 +161,7 @@ export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, 
                       </button>
                       <button
                         type="button"
+                        onClick={() => setProfileItem(persona)}
                         className="text-xs px-2.5 py-1 rounded border border-[#1E2A4A] text-[#8892A4] hover:text-white transition-colors"
                       >
                         Ver perfil
@@ -143,9 +175,11 @@ export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, 
 
           <button
             type="button"
-            className="mt-3 text-xs text-[#8892A4] hover:text-white transition-colors"
+            onClick={handleRequestPersona}
+            disabled={generating}
+            className="mt-3 text-xs text-[#8892A4] hover:text-white transition-colors disabled:opacity-50"
           >
-            + Agregar perspectiva
+            {generating ? 'Generando...' : '+ Agregar perspectiva'}
           </button>
         </div>
       </div>
@@ -162,11 +196,14 @@ export default function ICPsPropuesta({ project, acceptedIds, onAcceptedChange, 
         </button>
         <button
           type="button"
-          className="px-4 py-3 text-sm text-[#8892A4] border border-[#1E2A4A] rounded-xl hover:text-white transition-colors"
+          onClick={handleRequestPersona}
+          disabled={generating}
+          className="px-4 py-3 text-sm text-[#8892A4] border border-[#1E2A4A] rounded-xl hover:text-white transition-colors disabled:opacity-50"
         >
-          Pedir otra perspectiva
+          {generating ? 'Generando...' : 'Pedir otra perspectiva'}
         </button>
       </div>
     </main>
+    </>
   )
 }

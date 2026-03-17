@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 export interface DocumentSection {
   section_name: string
@@ -93,9 +94,9 @@ function SectionItem({ section, index }: { section: DocumentSection; index: numb
 
       {hasContent && (
         <div className="px-4 pb-3 space-y-2">
-          <p className="text-[10px] text-[#8892A4] leading-relaxed whitespace-pre-line">
-            {section.content.length > 300 ? section.content.slice(0, 300) + '...' : section.content}
-          </p>
+          <div className="text-[10px] text-[#8892A4] leading-relaxed prose prose-invert max-w-none" style={{ fontSize: '10px' }}>
+            <ReactMarkdown>{section.content.length > 300 ? section.content.slice(0, 300) + '...' : section.content}</ReactMarkdown>
+          </div>
 
           {section.key_points?.length > 0 && (
             <div className="space-y-1">
