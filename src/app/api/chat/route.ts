@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { callClaude } from '@/lib/claude'
 import { NEXO_SEED_SYSTEM } from '@/lib/prompts'
 import type { Message } from '@/lib/types'
@@ -124,16 +125,17 @@ export async function POST(req: NextRequest) {
 
     // ── Streaming path for voice mode ────────────────────────────────────────
     if (voiceMode && streamMode) {
+      const admin = createAdminClient()
       // Resolve conversationId before streaming so we can send it to client
       let activeConvId: string | undefined = conversationId
       if (!activeConvId) {
-        const { data: existing } = await supabase
+        const { data: existing } = await admin
           .from('conversations').select('id')
           .eq('project_id', projectId).eq('type', 'semilla').maybeSingle()
         if (existing) {
           activeConvId = existing.id
         } else {
-          const { data: newConv } = await supabase
+          const { data: newConv } = await admin
             .from('conversations')
             .insert({ project_id: projectId, type: 'semilla', messages })
             .select('id').single()
@@ -201,7 +203,7 @@ export async function POST(req: NextRequest) {
               { role: 'assistant' as const, content: response, author: 'Nexo' },
             ]
             if (activeConvId) {
-              await supabase.from('conversations')
+              await admin.from('conversations')
                 .update({ messages: updatedMessages, updated_at: new Date().toISOString() })
                 .eq('id', activeConvId)
             }
@@ -252,14 +254,15 @@ export async function POST(req: NextRequest) {
       convUpdate.phase = 'value_proposition'
     }
 
+    const adminNS = createAdminClient()
     let activeConversationId = conversationId
     if (activeConversationId) {
-      await supabase.from('conversations')
+      await adminNS.from('conversations')
         .update(convUpdate)
         .eq('id', activeConversationId)
     } else {
       // Create conversation if it doesn't exist (fallback for missing conversationId)
-      const { data: existing } = await supabase
+      const { data: existing } = await adminNS
         .from('conversations')
         .select('id')
         .eq('project_id', projectId)
@@ -267,11 +270,11 @@ export async function POST(req: NextRequest) {
         .maybeSingle()
       if (existing) {
         activeConversationId = existing.id
-        await supabase.from('conversations')
+        await adminNS.from('conversations')
           .update(convUpdate)
           .eq('id', activeConversationId)
       } else {
-        const { data: newConv } = await supabase.from('conversations').insert({
+        const { data: newConv } = await adminNS.from('conversations').insert({
           project_id: projectId,
           type: 'semilla',
           ...(selectedCouncil ? { phase: 'value_proposition' } : {}),

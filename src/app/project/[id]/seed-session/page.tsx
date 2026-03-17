@@ -1,5 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import IncubadoraChat from '@/components/incubadora/IncubadoraChat'
 import SeedSessionFlow from '@/components/seed-session/SeedSessionFlow'
 import type { Project, DocumentSpec, Advisor, Cofounder } from '@/lib/types'
@@ -39,7 +40,9 @@ export default async function SeedSessionPage({ params }: { params: Promise<{ id
   }
 
   // Seed Session aún no completa → chat con Nexo
-  const { data: conversations } = await supabase
+  // Use admin client to bypass RLS on conversations table
+  const admin = createAdminClient()
+  const { data: conversations } = await admin
     .from('conversations')
     .select('*')
     .eq('project_id', id)
@@ -49,10 +52,11 @@ export default async function SeedSessionPage({ params }: { params: Promise<{ id
   let conversation = conversations?.[0] ?? null
 
   if (!conversation) {
-    const { data: newConv } = await supabase.from('conversations').insert({
+    const { data: newConv } = await admin.from('conversations').insert({
       project_id: id,
       type: 'semilla',
       messages: [],
+      status: 'activa',
     }).select().single()
     conversation = newConv
   }
