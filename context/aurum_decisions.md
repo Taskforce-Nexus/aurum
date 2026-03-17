@@ -879,3 +879,24 @@ Scope: post-MVP. Diseñar frame después de completar landing.
 **Fecha:** 2026-03-12
 
 ---
+
+## 48. Game Theory como meta-framework de preguntas estratégicas
+
+Las preguntas canónicas de la Sesión de Consejo se estructuran internamente bajo Game Theory:
+
+- **Players** — ¿Quiénes participan? (cliente, competencia, aliados, reguladores)
+- **Rules / Constraints** — ¿Qué restricciones operan? (mercado, legal, técnico, capital)
+- **Incentives** — ¿Qué mueve a cada jugador? (pains, ganancias, poder, status)
+
+Esto no es visible para el founder — es el framework interno que usa Nexo para formular
+preguntas que extraigan información estratégicamente completa por sección de documento.
+
+Implementación: `src/lib/session-questions.ts` — preguntas canónicas por documento con sección explícita.
+Adaptación: `adaptQuestionsToContext()` personaliza cada pregunta al contexto del founder
+sin cambiar su enfoque estratégico (Game Theory preservado).
+
+Documentos cubiertos: Value Proposition Canvas, Business Model, Customer Journey, Business Plan.
+
+**Fecha:** 2026-03-17
+
+---

@@ -45,22 +45,29 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   if (!project) notFound()
   const p = project as Project & { description?: string | null; purpose?: string | null }
 
-  const [councilRes, docsRes, consultationRes] = await Promise.all([
-    supabase.from('councils').select('*').eq('project_id', id).maybeSingle(),
+  const [councilRes, docsRes, consultationRes, sessionRes] = await Promise.all([
+    supabase.from('councils').select('*, council_advisors(count)').eq('project_id', id).maybeSingle(),
     supabase.from('project_documents').select('id, status').eq('project_id', id),
     supabase.from('consultations').select('*').eq('project_id', id)
       .order('updated_at', { ascending: false }).limit(1),
+    supabase.from('sessions').select('id, status').eq('project_id', id)
+      .eq('status', 'completada').limit(1),
   ])
 
   const council = councilRes.data
   const docs = docsRes.data ?? []
   const consultation = consultationRes.data?.[0] ?? null
+  const hasCompletedSession = (sessionRes.data?.length ?? 0) > 0
 
-  const activeStage = getActiveStage(p, !!council, docs.length > 0, !!consultation)
+  // Count advisors from council_advisors join
+  const advisorCount = (council as any)?.council_advisors?.[0]?.count ?? 0
+
+  const activeStage = getActiveStage(p, !!council, docs.length > 0, !!(consultation || hasCompletedSession))
   const progressPct = Math.round((activeStage / (JOURNEY_STAGES.length - 1)) * 100)
 
-  const docsReady = EXPORT_DOCS.filter(d => !!p[d.key]).length
-  const exportPct = Math.round((docsReady / EXPORT_DOCS.length) * 100)
+  const docsReady = docs.filter(d => d.status === 'aprobado').length
+  const totalDocs = docs.length || EXPORT_DOCS.length
+  const exportPct = Math.round((docsReady / totalDocs) * 100)
   const completedAurum = docsReady
 
   const purpose = p.purpose ?? council?.purpose ?? null
@@ -153,7 +160,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 }
               </div>
               <p className="text-xs text-[#8892A4] mb-4 flex-1 line-clamp-4 leading-relaxed">
-                {p.founder_brief ?? 'Inicia la conversación con Nexo para capturar el contexto de tu decisión.'}
+                {p.founder_brief
+                  ? p.founder_brief.replace(/#{1,6}\s+/g, '').replace(/\*\*(.*?)\*\*/g, '$1').replace(/_(.*?)_/g, '$1').replace(/`(.*?)`/g, '$1')
+                  : 'Inicia la conversación con Nexo para capturar el contexto de tu decisión.'}
               </p>
               <Link href={`/project/${p.id}/semilla`}
                 className="block w-full border border-[#1E2A4A] hover:border-[#B8860B] text-[#8892A4] hover:text-white text-xs font-medium py-2 rounded-lg text-center transition-colors">
@@ -193,14 +202,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
 
           {/* Consultoría Activa */}
-          <div className={`bg-[#0D1535] border border-[#1E2A4A] rounded-xl overflow-hidden flex flex-col ${consultation ? 'border-t-0' : ''}`}>
-            {consultation && <div className="h-0.5 bg-[#B8860B]" />}
+          <div className={`bg-[#0D1535] border border-[#1E2A4A] rounded-xl overflow-hidden flex flex-col ${(consultation || hasCompletedSession) ? 'border-t-0' : ''}`}>
+            {(consultation || hasCompletedSession) && <div className="h-0.5 bg-[#B8860B]" />}
             <div className="p-5 flex flex-col flex-1">
               <div className="flex items-center justify-between mb-3">
-                <span className={`text-xs font-semibold uppercase tracking-widest ${consultation ? 'text-[#B8860B]' : 'text-[#8892A4]'}`}>Consultoría Activa</span>
+                <span className={`text-xs font-semibold uppercase tracking-widest ${(consultation || hasCompletedSession) ? 'text-[#B8860B]' : 'text-[#8892A4]'}`}>Consultoría Activa</span>
                 {consultation
                   ? <span className="flex items-center gap-1 text-xs text-[#B8860B] bg-[#B8860B]/10 px-2 py-0.5 rounded-full"><span className="w-1.5 h-1.5 rounded-full bg-[#B8860B] inline-block" />{consultation.message_count ?? 3} consultas</span>
-                  : <span className="flex items-center gap-1 text-xs text-[#8892A4]"><span className="w-1.5 h-1.5 rounded-full bg-[#3A4560] inline-block" />Pendiente</span>
+                  : hasCompletedSession
+                    ? <span className="flex items-center gap-1 text-xs text-[#B8860B] bg-[#B8860B]/10 px-2 py-0.5 rounded-full"><span className="w-1.5 h-1.5 rounded-full bg-[#B8860B] inline-block" />Disponible</span>
+                    : <span className="flex items-center gap-1 text-xs text-[#8892A4]"><span className="w-1.5 h-1.5 rounded-full bg-[#3A4560] inline-block" />Pendiente</span>
                 }
               </div>
               {consultation ? (
@@ -212,7 +223,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               ) : (
                 <p className="text-xs text-[#8892A4] mb-4 flex-1">Disponible una vez completada la Sesión de Consejo.</p>
               )}
-              {consultation ? (
+              {(consultation || hasCompletedSession) ? (
                 <Link href={`/project/${p.id}/consultoria`}
                   className="block w-full bg-[#B8860B] hover:bg-[#a07509] text-white text-xs font-semibold py-2 rounded-lg text-center transition-colors">
                   Abrir consultoría →
@@ -234,16 +245,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             <div className="p-5">
               <span className="text-xs font-semibold text-[#5B9BD5] uppercase tracking-widest">Consejo Asesor</span>
               <p className="text-sm text-white font-semibold mt-2 mb-1">
-                {council?.advisor_count ? `${council.advisor_count} asesores configurados` : '0 asesores configurados'}
+                {advisorCount > 0 ? `${advisorCount} asesores configurados` : '0 asesores configurados'}
               </p>
               {/* Advisor avatars */}
               <div className="flex gap-2 my-3">
-                {Array.from({ length: Math.min(council?.advisor_count ?? 0, 5) }).map((_, i) => (
+                {Array.from({ length: Math.min(advisorCount, 5) }).map((_, i) => (
                   <div key={i} className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: ['#B8860B','#5B9BD5','#22c55e','#a855f7','#f97316'][i] }}>
                     {['M','V','R','F','A'][i]}
                   </div>
                 ))}
-                {(!council?.advisor_count || council.advisor_count === 0) && (
+                {advisorCount === 0 && (
                   <div className="w-8 h-8 rounded-full bg-[#1E2A4A] border border-dashed border-[#3A4560] flex items-center justify-center">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3A4560" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
@@ -267,7 +278,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               <span className="text-xs font-semibold text-[#8892A4] uppercase tracking-widest">Exportación</span>
               <span className="text-xs font-semibold text-[#B8860B] bg-[#B8860B]/10 px-2 py-0.5 rounded-full">{exportPct}%</span>
             </div>
-            <p className="text-sm text-white font-semibold mb-2">{docsReady} de {EXPORT_DOCS.length} documentos listos</p>
+            <p className="text-sm text-white font-semibold mb-2">{docsReady} de {totalDocs} documentos listos</p>
             {/* Progress bar */}
             <div className="h-1 bg-[#1E2A4A] rounded-full mb-3 overflow-hidden">
               <div className="h-full bg-[#B8860B] rounded-full transition-all" style={{ width: `${exportPct}%` }} />
@@ -336,7 +347,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <div>
           <p className="text-[10px] font-semibold text-[#8892A4] uppercase tracking-widest mb-2">Documentos Reason</p>
           <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-lg p-3">
-            <p className="font-outfit text-2xl font-bold text-white">{completedAurum}<span className="text-sm text-[#8892A4] font-normal"> / {EXPORT_DOCS.length}</span></p>
+            <p className="font-outfit text-2xl font-bold text-white">{completedAurum}<span className="text-sm text-[#8892A4] font-normal"> / {totalDocs}</span></p>
             <p className="text-xs text-[#8892A4] mt-0.5">aprobados</p>
           </div>
         </div>

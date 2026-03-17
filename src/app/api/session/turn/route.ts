@@ -9,6 +9,7 @@ import {
   NEXO_SYNTHESIS_SYSTEM,
   NEXO_SECTION_WRITER_SYSTEM,
 } from '@/lib/prompts'
+import { getQuestionsForDocument, CanonicalQuestion } from '@/lib/session-questions'
 
 type Admin = ReturnType<typeof createAdminClient>
 
@@ -116,32 +117,20 @@ Documento en construcción: ${documentName}
 Pregunta estratégica para el debate:
 ${question}`
 
-  const constructiveContent = await callClaude(
-    NEXO_CONSTRUCTIVO_SYSTEM,
-    [{ role: 'user', content: context }],
-    600
-  )
-
-  const criticalContext = `${context}
-
-Propuesta del Nexo Constructivo:
-${constructiveContent}`
-
-  const criticalContent = await callClaude(
-    NEXO_CRITICO_SYSTEM,
-    [{ role: 'user', content: criticalContext }],
-    600
-  )
+  const [constructiveContent, criticalContent] = await Promise.all([
+    callClaude(NEXO_CONSTRUCTIVO_SYSTEM, [{ role: 'user', content: context }], 4096),
+    callClaude(NEXO_CRITICO_SYSTEM, [{ role: 'user', content: context }], 4096),
+  ])
 
   let agreement = false
   let synthesis: string | null = null
 
   try {
-    const synthesisContext = `Propuesta Constructiva:\n${constructiveContent}\n\nCrítica:\n${criticalContent}`
+    const synthesisContext = `Perspectiva Constructiva:\n${constructiveContent}\n\nPerspectiva Crítica:\n${criticalContent}`
     const synthesisRaw = await callClaude(
       NEXO_SYNTHESIS_SYSTEM,
       [{ role: 'user', content: synthesisContext }],
-      400,
+      2048,
       'claude-haiku-4-5-20251001'
     )
     const clean = synthesisRaw.trim().replace(/^```json\s*/i, '').replace(/\s*```$/, '')
@@ -179,7 +168,7 @@ async function handleResolve(admin: Admin, project: { id: string; founder_brief:
   phaseId: string
   responseId: string
   questionIndex: number
-  resolution: 'constructiva' | 'critico' | 'responder_yo' | 'acuerdo'
+  resolution: 'constructiva' | 'critico' | 'responder_yo' | 'acuerdo' | 'find_common_ground'
   founderResponse?: string
   constructiveContent?: string
   criticalContent?: string
@@ -210,6 +199,9 @@ async function handleResolve(admin: Admin, project: { id: string; founder_brief:
     momentum.constructivo_count = (momentum.constructivo_count ?? 0) + 1
   } else if (resolution === 'critico') {
     momentum.critico_count = (momentum.critico_count ?? 0) + 1
+  } else if (resolution === 'find_common_ground') {
+    momentum.constructivo_count = (momentum.constructivo_count ?? 0) + 1
+    momentum.critico_count = (momentum.critico_count ?? 0) + 1
   }
 
   const questions = [...(phase.questions ?? [])]
@@ -218,15 +210,19 @@ async function handleResolve(admin: Admin, project: { id: string; founder_brief:
   }
 
   // Generate section content for this question
+  const resolutionContent = resolution === 'responder_yo'
+    ? (founderResponse ?? '')
+    : resolution === 'critico'
+      ? (body.criticalContent ?? '')
+      : resolution === 'find_common_ground'
+        ? (body.synthesis ?? `${body.constructiveContent ?? ''}\n\n${body.criticalContent ?? ''}`)
+        : (body.synthesis ?? body.constructiveContent ?? '')
+
   const generatedSection = await generateSection({
     founderBrief: project.founder_brief,
     question: body.question ?? questions[questionIndex]?.pregunta ?? '',
     resolution,
-    resolutionContent: resolution === 'responder_yo'
-      ? (founderResponse ?? '')
-      : resolution === 'critico'
-        ? (body.criticalContent ?? '')
-        : (body.synthesis ?? body.constructiveContent ?? ''),
+    resolutionContent,
     documentName: body.documentName ?? '',
     sectionSpec: body.specSections?.[questionIndex] ?? null,
     previousSections: body.previousSections ?? [],
@@ -284,6 +280,38 @@ async function handleApprove(admin: Admin, project: { id: string; founder_brief:
   phaseIndex: number
 }) {
   const { sessionId, documentId, phaseIndex } = body
+
+  // Detect and fill missing sections before approving
+  const { data: docData } = await admin
+    .from('project_documents')
+    .select('content_json, document_specs(*)')
+    .eq('id', documentId)
+    .single()
+
+  const specSections: Array<{ nombre: string; descripcion: string }> = (docData?.document_specs as any)?.sections ?? []
+  const existingSections: GeneratedSection[] = (docData?.content_json as any)?.sections ?? []
+  const existingNames = new Set(existingSections.map((s: GeneratedSection) => s.section_name))
+
+  const missingSections = specSections.filter(s => !existingNames.has(s.nombre))
+  if (missingSections.length > 0) {
+    const founderBrief = project.founder_brief ?? ''
+    const docName = (docData?.document_specs as any)?.name ?? ''
+    for (const spec of missingSections) {
+      const generated = await generateSection({
+        founderBrief,
+        question: `Completa la sección "${spec.nombre}" del documento "${docName}"`,
+        resolution: 'acuerdo',
+        resolutionContent: spec.descripcion,
+        documentName: docName,
+        sectionSpec: spec,
+        previousSections: existingSections,
+      })
+      if (generated) {
+        existingSections.push(generated)
+        await upsertDocumentSection(admin, documentId, generated)
+      }
+    }
+  }
 
   // Mark document as approved
   await admin.from('project_documents')
@@ -343,6 +371,14 @@ async function generateQuestions(
   founderBrief: string,
   document: any
 ): Promise<Array<{ pregunta: string; resolucion: null }>> {
+  const docName = document?.document_specs?.name ?? document?.name ?? ''
+  const predefined = getQuestionsForDocument(docName)
+
+  if (predefined && predefined.length > 0) {
+    return await adaptQuestionsToContext(predefined, founderBrief, docName)
+  }
+
+  // Fallback: Claude generates questions
   const spec = document?.document_specs
   const sectionsText = (spec?.sections ?? [])
     .map((s: { nombre: string; descripcion: string }) => `- ${s.nombre}: ${s.descripcion}`)
@@ -387,6 +423,45 @@ Responde SOLO con un JSON array de 6 strings.`
   ]
 }
 
+async function adaptQuestionsToContext(
+  questions: CanonicalQuestion[],
+  founderBrief: string,
+  documentName: string
+): Promise<Array<{ pregunta: string; resolucion: null }>> {
+  const questionsList = questions
+    .map((q, i) => `${i + 1}. [${q.section}] ${q.question}`)
+    .join('\n')
+
+  const prompt = `Tienes estas preguntas estratégicas canónicas para el documento "${documentName}":
+${questionsList}
+
+Resumen del Fundador:
+${founderBrief ?? 'No disponible'}
+
+Adapta cada pregunta al contexto específico del founder manteniendo EXACTAMENTE el mismo enfoque estratégico.
+Usa el contexto del founder (industria, producto, cliente específico) para hacer las preguntas más precisas y relevantes.
+No cambies el propósito estratégico de ninguna pregunta. Solo personaliza el lenguaje al contexto del proyecto.
+Responde SOLO con un JSON array de ${questions.length} strings (las preguntas adaptadas, en el mismo orden).`
+
+  try {
+    const response = await callClaude(
+      NEXO_SESSION_QUESTION_SYSTEM,
+      [{ role: 'user', content: prompt }],
+      600,
+      'claude-haiku-4-5-20251001'
+    )
+    const clean = response.trim().replace(/^```json\s*/i, '').replace(/\s*```$/, '')
+    const parsed = JSON.parse(clean)
+    if (Array.isArray(parsed) && parsed.length === questions.length) {
+      return parsed.map(q => ({ pregunta: String(q), resolucion: null }))
+    }
+  } catch {
+    // fallback: use predefined questions as-is
+  }
+
+  return questions.map(q => ({ pregunta: q.question, resolucion: null }))
+}
+
 async function generateSection(args: {
   founderBrief: string
   question: string
@@ -399,28 +474,34 @@ async function generateSection(args: {
   const { founderBrief, question, resolution, resolutionContent, documentName, sectionSpec, previousSections } = args
 
   const previousContext = previousSections.length > 0
-    ? `\n\nContexto de secciones anteriores:\n${previousSections.map(s => `${s.section_name}: ${s.content.slice(0, 200)}...`).join('\n')}`
+    ? `\n\nCONTEXTO DE SECCIONES YA GENERADAS (mantén coherencia con estas):\n${previousSections.map(s => `### ${s.section_name}\n${s.content.slice(0, 600)}`).join('\n\n')}`
     : ''
 
   const prompt = `DOCUMENTO: ${documentName}
-SPEC DE LA SECCIÓN: ${sectionSpec?.nombre ?? 'Sección principal'} — ${sectionSpec?.descripcion ?? 'Contenido relevante para el documento'}
+SECCIÓN A GENERAR: ${sectionSpec?.nombre ?? 'Sección principal'}
+DESCRIPCIÓN DE LA SECCIÓN: ${sectionSpec?.descripcion ?? 'Contenido relevante para el documento'}
 
 RESUMEN DEL FUNDADOR:
 ${founderBrief ?? 'No disponible'}
 
-RESOLUCIÓN DEL DEBATE:
+DEBATE ESTRATÉGICO RESUELTO:
 Pregunta: ${question}
 Posición elegida: ${resolution}
-Contenido de la resolución:
+Perspectiva seleccionada (úsala como fuente principal):
 ${resolutionContent}${previousContext}
 
-Genera el contenido de la sección "${sectionSpec?.nombre ?? 'Sección principal'}" del documento "${documentName}".`
+INSTRUCCIONES:
+- Genera el contenido de la sección "${sectionSpec?.nombre ?? 'Sección principal'}" del documento "${documentName}"
+- Mínimo 300 palabras de contenido sustantivo
+- Integra la perspectiva del debate con el contexto del founder
+- Usa los datos, nombres y contexto específico del proyecto del founder
+- El contenido debe ser accionable y específico, no genérico`
 
   try {
     const raw = await callClaude(
       NEXO_SECTION_WRITER_SYSTEM,
       [{ role: 'user', content: prompt }],
-      800,
+      8192,
       'claude-haiku-4-5-20251001'
     )
     const clean = raw.trim().replace(/^```json\s*/i, '').replace(/\s*```$/, '')

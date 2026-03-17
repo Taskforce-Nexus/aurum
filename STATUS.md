@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-17
-Etapa actual: STRIPE + PAYMENTS — Integración Stripe (test mode) completa. Checkout sessions para subscripciones y recargas de tokens. Webhook handler. UI conectada.
+Etapa actual: SESSION ENGINE REDESIGN — Kira 12-fix + Fix 13 ProjectView post-sesión. Preguntas prediseñadas (Game Theory), max_tokens aumentados, perspectivas independientes, fix 13 (markdown, contadores, unlock Consultoría).
 
 ---
 
@@ -465,6 +465,46 @@ Acciones pendientes para Juan:
 ## Fix crítico — conversations.phase constraint (COMPLETO ✓)
 
 - `phase: 'semilla'` violaba CHECK constraint — corregido a `phase: 'seed'` en 3 archivos ✓
+
+## Epic Session Engine — Rediseño motor Sesión de Consejo (COMPLETO ✓)
+
+Kira 12-fix session engine redesign + Porfirio feedback fixes + Fix 13 ProjectView.
+
+**Porfirio Feedback (7 fixes):**
+
+- Preguntas 3→6 por documento ✓
+- Pre-aceptar todos los especialistas/personas por defecto ✓
+- AdvisorProfileDrawer — "Ver perfil" en 3 pasos del seed session ✓
+- "Cambiar" → "Quitar"/"Agregar" con estado visual ✓
+- /api/seed-session/generate — Claude genera especialistas/personas adicionales ✓
+- Markdown en debate cards + DocumentPreview (react-markdown + @tailwindcss/typography) ✓
+- Prompts Constructivo/Crítico: perspectivas independientes (no se responden entre sí) ✓
+
+**Kira 12-fix (aplicados):**
+
+- Fix 2: session-questions.ts — preguntas canónicas por documento (Game Theory: Players/Rules/Incentives) ✓
+- Fix 2 (cont.): adaptQuestionsToContext() — personaliza al contexto del founder ✓
+- Fix 3: generateSection prompt mejorado — debate completo, mín 300 palabras ✓
+- Fix 4: handleApprove detecta secciones faltantes y las genera antes de aprobar ✓
+- Fix 6: max_tokens aumentados — debate 4096, sections 8192, synthesis 2048 ✓
+- Fix 10: Constructivo y Crítico responden INDEPENDIENTEMENTE a la pregunta (en paralelo) ✓
+- Fix 11: racional detrás de números obligatorio en prompts ✓
+- Fix 12: find\_common\_ground — síntesis como resolutionContent cuando el founder busca punto medio ✓
+- Decision #48: Game Theory meta-framework registrado en aurum_decisions.md ✓
+
+**Fix 13 — ProjectView post-sesión:**
+
+- Fix 13.1: founder\_brief preview strips raw markdown (\#\#, \*\*, \_, \`) ✓
+- Fix 13.2: advisor\_count desde council\_advisors JOIN (fix RLS 0 asesores) ✓
+- Fix 13.3: docsReady desde project\_documents.status === 'aprobado' (no project columns) ✓
+- Fix 13.4: Consultoría se desbloquea si session.status === 'completada' (no solo consultation) ✓
+
+**Pendiente:**
+
+- Fix 1: Advisors participan en el debate (requiere diseño adicional)
+- Fix 5: Botón "Pedir revisión" (requiere UI nueva)
+- Fix 7: Momentum state updates en UI (requiere SesionConsejoView update)
+- Fix 8: Nombres de sección en sidebar
 
 ## Siguiente paso
 
