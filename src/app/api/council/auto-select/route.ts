@@ -89,7 +89,27 @@ export async function POST(req: NextRequest) {
 
   if (existing) {
     councilId = existing.id
-    // Remove old auto-selected advisors
+
+    // Guard: if council already has 5-7 advisors, don't overwrite — return existing
+    const { count: existingCount } = await supabase
+      .from('council_advisors')
+      .select('id', { count: 'exact', head: true })
+      .eq('council_id', councilId)
+
+    if (existingCount && existingCount >= 5 && existingCount <= 7) {
+      const { data: existingAdvisors } = await supabase
+        .from('council_advisors')
+        .select('level, advisors(*)')
+        .eq('council_id', councilId)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const mapped = (existingAdvisors ?? []).map((ca: any) => ({
+        ...(ca.advisors ?? {}),
+        level: ca.level as 'lidera' | 'apoya' | 'observa',
+      }))
+      return NextResponse.json({ council_id: councilId, advisors: mapped })
+    }
+
+    // Remove incorrect/inflated council_advisors and re-select
     await supabase.from('council_advisors').delete().eq('council_id', councilId)
   } else {
     const { data: newCouncil, error: councilErr } = await supabase
@@ -103,12 +123,13 @@ export async function POST(req: NextRequest) {
     councilId = newCouncil.id
   }
 
-  // 5. Insert council_advisors
-  if (withLevels.length > 0) {
+  // 5. Insert council_advisors (max 7)
+  const toInsert = withLevels.slice(0, 7)
+  if (toInsert.length > 0) {
     await supabase.from('council_advisors').insert(
-      withLevels.map(a => ({ council_id: councilId, advisor_id: a.id, level: a.level }))
+      toInsert.map(a => ({ council_id: councilId, advisor_id: a.id, level: a.level }))
     )
   }
 
-  return NextResponse.json({ council_id: councilId, advisors: withLevels })
+  return NextResponse.json({ council_id: councilId, advisors: toInsert })
 }
