@@ -38,7 +38,6 @@ const STEP_NUMBERS: Record<SeedStep, number> = {
 
 interface Props {
   project: Project
-  documentSpecs: DocumentSpec[]
   advisors: Advisor[]
   cofounders: Cofounder[]
   userEmail: string
@@ -55,13 +54,16 @@ export const HAT_COLORS: Record<string, string> = {
   naranja:  'bg-orange-500',
 }
 
-export default function SeedSessionFlow({ project, documentSpecs, advisors, cofounders, userEmail }: Props) {
+export default function SeedSessionFlow({ project, advisors, cofounders, userEmail }: Props) {
   const STORAGE_KEY = `sesion_consejo_${project.id}`
 
   const [currentStep, setCurrentStep] = useState<SeedStep>('entregables')
 
+  // Composed deliverables (set after /api/compose runs in EntregablesPropuesta)
+  const [composedDeliverables, setComposedDeliverables] = useState<{ id: string; name: string }[]>([])
+
   // Selections across steps
-  const [acceptedDocIds,     setAcceptedDocIds]     = useState<string[]>(documentSpecs.map(d => d.id))
+  const [acceptedDocIds,     setAcceptedDocIds]     = useState<string[]>([])
   const [acceptedAdvIds,     setAcceptedAdvIds]     = useState<string[]>(advisors.map(a => a.id))
   const [acceptedCofIds,     setAcceptedCofIds]     = useState<string[]>(
     cofounders.filter(c => c.role === 'constructivo' || c.role === 'critico').slice(0, 2).map(c => c.id)
@@ -184,9 +186,7 @@ export default function SeedSessionFlow({ project, documentSpecs, advisors, cofo
         {currentStep === 'entregables' && (
           <EntregablesPropuesta
             {...sharedProps}
-            documentSpecs={documentSpecs}
-            acceptedIds={acceptedDocIds}
-            onAcceptedChange={setAcceptedDocIds}
+            onDeliverablesComposed={setComposedDeliverables}
           />
         )}
         {currentStep === 'cofounders' && (
@@ -222,7 +222,7 @@ export default function SeedSessionFlow({ project, documentSpecs, advisors, cofo
         {currentStep === 'consejo_listo' && (
           <ConsejoListo
             {...sharedProps}
-            documentSpecs={documentSpecs.filter(d => acceptedDocIds.includes(d.id))}
+            documentSpecs={composedDeliverables as unknown as DocumentSpec[]}
             advisors={advisors.filter(a => acceptedAdvIds.includes(a.id))}
             cofounders={cofounders.filter(c => acceptedCofIds.includes(c.id))}
             specialistCount={acceptedSpecIds.length}

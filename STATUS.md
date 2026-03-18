@@ -63,6 +63,15 @@ Etapa actual: FRAMEWORK ENGINE instalado — Document Specification Library reem
 - CofoundersPropuesta — botón Cambiar conectado a CofounderSwapDrawer ✓
 - ConsejoPrincipalPropuesta — botón Cambiar por card conectado a AdvisorSwapDrawer ✓
 - "Ver perfil" ya funcional en ConsejoPrincipalPropuesta, EspecialistasPropuesta, ICPsPropuesta ✓
+- Story 4.1 — EntregablesPropuesta dinámica — conectada a /api/compose ✓
+  - Fetch automático al montar (useEffect + compose())
+  - Loading: skeleton 3 cards + mensaje Nexo
+  - Cards expandibles: nombre, pregunta clave, badges secciones/consejeros, dependencias
+  - "Pedir ajuste" → textarea → recompone con contexto adicional
+  - "Aprobar propuesta" → save + advance
+  - SeedSessionFlow: sin documentSpecs prop, composedDeliverables state
+  - seed-session/page.tsx: sin query a document_specs (tabla eliminada)
+
 - Story 4.0 — POST /api/compose — endpoint de composición dinámica de entregables ✓
   - supabase/migrations/20260317_framework_engine.sql (DROP document_specs + ADD composition/deliverable_index/key_question)
   - COMPOSE_DELIVERABLES_PROMPT agregado a src/lib/prompts.ts

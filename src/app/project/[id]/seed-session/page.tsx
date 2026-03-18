@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import IncubadoraChat from '@/components/incubadora/IncubadoraChat'
 import SeedSessionFlow from '@/components/seed-session/SeedSessionFlow'
-import type { Project, DocumentSpec, Advisor, Cofounder } from '@/lib/types'
+import type { Project, Advisor, Cofounder } from '@/lib/types'
 
 export default async function SeedSessionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -22,8 +22,7 @@ export default async function SeedSessionPage({ params }: { params: Promise<{ id
 
   // Si ya tiene founder_brief → SeedSessionFlow (Sesión de Consejo, pasos 2-7)
   if (project.founder_brief) {
-    const [{ data: documentSpecs }, { data: advisors }, { data: cofounders }] = await Promise.all([
-      supabase.from('document_specs').select('*').eq('icp', 'founder').order('created_at'),
+    const [{ data: advisors }, { data: cofounders }] = await Promise.all([
       supabase.from('advisors').select('*').eq('is_native', true).order('created_at'),
       supabase.from('cofounders').select('*').eq('is_native', true).order('created_at'),
     ])
@@ -31,7 +30,6 @@ export default async function SeedSessionPage({ params }: { params: Promise<{ id
     return (
       <SeedSessionFlow
         project={project as Project}
-        documentSpecs={(documentSpecs ?? []) as DocumentSpec[]}
         advisors={(advisors ?? []) as Advisor[]}
         cofounders={(cofounders ?? []) as Cofounder[]}
         userEmail={user.email ?? ''}
