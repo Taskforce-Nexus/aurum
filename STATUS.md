@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-17
-Etapa actual: COUNCIL LIMPIO + GUARD IMPLEMENTADO — Motive: 548 council_advisors limpiados → re-poblado con 7 correctos. Auto-select guard: si council ya tiene 5-7 advisors, no sobreescribe. MyBoard ya consulta solo council_advisors (nunca el marketplace completo). Todos los proyectos verificados ≤ 7 advisors.
+Etapa actual: TESTS E2E COMPLETOS — Story 4.8 ejecutada. 9/9 tests PASS en full-flow.spec.ts. Playwright 1.58.2 con Chromium. Usuario test: e2e@reason.test. Screenshots generados para todos los pasos. 2 warnings documentados (no son bugs de código).
 
 ---
 
