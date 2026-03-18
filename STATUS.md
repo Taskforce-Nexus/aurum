@@ -63,6 +63,13 @@ Etapa actual: FRAMEWORK ENGINE instalado — Document Specification Library reem
 - CofoundersPropuesta — botón Cambiar conectado a CofounderSwapDrawer ✓
 - ConsejoPrincipalPropuesta — botón Cambiar por card conectado a AdvisorSwapDrawer ✓
 - "Ver perfil" ya funcional en ConsejoPrincipalPropuesta, EspecialistasPropuesta, ICPsPropuesta ✓
+- Story 4.0 — POST /api/compose — endpoint de composición dinámica de entregables ✓
+  - supabase/migrations/20260317_framework_engine.sql (DROP document_specs + ADD composition/deliverable_index/key_question)
+  - COMPOSE_DELIVERABLES_PROMPT agregado a src/lib/prompts.ts
+  - src/app/api/compose/route.ts — lee founder_brief, llama Claude tier:strong, guarda ProjectDocuments
+  - Tabla project_documents verificada: existe en migration 005, nombre correcto
+  - ⚠️ Juan debe ejecutar 20260317_framework_engine.sql en Supabase SQL Editor
+
 - Framework Engine instalado — aurum_framework_engine.md creado, aurum_document_specs.md eliminado ✓
   - aurum_brain.md, aurum_incubadora.md, aurum_documents.md, CLAUDE.md actualizados ✓
   - aurum_decisions.md: Decisión #48 agregada ✓

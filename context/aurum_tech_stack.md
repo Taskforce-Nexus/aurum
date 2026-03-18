@@ -60,6 +60,7 @@ STRIPE_WEBHOOK_SECRET=         # whsec_... — webhook signing secret
 
 | Ruta | Responsabilidad |
 |------|-----------------|
+| `POST /api/compose` | Composición dinámica de entregables — lee founder_brief, llama Claude con Framework Engine, guarda ProjectDocuments |
 | `POST /api/chat` | Chat principal — semilla 1:1 + consejo + auto-generación debate Nexo Dual |
 | `POST /api/chat/proxy` | Acciones de proxy: generar borrador, aprobar, descartar, elegir lado |
 | `POST /api/chat/brief` | Generar Resumen del Fundador desde conversación semilla |
