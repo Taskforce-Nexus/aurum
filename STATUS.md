@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-17
-Etapa actual: BUGS CRÍTICOS POST-DEMO CORREGIDOS — 5 fixes aplicados tras demo con Porfirio (Motive). Auto-select funcional. ConsejoListo con cards estructuradas. Sesión de Consejo guarda contra docs sin composition. ProjectView navega correctamente.
+Etapa actual: UX MARKETPLACE CORREGIDO — El usuario nunca ve los 800+ advisors. ConsejoPrincipalPropuesta con panel inline de swap. Especialistas y Buyer Personas generados dinámicamente con Claude por proyecto. ConsejoListo con validación de completitud. Límites duros: 5 especialistas, 5 personas, min 3 advisors.
 
 ---
 
