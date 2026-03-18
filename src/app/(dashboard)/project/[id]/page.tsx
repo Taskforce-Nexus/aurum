@@ -75,6 +75,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const sessionCompleta = session?.status === 'completada'
   const hasExport = docsReady > 0
 
+  // Consultoría tile: requires completed session
+  const consultoriaUnlocked = sessionCompleta
+
+  // Load consultation count for tile
+  const { data: consultations } = await supabase
+    .from('consultations')
+    .select('id, messages')
+    .eq('project_id', id)
+    .order('created_at', { ascending: false })
+
+  const consultCount = consultations?.length ?? 0
+  const totalMessages = (consultations ?? []).reduce((acc, c) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const msgs = (c as any).messages as Array<{ role: string }> ?? []
+    return acc + msgs.filter((m: { role: string }) => m.role === 'user').length
+  }, 0)
+
   const pipelineStates: PipelineState[] = [
     hasSemilla ? 'done' : 'pending',
     hasEntregables ? 'done' : 'pending',
@@ -350,8 +367,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
 
-        {/* ── Bottom 2 tiles ───────────────────────────────── */}
-        <div className="grid grid-cols-5 gap-4">
+        {/* ── Bottom tiles ─────────────────────────────────── */}
+        <div className="grid grid-cols-5 gap-4 mb-4">
 
           {/* Tile 4 — Consejo Asesor (3 cols) */}
           <div className={`col-span-3 bg-[#0D1535] border border-[#1E2A4A] rounded-xl overflow-hidden ${hasCouncil ? 'border-t-0' : ''}`}>
@@ -444,6 +461,59 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 }`}>
                 {hasExport ? 'Exportar →' : 'Ir al Export Center →'}
               </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Consultoría tile ─────────────────────────────── */}
+        <div className={`bg-[#0D1535] border border-[#1E2A4A] rounded-xl overflow-hidden ${consultoriaUnlocked ? 'border-t-0' : ''}`}>
+          {consultoriaUnlocked && totalMessages > 0 && <div className="h-0.5 bg-[#22c55e]" />}
+          {consultoriaUnlocked && totalMessages === 0 && <div className="h-0.5 bg-[#B8860B]" />}
+          <div className="p-5 flex items-center justify-between">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-3 mb-1">
+                <span className={`text-xs font-semibold uppercase tracking-widest ${
+                  consultoriaUnlocked ? (totalMessages > 0 ? 'text-green-400' : 'text-[#B8860B]') : 'text-[#8892A4]'
+                }`}>
+                  Consultoría Activa
+                </span>
+                {consultoriaUnlocked && (
+                  <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${
+                    totalMessages > 0
+                      ? 'text-green-400 bg-green-400/10'
+                      : 'text-[#B8860B] bg-[#B8860B]/10'
+                  }`}>
+                    <span className={`w-1.5 h-1.5 rounded-full inline-block ${totalMessages > 0 ? 'bg-green-400' : 'bg-[#B8860B]'}`} />
+                    {totalMessages > 0 ? `${totalMessages} consulta${totalMessages !== 1 ? 's' : ''}` : 'Disponible'}
+                  </span>
+                )}
+                {!consultoriaUnlocked && (
+                  <span className="flex items-center gap-1 text-xs text-[#8892A4]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3A4560] inline-block" />Bloqueada
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-[#8892A4] leading-relaxed">
+                {consultoriaUnlocked
+                  ? totalMessages > 0
+                    ? `${consultCount} sesión${consultCount !== 1 ? 'es' : ''} · ${totalMessages} consulta${totalMessages !== 1 ? 's' : ''} realizadas`
+                    : 'Tu consejo asesor está disponible. Hazles cualquier pregunta sobre tu venture.'
+                  : 'Disponible tras completar la Sesión de Consejo. Tu consejo asesor responderá consultas sobre estrategia, mercado y producto.'
+                }
+              </p>
+            </div>
+            <div className="ml-4 shrink-0">
+              {consultoriaUnlocked ? (
+                <Link href={`/project/${p.id}/consultoria`}
+                  className="block bg-[#B8860B] hover:bg-[#a07509] text-[#0A1128] text-xs font-semibold px-4 py-2 rounded-lg transition-colors">
+                  {totalMessages > 0 ? 'Continuar →' : 'Iniciar →'}
+                </Link>
+              ) : (
+                <button type="button" disabled
+                  className="border border-[#1E2A4A] text-[#3A4560] text-xs font-medium px-4 py-2 rounded-lg cursor-not-allowed">
+                  Bloqueada
+                </button>
+              )}
             </div>
           </div>
         </div>

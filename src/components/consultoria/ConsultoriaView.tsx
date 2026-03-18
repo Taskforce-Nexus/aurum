@@ -11,6 +11,7 @@ interface Props {
   cofounders: Cofounder[]
   documents: DocumentRef[]
   consultations: Consultation[]
+  sessionCompleted: boolean
 }
 
 const QUICK_ACTIONS = [
@@ -26,8 +27,9 @@ export default function ConsultoriaView({
   cofounders,
   documents,
   consultations: initialConsultations,
+  sessionCompleted,
 }: Props) {
-  const isUnlocked = project.current_phase === 'completado'
+  const isUnlocked = sessionCompleted
 
   const [consultations, setConsultations] = useState<Consultation[]>(initialConsultations)
   const [activeConsultation, setActiveConsultation] = useState<Consultation | null>(
@@ -51,11 +53,10 @@ export default function ConsultoriaView({
   }
 
   async function handleNewConsultation() {
-    const title = `Consulta ${new Date().toLocaleDateString('es', { month: 'short', day: 'numeric' })}`
-    const res = await fetch('/api/consultoria/chat', {
+    const res = await fetch('/api/consultation/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ projectId: project.id, consultationId: null, message: title, createOnly: true }),
+      body: JSON.stringify({ project_id: project.id }),
     })
     if (!res.ok) return
     const data = await res.json()
@@ -84,35 +85,46 @@ export default function ConsultoriaView({
     setMessages(prev => [...prev, userMsg])
 
     try {
-      const res = await fetch('/api/consultoria/chat', {
+      // Ensure we have an active consultation
+      let consultId = activeConsultation?.id
+      if (!consultId) {
+        const startRes = await fetch('/api/consultation/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ project_id: project.id }),
+        })
+        if (!startRes.ok) throw new Error('Failed to start')
+        const startData = await startRes.json()
+        consultId = startData.consultation.id
+        setActiveConsultation(startData.consultation)
+        setConsultations(prev => [startData.consultation, ...prev])
+      }
+
+      const res = await fetch('/api/consultation/message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          projectId: project.id,
-          consultationId: activeConsultation?.id ?? null,
-          message: msg,
-        }),
+        body: JSON.stringify({ consultation_id: consultId, message: msg }),
       })
       if (!res.ok) throw new Error('Failed')
       const data = await res.json()
 
-      const newMessages: ConsultationMessage[] = data.responses.map(
-        (r: { role: string; content: string; advisor_name?: string; specialty?: string; advisor_id?: string }) => ({
-          role: r.role,
-          content: r.content,
-          advisor_id: r.advisor_id,
-          advisor_name: r.advisor_name,
-          specialty: r.specialty,
-          timestamp: new Date().toISOString(),
-        })
+      // Flatten council messages into individual ChatBubble-compatible messages
+      const flatMessages: ConsultationMessage[] = data.messages.flatMap(
+        (m: { role: string; content: string; responses?: Array<{ role: string; content: string; advisor_id?: string; advisor_name?: string; specialty?: string }>; created_at: string }) => {
+          if (m.role === 'user') {
+            return [{ role: 'user' as const, content: m.content, timestamp: m.created_at }]
+          }
+          return (m.responses ?? []).map(r => ({
+            role: r.role as 'nexo' | 'advisor',
+            content: r.content,
+            advisor_id: r.advisor_id,
+            advisor_name: r.advisor_name,
+            specialty: r.specialty,
+            timestamp: m.created_at,
+          }))
+        }
       )
-
-      setMessages(prev => [...prev, ...newMessages])
-
-      if (!activeConsultation && data.consultation) {
-        setActiveConsultation(data.consultation)
-        setConsultations(prev => [data.consultation, ...prev.filter(c => c.id !== data.consultation.id)])
-      }
+      setMessages(flatMessages)
     } catch {
       setMessages(prev => [
         ...prev,

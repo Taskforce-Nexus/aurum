@@ -77,6 +77,9 @@ STRIPE_WEBHOOK_SECRET=         # whsec_... — webhook signing secret
 | `POST /api/stripe/usage` | Trackeo interno de consumo de tokens — descuenta de token_balances + registra en token_usages |
 | `POST /api/export/pdf` | Genera PDF de un entregable — recibe `{ docId, docName, keyQuestion, contentJson }` — jsPDF |
 | `POST /api/export/pptx` | Genera PPTX de un entregable — recibe `{ document_id, project_name }` — pptxgenjs v4 |
+| `POST /api/consultation/start` | Inicia consultoría activa — requiere sesión completada, crea consultation en DB, retorna `{ consultation, advisors }` |
+| `POST /api/consultation/message` | Envía consulta al consejo — llama Claude (Sonnet, tier strong), retorna `{ responses, messages }`. Usa NEXO_CONSULTORIA_SYSTEM |
+| `GET /api/consultation/[consultationId]` | Estado completo de consultoría — consultation con messages JSONB |
 | `POST /api/export/pptx/all` | Genera PPTX con todos los entregables del proyecto — recibe `{ project_id }` — pptxgenjs v4 |
 
 ---

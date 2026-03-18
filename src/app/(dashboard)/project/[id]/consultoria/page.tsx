@@ -18,6 +18,17 @@ export default async function ConsultoriaPage({ params }: { params: Promise<{ id
 
   if (!project) notFound()
 
+  // Gate: check for completed session
+  const { data: completedSession } = await supabase
+    .from('sessions')
+    .select('id')
+    .eq('project_id', id)
+    .eq('status', 'completada')
+    .limit(1)
+    .maybeSingle()
+
+  const sessionCompleted = !!completedSession
+
   // Fetch council, advisors, cofounders, documents, consultations
   const [
     { data: council },
@@ -29,7 +40,7 @@ export default async function ConsultoriaPage({ params }: { params: Promise<{ id
       .from('project_documents')
       .select('id, name, status, content_json')
       .eq('project_id', id)
-      .order('generated_at', { ascending: true, nullsFirst: true }),
+      .order('deliverable_index', { ascending: true }),
     supabase
       .from('consultations')
       .select('*')
@@ -45,7 +56,9 @@ export default async function ConsultoriaPage({ params }: { params: Promise<{ id
       supabase.from('council_advisors').select('*, advisors(*)').eq('council_id', council.id),
       supabase.from('council_cofounders').select('*, cofounders(*)').eq('council_id', council.id),
     ])
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     advisors = (councilAdvisors ?? []).map((ca: any) => ({ ...ca.advisors, level: ca.level })) as Advisor[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cofounders = (councilCofounders ?? []).map((cc: any) => ({ ...cc.cofounders, role: cc.role })) as Cofounder[]
   }
 
@@ -56,6 +69,7 @@ export default async function ConsultoriaPage({ params }: { params: Promise<{ id
       cofounders={cofounders}
       documents={(documents ?? []) as DocumentRef[]}
       consultations={(consultations ?? []) as Consultation[]}
+      sessionCompleted={sessionCompleted}
     />
   )
 }

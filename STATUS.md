@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-18
-Etapa actual: SMOKE TEST 5.4 COMPLETO — Flujo core Sesión de Consejo verificado E2E. 4 bugs documentados en /context/smoke_5_4_bugs.md. Flujo core funciona: Login → Iniciar Sesión → Nexo Dual → Resolver → Export PDF. BUG-A: "Application error" overlay dev mode en 4 páginas (no bloquea funcionalidad). BUG-B: PPTX download requiere verificación manual. Build limpio.
+Etapa actual: STORY 5.5 COMPLETO — Consultoría Activa implementada. API routes: /api/consultation/start, /api/consultation/message, /api/consultation/[id]. Página /project/[id]/consultoria con gate (requiere sesión completada). Tile en ProjectView con 3 estados: bloqueado / disponible / N consultas. ConsultoriaView actualizado para usar nuevos endpoints.
 
 ---
 

@@ -15,6 +15,7 @@ const OPERATION_COSTS: Record<string, number> = {
   generate_persona:     0.05,
   seed_chat:            0.03,
   brief_generation:     0.08,
+  consultation_message: 0.08,
 }
 
 export async function trackUsage(
