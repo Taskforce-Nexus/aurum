@@ -18,14 +18,17 @@ export default async function SesionConsejoPage({ params }: { params: Promise<{ 
 
   if (!project) notFound()
 
-  // Fetch council + advisors + cofounders + documents + existing session
   const [
     { data: council },
     { data: documents },
     { data: session },
   ] = await Promise.all([
     supabase.from('councils').select('*').eq('project_id', id).maybeSingle(),
-    supabase.from('project_documents').select('*, document_specs(*)').eq('project_id', id).order('generated_at', { ascending: true, nullsFirst: true }),
+    supabase
+      .from('project_documents')
+      .select('id, name, key_question, composition, deliverable_index, status')
+      .eq('project_id', id)
+      .order('deliverable_index', { ascending: true }),
     supabase.from('sessions').select('*').eq('project_id', id).eq('status', 'activa').maybeSingle(),
   ])
 
@@ -41,7 +44,9 @@ export default async function SesionConsejoPage({ params }: { params: Promise<{ 
       supabase.from('council_advisors').select('*, advisors(*)').eq('council_id', council.id),
       supabase.from('council_cofounders').select('*, cofounders(*)').eq('council_id', council.id),
     ])
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     advisors = (councilAdvisors ?? []).map((ca: any) => ({ ...ca.advisors, level: ca.level })) as Advisor[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cofounders = (councilCofounders ?? []).map((cc: any) => ({ ...cc.cofounders, role: cc.role })) as Cofounder[]
   }
 
@@ -59,7 +64,7 @@ export default async function SesionConsejoPage({ params }: { params: Promise<{ 
       project={project as Project}
       advisors={advisors}
       cofounders={cofounders}
-      documents={(documents ?? []) as unknown[]}
+      documents={documents ?? []}
       initialSession={session ?? null}
       initialPhases={phases}
     />

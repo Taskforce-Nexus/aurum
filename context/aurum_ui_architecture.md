@@ -40,6 +40,16 @@ Solo se activa cuando no existe spec en la biblioteca para el propósito declara
 Panel de conversación con el consejo IA activo.
 N fases según documentos definidos. Cada fase produce un documento aprobado.
 Mecanismo Nexo Dual operando en cada fase.
+Layout de 3 columnas:
+
+- Sidebar izquierdo (260px): lista de fases/entregables con estado (completada: check verde, en_progreso: dot pulsante azul + pregunta clave, pendiente: gris), progreso general "Entregable X de N".
+- Área central (fill): header de fase (nombre + pregunta clave + sección actual), chat con burbujas de Nexo (izquierda) y usuario (derecha, fondo gold sutil), skeleton de deliberación, cards Nexo Dual (acuerdo: card verde unificada; desacuerdo: dos cards lado a lado verde/rojo), botones de resolución (normal) o auto-resolve (autopiloto/levantar_mano), textarea de respuesta con botón "Enviar →".
+- Sidebar derecho (280px): consejeros activos con avatar + nombre + especialidad (gold si relevante al entregable), cofounders constructivo/crítico, secciones del entregable con estado (completada/en_progreso/pendiente), preview vivo de secciones generadas (expandibles).
+
+Toggle de modo en header: Normal / Autopiloto / Levantar Mano.
+Estados: init → starting → answering → submitting → debate_ready → resolving → phase_complete → session_complete.
+Ruta: `/project/[id]/sesion-consejo`
+Componente: `src/components/sesion-consejo/SesionConsejoView.tsx`
 
 ## Export Center
 Interfaz de presentación interactiva de los resultados de la Sesión de Consejo.

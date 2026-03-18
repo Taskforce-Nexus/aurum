@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-17
-Etapa actual: STORY 4.2 COMPLETO — Sesión de Consejo con entregables dinámicos. 4 endpoints: start, question, resolve, GET. Framework Engine instalado. callClaude 3 tiers. Botones Cambiar conectados a Supabase.
+Etapa actual: STORY 4.3 COMPLETO — UI de Sesión de Consejo reescrita para nuevos endpoints. Layout 3 columnas, Nexo Dual, modos Normal/Autopiloto/Levantar Mano, transiciones de fase.
 
 ---
 
@@ -63,6 +63,18 @@ Etapa actual: STORY 4.2 COMPLETO — Sesión de Consejo con entregables dinámic
 - CofoundersPropuesta — botón Cambiar conectado a CofounderSwapDrawer ✓
 - ConsejoPrincipalPropuesta — botón Cambiar por card conectado a AdvisorSwapDrawer ✓
 - "Ver perfil" ya funcional en ConsejoPrincipalPropuesta, EspecialistasPropuesta, ICPsPropuesta ✓
+- Story 4.3 — UI de Sesión de Consejo ✓
+  - SesionConsejoView.tsx reescrito para endpoints start/question/resolve/GET
+  - Layout 3 columnas: sidebar fases (260px) + área central + sidebar consejeros (280px)
+  - Flujo: init → starting → answering → submitting → debate_ready → resolving → phase_complete → session_complete
+  - Modo Normal: cards dual + botones de resolución manual
+  - Modo Autopiloto: auto-resolve constructiva/acuerdo después de 1.8s
+  - Modo Levantar Mano: auto-resolve responder_yo con input del usuario
+  - Celebración de fase con animación bounce + 2.5s pausa → siguiente fase
+  - Preview vivo de secciones (section_draft por pregunta resuelta)
+  - page.tsx: query documents actualizada (sin document_specs, con composition/key_question/deliverable_index)
+  - TypeScript: clean
+
 - Story 4.2 — Sesión de Consejo endpoints ✓
   - POST /api/session/start — crea session + session_phases desde project_documents pendientes
   - POST /api/session/question — Nexo Dual por pregunta (constructive/critical + NexoDualResponse)
