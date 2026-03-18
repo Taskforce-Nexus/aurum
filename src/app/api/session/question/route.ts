@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { SESSION_QUESTION_PROMPT } from '@/lib/prompts'
+import { checkBalance, trackUsage } from '@/lib/usage'
 
 interface QuestionItem {
   section_title: string
@@ -32,6 +33,16 @@ export async function POST(req: NextRequest) {
   }
 
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+
+  const { canProceed } = await checkBalance(user.id)
+  if (!canProceed) {
+    return NextResponse.json({
+      error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
+      balance: 0,
+    }, { status: 402 })
+  }
 
   // 1. Load the phase with its document
   const { data: phase, error: phaseErr } = await supabase
@@ -145,6 +156,8 @@ export async function POST(req: NextRequest) {
     const err = e as Error
     return NextResponse.json({ error: `Claude error: ${err.message}` }, { status: 502 })
   }
+
+  try { await trackUsage(user.id, projectId, 'session_question') } catch (e) { console.error('Usage tracking failed:', e) }
 
   // 9. Save NexoDualResponse
   const { data: savedDual, error: dualErr } = await supabase

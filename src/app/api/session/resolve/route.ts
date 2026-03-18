@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
+import { checkBalance, trackUsage } from '@/lib/usage'
 
 const GENERATE_DOCUMENT_PROMPT = `Eres Nexo, consultor estratégico de Reason.
 
@@ -52,6 +53,16 @@ export async function POST(req: NextRequest) {
   }
 
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+
+  const { canProceed } = await checkBalance(user.id)
+  if (!canProceed) {
+    return NextResponse.json({
+      error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
+      balance: 0,
+    }, { status: 402 })
+  }
 
   // 1. Update the NexoDualResponse with the resolution
   const updatePayload: Record<string, string> = { resolution }
@@ -162,6 +173,7 @@ export async function POST(req: NextRequest) {
     })
     const jsonMatch = raw.match(/\{[\s\S]*\}/)
     if (jsonMatch) contentJson = JSON.parse(jsonMatch[0])
+    try { await trackUsage(user.id, session.project_id, 'session_resolve') } catch (e) { console.error('Usage tracking failed:', e) }
   } catch { /* non-blocking — save empty content */ }
 
   // Save content to ProjectDocument

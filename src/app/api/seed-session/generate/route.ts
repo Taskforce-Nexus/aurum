@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
+import { checkBalance, trackUsage } from '@/lib/usage'
 
 const SPECIALIST_SYSTEM = `Eres Nexo, el consejero IA de Reason. Generas propuestas de especialistas de industria relevantes para un proyecto específico.
 
@@ -74,6 +75,14 @@ export async function POST(req: NextRequest) {
 
     if (!project) return NextResponse.json({ error: 'Proyecto no encontrado' }, { status: 404 })
 
+    const { canProceed } = await checkBalance(user.id)
+    if (!canProceed) {
+      return NextResponse.json({
+        error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
+        balance: 0,
+      }, { status: 402 })
+    }
+
     const brief = founderBrief ?? project.founder_brief ?? 'No disponible'
     const existing = existingItems ?? []
     const batchCount = Math.min(Math.max(1, count), 5)
@@ -100,6 +109,9 @@ export async function POST(req: NextRequest) {
       max_tokens: maxTokens,
       tier: 'fast',
     })
+
+    const operation = type === 'specialist' ? 'generate_specialist' : 'generate_persona'
+    try { await trackUsage(user.id, projectId, operation) } catch (e) { console.error('Usage tracking failed:', e) }
 
     // Strip markdown code fences if present
     const clean = raw.trim().replace(/^```json\s*/i, '').replace(/\s*```$/, '').trim()

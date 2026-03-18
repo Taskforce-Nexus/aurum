@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { callClaude } from '@/lib/claude'
 import { NEXO_SEED_SYSTEM, NEXO_GAME_ANALYSIS_SYSTEM } from '@/lib/prompts'
+import { checkBalance, trackUsage } from '@/lib/usage'
 import type { Message } from '@/lib/types'
 
 const GITHUB_API = 'https://api.github.com'
@@ -114,6 +115,14 @@ export async function POST(req: NextRequest) {
       .eq('user_id', user.id)
       .single()
     if (!project) return NextResponse.json({ error: 'Proyecto no encontrado' }, { status: 404 })
+
+    const { canProceed } = await checkBalance(user.id)
+    if (!canProceed) {
+      return NextResponse.json({
+        error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
+        balance: 0,
+      }, { status: 402 })
+    }
 
     const systemPrompt = NEXO_SEED_SYSTEM
 
@@ -245,6 +254,7 @@ export async function POST(req: NextRequest) {
       max_tokens: voiceMode ? 512 : 2048,
       tier: 'fast',
     })
+    try { await trackUsage(user.id, projectId, 'seed_chat') } catch (e) { console.error('Usage tracking failed:', e) }
 
     // Parse [CONSEJO:...] signal from response
     const councilMatch = rawResponse.match(/\[CONSEJO:([^\]]+)\]/)
@@ -330,6 +340,7 @@ export async function POST(req: NextRequest) {
           console.error('[game-analysis]', e)
         }
         await adminNS.from('projects').update({ founder_brief: founderBrief, game_analysis: gameAnalysis }).eq('id', projectId)
+        try { await trackUsage(user.id, projectId, 'brief_generation') } catch (e) { console.error('Usage tracking failed:', e) }
       } catch (err) {
         console.error('[founder-brief]', err)
       }

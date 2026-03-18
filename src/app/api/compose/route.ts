@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { COMPOSE_DELIVERABLES_PROMPT } from '@/lib/prompts'
+import { checkBalance, trackUsage } from '@/lib/usage'
 
 export async function POST(req: NextRequest) {
   const { project_id } = await req.json()
@@ -11,6 +12,16 @@ export async function POST(req: NextRequest) {
   }
 
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+
+  const { canProceed } = await checkBalance(user.id)
+  if (!canProceed) {
+    return NextResponse.json({
+      error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
+      balance: 0,
+    }, { status: 402 })
+  }
 
   // 1. Leer proyecto
   const { data: project, error: projectErr } = await supabase
@@ -42,6 +53,8 @@ export async function POST(req: NextRequest) {
     const err = e as Error
     return NextResponse.json({ error: `Claude error: ${err.message}` }, { status: 502 })
   }
+
+  try { await trackUsage(user.id, project_id, 'compose') } catch (e) { console.error('Usage tracking failed:', e) }
 
   // 3. Parsear JSON
   let composition: { diagnosis: unknown; deliverables: Array<Record<string, unknown>> }
