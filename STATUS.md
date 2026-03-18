@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-18
-Etapa actual: STORY 5.5 COMPLETO — Consultoría Activa implementada. API routes: /api/consultation/start, /api/consultation/message, /api/consultation/[id]. Página /project/[id]/consultoria con gate (requiere sesión completada). Tile en ProjectView con 3 estados: bloqueado / disponible / N consultas. ConsultoriaView actualizado para usar nuevos endpoints.
+Etapa actual: STORY 5.6 COMPLETO — Deploy Railway verificado. Build limpio (0 errores). App respondiendo en producción: <https://reason-production-e205.up.railway.app>. Variables de entorno Stripe configuradas en Railway. PENDIENTE: STRIPE_PRICE_* (Juan crea productos en Stripe Dashboard y pega los price IDs).
 
 ---
 
