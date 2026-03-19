@@ -41,7 +41,7 @@ export default async function DashboardLayout({
         {/* Right — Notifications + Balance + User */}
         <div className="flex items-center gap-4">
           {/* Notifications bell */}
-          <button type="button" className="relative text-[#8892A4] hover:text-white transition-colors">
+          <Link href="/settings/notificaciones" className="relative text-[#8892A4] hover:text-white transition-colors">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
               <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
@@ -51,7 +51,7 @@ export default async function DashboardLayout({
                 {unread! > 9 ? '9+' : unread}
               </span>
             )}
-          </button>
+          </Link>
 
           {/* Token balance — clickable, red if low */}
           <Link

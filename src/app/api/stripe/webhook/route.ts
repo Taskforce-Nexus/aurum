@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { createNotification } from '@/lib/notifications'
 
 export async function POST(req: Request) {
   const body = await req.text()
@@ -17,6 +18,9 @@ export async function POST(req: Request) {
   }
 
   const admin = createAdminClient()
+
+  console.log('[STRIPE WEBHOOK] Event:', event.type)
+  console.log('[STRIPE WEBHOOK] Data:', JSON.stringify(event.data.object).slice(0, 200))
 
   switch (event.type) {
     case 'checkout.session.completed': {
@@ -35,6 +39,7 @@ export async function POST(req: Request) {
         const periodEnd = sub.current_period_end
           ? new Date(sub.current_period_end * 1000).toISOString()
           : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+        const priceMonthly = (sub.items?.data[0]?.price?.unit_amount ?? 0) / 100
 
         await admin.from('subscriptions').upsert({
           user_id: userId,
@@ -44,13 +49,21 @@ export async function POST(req: Request) {
           stripe_customer_id: session.customer as string,
           current_period_start: periodStart,
           current_period_end: periodEnd,
-          price_monthly: (sub.items?.data[0]?.price?.unit_amount ?? 0) / 100,
+          price_monthly: priceMonthly,
         }, { onConflict: 'user_id' })
 
         // Save stripe_customer_id to profiles for future checkout sessions
         await admin.from('profiles')
           .update({ stripe_customer_id: session.customer as string })
           .eq('id', userId)
+
+        try {
+          await createNotification({
+            userId,
+            type: 'pago_procesado',
+            title: `Pago de $${priceMonthly.toFixed(2)} procesado correctamente`,
+          })
+        } catch (e) { console.error('[notify] subscription paid:', e) }
       }
 
       if (session.mode === 'payment') {
@@ -74,6 +87,14 @@ export async function POST(req: Request) {
           amount_usd: amount,
           status: 'pagada',
         })
+
+        try {
+          await createNotification({
+            userId,
+            type: 'pago_procesado',
+            title: `Recarga de $${amount.toFixed(2)} acreditada a tu saldo`,
+          })
+        } catch (e) { console.error('[notify] token topup:', e) }
       }
       break
     }
@@ -118,13 +139,22 @@ export async function POST(req: Request) {
         .single()
 
       if (subscription) {
+        const amountPaid = (inv.amount_paid || 0) / 100
         await admin.from('invoices').insert({
           user_id: subscription.user_id,
           concept: `Suscripción Reason — ${inv.lines?.data[0]?.description || 'mensual'}`,
-          amount_usd: (inv.amount_paid || 0) / 100,
+          amount_usd: amountPaid,
           status: 'pagada',
           pdf_url: inv.invoice_pdf,
         })
+
+        try {
+          await createNotification({
+            userId: subscription.user_id,
+            type: 'pago_procesado',
+            title: `Pago de $${amountPaid.toFixed(2)} procesado correctamente`,
+          })
+        } catch (e) { console.error('[notify] invoice.paid:', e) }
       }
       break
     }

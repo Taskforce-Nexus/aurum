@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { createNotification } from '@/lib/notifications'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -48,6 +49,17 @@ export async function trackUsage(
       .from('token_balances')
       .update({ balance_usd: newBalance })
       .eq('user_id', userId)
+  }
+
+  // Notify when balance drops below $5
+  if (newBalance < 5 && current >= 5) {
+    try {
+      await createNotification({
+        userId,
+        type: 'saldo_bajo',
+        title: 'Tu saldo es menor a $5 — recarga para continuar usando Reason',
+      })
+    } catch (e) { console.error('[notify] saldo_bajo:', e) }
   }
 
   return { cost, remaining: newBalance }

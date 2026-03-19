@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -14,7 +14,7 @@ function AuthConfirmInner() {
   useEffect(() => {
     async function confirm() {
       const tokenHash = searchParams.get('token_hash')
-      const type = searchParams.get('type') as 'signup' | 'magiclink' | null
+      const type = searchParams.get('type') as 'signup' | 'magiclink' | 'recovery' | null
 
       if (!tokenHash || !type) {
         setStatus('error')
@@ -31,6 +31,9 @@ function AuthConfirmInner() {
             ? 'El enlace expiró. Solicita uno nuevo.'
             : 'No pudimos verificar tu cuenta. Intenta de nuevo.'
         )
+      } else if (type === 'recovery') {
+        // User is now authenticated — redirect to password reset page
+        router.push('/auth/reset-password')
       } else {
         setStatus('success')
         setTimeout(() => router.push('/'), 1500)

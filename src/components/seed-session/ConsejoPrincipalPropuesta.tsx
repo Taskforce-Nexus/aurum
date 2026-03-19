@@ -44,6 +44,12 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
   const [swapLoading, setSwapLoading] = useState(false)
   const [swapOffset, setSwapOffset] = useState(0)
 
+  // Custom advisor state
+  const [showCustomInput, setShowCustomInput] = useState(false)
+  const [customDescription, setCustomDescription] = useState('')
+  const [generatingCustom, setGeneratingCustom] = useState(false)
+  const [customError, setCustomError] = useState('')
+
   // Sync localAdvisors when prop updates (e.g., after page refresh loads from DB)
   useEffect(() => {
     if (advisors.length > 0) setLocalAdvisors(advisors)
@@ -115,6 +121,35 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
     setSwapOptions([])
   }
 
+  async function handleGenerateCustom() {
+    if (!customDescription.trim() || customDescription.trim().length < 10) {
+      setCustomError('Describe el tipo de experto que necesitas (mínimo 10 caracteres).')
+      return
+    }
+    setCustomError('')
+    setGeneratingCustom(true)
+    try {
+      const res = await fetch('/api/advisors/generate-custom', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project_id: project.id, description: customDescription.trim() }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setCustomError(data.error ?? 'Error generando el consejero. Intenta de nuevo.')
+        return
+      }
+      const newAdvisor: Advisor = { ...data.advisor, level: 'lidera' }
+      setLocalAdvisors(prev => [...prev, newAdvisor])
+      setCustomDescription('')
+      setShowCustomInput(false)
+    } catch {
+      setCustomError('Error de red. Intenta de nuevo.')
+    } finally {
+      setGeneratingCustom(false)
+    }
+  }
+
   async function handleConfirm() {
     setLoading(true)
     try {
@@ -169,7 +204,14 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
                         {/* Card content */}
                         <div className="p-4">
                           <div className="flex items-start justify-between mb-2">
-                            <p className="font-semibold text-sm text-white leading-tight">{advisor.name}</p>
+                            <div className="flex-1 min-w-0">
+                              <p className="font-semibold text-sm text-white leading-tight">{advisor.name}</p>
+                              {!advisor.is_native && (
+                                <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30 font-medium inline-block mt-0.5">
+                                  Personalizado
+                                </span>
+                              )}
+                            </div>
                             <span className={`text-[10px] px-1.5 py-0.5 rounded border font-medium shrink-0 ml-1 ${LEVEL_COLORS[advisor.level]}`}>
                               {LEVEL_LABELS[advisor.level]}
                             </span>
@@ -269,6 +311,54 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
             </div>
           )}
         </div>
+      </div>
+
+      {/* Custom advisor */}
+      <div className="px-8 pb-4 shrink-0">
+        {!showCustomInput ? (
+          <button
+            type="button"
+            onClick={() => setShowCustomInput(true)}
+            className="w-full py-2.5 border border-dashed border-[#1E2A4A] hover:border-[#B8860B]/40 rounded-xl text-[12px] text-[#4A5568] hover:text-[#B8860B] transition-colors"
+          >
+            + ¿Necesitas un perfil específico? Genera un consejero personalizado
+          </button>
+        ) : (
+          <div className="bg-[#0D1535] border border-[#B8860B]/30 rounded-xl p-4 space-y-3">
+            <p className="text-[12px] text-[#B8860B] font-medium">Consejero personalizado</p>
+            <p className="text-[11px] text-[#4A5568]">
+              Describe qué tipo de experto necesitas y Nexo lo generará en ~20 segundos.
+            </p>
+            <textarea
+              value={customDescription}
+              onChange={e => setCustomDescription(e.target.value)}
+              placeholder="Ej: Necesito un experto en regulación de criptomonedas en Colombia con experiencia en SFC..."
+              rows={3}
+              maxLength={500}
+              className="w-full bg-[#0A1128] border border-[#1E2A4A] rounded-lg px-3 py-2 text-[13px] text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B]/50 resize-none"
+            />
+            {customError && (
+              <p className="text-[12px] text-red-400">{customError}</p>
+            )}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleGenerateCustom}
+                disabled={generatingCustom}
+                className="flex-1 py-2 bg-[#B8860B] hover:bg-[#A07710] disabled:opacity-40 text-black font-semibold text-[12px] rounded-lg transition-colors"
+              >
+                {generatingCustom ? 'Generando (~20s)...' : 'Generar consejero'}
+              </button>
+              <button
+                type="button"
+                onClick={() => { setShowCustomInput(false); setCustomError(''); setCustomDescription('') }}
+                className="px-3 py-2 border border-[#1E2A4A] text-[#8892A4] hover:text-white text-[12px] rounded-lg transition-colors"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* CTA */}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from '@/components/ui/Toast'
 
@@ -39,6 +40,9 @@ export default function SettingsAccount({ email, profile: initialProfile }: Prop
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const router = useRouter()
+  const supabase = createClient()
 
   async function handleChangePassword() {
     const supabase = createClient()
@@ -52,9 +56,24 @@ export default function SettingsAccount({ email, profile: initialProfile }: Prop
     }
   }
 
-  function handleDeleteAccount() {
-    setShowDeleteConfirm(false)
-    toast('Para eliminar tu cuenta contacta a soporte@reason.dev')
+  async function handleDeleteAccount() {
+    setDeleting(true)
+    try {
+      const res = await fetch('/api/auth/delete-account', { method: 'DELETE' })
+      if (res.ok) {
+        await supabase.auth.signOut()
+        router.push('/')
+      } else {
+        const data = await res.json()
+        toast(data.error ?? 'Error al eliminar la cuenta. Intenta de nuevo.')
+        setShowDeleteConfirm(false)
+      }
+    } catch {
+      toast('Error de red. Intenta de nuevo.')
+      setShowDeleteConfirm(false)
+    } finally {
+      setDeleting(false)
+    }
   }
 
   const initials = profile.name
@@ -261,9 +280,10 @@ export default function SettingsAccount({ email, profile: initialProfile }: Prop
               <button
                 type="button"
                 onClick={handleDeleteAccount}
-                className="flex-1 py-2.5 bg-[#E53E3E] hover:bg-red-600 text-white text-[13px] font-semibold rounded-lg transition-colors"
+                disabled={deleting}
+                className="flex-1 py-2.5 bg-[#E53E3E] hover:bg-red-600 disabled:opacity-40 text-white text-[13px] font-semibold rounded-lg transition-colors"
               >
-                Sí, eliminar
+                {deleting ? 'Eliminando...' : 'Sí, eliminar'}
               </button>
             </div>
           </div>

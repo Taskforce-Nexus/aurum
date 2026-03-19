@@ -1,16 +1,28 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createClient } from '@/lib/supabase/client'
 
-interface NotificationSetting {
+interface Notification {
   id: string
-  label: string
-  description: string
-  defaultValue: boolean
-  category: string
+  type: string
+  title: string
+  is_read: boolean
+  created_at: string
+  project_id: string | null
 }
 
-const NOTIFICATIONS: NotificationSetting[] = [
+const TYPE_ICON: Record<string, string> = {
+  documento_generado: '📄',
+  sesion_completada: '✅',
+  saldo_bajo: '⚠️',
+  pago_procesado: '💳',
+  factura_disponible: '🧾',
+  consejero_disponible: '🤝',
+  miembro_unido: '👤',
+}
+
+const PREF_SETTINGS = [
   {
     id: 'session_complete',
     label: 'Sesión de Consejo completada',
@@ -56,10 +68,40 @@ const NOTIFICATIONS: NotificationSetting[] = [
 ]
 
 export default function NotificacionesPage() {
+  const supabase = createClient()
+  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [loadingNotifs, setLoadingNotifs] = useState(true)
+
   const [settings, setSettings] = useState<Record<string, boolean>>(
-    Object.fromEntries(NOTIFICATIONS.map(n => [n.id, n.defaultValue]))
+    Object.fromEntries(PREF_SETTINGS.map(n => [n.id, n.defaultValue]))
   )
   const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    async function loadAndMarkRead() {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+
+      // Load recent notifications
+      const { data } = await supabase
+        .from('notifications')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(30)
+
+      setNotifications(data ?? [])
+      setLoadingNotifs(false)
+
+      // Mark all as read
+      await supabase
+        .from('notifications')
+        .update({ is_read: true })
+        .eq('user_id', user.id)
+        .eq('is_read', false)
+    }
+    loadAndMarkRead()
+  }, [])
 
   function toggle(id: string) {
     setSettings(prev => ({ ...prev, [id]: !prev[id] }))
@@ -71,20 +113,60 @@ export default function NotificacionesPage() {
     setTimeout(() => setSaved(false), 2000)
   }
 
-  const categories = Array.from(new Set(NOTIFICATIONS.map(n => n.category)))
+  const categories = Array.from(new Set(PREF_SETTINGS.map(n => n.category)))
+
+  function formatDate(iso: string) {
+    const d = new Date(iso)
+    return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+  }
 
   return (
     <div className="space-y-8">
       <div className="space-y-1">
         <p className="text-[11px] text-[#B8860B] uppercase tracking-[2px] font-semibold">Notificaciones</p>
-        <p className="text-[13px] text-[#4A5568]">Controla qué notificaciones recibes y cuándo.</p>
+        <p className="text-[13px] text-[#4A5568]">Historial de actividad y preferencias de notificación.</p>
       </div>
 
+      {/* ── Recent notifications ── */}
+      <section className="space-y-3">
+        <p className="text-[10px] text-[#6E8EAD] uppercase tracking-wider font-semibold">Historial reciente</p>
+        <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-lg overflow-hidden">
+          {loadingNotifs ? (
+            <div className="px-5 py-8 text-center text-[13px] text-[#4A5568]">Cargando...</div>
+          ) : notifications.length === 0 ? (
+            <div className="px-5 py-8 text-center text-[13px] text-[#4A5568]">
+              Sin notificaciones aún — activa tu proyecto para comenzar.
+            </div>
+          ) : (
+            notifications.map((n, i) => (
+              <div
+                key={n.id}
+                className={`flex items-start gap-3 px-5 py-4 ${
+                  i < notifications.length - 1 ? 'border-b border-[#1E2A4A]/50' : ''
+                } ${!n.is_read ? 'bg-[#B8860B]/5' : ''}`}
+              >
+                <span className="text-[18px] shrink-0 mt-0.5">{TYPE_ICON[n.type] ?? '🔔'}</span>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-[13px] ${!n.is_read ? 'text-white font-medium' : 'text-[#8892A4]'}`}>
+                    {n.title}
+                  </p>
+                  <p className="text-[11px] text-[#4A5568] mt-0.5">{formatDate(n.created_at)}</p>
+                </div>
+                {!n.is_read && (
+                  <span className="w-2 h-2 rounded-full bg-[#B8860B] shrink-0 mt-1.5" />
+                )}
+              </div>
+            ))
+          )}
+        </div>
+      </section>
+
+      {/* ── Preferences ── */}
       {categories.map(category => (
         <section key={category} className="space-y-3">
           <p className="text-[10px] text-[#6E8EAD] uppercase tracking-wider font-semibold">{category}</p>
           <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-lg overflow-hidden">
-            {NOTIFICATIONS.filter(n => n.category === category).map((notif, i, arr) => (
+            {PREF_SETTINGS.filter(n => n.category === category).map((notif, i, arr) => (
               <div
                 key={notif.id}
                 className={`flex items-center justify-between px-5 py-4 ${
@@ -126,7 +208,7 @@ export default function NotificacionesPage() {
         <button
           type="button"
           onClick={() => {
-            setSettings(Object.fromEntries(NOTIFICATIONS.map(n => [n.id, false])))
+            setSettings(Object.fromEntries(PREF_SETTINGS.map(n => [n.id, false])))
             setSaved(false)
           }}
           className="text-[13px] text-[#4A5568] hover:text-[#E53E3E] transition-colors"

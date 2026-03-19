@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
             )}
             <button type="submit" disabled={loading}
               className="w-full h-12 bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-outfit">
-              {loading ? 'Enviando...' : 'Tomar enviar'}
+              {loading ? 'Enviando...' : 'Enviar enlace'}
             </button>
           </form>
 

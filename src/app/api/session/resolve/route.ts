@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { checkBalance, trackUsage } from '@/lib/usage'
 import { GENERATE_DOCUMENT_PROMPT } from '@/lib/prompts'
+import { createNotification } from '@/lib/notifications'
 
 export async function POST(req: NextRequest) {
   const { session_id, phase_id, dual_response_id, resolution, founder_response } = await req.json()
@@ -153,6 +154,16 @@ export async function POST(req: NextRequest) {
     })
     .eq('id', phase.document_id)
 
+  // Notify: documento generado
+  try {
+    await createNotification({
+      userId: user.id,
+      projectId: session.project_id,
+      type: 'documento_generado',
+      title: `Tu "${doc?.name ?? 'documento'}" está listo`,
+    })
+  } catch (e) { console.error('[notify] documento_generado:', e) }
+
   // 5. Advance session to next phase
   const nextDocIndex = session.current_document_index + 1
   const sessionComplete = nextDocIndex >= session.total_documents
@@ -167,6 +178,16 @@ export async function POST(req: NextRequest) {
       .from('projects')
       .update({ current_phase: 'completado' })
       .eq('id', session.project_id)
+
+    // Notify: sesión completada
+    try {
+      await createNotification({
+        userId: user.id,
+        projectId: session.project_id,
+        type: 'sesion_completada',
+        title: `Sesión de Consejo completada — ${session.total_documents} documentos generados`,
+      })
+    } catch (e) { console.error('[notify] sesion_completada:', e) }
   } else {
     // Mark next phase as en_progreso
     const { data: nextPhase } = await supabase
