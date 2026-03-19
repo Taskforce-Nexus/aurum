@@ -47,24 +47,30 @@ test.describe('Full Flow E2E post-7.8', () => {
     await page.locator('input[type="email"]').fill(TEST_EMAIL);
     await page.locator('input[type="password"]').fill(TEST_PASSWORD);
     await page.locator('button[type="submit"]').click();
-    await page.waitForTimeout(3000);
+    // Wait for redirect to dashboard (more reliable than fixed timeout in parallel)
+    await page.waitForURL('**/dashboard', { timeout: 15000 }).catch(() => {});
 
     // Navigate to seed session of most recent project
     const projectLink = page.locator('a[href*="/project/"]').first();
     if (await projectLink.isVisible({ timeout: 5000 }).catch(() => false)) {
       await projectLink.click();
-      await page.waitForTimeout(2000);
+      // Wait for project page to load
+      await page.waitForURL('**/project/**', { timeout: 10000 }).catch(() => {});
+      await page.waitForTimeout(1000);
     }
 
-    // Find semilla/seed link
-    const semillaLink = page.getByText(/semilla|comenzar|iniciar/i).first();
-    if (await semillaLink.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await semillaLink.click();
-      await page.waitForTimeout(3000);
+    // Navigate directly to semilla if we're on a project page
+    const currentUrl = page.url();
+    if (currentUrl.includes('/project/')) {
+      const projectId = currentUrl.match(/\/project\/([^/]+)/)?.[1];
+      if (projectId) {
+        await page.goto(`${BASE}/project/${projectId}/semilla`);
+        await page.waitForTimeout(3000);
+      }
     }
 
-    // Check if chat input exists
-    const chatInput = page.locator('textarea, input[type="text"]').last();
+    // Check if chat input exists (input has no explicit type="text", just type defaults)
+    const chatInput = page.locator('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]), textarea').last();
     await expect(chatInput).toBeVisible({ timeout: 10000 });
   });
 
