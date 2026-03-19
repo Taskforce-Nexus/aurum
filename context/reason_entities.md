@@ -615,3 +615,66 @@ Por nivel y especialidad según ConsejoPrincipalPropuesta:
 4. Business Plan
 
 Specs adicionales se crean vía Sesión de Clarificación.
+
+---
+
+## Support System (Story 7.2)
+
+### SupportTicket
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| id | uuid PK | |
+| user_id | uuid FK → auth.users | propietario del ticket |
+| subject | text | asunto del ticket |
+| description | text | descripción inicial |
+| status | text | abierto / escalado / resuelto / cerrado |
+| priority | text | urgente / normal / bajo |
+| aria_resolved | boolean | true si Aria pudo resolver sin escalar |
+| assigned_to | uuid FK → auth.users | admin asignado (nullable) |
+| project_id | uuid FK → projects | proyecto relacionado (nullable) |
+| created_at | timestamptz | |
+| updated_at | timestamptz | |
+
+**Aparece en:** /soporte (lista), /soporte/[id] (chat), /admin/tickets (tabla + detalle)
+
+### TicketMessage
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| id | uuid PK | |
+| ticket_id | uuid FK → support_tickets | |
+| sender_id | uuid FK → auth.users | |
+| sender_role | text | user / aria / admin |
+| content | text | contenido del mensaje |
+| created_at | timestamptz | |
+
+**Aparece en:** /soporte/[id] (chat), /admin/tickets/[id] (chat admin)
+
+### FeatureRequest
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| id | uuid PK | |
+| user_id | uuid FK → auth.users | |
+| title | text | título de la sugerencia |
+| description | text | nullable |
+| status | text | recibida / evaluada / planeada / implementada / descartada |
+| votes | integer | contador total de votos |
+| admin_notes | text | notas internas del admin (nullable) |
+| created_at | timestamptz | |
+| updated_at | timestamptz | |
+
+**Aparece en:** /sugerencias (lista + voting), /admin/features (gestión)
+
+### FeatureVote
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| id | uuid PK | |
+| feature_id | uuid FK → feature_requests | |
+| user_id | uuid FK → auth.users | |
+| created_at | timestamptz | |
+| UNIQUE | (feature_id, user_id) | un voto por usuario por sugerencia |
+
+**Aparece en:** /sugerencias (toggle voto), /api/features/[id]/vote
