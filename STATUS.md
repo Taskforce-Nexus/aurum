@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-18
-Etapa actual: STORY 6.0 COMPLETO. 9 gaps críticos resueltos: system prompts profundos para advisors/cofounders (GENERATE_ADVISOR_PROMPT ~4,000 palabras), endpoints generate-prompt, script batch resumable, editor UI de prompts en AdvisorProfileDrawer, integración de system_prompts en session/question, auto-init council_cofounders, persistencia Supabase en ICPs y Especialistas, NexoCustomPromptEditor en project page, GENERATE_DOCUMENT_PROMPT mejorado en session/resolve. Pendiente SQL: ALTER TABLE projects ADD COLUMN nexo_custom_prompt text; ALTER TABLE cofounders ADD COLUMN system_prompt text. Pendiente: BUG-A (Restricted Key), BUG-B (STRIPE_PRICE_*).
+Etapa actual: STORY 6.1 COMPLETO. Batch de system prompts con Haiku + few-shot: 5 prompts de referencia 10/10 extraídos y guardados en scripts/few-shot-examples/. Scripts actualizados: generate-advisor-prompts.ts (Haiku + few-shot mapping por categoría) + generate-cofounder-prompts.ts (nuevo, mismo patrón). 5 prompts de prueba generados y validados. Los 5 ejemplos de referencia actualizados en DB. Pendiente: correr batch completo (~1,368 advisors + ~122 cofounders sin prompt) con npx tsx scripts/generate-advisor-prompts.ts + npx tsx scripts/generate-cofounder-prompts.ts. Pendiente SQL: ALTER TABLE projects ADD COLUMN nexo_custom_prompt text (cofounders.system_prompt ya existe). Pendiente: BUG-A (Restricted Key), BUG-B (STRIPE_PRICE_*).
 
 ---
 
