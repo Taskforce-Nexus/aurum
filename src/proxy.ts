@@ -34,7 +34,10 @@ export async function proxy(request: NextRequest) {
     request.nextUrl.pathname.startsWith('/forgot-password-sent') ||
     request.nextUrl.pathname.startsWith('/auth')
 
-  const isPublicPage = request.nextUrl.pathname === '/'
+  const isPublicPage = request.nextUrl.pathname === '/' ||
+    request.nextUrl.pathname === '/pricing' ||
+    request.nextUrl.pathname === '/privacy' ||
+    request.nextUrl.pathname === '/terms'
 
   if (!user && !isAuthPage && !isPublicPage) {
     const url = request.nextUrl.clone()
@@ -52,5 +55,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|branding|auth).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt|api|branding|auth).*)'],
 }
