@@ -84,10 +84,6 @@ export default function SettingsPlans({ subscription, priceIds }: Props) {
 
   async function handleSubscribe(planId: string) {
     const priceId = priceIds[planId as keyof PriceIds]
-    if (planId === 'enterprise') {
-      toast('Escríbenos a hola@reason.dev para hablar sobre Enterprise.')
-      return
-    }
     setLoading(planId)
     try {
       const body = priceId
@@ -212,9 +208,10 @@ export default function SettingsPlans({ subscription, priceIds }: Props) {
                   <button
                     type="button"
                     onClick={() => handleSubscribe('enterprise')}
-                    className="w-full py-2.5 border border-[#1E2A4A] hover:border-[#4A5568] rounded-lg text-[13px] text-[#8B9DB7] hover:text-white transition-colors"
+                    disabled={loading === 'enterprise'}
+                    className="w-full py-2.5 border border-[#1E2A4A] hover:border-[#4A5568] rounded-lg text-[13px] text-[#8B9DB7] hover:text-white transition-colors disabled:opacity-50"
                   >
-                    Contactar ventas
+                    {loading === 'enterprise' ? 'Redirigiendo...' : 'Suscribirme'}
                   </button>
                 ) : currentPlanId ? (
                   <button

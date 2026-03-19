@@ -89,9 +89,9 @@ const PLANS = [
     price: '$199',
     period: '/mes',
     description: 'Para equipos y organizaciones con requerimientos avanzados.',
-    cta: 'Contactar',
-    ctaHref: 'mailto:juan@taskforce.fyi',
-    ctaStyle: 'border border-[#B8860B]/50 text-[#B8860B] hover:bg-[#B8860B]/10',
+    cta: 'Suscribirme',
+    ctaHref: '/register?plan=enterprise',
+    ctaStyle: 'border border-[#1E2A4A] hover:border-[#4A5568] text-white',
     popular: false,
     features: [
       { label: 'Proyectos ilimitados', included: true },

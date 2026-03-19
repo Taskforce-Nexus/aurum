@@ -22,6 +22,12 @@ export async function POST(req: Request) {
   console.log('[STRIPE WEBHOOK] Event:', event.type)
   console.log('[STRIPE WEBHOOK] Data:', JSON.stringify(event.data.object).slice(0, 200))
 
+  // Fallback: map price ID → plan using env vars (in case Stripe price lacks metadata.tier)
+  const PRICE_TO_PLAN: Record<string, string> = {}
+  if (process.env.STRIPE_PRICE_CORE) PRICE_TO_PLAN[process.env.STRIPE_PRICE_CORE] = 'core'
+  if (process.env.STRIPE_PRICE_PRO) PRICE_TO_PLAN[process.env.STRIPE_PRICE_PRO] = 'pro'
+  if (process.env.STRIPE_PRICE_ENTERPRISE) PRICE_TO_PLAN[process.env.STRIPE_PRICE_ENTERPRISE] = 'enterprise'
+
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session
@@ -32,7 +38,15 @@ export async function POST(req: Request) {
         // Fetch actual subscription to get period dates and tier from price metadata
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const sub = await stripe.subscriptions.retrieve(session.subscription as string) as any
-        const tier = sub.items?.data[0]?.price?.metadata?.tier || 'core'
+        const priceId = sub.items?.data[0]?.price?.id as string | undefined
+        const tier = sub.items?.data[0]?.price?.metadata?.tier
+          || (priceId ? PRICE_TO_PLAN[priceId] : undefined)
+          || 'core'
+        console.log('[WEBHOOK] checkout.session.completed — subscription')
+        console.log('[WEBHOOK] Price ID:', priceId)
+        console.log('[WEBHOOK] Mapped plan:', tier)
+        console.log('[WEBHOOK] Customer:', session.customer)
+        console.log('[WEBHOOK] User ID:', userId)
         const periodStart = sub.current_period_start
           ? new Date(sub.current_period_start * 1000).toISOString()
           : new Date().toISOString()

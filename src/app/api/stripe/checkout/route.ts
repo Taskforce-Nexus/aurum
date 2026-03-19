@@ -1,4 +1,4 @@
-import { getStripe } from '@/lib/stripe'
+import { getStripe, PRICE_IDS } from '@/lib/stripe'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { NextResponse } from 'next/server'
@@ -9,9 +9,14 @@ export async function POST(req: Request) {
   if (!user) return NextResponse.json({ error: 'No auth' }, { status: 401 })
 
   const body = await req.json()
-  // Support both naming conventions: price_id (spec) and priceId (legacy)
-  const { mode, price_id, priceId, amount } = body
-  const resolvedPriceId: string | undefined = price_id || priceId
+  // Support multiple naming conventions: price_id (spec), priceId (legacy), plan (from register/dashboard flow)
+  const { mode, price_id, priceId, plan, amount } = body
+  const planToPriceId: Record<string, string> = {
+    core: PRICE_IDS.core_monthly,
+    pro: PRICE_IDS.pro_monthly,
+    enterprise: PRICE_IDS.enterprise_monthly,
+  }
+  const resolvedPriceId: string | undefined = price_id || priceId || (plan ? planToPriceId[plan] : undefined) || undefined
   const stripe = getStripe()
   const admin = createAdminClient()
 
