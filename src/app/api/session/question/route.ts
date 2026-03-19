@@ -99,7 +99,6 @@ export async function POST(req: NextRequest) {
       .from('council_advisors')
       .select('advisor:advisors(id, name, specialty, communication_style, element, hats, system_prompt)')
       .eq('council_id', councils.id)
-      .limit(3)
 
     if (councilAdvisors && councilAdvisors.length > 0) {
       const advisorContexts = councilAdvisors

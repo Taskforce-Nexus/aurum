@@ -58,7 +58,7 @@ export const HAT_COLORS: Record<string, string> = {
 export default function SeedSessionFlow({ project, cofounders, userEmail, initialStep }: Props) {
   const [currentStep, setCurrentStep] = useState<SeedStep>(initialStep ?? 'entregables')
 
-  // Council advisors — populated by auto-select after approving deliverables
+  // Council advisors — generated on-demand in ConsejoPrincipalPropuesta
   const [councilAdvisors, setCouncilAdvisors] = useState<Advisor[]>([])
 
   // Composed deliverables (set after /api/compose runs in EntregablesPropuesta)

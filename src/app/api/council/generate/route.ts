@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { getUserPlan } from '@/lib/plan'
 import { PLAN_LIMITS } from '@/lib/stripe'
+import { getModel } from '@/lib/model-router'
 import Anthropic from '@anthropic-ai/sdk'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
@@ -35,14 +36,12 @@ Para cada consejero, genera un objeto con estos campos:
 - industries_tags: array de 2-3 industrias relevantes al proyecto
 - experience: array de 3-4 logros concretos con métricas
 - language: "Español" o "Español · Inglés técnico"
-- level: lidera | apoya | observa
 - reason: Por qué este consejero es CRÍTICO para este proyecto específico (1-2 oraciones)
 
 REGLAS:
 - No genéricos. Si el proyecto es fintech en México, genera un experto en regulación fintech mexicana, no "abogado generalista"
 - Si el proyecto es de comida, genera alguien de la industria alimentaria, no "estrategia genérica"
 - Nombres creíbles y culturalmente diversos
-- Máximo 2 con level "lidera", 2-3 "apoya", resto "observa"
 - Diversidad de áreas: no 3 de marketing. Cubrir negocio, finanzas, y dominio específico del venture
 - Cada "reason" explica qué aporta a ESTE proyecto
 - Si no hay founder_brief o venture_profile, infiere del nombre y descripción del proyecto
@@ -57,7 +56,6 @@ Especialidad: {specialty}
 Elemento: {element}
 Estilo: {communication_style}
 Bio: {bio}
-Razón en el proyecto: {reason}
 
 El system prompt debe:
 1. Definir la identidad y voz del consejero (2-3 párrafos)
@@ -76,37 +74,41 @@ async function generateSystemPromptsInBackground(
   admin: ReturnType<typeof createAdminClient>,
   advisorIds: string[]
 ): Promise<void> {
-  for (const id of advisorIds) {
-    try {
-      const { data: advisor } = await admin
-        .from('advisors')
-        .select('name, specialty, element, communication_style, bio, advisor_type')
-        .eq('id', id)
-        .single()
+  // Process 3 concurrent workers
+  for (let i = 0; i < advisorIds.length; i += 3) {
+    const batch = advisorIds.slice(i, i + 3)
+    await Promise.all(batch.map(async (id) => {
+      try {
+        const { data: advisor } = await admin
+          .from('advisors')
+          .select('name, specialty, element, communication_style, bio')
+          .eq('id', id)
+          .single()
 
-      if (!advisor) continue
+        if (!advisor) return
 
-      const prompt = SYSTEM_PROMPT_PROMPT
-        .replace('{name}', advisor.name ?? '')
-        .replace('{specialty}', advisor.specialty ?? '')
-        .replace('{element}', advisor.element ?? 'tierra')
-        .replace('{communication_style}', advisor.communication_style ?? '')
-        .replace('{bio}', advisor.bio ?? '')
-        .replace('{reason}', '')
+        const element = advisor.element ?? 'tierra'
+        const prompt = SYSTEM_PROMPT_PROMPT
+          .replace('{name}', advisor.name ?? '')
+          .replace('{specialty}', advisor.specialty ?? '')
+          .replace(/{element}/g, element)
+          .replace('{communication_style}', advisor.communication_style ?? '')
+          .replace('{bio}', advisor.bio ?? '')
 
-      const response = await anthropic.messages.create({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 2048,
-        messages: [{ role: 'user', content: prompt }],
-      })
+        const response = await anthropic.messages.create({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 2048,
+          messages: [{ role: 'user', content: prompt }],
+        })
 
-      const systemPrompt = response.content[0].type === 'text' ? response.content[0].text : ''
-      if (systemPrompt) {
-        await admin.from('advisors').update({ system_prompt: systemPrompt }).eq('id', id)
+        const systemPrompt = response.content[0].type === 'text' ? response.content[0].text : ''
+        if (systemPrompt) {
+          await admin.from('advisors').update({ system_prompt: systemPrompt }).eq('id', id)
+        }
+      } catch (err) {
+        console.error('[COUNCIL/GENERATE] Prompt gen failed for', id, err)
       }
-    } catch (err) {
-      console.error('[COUNCIL/GENERATE] Prompt gen failed for', id, err)
-    }
+    }))
   }
 }
 
@@ -133,7 +135,7 @@ export async function POST(req: NextRequest) {
   // If council already has advisors, return existing
   const { data: existingCouncil } = await admin
     .from('councils')
-    .select('id, council_advisors(id, level, advisors(*))')
+    .select('id, council_advisors(id, advisors(*))')
     .eq('project_id', project_id)
     .maybeSingle()
 
@@ -141,16 +143,16 @@ export async function POST(req: NextRequest) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const existing = ((existingCouncil as any).council_advisors ?? []).map((ca: any) => ({
       ...(ca.advisors ?? {}),
-      level: ca.level,
     }))
     if (existing.length >= 3) {
       return NextResponse.json({ council_id: existingCouncil.id, advisors: existing })
     }
   }
 
-  // Get plan limits
+  // Get plan limits + model
   const plan = await getUserPlan(user.id)
   const maxAdvisors = (PLAN_LIMITS[plan] ?? PLAN_LIMITS['free']).advisors_per_session
+  const model = getModel(plan, 'seed_chat') ?? 'claude-haiku-4-5-20251001'
 
   // Build the prompt
   const founderBrief = project.founder_brief
@@ -172,7 +174,7 @@ export async function POST(req: NextRequest) {
   let generatedAdvisors: Record<string, unknown>[] = []
   try {
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model,
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     })
@@ -191,7 +193,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No se generaron consejeros' }, { status: 500 })
   }
 
-  // Insert advisors into DB (not native — project-specific)
+  // Insert advisors into DB (not native — project-specific, no level field)
   const rows = generatedAdvisors.slice(0, maxAdvisors).map(a => ({
     name: a.name as string,
     specialty: a.specialty as string,
@@ -199,13 +201,12 @@ export async function POST(req: NextRequest) {
     advisor_type: a.advisor_type as string,
     element: a.element as string,
     communication_style: a.communication_style as string,
-    hats: a.hats as string[] ?? [],
+    hats: (a.hats as string[]) ?? [],
     bio: a.bio as string,
-    specialties_tags: a.specialties_tags as string[] ?? [],
-    industries_tags: a.industries_tags as string[] ?? [],
-    experience: a.experience as string[] ?? [],
-    language: a.language as string ?? 'Español',
-    level: a.level as string ?? 'apoya',
+    specialties_tags: (a.specialties_tags as string[]) ?? [],
+    industries_tags: (a.industries_tags as string[]) ?? [],
+    experience: (a.experience as string[]) ?? [],
+    language: (a.language as string) ?? 'Español',
     is_native: false,
   }))
 
@@ -233,23 +234,22 @@ export async function POST(req: NextRequest) {
     councilId = newCouncil!.id
   }
 
-  // Link advisors to council
+  // Link advisors to council (level kept as 'apoya' to satisfy DB constraint — not shown in UI)
   await admin.from('council_advisors').insert(
-    insertedAdvisors.map((a, i) => ({
+    insertedAdvisors.map((a) => ({
       council_id: councilId,
       advisor_id: a.id,
-      level: (generatedAdvisors[i]?.level as string) ?? (i < 2 ? 'lidera' : i < 5 ? 'apoya' : 'observa'),
+      level: 'apoya',
     }))
   )
 
   // Build response — include reason from generated data
   const advisorsWithReason = insertedAdvisors.map((a, i) => ({
     ...a,
-    level: (generatedAdvisors[i]?.level as string) ?? 'apoya',
     reason: generatedAdvisors[i]?.reason as string ?? null,
   }))
 
-  // Fire-and-forget: generate system prompts in background
+  // Fire-and-forget: generate system prompts in background (3 concurrent workers)
   const advisorIds = insertedAdvisors.map(a => a.id)
   generateSystemPromptsInBackground(admin, advisorIds).catch(err =>
     console.error('[COUNCIL/GENERATE] Background prompt generation failed:', err)

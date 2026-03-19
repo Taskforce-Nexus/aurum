@@ -45,10 +45,6 @@ const HAT_LABELS: Record<HatKey, string> = {
 }
 
 export default function MyBoard({ project, advisors, cofounders, specialists, buyerPersonas }: Props) {
-  const lidera = advisors.filter(a => a.level === 'lidera')
-  const apoya = advisors.filter(a => a.level === 'apoya')
-  const observa = advisors.filter(a => a.level === 'observa')
-
   // Compute hat coverage from all advisors
   const coveredHats = new Set<string>()
   advisors.forEach(a => {
@@ -105,41 +101,15 @@ export default function MyBoard({ project, advisors, cofounders, specialists, bu
             </span>
           </div>
 
-          {/* LIDERA */}
-          {(lidera.length > 0 || advisors.length === 0) && (
-            <section className="space-y-3">
-              <p className="text-[10px] text-[#B8860B] uppercase tracking-[2px] font-semibold">Lidera</p>
-              {lidera.length > 0 ? (
-                <div className="grid grid-cols-2 gap-3">
-                  {lidera.map(a => <AdvisorCard key={a.id} advisor={a} level="lidera" />)}
-                </div>
-              ) : (
-                <EmptySection label="Sin consejeros que lideren aún" />
-              )}
-            </section>
-          )}
-
-          {/* APOYA */}
+          {/* CONSEJEROS */}
           <section className="space-y-3">
-            <p className="text-[10px] text-[#6E8EAD] uppercase tracking-[2px] font-semibold">Apoya</p>
-            {apoya.length > 0 ? (
+            <p className="text-[10px] text-[#B8860B] uppercase tracking-[2px] font-semibold">Consejo Asesor</p>
+            {advisors.length > 0 ? (
               <div className="grid grid-cols-2 gap-3">
-                {apoya.map(a => <AdvisorCard key={a.id} advisor={a} level="apoya" />)}
+                {advisors.map(a => <AdvisorCard key={a.id} advisor={a} />)}
               </div>
             ) : (
-              <EmptySection label="Sin consejeros de apoyo" />
-            )}
-          </section>
-
-          {/* OBSERVA */}
-          <section className="space-y-3">
-            <p className="text-[10px] text-[#4A5568] uppercase tracking-[2px] font-semibold">Observa</p>
-            {observa.length > 0 ? (
-              <div className="grid grid-cols-2 gap-3">
-                {observa.map(a => <AdvisorCard key={a.id} advisor={a} level="observa" />)}
-              </div>
-            ) : (
-              <EmptySection label="Sin observadores" />
+              <EmptySection label="Sin consejeros configurados aún" />
             )}
           </section>
 
@@ -318,15 +288,11 @@ export default function MyBoard({ project, advisors, cofounders, specialists, bu
   )
 }
 
-function AdvisorCard({ advisor, level }: { advisor: Advisor; level: string }) {
-  const borderClass = level === 'lidera'
-    ? 'border-[#C5A55A]'
-    : 'border-[#1E2A4A]'
-
+function AdvisorCard({ advisor }: { advisor: Advisor }) {
   const coveredHats = Array.isArray(advisor.hats) ? advisor.hats : []
 
   return (
-    <div className={`bg-[#0D1535] border ${borderClass} rounded-xl p-4 space-y-2`}>
+    <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-xl p-4 space-y-2">
       <div className="flex items-start justify-between">
         <div className="space-y-0.5">
           <p className="text-[10px] text-[#6E8EAD] uppercase tracking-wider font-medium">

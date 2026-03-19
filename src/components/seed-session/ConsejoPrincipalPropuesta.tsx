@@ -15,23 +15,6 @@ interface Props {
   onNext: () => void
 }
 
-const LEVEL_LABELS: Record<string, string> = {
-  lidera:  'LIDERA',
-  apoya:   'APOYA',
-  observa: 'OBSERVA',
-}
-
-const LEVEL_COLORS: Record<string, string> = {
-  lidera:  'bg-[#B8860B]/20 text-[#B8860B] border-[#B8860B]/30',
-  apoya:   'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  observa: 'bg-[#1E2A4A] text-[#8892A4] border-[#1E2A4A]',
-}
-
-const LEVEL_BORDER: Record<string, string> = {
-  lidera:  'border-[#B8860B]/40',
-  apoya:   'border-blue-500/30',
-  observa: 'border-[#1E2A4A]',
-}
 
 export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedIds, onAcceptedChange, onNext }: Props) {
   const [loading, setLoading] = useState(false)
@@ -82,11 +65,6 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
       .finally(() => setGenerating(false))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const grouped: Record<string, Advisor[]> = { lidera: [], apoya: [], observa: [] }
-  for (const a of localAdvisors) {
-    if (grouped[a.level]) grouped[a.level].push(a)
-  }
 
   async function loadSwapOptions(advisor: Advisor, offset: number, search = swapSearch, cat = swapCategory) {
     setSwapLoading(true)
@@ -159,9 +137,8 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
 
   function applySwap(newAdvisor: Advisor) {
     if (!swapForAdvisor) return
-    const replacedLevel = swapForAdvisor.level
     setLocalAdvisors(prev =>
-      prev.map(a => a.id === swapForAdvisor.id ? { ...newAdvisor, level: replacedLevel } : a)
+      prev.map(a => a.id === swapForAdvisor.id ? newAdvisor : a)
     )
     onAcceptedChange(
       acceptedIds.filter(id => id !== swapForAdvisor.id).concat(newAdvisor.id)
@@ -233,9 +210,8 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
           <div className="max-w-2xl bg-[#0D1535] border border-[#1E2A4A] rounded-2xl rounded-tl-sm px-5 py-4 text-sm text-[#e0e0e5] leading-relaxed">
             {generating
               ? 'Nexo está armando tu consejo especializado para este proyecto...'
-              : 'Seleccioné estos expertos específicamente para tu proyecto. Cada uno tiene un rol: '
+              : 'Seleccioné estos expertos específicamente para tu proyecto. Cada uno fue elegido por una razón concreta. Puedes cambiar cualquiera por alguien del catálogo.'
             }
-            {!generating && (<><strong className="text-[#B8860B]">LIDERA</strong> toma la iniciativa, <strong className="text-blue-400">APOYA</strong> aporta perspectiva, <strong className="text-[#8892A4]">OBSERVA</strong> monitorea. Puedes cambiar cualquiera por alguien del catálogo.</>)}
           </div>
         </div>
 
@@ -264,157 +240,146 @@ export default function ConsejoPrincipalPropuesta({ project, advisors, acceptedI
           </div>
         )}
 
-        {/* Estructura del consejo */}
+        {/* Consejo — flat grid */}
         <div>
-          <p className="text-xs text-[#B8860B] uppercase tracking-wider font-medium mb-1">Estructura de tu consejo</p>
-          <p className="text-xs text-[#8892A4] mb-4">Base — {project.name} · {localAdvisors.length} consejeros</p>
+          <p className="text-xs text-[#B8860B] uppercase tracking-wider font-medium mb-1">Tu consejo</p>
+          <p className="text-xs text-[#8892A4] mb-4">{project.name} · {localAdvisors.length} consejeros</p>
 
-          {(['lidera', 'apoya', 'observa'] as const).map(level => {
-            if (!grouped[level]?.length) return null
-            return (
-              <div key={level} className="mb-5">
-                <p className="text-xs text-[#8892A4] uppercase tracking-wider mb-2">{LEVEL_LABELS[level]}</p>
-                <div className="grid grid-cols-3 gap-3">
-                  {grouped[level].map(advisor => {
-                    const isSwapOpen = swapForAdvisor?.id === advisor.id
-                    return (
-                      <div key={advisor.id} className={`bg-[#0D1535] border rounded-xl overflow-hidden transition-colors ${LEVEL_BORDER[advisor.level]}`}>
-                        {/* Card content */}
-                        <div className="p-4">
-                          <div className="flex items-start justify-between mb-2">
-                            <div className="flex-1 min-w-0">
-                              <p className="font-semibold text-sm text-white leading-tight">{advisor.name}</p>
-                              {!advisor.is_native && (
-                                <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30 font-medium inline-block mt-0.5">
-                                  Personalizado
-                                </span>
-                              )}
-                            </div>
-                            <span className={`text-[10px] px-1.5 py-0.5 rounded border font-medium shrink-0 ml-1 ${LEVEL_COLORS[advisor.level]}`}>
-                              {LEVEL_LABELS[advisor.level]}
-                            </span>
-                          </div>
-                          <p className="text-xs text-[#8892A4] mb-2">{advisor.specialty}</p>
-
-                          {/* Hats */}
-                          {advisor.hats?.length > 0 && (
-                            <div className="flex gap-1 mb-2">
-                              {advisor.hats.map(hat => (
-                                <div key={hat} className={`w-2.5 h-2.5 rounded-full ${HAT_COLORS[hat] ?? 'bg-gray-600'}`} title={hat} />
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Reason — why this advisor for this project */}
-                          {advisor.reason && (
-                            <p className="text-[11px] text-[#6E8EAD] mb-2 leading-snug italic">"{advisor.reason}"</p>
-                          )}
-
-                          {/* Communication style */}
-                          {!advisor.reason && advisor.communication_style && (
-                            <p className="text-[10px] italic text-[#4A5568] mb-2 line-clamp-1">"{advisor.communication_style}"</p>
-                          )}
-
-                          <div className="flex gap-1.5 mt-3">
-                            <button
-                              type="button"
-                              onClick={() => openSwap(advisor)}
-                              className={`text-xs border px-2 py-1 rounded transition-colors ${
-                                isSwapOpen
-                                  ? 'text-[#B8860B] border-[#B8860B]/30 bg-[#B8860B]/10'
-                                  : 'text-[#8892A4] border-[#1E2A4A] hover:text-white'
-                              }`}
-                            >
-                              {isSwapOpen ? 'Cerrar' : 'Cambiar'}
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setProfileAdvisor(advisor)}
-                              className="text-xs text-[#8892A4] border border-[#1E2A4A] px-2 py-1 rounded hover:text-white transition-colors"
-                            >
-                              Ver perfil
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Inline swap panel — catalog explorer */}
-                        {isSwapOpen && (
-                          <div className="border-t border-[#1E2A4A] bg-[#070E22] px-4 py-3 space-y-2">
-                            <p className="text-[10px] text-[#8892A4] uppercase tracking-wider font-medium">
-                              Explorar catálogo
-                            </p>
-                            {/* Search */}
-                            <input
-                              type="text"
-                              value={swapSearch}
-                              onChange={handleSwapSearch}
-                              placeholder="Buscar por nombre..."
-                              className="w-full bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B]/40"
-                            />
-                            {/* Category pills */}
-                            <div className="flex flex-wrap gap-1">
-                              {['negocio', 'tecnico', 'ux_producto', 'investigacion', 'precios'].map(cat => (
-                                <button
-                                  key={cat}
-                                  type="button"
-                                  onClick={() => handleSwapCategory(cat)}
-                                  className={`text-[9px] px-2 py-0.5 rounded-full border transition-colors ${
-                                    swapCategory === cat
-                                      ? 'bg-[#B8860B]/20 border-[#B8860B]/40 text-[#B8860B]'
-                                      : 'border-[#1E2A4A] text-[#4A5568] hover:text-[#8892A4]'
-                                  }`}
-                                >
-                                  {cat}
-                                </button>
-                              ))}
-                            </div>
-                            {/* Results */}
-                            {swapLoading && swapOptions.length === 0 ? (
-                              <div className="space-y-1.5">
-                                {[1, 2, 3].map(i => (
-                                  <div key={i} className="h-9 bg-[#0D1535] rounded-lg animate-pulse" />
-                                ))}
-                              </div>
-                            ) : swapOptions.length === 0 ? (
-                              <p className="text-xs text-[#4A5568] italic py-1">Sin resultados.</p>
-                            ) : (
-                              <div className="space-y-1.5 max-h-48 overflow-y-auto">
-                                {swapOptions.map(opt => (
-                                  <div key={opt.id} className="flex items-center justify-between bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-2.5 py-1.5 gap-2">
-                                    <div className="flex-1 min-w-0">
-                                      <p className="text-[11px] text-white font-medium truncate">{opt.name}</p>
-                                      <p className="text-[10px] text-[#8892A4] truncate">{opt.specialty}</p>
-                                    </div>
-                                    <button
-                                      type="button"
-                                      onClick={() => applySwap(opt)}
-                                      className="text-[10px] text-[#B8860B] border border-[#B8860B]/30 px-2 py-1 rounded hover:bg-[#B8860B]/10 transition-colors shrink-0"
-                                    >
-                                      Elegir
-                                    </button>
-                                  </div>
-                                ))}
-                                {swapOptions.length >= 12 && (
-                                  <button
-                                    type="button"
-                                    onClick={loadMore}
-                                    disabled={swapLoading}
-                                    className="w-full text-[10px] text-[#4A5568] hover:text-[#8892A4] transition-colors py-1 disabled:opacity-40"
-                                  >
-                                    {swapLoading ? 'Cargando...' : 'Ver más →'}
-                                  </button>
-                                )}
-                              </div>
-                            )}
-                          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {localAdvisors.map(advisor => {
+              const isSwapOpen = swapForAdvisor?.id === advisor.id
+              return (
+                <div key={advisor.id} className="bg-[#0D1535] border border-[#1E2A4A] rounded-xl overflow-hidden transition-colors hover:border-[#B8860B]/30">
+                  {/* Card content */}
+                  <div className="p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-sm text-white leading-tight">{advisor.name}</p>
+                        {!advisor.is_native && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30 font-medium inline-block mt-0.5">
+                            Personalizado
+                          </span>
                         )}
                       </div>
-                    )
-                  })}
+                    </div>
+                    <p className="text-xs text-[#8892A4] mb-2">{advisor.specialty}</p>
+
+                    {/* Hats */}
+                    {advisor.hats?.length > 0 && (
+                      <div className="flex gap-1 mb-2">
+                        {advisor.hats.map(hat => (
+                          <div key={hat} className={`w-2.5 h-2.5 rounded-full ${HAT_COLORS[hat] ?? 'bg-gray-600'}`} title={hat} />
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Reason — why this advisor for this project */}
+                    {advisor.reason && (
+                      <p className="text-[11px] text-[#6E8EAD] mb-2 leading-snug italic">"{advisor.reason}"</p>
+                    )}
+
+                    {/* Communication style fallback */}
+                    {!advisor.reason && advisor.communication_style && (
+                      <p className="text-[10px] italic text-[#4A5568] mb-2 line-clamp-1">"{advisor.communication_style}"</p>
+                    )}
+
+                    <div className="flex gap-1.5 mt-3">
+                      <button
+                        type="button"
+                        onClick={() => openSwap(advisor)}
+                        className={`text-xs border px-2 py-1 rounded transition-colors ${
+                          isSwapOpen
+                            ? 'text-[#B8860B] border-[#B8860B]/30 bg-[#B8860B]/10'
+                            : 'text-[#8892A4] border-[#1E2A4A] hover:text-white'
+                        }`}
+                      >
+                        {isSwapOpen ? 'Cerrar' : 'Cambiar'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setProfileAdvisor(advisor)}
+                        className="text-xs text-[#8892A4] border border-[#1E2A4A] px-2 py-1 rounded hover:text-white transition-colors"
+                      >
+                        Ver perfil
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Inline swap panel — catalog explorer */}
+                  {isSwapOpen && (
+                    <div className="border-t border-[#1E2A4A] bg-[#070E22] px-4 py-3 space-y-2">
+                      <p className="text-[10px] text-[#8892A4] uppercase tracking-wider font-medium">
+                        Explorar catálogo
+                      </p>
+                      {/* Search */}
+                      <input
+                        type="text"
+                        value={swapSearch}
+                        onChange={handleSwapSearch}
+                        placeholder="Buscar por nombre..."
+                        className="w-full bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B]/40"
+                      />
+                      {/* Category pills */}
+                      <div className="flex flex-wrap gap-1">
+                        {['negocio', 'tecnico', 'ux_producto', 'investigacion', 'precios'].map(cat => (
+                          <button
+                            key={cat}
+                            type="button"
+                            onClick={() => handleSwapCategory(cat)}
+                            className={`text-[9px] px-2 py-0.5 rounded-full border transition-colors ${
+                              swapCategory === cat
+                                ? 'bg-[#B8860B]/20 border-[#B8860B]/40 text-[#B8860B]'
+                                : 'border-[#1E2A4A] text-[#4A5568] hover:text-[#8892A4]'
+                            }`}
+                          >
+                            {cat}
+                          </button>
+                        ))}
+                      </div>
+                      {/* Results */}
+                      {swapLoading && swapOptions.length === 0 ? (
+                        <div className="space-y-1.5">
+                          {[1, 2, 3].map(i => (
+                            <div key={i} className="h-9 bg-[#0D1535] rounded-lg animate-pulse" />
+                          ))}
+                        </div>
+                      ) : swapOptions.length === 0 ? (
+                        <p className="text-xs text-[#4A5568] italic py-1">Sin resultados.</p>
+                      ) : (
+                        <div className="space-y-1.5 max-h-48 overflow-y-auto">
+                          {swapOptions.map(opt => (
+                            <div key={opt.id} className="flex items-center justify-between bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-2.5 py-1.5 gap-2">
+                              <div className="flex-1 min-w-0">
+                                <p className="text-[11px] text-white font-medium truncate">{opt.name}</p>
+                                <p className="text-[10px] text-[#8892A4] truncate">{opt.specialty}</p>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => applySwap(opt)}
+                                className="text-[10px] text-[#B8860B] border border-[#B8860B]/30 px-2 py-1 rounded hover:bg-[#B8860B]/10 transition-colors shrink-0"
+                              >
+                                Elegir
+                              </button>
+                            </div>
+                          ))}
+                          {swapOptions.length >= 12 && (
+                            <button
+                              type="button"
+                              onClick={loadMore}
+                              disabled={swapLoading}
+                              className="w-full text-[10px] text-[#4A5568] hover:text-[#8892A4] transition-colors py-1 disabled:opacity-40"
+                            >
+                              {swapLoading ? 'Cargando...' : 'Ver más →'}
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
 
           {localAdvisors.length === 0 && (
             <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-xl p-8 text-center">

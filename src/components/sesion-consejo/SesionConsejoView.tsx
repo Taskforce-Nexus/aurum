@@ -112,6 +112,33 @@ export default function SesionConsejoView({
   // section_title → draft text for live preview
   const [sectionDrafts, setSectionDrafts] = useState<Record<string, string>>({})
 
+  // Prompts loading banner — shown while background generation is in progress
+  const [promptsReady, setPromptsReady] = useState(
+    advisors.every(a => a.system_prompt != null)
+  )
+
+  useEffect(() => {
+    if (promptsReady) return
+    // Poll every 8s until all advisors have system_prompt
+    const interval = setInterval(async () => {
+      try {
+        const supabase = (await import('@/lib/supabase/client')).createClient()
+        const ids = advisors.map(a => a.id)
+        if (!ids.length) { setPromptsReady(true); clearInterval(interval); return }
+        const { data } = await supabase
+          .from('advisors')
+          .select('id, system_prompt')
+          .in('id', ids)
+        if (data && data.every(a => a.system_prompt != null)) {
+          setPromptsReady(true)
+          clearInterval(interval)
+        }
+      } catch { /* non-blocking */ }
+    }, 8000)
+    return () => clearInterval(interval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // Derived
   const currentPhase = phases.find(p => p.id === currentPhaseId) ?? phases.find(p => p.phase_index === currentDocIndex)
   const currentDoc = documents[currentDocIndex]
@@ -529,6 +556,14 @@ export default function SesionConsejoView({
                       </div>
                     </div>
                   ))}
+                </div>
+              )}
+              {!promptsReady && (
+                <div className="flex items-center gap-3 bg-[#0D1535] border border-[#B8860B]/30 rounded-xl px-4 py-3 w-full max-w-md">
+                  <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] border-t-transparent animate-spin shrink-0" />
+                  <p className="text-xs text-[#B8860B]">
+                    Preparando a tus consejeros... Esto toma unos segundos la primera vez.
+                  </p>
                 </div>
               )}
               <button

@@ -9,7 +9,6 @@ interface LocalAdvisor {
   id: string
   name: string
   specialty?: string
-  level: 'lidera' | 'apoya' | 'observa'
 }
 
 interface LocalCofounder {
@@ -57,7 +56,7 @@ export default function ConsejoListo({ project, onComplete }: Props) {
         // Council advisors
         const { data: council } = await supabase
           .from('councils')
-          .select('id, council_advisors(level, advisor:advisors(id, name, specialty))')
+          .select('id, council_advisors(advisor:advisors(id, name, specialty))')
           .eq('project_id', project.id)
           .maybeSingle()
 
@@ -65,7 +64,6 @@ export default function ConsejoListo({ project, onComplete }: Props) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setAdvisors((council.council_advisors as any[]).map(ca => ({
             ...(ca.advisor ?? {}),
-            level: ca.level as 'lidera' | 'apoya' | 'observa',
           })))
         }
 
@@ -140,7 +138,7 @@ export default function ConsejoListo({ project, onComplete }: Props) {
   // Completeness validation — only after data is loaded
   const missingItems: string[] = []
   if (!dataLoading) {
-    if (advisors.length < 3) missingItems.push(`Consejeros principales: ${advisors.length}/3 mínimo`)
+    if (advisors.length < 1) missingItems.push('Sin consejeros configurados')
     if (cofounderPair.length < 2) missingItems.push(`Cofounders: ${cofounderPair.length}/2 (constructivo + crítico)`)
     if (deliverables.length < 1) missingItems.push('Sin entregables configurados')
   }
@@ -183,32 +181,15 @@ export default function ConsejoListo({ project, onComplete }: Props) {
               {advisors.length === 0 ? (
                 <p className="text-xs text-[#3A4560] italic">Sin consejeros seleccionados</p>
               ) : (
-                <div className="space-y-2">
-                  {(['lidera', 'apoya', 'observa'] as const).map(level => {
-                    const group = advisors.filter(a => a.level === level)
-                    if (!group.length) return null
-                    const levelLabel = level === 'lidera' ? 'LIDERA' : level === 'apoya' ? 'APOYA' : 'OBSERVA'
-                    const levelColor = level === 'lidera'
-                      ? 'bg-[#B8860B]/20 text-[#B8860B] border-[#B8860B]/30'
-                      : level === 'apoya'
-                      ? 'bg-blue-500/20 text-blue-400 border-blue-500/30'
-                      : 'bg-[#1E2A4A] text-[#8892A4] border-[#1E2A4A]'
-                    return (
-                      <div key={level}>
-                        {group.map(a => (
-                          <div key={a.id} className="flex items-center gap-2 py-1">
-                            <span className={`text-[9px] px-1.5 py-0.5 rounded border font-medium shrink-0 ${levelColor}`}>
-                              {levelLabel}
-                            </span>
-                            <span className="text-xs text-white font-medium truncate">{a.name}</span>
-                            {a.specialty && (
-                              <span className="text-xs text-[#8892A4] truncate">{a.specialty}</span>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )
-                  })}
+                <div className="space-y-1">
+                  {advisors.map(a => (
+                    <div key={a.id} className="flex items-center gap-2 py-1">
+                      <span className="text-xs text-white font-medium truncate">{a.name}</span>
+                      {a.specialty && (
+                        <span className="text-xs text-[#8892A4] truncate">{a.specialty}</span>
+                      )}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
