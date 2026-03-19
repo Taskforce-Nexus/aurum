@@ -41,9 +41,37 @@ Nexo filtra y recomienda según propósito + Resumen del usuario.
 
 Script: `scripts/generate-marketplace.ts`
 Modelo: `claude-sonnet-4-20250514` (strong tier)
-Estado: **RESUMABLE** — skip logic por sección activo
-⚠️ **Bloqueado**: API limit Anthropic — se renueva 2026-04-01 00:00 UTC
-Acción pendiente: re-ejecutar `npx tsx scripts/generate-marketplace.ts` después del 1 Abr
+Estado: **COMPLETO** — 1,760 entidades generadas (excede objetivo 1,440)
+
+### System Prompts profundos por consejero
+
+Cada advisor y cofounder puede tener un `system_prompt` de 3,000–5,000 palabras con conocimiento real de dominio.
+
+**Generación:**
+- On-demand: `POST /api/advisors/generate-prompt { advisor_id }` — guarda en `advisors.system_prompt`
+- On-demand: `POST /api/cofounders/generate-prompt { cofounder_id }` — guarda en `cofounders.system_prompt`
+- Batch: `npx tsx scripts/generate-advisor-prompts.ts` — genera para todos sin prompt (resumable)
+
+**Uso en sesión:**
+- `session/question/route.ts` inyecta `system_prompt` si existe; fallback a descripción breve
+- `nexo_custom_prompt` de `projects` se inyecta como bloque adicional al final del system prompt
+
+**Edición manual:**
+- `AdvisorProfileDrawer` expone textarea editable con botones Generar / Guardar
+- `NexoCustomPromptEditor` en sidebar de `/project/[id]` para instrucciones personalizadas de Nexo
+
+**SQL requerido:**
+```sql
+ALTER TABLE advisors ADD COLUMN IF NOT EXISTS system_prompt text;  -- ya existe
+ALTER TABLE cofounders ADD COLUMN IF NOT EXISTS system_prompt text;  -- pendiente
+ALTER TABLE projects ADD COLUMN IF NOT EXISTS nexo_custom_prompt text;  -- pendiente
+```
+
+**Ejemplos generados (Story 6.0):**
+- `scripts/example-prompt-Advisor_estrategia.txt` — Alejandra Mendoza, 11,521 chars ✅ en DB
+- `scripts/example-prompt-Advisor_finanzas.txt` — Elena Mendoza Chen, 15,095 chars ✅ en DB
+- `scripts/example-prompt-Advisor_legal.txt` — Elisabeth Björkman, 12,770 chars ✅ en DB
+- `scripts/example-prompts-output.txt` — cofounders Camila Reyes + Andrés Quiroga, pendiente columna DB
 
 ### Migraciones SQL requeridas antes de correr el script
 

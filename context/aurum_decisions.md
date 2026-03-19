@@ -1050,3 +1050,32 @@ Variables mínimas para producción en Railway:
 **Fecha:** 2026-03-18
 
 ---
+
+## 56. Deep System Prompts Architecture — Advisors & Cofounders
+
+Cada advisor y cofounder en el marketplace tiene un `system_prompt` de 3,000–5,000 palabras generado por Claude Sonnet.
+El prompt contiene: Identidad (200w), Conocimiento Profundo del Dominio (1,500–2,500w con frameworks reales, regulación, métricas, unknown unknowns), Comportamiento en Sesión (300w), Reglas Operativas (200w).
+
+- Generación on-demand vía `POST /api/advisors/generate-prompt` y `POST /api/cofounders/generate-prompt`
+- Generación en batch: `scripts/generate-advisor-prompts.ts` (resumable, skip si ya tiene prompt)
+- En `session/question/route.ts`: si `system_prompt` existe se inyecta directamente; si no, fallback a descripción breve
+- Columnas requeridas: `advisors.system_prompt text`, `cofounders.system_prompt text`
+
+**Fecha:** 2026-03-18
+
+---
+
+## 57. Editable Prompts Pattern — Advisor Drawer + NexoCustomPromptEditor
+
+Usuarios pueden ver y editar el `system_prompt` de cualquier consejero directamente desde `AdvisorProfileDrawer`.
+El drawer expone un textarea (monospace, 15 rows) con botones "Generar automáticamente" (genera vía API) y "Guardar cambios" (solo visible si hay cambios pendientes).
+
+A nivel de proyecto, `NexoCustomPromptEditor` en el sidebar de `/project/[id]` permite personalizar el comportamiento de Nexo con instrucciones adicionales almacenadas en `projects.nexo_custom_prompt`.
+Estas instrucciones se inyectan al final del system prompt en `session/question/route.ts`.
+
+- Columna requerida: `projects.nexo_custom_prompt text`
+- Patrón de dirty tracking: botón Guardar solo aparece cuando `isDirty === true`
+
+**Fecha:** 2026-03-18
+
+---

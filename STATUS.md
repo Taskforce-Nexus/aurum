@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-18
-Etapa actual: STORY 5.9 COMPLETO. Marketplace: advisors=1371, cofounders=124, specialists=325, buyer_personas=338, total=2158 (todos superan targets). Onboarding: empty state Dashboard rediseñado, tip banner en SeedSession, $5 welcome credit, profile creation verificado. Pendiente: BUG-A (Restricted Key), BUG-B (STRIPE_PRICE_* env vars).
+Etapa actual: STORY 6.0 COMPLETO. 9 gaps críticos resueltos: system prompts profundos para advisors/cofounders (GENERATE_ADVISOR_PROMPT ~4,000 palabras), endpoints generate-prompt, script batch resumable, editor UI de prompts en AdvisorProfileDrawer, integración de system_prompts en session/question, auto-init council_cofounders, persistencia Supabase en ICPs y Especialistas, NexoCustomPromptEditor en project page, GENERATE_DOCUMENT_PROMPT mejorado en session/resolve. Pendiente SQL: ALTER TABLE projects ADD COLUMN nexo_custom_prompt text; ALTER TABLE cofounders ADD COLUMN system_prompt text. Pendiente: BUG-A (Restricted Key), BUG-B (STRIPE_PRICE_*).
 
 ---
 
