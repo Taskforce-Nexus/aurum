@@ -37,6 +37,15 @@ const STEP_NUMBERS: Record<SeedStep, number> = {
   consejo_listo: 7,
 }
 
+const STEP_LABELS: Record<SeedStep, string> = {
+  entregables: 'Entregables',
+  cofounders: 'Cofounders IA',
+  consejo_principal: 'Consejo Principal',
+  especialistas: 'Especialistas',
+  icps: 'Buyer Personas',
+  consejo_listo: 'Consejo Listo',
+}
+
 interface Props {
   project: Project
   cofounders: Cofounder[]
@@ -56,7 +65,15 @@ export const HAT_COLORS: Record<string, string> = {
 }
 
 export default function SeedSessionFlow({ project, cofounders, userEmail, initialStep }: Props) {
-  const [currentStep, setCurrentStep] = useState<SeedStep>(initialStep ?? 'entregables')
+  const initialIdx = initialStep ? Math.max(STEPS.indexOf(initialStep), 0) : 0
+
+  // Two-layer navigation: progress never goes back, view can
+  const [currentMaxStepIdx, setCurrentMaxStepIdx] = useState(initialIdx)
+  const [viewingStepIdx, setViewingStepIdx] = useState(initialIdx)
+  const [showAdvanceConfirm, setShowAdvanceConfirm] = useState(false)
+
+  const currentStep = STEPS[viewingStepIdx]
+  const isViewingPast = viewingStepIdx < currentMaxStepIdx
 
   // Council advisors — generated on-demand in ConsejoPrincipalPropuesta
   const [councilAdvisors, setCouncilAdvisors] = useState<Advisor[]>([])
@@ -101,14 +118,13 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
     })()
   }, [project.id])
 
-  const stepNum = STEP_NUMBERS[currentStep]
-
-  async function advance() {
-    const idx = STEPS.indexOf(currentStep)
-    if (idx < STEPS.length - 1) {
-      const nextStep = STEPS[idx + 1]
-      setCurrentStep(nextStep)
-      // Persist to Supabase so page reload resumes at correct step
+  // Advance to next step (called after confirmation)
+  async function doAdvance() {
+    const nextIdx = currentMaxStepIdx + 1
+    if (nextIdx < STEPS.length) {
+      const nextStep = STEPS[nextIdx]
+      setCurrentMaxStepIdx(nextIdx)
+      setViewingStepIdx(nextIdx)
       try {
         const supabase = createClient()
         await supabase.from('projects').update({ current_phase: nextStep }).eq('id', project.id)
@@ -116,10 +132,21 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
     }
   }
 
+  // onNext handler — shows confirmation or no-ops when viewing past
+  function handleAdvanceRequest() {
+    if (isViewingPast) return // past step: button is hidden, noop
+    setShowAdvanceConfirm(true)
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   function clearStorage() {}
 
-  const sharedProps = { project, stepNumber: stepNum, onNext: advance }
+  const stepNum = STEP_NUMBERS[currentStep]
+  const sharedProps = {
+    project,
+    stepNumber: stepNum,
+    onNext: isViewingPast ? () => {} : handleAdvanceRequest,
+  }
 
   return (
     <div className="min-h-screen bg-[#0A1128] flex flex-col">
@@ -132,11 +159,18 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
         <div className="flex items-center gap-3 text-sm text-[#8892A4]">
           <span>{project.name} — Sesión de Consejo</span>
           <span className="text-[#1E2A4A]">|</span>
-          <span>Paso {stepNum} de 7</span>
-          <span className="flex items-center gap-1.5 text-xs bg-green-500/20 text-green-400 border border-green-500/30 px-2.5 py-0.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
-            En curso
-          </span>
+          <span>Paso {isViewingPast ? STEP_NUMBERS[STEPS[viewingStepIdx]] : stepNum} de 7</span>
+          {isViewingPast && (
+            <span className="flex items-center gap-1.5 text-xs bg-[#B8860B]/10 text-[#B8860B] border border-[#B8860B]/30 px-2.5 py-0.5 rounded-full">
+              Vista previa
+            </span>
+          )}
+          {!isViewingPast && (
+            <span className="flex items-center gap-1.5 text-xs bg-green-500/20 text-green-400 border border-green-500/30 px-2.5 py-0.5 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
+              En curso
+            </span>
+          )}
         </div>
         <Link
           href={`/project/${project.id}`}
@@ -156,30 +190,44 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
 
           <div>
             <p className="text-xs text-[#B8860B] uppercase tracking-wider font-medium mb-2">Progreso</p>
-            <div className="space-y-2">
+            <div className="space-y-1">
               {STEPS.map((step, i) => {
                 const num = STEP_NUMBERS[step]
-                const labels: Record<SeedStep, string> = {
-                  entregables:      'Entregables',
-                  cofounders:       'Cofounders IA',
-                  consejo_principal:'Consejo Principal',
-                  especialistas:    'Especialistas',
-                  icps:             'Buyer Personas',
-                  consejo_listo:    'Consejo Listo',
-                }
-                const done = STEPS.indexOf(currentStep) > i
-                const active = step === currentStep
+                const done = i < currentMaxStepIdx
+                const isActive = i === currentMaxStepIdx
+                const isViewing = i === viewingStepIdx
+                const isFuture = i > currentMaxStepIdx
+                const isClickable = i <= currentMaxStepIdx
+
                 return (
-                  <div key={step} className="flex items-center gap-2">
+                  <button
+                    key={step}
+                    type="button"
+                    disabled={!isClickable}
+                    onClick={() => isClickable ? setViewingStepIdx(i) : undefined}
+                    className={`flex items-center gap-2 w-full text-left px-2 py-1.5 rounded-lg transition-colors
+                      ${isViewing ? 'bg-[#1E2A4A]' : ''}
+                      ${isClickable && !isViewing ? 'hover:bg-[#1E2A4A]/50 cursor-pointer' : ''}
+                      ${isFuture ? 'cursor-not-allowed' : ''}
+                    `}
+                  >
                     <div className={`w-2 h-2 rounded-full shrink-0 ${
                       done   ? 'bg-[#B8860B]' :
-                      active ? 'bg-[#B8860B] ring-2 ring-[#B8860B]/30' :
-                               'border border-[#1E2A4A]'
+                      isActive ? 'bg-[#B8860B] ring-2 ring-[#B8860B]/30' :
+                                 'border border-[#1E2A4A]'
                     }`} />
-                    <span className={`text-xs ${active ? 'text-white font-medium' : done ? 'text-[#8892A4]' : 'text-[#1E2A4A]'}`}>
-                      {num}. {labels[step]}
+                    <span className={`text-xs ${
+                      isViewing   ? 'text-white font-medium' :
+                      done        ? 'text-[#B8860B]' :
+                      isActive    ? 'text-white' :
+                                    'text-[#1E2A4A]'
+                    }`}>
+                      {num}. {STEP_LABELS[step]}
                     </span>
-                  </div>
+                    {done && (
+                      <span className="text-[9px] text-[#B8860B]/60 ml-auto">✓</span>
+                    )}
+                  </button>
                 )
               })}
             </div>
@@ -204,56 +252,108 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
           </div>
         </aside>
 
-        {/* Main content — changes per step */}
-        {currentStep === 'entregables' && (
-          <EntregablesPropuesta
-            {...sharedProps}
-            onDeliverablesComposed={setComposedDeliverables}
-            onCouncilReady={handleCouncilReady}
-          />
-        )}
-        {currentStep === 'cofounders' && (
-          <CofoundersPropuesta
-            {...sharedProps}
-            cofounders={cofounders}
-            acceptedIds={acceptedCofIds}
-            onAcceptedChange={setAcceptedCofIds}
-          />
-        )}
-        {currentStep === 'consejo_principal' && (
-          <ConsejoPrincipalPropuesta
-            {...sharedProps}
-            advisors={councilAdvisors}
-            acceptedIds={acceptedAdvIds}
-            onAcceptedChange={setAcceptedAdvIds}
-          />
-        )}
-        {currentStep === 'especialistas' && (
-          <EspecialistasPropuesta
-            {...sharedProps}
-            acceptedIds={acceptedSpecIds}
-            onAcceptedChange={setAcceptedSpecIds}
-          />
-        )}
-        {currentStep === 'icps' && (
-          <ICPsPropuesta
-            {...sharedProps}
-            acceptedIds={acceptedPersonaIds}
-            onAcceptedChange={setAcceptedPersonaIds}
-          />
-        )}
-        {currentStep === 'consejo_listo' && (
-          <ConsejoListo
-            {...sharedProps}
-            documentSpecs={composedDeliverables as unknown as DocumentSpec[]}
-            advisors={councilAdvisors.filter(a => acceptedAdvIds.includes(a.id))}
-            cofounders={cofounders.filter(c => acceptedCofIds.includes(c.id))}
-            specialistCount={acceptedSpecIds.length}
-            personaCount={acceptedPersonaIds.length}
-            onComplete={clearStorage}
-          />
-        )}
+        {/* Main content — relative container for floating button */}
+        <div className="flex-1 flex flex-col overflow-hidden relative">
+
+          {/* Step content */}
+          {currentStep === 'entregables' && (
+            <EntregablesPropuesta
+              {...sharedProps}
+              onDeliverablesComposed={setComposedDeliverables}
+              onCouncilReady={handleCouncilReady}
+            />
+          )}
+          {currentStep === 'cofounders' && (
+            <CofoundersPropuesta
+              {...sharedProps}
+              cofounders={cofounders}
+              acceptedIds={acceptedCofIds}
+              onAcceptedChange={setAcceptedCofIds}
+            />
+          )}
+          {currentStep === 'consejo_principal' && (
+            <ConsejoPrincipalPropuesta
+              {...sharedProps}
+              advisors={councilAdvisors}
+              acceptedIds={acceptedAdvIds}
+              onAcceptedChange={setAcceptedAdvIds}
+            />
+          )}
+          {currentStep === 'especialistas' && (
+            <EspecialistasPropuesta
+              {...sharedProps}
+              acceptedIds={acceptedSpecIds}
+              onAcceptedChange={setAcceptedSpecIds}
+            />
+          )}
+          {currentStep === 'icps' && (
+            <ICPsPropuesta
+              {...sharedProps}
+              acceptedIds={acceptedPersonaIds}
+              onAcceptedChange={setAcceptedPersonaIds}
+            />
+          )}
+          {currentStep === 'consejo_listo' && (
+            <ConsejoListo
+              {...sharedProps}
+              documentSpecs={composedDeliverables as unknown as DocumentSpec[]}
+              advisors={councilAdvisors.filter(a => acceptedAdvIds.includes(a.id))}
+              cofounders={cofounders.filter(c => acceptedCofIds.includes(c.id))}
+              specialistCount={acceptedSpecIds.length}
+              personaCount={acceptedPersonaIds.length}
+              onComplete={clearStorage}
+            />
+          )}
+
+          {/* Floating "continue" button when viewing a past step */}
+          {isViewingPast && (
+            <div className="absolute bottom-6 right-6 z-10">
+              <button
+                type="button"
+                onClick={() => setViewingStepIdx(currentMaxStepIdx)}
+                className="bg-[#B8860B] hover:bg-[#b8963f] text-[#0A1128] font-semibold text-sm px-5 py-3 rounded-xl shadow-lg transition-colors flex items-center gap-2"
+              >
+                <span className="text-[10px] opacity-70">◀</span>
+                Continuar en {STEP_LABELS[STEPS[currentMaxStepIdx]]}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Advance confirmation modal */}
+      {showAdvanceConfirm && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
+            <h3 className="text-white text-base font-semibold mb-2">
+              ¿Avanzar al siguiente paso?
+            </h3>
+            <p className="text-[#8892A4] text-sm mb-5 leading-relaxed">
+              Podrás regresar a ver este paso en cualquier momento haciendo clic en el sidebar.
+              Tu información se guarda automáticamente.
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                type="button"
+                onClick={() => setShowAdvanceConfirm(false)}
+                className="px-4 py-2 text-[#8892A4] hover:text-white text-sm transition-colors"
+              >
+                Seguir aquí
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowAdvanceConfirm(false)
+                  void doAdvance()
+                }}
+                className="px-5 py-2 bg-[#B8860B] hover:bg-[#b8963f] text-[#0A1128] font-semibold text-sm rounded-lg transition-colors"
+              >
+                Avanzar →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

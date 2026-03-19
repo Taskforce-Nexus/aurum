@@ -37,6 +37,16 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
+function formatTime(timestamp: string): string {
+  const date = new Date(timestamp)
+  const now = new Date()
+  const isToday = date.toDateString() === now.toDateString()
+  if (isToday) {
+    return date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })
+  }
+  return date.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+}
+
 export default function IncubadoraChat({ project, conversation, userEmail }: Props) {
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>(conversation?.messages ?? [])
@@ -149,7 +159,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
       })
       const data = await res.json()
       if (data.message) {
-        setMessages([{ role: 'assistant', content: data.message, author: 'Nexo' }])
+        setMessages([{ role: 'assistant', content: data.message, author: 'Nexo', timestamp: new Date().toISOString() }])
       }
       if (data.conversationId && !activeConversationId) {
         setActiveConversationId(data.conversationId)
@@ -162,7 +172,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
     e.preventDefault()
     if (!input.trim() || loading) return
 
-    const userMessage: Message = { role: 'user', content: input.trim() }
+    const userMessage: Message = { role: 'user', content: input.trim(), timestamp: new Date().toISOString() }
     const newMessages = [...messages, userMessage]
     setMessages(newMessages)
     setInput('')
@@ -191,7 +201,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
       })
       const data = await res.json()
       if (data.message) {
-        setMessages(prev => [...prev, { role: 'assistant', content: data.message, author: 'Nexo' }])
+        setMessages(prev => [...prev, { role: 'assistant', content: data.message, author: 'Nexo', timestamp: new Date().toISOString() }])
       }
       if (data.conversationId && !activeConversationId) {
         setActiveConversationId(data.conversationId)
@@ -217,7 +227,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
         if (d.covered) setCoveredTopics(d.covered)
       }).catch(() => null)
     } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Error al conectar con Nexo. Intenta de nuevo.', author: 'Nexo' }])
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Error al conectar con Nexo. Intenta de nuevo.', author: 'Nexo', timestamp: new Date().toISOString() }])
     }
     setLoading(false)
   }
@@ -598,36 +608,45 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
               </div>
             )}
             {messages.map((msg, i) => (
-              <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                {msg.role === 'assistant' && (
-                  <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-1">
-                    N
+              <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                  {msg.role === 'assistant' && (
+                    <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-1">
+                      N
+                    </div>
+                  )}
+                  <div className={`max-w-[75%] rounded-2xl px-5 py-4 text-sm leading-relaxed ${
+                    msg.role === 'user'
+                      ? 'max-w-[65%] bg-[#1e3a5f] text-white rounded-tr-sm'
+                      : 'bg-[#0D1535] border border-[#1E2A4A] text-[#e0e0e5] rounded-tl-sm'
+                  }`}>
+                    {msg.role === 'assistant' ? (
+                      <ReactMarkdown components={{
+                        h1: ({ children }) => <h1 className="text-[#B8860B] font-bold text-lg mb-3 mt-1">{children}</h1>,
+                        h2: ({ children }) => <h2 className="text-[#B8860B] font-bold text-base mb-2 mt-1">{children}</h2>,
+                        h3: ({ children }) => <h3 className="text-[#B8860B] font-semibold mb-2 mt-1">{children}</h3>,
+                        strong: ({ children }) => <strong className="text-white font-semibold">{children}</strong>,
+                        p: ({ children }) => <p className="text-[#e0e0e5] leading-7 mb-3 last:mb-0 break-words whitespace-pre-wrap">{children}</p>,
+                        ul: ({ children }) => <div className="space-y-1.5 mb-3 pl-1">{children}</div>,
+                        ol: ({ children }) => <div className="space-y-1.5 mb-3 pl-1">{children}</div>,
+                        li: ({ children }) => <div className="text-[#e0e0e5] pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-[#B8860B]">{children}</div>,
+                      }}>
+                        {msg.content}
+                      </ReactMarkdown>
+                    ) : (
+                      <span className="break-words whitespace-pre-wrap">{msg.content}</span>
+                    )}
                   </div>
-                )}
-                <div className={`max-w-2xl rounded-2xl px-5 py-4 text-sm leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'bg-[#1e3a5f] text-white rounded-tr-sm'
-                    : 'bg-[#0D1535] border border-[#1E2A4A] text-[#e0e0e5] rounded-tl-sm'
-                }`}>
-                  {msg.role === 'assistant' ? (
-                    <ReactMarkdown components={{
-                      h1: ({ children }) => <h1 className="text-[#B8860B] font-bold text-lg mb-3 mt-1">{children}</h1>,
-                      h2: ({ children }) => <h2 className="text-[#B8860B] font-bold text-base mb-2 mt-1">{children}</h2>,
-                      h3: ({ children }) => <h3 className="text-[#B8860B] font-semibold mb-2 mt-1">{children}</h3>,
-                      strong: ({ children }) => <strong className="text-white font-semibold">{children}</strong>,
-                      p: ({ children }) => <p className="text-[#e0e0e5] leading-7 mb-3 last:mb-0">{children}</p>,
-                      ul: ({ children }) => <div className="space-y-1.5 mb-3 pl-1">{children}</div>,
-                      ol: ({ children }) => <div className="space-y-1.5 mb-3 pl-1">{children}</div>,
-                      li: ({ children }) => <div className="text-[#e0e0e5] pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-[#B8860B]">{children}</div>,
-                    }}>
-                      {msg.content}
-                    </ReactMarkdown>
-                  ) : msg.content}
+                  {msg.role === 'user' && (
+                    <div className="w-8 h-8 rounded-full bg-[#1E2A4A] flex items-center justify-center text-xs font-bold shrink-0 mt-1">
+                      {userEmail[0]?.toUpperCase()}
+                    </div>
+                  )}
                 </div>
-                {msg.role === 'user' && (
-                  <div className="w-8 h-8 rounded-full bg-[#1E2A4A] flex items-center justify-center text-xs font-bold shrink-0 mt-1">
-                    {userEmail[0]?.toUpperCase()}
-                  </div>
+                {msg.timestamp && (
+                  <span className={`text-[10px] text-[#8892A4] mt-1 ${msg.role === 'user' ? 'pr-11' : 'pl-11'}`}>
+                    {formatTime(msg.timestamp)}
+                  </span>
                 )}
               </div>
             ))}

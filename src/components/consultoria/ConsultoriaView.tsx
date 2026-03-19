@@ -372,30 +372,34 @@ export default function ConsultoriaView({
 // ─── Chat Bubble ──────────────────────────────────────────────────────────────
 
 function ChatBubble({ msg }: { msg: ConsultationMessage }) {
+  const time = msg.timestamp ? formatTime(msg.timestamp) : null
+
   if (msg.role === 'user') {
     return (
-      <div className="flex justify-end">
-        <div className="max-w-[500px] bg-[#B8860B]/10 border border-[#B8860B]/30 rounded-xl px-4 py-3">
-          <p className="text-[14px] text-[#E0D4A0] leading-relaxed">{msg.content}</p>
+      <div className="flex flex-col items-end">
+        <div className="max-w-[65%] bg-[#B8860B]/10 border border-[#B8860B]/30 rounded-xl px-4 py-3">
+          <p className="text-[14px] text-[#E0D4A0] leading-relaxed break-words whitespace-pre-wrap">{msg.content}</p>
         </div>
+        {time && <span className="text-[10px] text-[#8892A4] mt-1">{time}</span>}
       </div>
     )
   }
 
   if (msg.role === 'nexo') {
     return (
-      <div className="max-w-[500px]">
-        <div className="bg-[#0A1128] border border-[#4A9DF8] rounded-xl px-4 py-3 space-y-1">
+      <div className="flex flex-col items-start">
+        <div className="max-w-[75%] bg-[#0A1128] border border-[#4A9DF8] rounded-xl px-4 py-3 space-y-1">
           <p className="text-[10px] text-[#4A9DF8] font-semibold uppercase tracking-wide">Nexo</p>
-          <p className="text-[13px] text-[#C8D4E8] leading-relaxed">{msg.content}</p>
+          <p className="text-[13px] text-[#C8D4E8] leading-relaxed break-words whitespace-pre-wrap">{msg.content}</p>
         </div>
+        {time && <span className="text-[10px] text-[#8892A4] mt-1">{time}</span>}
       </div>
     )
   }
 
   return (
-    <div className="max-w-[540px]">
-      <div className="bg-[#0D1535] border border-[#B8860B] rounded-xl px-4 py-3 space-y-1.5">
+    <div className="flex flex-col items-start">
+      <div className="max-w-[75%] bg-[#0D1535] border border-[#B8860B] rounded-xl px-4 py-3 space-y-1.5">
         <div className="flex items-center gap-2">
           <p className="text-[10px] text-[#B8860B] font-semibold uppercase tracking-wide">
             {msg.advisor_name ?? 'Consejero'}
@@ -404,10 +408,21 @@ function ChatBubble({ msg }: { msg: ConsultationMessage }) {
             <span className="text-[9px] text-[#4A5568]">— {msg.specialty}</span>
           )}
         </div>
-        <p className="text-[13px] text-[#C8D4E8] leading-relaxed">{msg.content}</p>
+        <p className="text-[13px] text-[#C8D4E8] leading-relaxed break-words whitespace-pre-wrap">{msg.content}</p>
       </div>
+      {time && <span className="text-[10px] text-[#8892A4] mt-1">{time}</span>}
     </div>
   )
+}
+
+function formatTime(timestamp: string): string {
+  const date = new Date(timestamp)
+  const now = new Date()
+  const isToday = date.toDateString() === now.toDateString()
+  if (isToday) {
+    return date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })
+  }
+  return date.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
 function TypingIndicator() {

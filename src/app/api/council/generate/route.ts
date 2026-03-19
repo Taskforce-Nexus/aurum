@@ -130,6 +130,10 @@ export async function POST(req: NextRequest) {
 
   if (!project) return NextResponse.json({ error: 'Proyecto no encontrado' }, { status: 404 })
 
+  if (!project.founder_brief) {
+    return NextResponse.json({ error: 'Semilla no completada' }, { status: 400 })
+  }
+
   const admin = createAdminClient()
 
   // If council already has advisors, return existing
@@ -152,7 +156,7 @@ export async function POST(req: NextRequest) {
   // Get plan limits + model
   const plan = await getUserPlan(user.id)
   const maxAdvisors = (PLAN_LIMITS[plan] ?? PLAN_LIMITS['free']).advisors_per_session
-  const model = getModel(plan, 'seed_chat') ?? 'claude-haiku-4-5-20251001'
+  const model = getModel(plan, 'compose') ?? 'claude-haiku-4-5-20251001'
 
   // Build the prompt
   const founderBrief = project.founder_brief
@@ -193,30 +197,34 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No se generaron consejeros' }, { status: 500 })
   }
 
-  // Insert advisors into DB (not native — project-specific, no level field)
-  const rows = generatedAdvisors.slice(0, maxAdvisors).map(a => ({
-    name: a.name as string,
-    specialty: a.specialty as string,
-    category: a.category as string,
-    advisor_type: a.advisor_type as string,
-    element: a.element as string,
-    communication_style: a.communication_style as string,
-    hats: (a.hats as string[]) ?? [],
-    bio: a.bio as string,
-    specialties_tags: (a.specialties_tags as string[]) ?? [],
-    industries_tags: (a.industries_tags as string[]) ?? [],
-    experience: (a.experience as string[]) ?? [],
-    language: (a.language as string) ?? 'Español',
-    is_native: false,
-  }))
+  // Insert advisors sequentially (project-specific, no level field)
+  const insertedAdvisors: Record<string, unknown>[] = []
+  for (const ga of generatedAdvisors.slice(0, maxAdvisors)) {
+    const { data: advisor } = await admin
+      .from('advisors')
+      .insert({
+        name: ga.name as string,
+        specialty: ga.specialty as string,
+        category: ga.category as string,
+        advisor_type: ga.advisor_type as string,
+        element: ga.element as string,
+        communication_style: ga.communication_style as string,
+        hats: (ga.hats as string[]) ?? [],
+        bio: ga.bio as string,
+        specialties_tags: (ga.specialties_tags as string[]) ?? [],
+        industries_tags: (ga.industries_tags as string[]) ?? [],
+        experience: (ga.experience as string[]) ?? [],
+        language: (ga.language as string) ?? 'Español',
+        is_native: false,
+      })
+      .select()
+      .single()
+    if (advisor) {
+      insertedAdvisors.push({ ...advisor, reason: ga.reason as string ?? null })
+    }
+  }
 
-  const { data: insertedAdvisors, error: insertErr } = await admin
-    .from('advisors')
-    .insert(rows)
-    .select()
-
-  if (insertErr || !insertedAdvisors?.length) {
-    console.error('[COUNCIL/GENERATE] Insert error:', insertErr)
+  if (!insertedAdvisors.length) {
     return NextResponse.json({ error: 'Error guardando consejeros' }, { status: 500 })
   }
 
@@ -238,22 +246,19 @@ export async function POST(req: NextRequest) {
   await admin.from('council_advisors').insert(
     insertedAdvisors.map((a) => ({
       council_id: councilId,
-      advisor_id: a.id,
+      advisor_id: a.id as string,
       level: 'apoya',
     }))
   )
 
-  // Build response — include reason from generated data
-  const advisorsWithReason = insertedAdvisors.map((a, i) => ({
-    ...a,
-    reason: generatedAdvisors[i]?.reason as string ?? null,
-  }))
+  // Mark council as ready
+  await admin.from('councils').update({ status: 'listo' }).eq('id', councilId)
 
   // Fire-and-forget: generate system prompts in background (3 concurrent workers)
-  const advisorIds = insertedAdvisors.map(a => a.id)
+  const advisorIds = insertedAdvisors.map((a: Record<string, unknown>) => a.id as string)
   generateSystemPromptsInBackground(admin, advisorIds).catch(err =>
     console.error('[COUNCIL/GENERATE] Background prompt generation failed:', err)
   )
 
-  return NextResponse.json({ council_id: councilId, advisors: advisorsWithReason })
+  return NextResponse.json({ council_id: councilId, advisors: insertedAdvisors })
 }

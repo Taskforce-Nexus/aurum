@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Project, Advisor, Cofounder } from '@/lib/types'
 import { safeFetch } from '@/lib/fetch402'
@@ -90,6 +90,7 @@ export default function SesionConsejoView({
 }: Props) {
   const router = useRouter()
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const [session, setSession] = useState<SessionState | null>(initialSession)
   const [phases, setPhases] = useState<PhaseItem[]>(initialPhases as PhaseItem[])
@@ -111,6 +112,19 @@ export default function SesionConsejoView({
 
   // section_title → draft text for live preview
   const [sectionDrafts, setSectionDrafts] = useState<Record<string, string>>({})
+
+  // Per-exchange timestamps
+  const [questionTimestamp, setQuestionTimestamp] = useState<string | null>(null)
+  const [answerTimestamp, setAnswerTimestamp] = useState<string | null>(null)
+
+  // Auto-scroll to latest exchange
+  const scrollToBottom = useCallback(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [dual, uiState, questionTimestamp, scrollToBottom])
 
   // Prompts loading banner — shown while background generation is in progress
   const [promptsReady, setPromptsReady] = useState(
@@ -244,6 +258,7 @@ export default function SesionConsejoView({
     if (!userInput.trim() || !session || !currentPhaseId) return
     setUiState('submitting')
     setError(null)
+    setAnswerTimestamp(new Date().toISOString())
     try {
       const res = await safeFetch('/api/session/question', {
         method: 'POST',
@@ -317,6 +332,8 @@ export default function SesionConsejoView({
         setSession(s => s ? { ...s, current_question_index: nextIdx } : s)
       }
       setUserInput('')
+      setAnswerTimestamp(null)
+      setQuestionTimestamp(new Date().toISOString())
       setUiState('answering')
       setTimeout(() => inputRef.current?.focus(), 100)
     } catch {
@@ -365,6 +382,18 @@ export default function SesionConsejoView({
     return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uiState])
+
+  // ─── Helpers ──────────────────────────────────────────────────────────────
+
+  function formatTime(timestamp: string): string {
+    const date = new Date(timestamp)
+    const now = new Date()
+    const isToday = date.toDateString() === now.toDateString()
+    if (isToday) {
+      return date.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })
+    }
+    return date.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+  }
 
   // ─── Render ───────────────────────────────────────────────────────────────
 
@@ -686,31 +715,41 @@ export default function SesionConsejoView({
 
                 {/* Nexo question bubble */}
                 {currentQuestion && (
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-0.5">
-                      N
+                  <div className="flex flex-col items-start">
+                    <div className="flex gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-0.5">
+                        N
+                      </div>
+                      <div className="max-w-[75%] bg-[#0D1535] border border-[#1E2A4A] rounded-2xl rounded-tl-sm px-5 py-4">
+                        <p className="text-[9px] text-[#B8860B] uppercase tracking-wider font-medium mb-2">
+                          Pregunta {questionIndex + 1} de {totalQuestions}
+                        </p>
+                        <p className="text-sm text-white font-medium leading-relaxed break-words whitespace-pre-wrap">
+                          {currentQuestion.question}
+                        </p>
+                      </div>
                     </div>
-                    <div className="max-w-[75%] bg-[#0D1535] border border-[#1E2A4A] rounded-2xl rounded-tl-sm px-5 py-4">
-                      <p className="text-[9px] text-[#B8860B] uppercase tracking-wider font-medium mb-2">
-                        Pregunta {questionIndex + 1} de {totalQuestions}
-                      </p>
-                      <p className="text-sm text-white font-medium leading-relaxed">
-                        {currentQuestion.question}
-                      </p>
-                    </div>
+                    {questionTimestamp && (
+                      <span className="text-[10px] text-[#8892A4] mt-1 pl-11">{formatTime(questionTimestamp)}</span>
+                    )}
                   </div>
                 )}
 
                 {/* User answer bubble (after submit) */}
                 {(uiState === 'submitting' || uiState === 'debate_ready' || uiState === 'resolving') &&
                   userInput && (
-                    <div className="flex flex-row-reverse gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-0.5">
-                        {project.name?.charAt(0)?.toUpperCase() ?? 'F'}
+                    <div className="flex flex-col items-end">
+                      <div className="flex flex-row-reverse gap-3">
+                        <div className="w-8 h-8 rounded-full bg-[#B8860B]/30 flex items-center justify-center text-[#B8860B] text-xs font-bold shrink-0 mt-0.5">
+                          {project.name?.charAt(0)?.toUpperCase() ?? 'F'}
+                        </div>
+                        <div className="max-w-[65%] bg-[#B8860B]/10 border border-[#B8860B]/20 rounded-2xl rounded-tr-sm px-5 py-4">
+                          <p className="text-sm text-[#e0e0e5] leading-relaxed break-words whitespace-pre-wrap">{userInput}</p>
+                        </div>
                       </div>
-                      <div className="max-w-[65%] bg-[#B8860B]/10 border border-[#B8860B]/20 rounded-2xl rounded-tr-sm px-5 py-4">
-                        <p className="text-sm text-[#e0e0e5] leading-relaxed">{userInput}</p>
-                      </div>
+                      {answerTimestamp && (
+                        <span className="text-[10px] text-[#8892A4] mt-1 pr-11">{formatTime(answerTimestamp)}</span>
+                      )}
                     </div>
                   )}
 
@@ -761,7 +800,7 @@ export default function SesionConsejoView({
                             Acuerdo del Consejo
                           </p>
                         </div>
-                        <p className="text-sm text-[#e0e0e5] leading-relaxed">
+                        <p className="text-sm text-[#e0e0e5] leading-relaxed break-words whitespace-pre-wrap">
                           {dual.constructive_content}
                         </p>
                       </div>
@@ -797,7 +836,7 @@ export default function SesionConsejoView({
                               <p className="text-[9px] text-[#8892A4]">Perspectiva crítica</p>
                             </div>
                           </div>
-                          <p className="text-sm text-[#e0e0e5] leading-relaxed">
+                          <p className="text-sm text-[#e0e0e5] leading-relaxed break-words whitespace-pre-wrap">
                             {dual.critical_content}
                           </p>
                         </div>
@@ -888,6 +927,9 @@ export default function SesionConsejoView({
                     )}
                   </div>
                 )}
+
+                {/* Scroll anchor */}
+                <div ref={messagesEndRef} />
               </div>
 
               {/* Answer input — only in 'answering' state */}
