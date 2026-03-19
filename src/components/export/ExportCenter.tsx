@@ -35,6 +35,7 @@ function formatDate(iso: string | null) {
 // ─── Main component ─────────────────────────────────────────────────────────
 
 export default function ExportCenter({ project, documents }: Props) {
+  const [localDocuments, setLocalDocuments] = useState<ExportDocument[]>(documents)
   const [downloading, setDownloading] = useState<Record<string, boolean>>({})
   const [bulkLoading, setBulkLoading] = useState(false)
   const [bulkPptxLoading, setBulkPptxLoading] = useState(false)
@@ -42,15 +43,15 @@ export default function ExportCenter({ project, documents }: Props) {
   const [copied, setCopied] = useState<string | null>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
 
-  const readyDocs = documents.filter(isReady)
+  const readyDocs = localDocuments.filter(isReady)
   const readyCount = readyDocs.length
 
   useEffect(() => {
     if (progressBarRef.current) {
-      const pct = documents.length > 0 ? (readyCount / documents.length) * 100 : 0
+      const pct = localDocuments.length > 0 ? (readyCount / localDocuments.length) * 100 : 0
       progressBarRef.current.style.width = `${pct}%`
     }
-  }, [readyCount, documents.length])
+  }, [readyCount, localDocuments.length])
 
   async function downloadPDF(doc: ExportDocument) {
     const cj = doc.content_json
@@ -208,7 +209,7 @@ export default function ExportCenter({ project, documents }: Props) {
         {/* Progress bar */}
         <div className="space-y-1.5">
           <p className="text-[13px] text-[#B8860B] font-semibold">
-            {readyCount} de {documents.length} documentos listos
+            {readyCount} de {localDocuments.length} documentos listos
           </p>
           <div className="w-full h-1.5 bg-[#1E2A4A] rounded-full">
             <div ref={progressBarRef} className="h-1.5 bg-[#B8860B] rounded-full transition-all" />
@@ -216,7 +217,7 @@ export default function ExportCenter({ project, documents }: Props) {
         </div>
 
         {/* Empty state — no documents at all */}
-        {documents.length === 0 && (
+        {localDocuments.length === 0 && (
           <div className="border border-[#1E2A4A] rounded-xl px-8 py-16 text-center">
             <p className="text-sm text-[#8892A4] mb-4">
               Aún no tienes documentos generados. Completa tu Sesión de Consejo para ver tus
@@ -232,7 +233,7 @@ export default function ExportCenter({ project, documents }: Props) {
         )}
 
         {/* Table */}
-        {documents.length > 0 && (
+        {localDocuments.length > 0 && (
           <div className="border border-[#1E2A4A] rounded-xl overflow-hidden">
             {/* Header */}
             <div className="flex items-center gap-4 px-5 py-3 bg-[#0A1128] border-b border-[#1E2A4A]">
@@ -242,7 +243,7 @@ export default function ExportCenter({ project, documents }: Props) {
               <div className="w-[300px] text-[11px] text-[#4A5568] uppercase tracking-wider">Acciones</div>
             </div>
 
-            {documents.map(doc => (
+            {localDocuments.map(doc => (
               <DocumentRow
                 key={doc.id}
                 doc={doc}
@@ -259,7 +260,7 @@ export default function ExportCenter({ project, documents }: Props) {
             {/* Pagination placeholder */}
             <div className="flex items-center justify-between px-5 py-3 bg-[#0A1128] border-t border-[#1E2A4A]">
               <span className="text-[13px] text-[#4A5568]">
-                {documents.length} entregable{documents.length !== 1 ? 's' : ''}
+                {localDocuments.length} entregable{localDocuments.length !== 1 ? 's' : ''}
               </span>
               <div className="flex items-center gap-2">
                 <button
@@ -284,7 +285,14 @@ export default function ExportCenter({ project, documents }: Props) {
 
       {/* Document preview drawer */}
       {selectedDoc && (
-        <DocumentDrawer doc={selectedDoc} onClose={() => setSelectedDoc(null)} />
+        <DocumentDrawer
+          doc={selectedDoc}
+          onClose={() => setSelectedDoc(null)}
+          onDocumentUpdate={(updated) => {
+            setLocalDocuments(prev => prev.map(d => d.id === updated.id ? updated : d))
+            setSelectedDoc(updated)
+          }}
+        />
       )}
     </div>
   )
@@ -394,9 +402,90 @@ function DocumentRow({
 
 // ─── Preview drawer ──────────────────────────────────────────────────────────
 
-function DocumentDrawer({ doc, onClose }: { doc: ExportDocument; onClose: () => void }) {
-  const cj = doc.content_json
-  const compositionSections = doc.composition?.sections ?? []
+function DocumentDrawer({
+  doc,
+  onClose,
+  onDocumentUpdate,
+}: {
+  doc: ExportDocument
+  onClose: () => void
+  onDocumentUpdate?: (updated: ExportDocument) => void
+}) {
+  const [liveDoc, setLiveDoc] = useState<ExportDocument>(doc)
+  const [editingIndex, setEditingIndex] = useState<number | null>(null)
+  const [editValue, setEditValue] = useState('')
+  const [showAiInput, setShowAiInput] = useState(false)
+  const [aiInstruction, setAiInstruction] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [aiLoading, setAiLoading] = useState(false)
+  const [editError, setEditError] = useState('')
+
+  const cj = liveDoc.content_json
+  const compositionSections = liveDoc.composition?.sections ?? []
+
+  function startEdit(index: number) {
+    const sec = cj?.sections?.[index]
+    if (!sec) return
+    setEditingIndex(index)
+    setEditValue(sec.content ?? '')
+    setShowAiInput(false)
+    setAiInstruction('')
+    setEditError('')
+  }
+
+  function cancelEdit() {
+    setEditingIndex(null)
+    setEditValue('')
+    setShowAiInput(false)
+    setAiInstruction('')
+    setEditError('')
+  }
+
+  async function handleSave() {
+    if (editingIndex === null) return
+    setSaving(true)
+    setEditError('')
+    try {
+      const res = await fetch(`/api/documents/${liveDoc.id}/edit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ section_index: editingIndex, field: 'content', value: editValue }),
+      })
+      const data = await res.json()
+      if (!res.ok) { setEditError(data.error ?? 'Error guardando'); return }
+      const updated = { ...liveDoc, content_json: data.content_json }
+      setLiveDoc(updated)
+      onDocumentUpdate?.(updated)
+      cancelEdit()
+    } catch {
+      setEditError('Error de red. Intenta de nuevo.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function handleAiImprove() {
+    if (editingIndex === null || !aiInstruction.trim()) return
+    setAiLoading(true)
+    setEditError('')
+    try {
+      const res = await fetch(`/api/documents/${liveDoc.id}/edit-with-ai`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ section_index: editingIndex, instruction: aiInstruction.trim() }),
+      })
+      const data = await res.json()
+      if (!res.ok) { setEditError(data.error ?? 'Error con IA'); return }
+      const updated = { ...liveDoc, content_json: data.content_json }
+      setLiveDoc(updated)
+      onDocumentUpdate?.(updated)
+      cancelEdit()
+    } catch {
+      setEditError('Error de red. Intenta de nuevo.')
+    } finally {
+      setAiLoading(false)
+    }
+  }
 
   return (
     <>
@@ -411,10 +500,10 @@ function DocumentDrawer({ doc, onClose }: { doc: ExportDocument; onClose: () => 
         {/* Drawer header */}
         <div className="shrink-0 px-6 py-5 border-b border-[#1E2A4A] flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h2 className="text-base font-semibold text-white leading-tight">{doc.name}</h2>
-            {doc.key_question && (
+            <h2 className="text-base font-semibold text-white leading-tight">{liveDoc.name}</h2>
+            {liveDoc.key_question && (
               <p className="text-xs text-[#8892A4] italic mt-1 leading-relaxed">
-                {doc.key_question}
+                {liveDoc.key_question}
               </p>
             )}
           </div>
@@ -443,26 +532,115 @@ function DocumentDrawer({ doc, onClose }: { doc: ExportDocument; onClose: () => 
                 </div>
               )}
 
-              {/* Sections */}
+              {/* Sections — editable */}
               {(cj.sections ?? []).length > 0 && (
                 <div className="space-y-4">
                   {(cj.sections ?? []).map((sec, i) => (
-                    <div key={i}>
-                      <h3 className="text-xs text-[#B8860B] font-semibold uppercase tracking-wider mb-2">
-                        {getSectionTitle(sec)}
-                      </h3>
-                      <p className="text-sm text-[#e0e0e5] leading-relaxed whitespace-pre-line">
-                        {sec.content}
-                      </p>
-                      {sec.key_points && sec.key_points.length > 0 && (
-                        <ul className="mt-2 space-y-1">
-                          {sec.key_points.map((pt, pi) => (
-                            <li key={pi} className="flex items-start gap-2 text-xs text-[#8892A4]">
-                              <span className="text-[#B8860B] mt-0.5 shrink-0">•</span>
-                              {pt}
-                            </li>
-                          ))}
-                        </ul>
+                    <div key={i} className="group relative">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-xs text-[#B8860B] font-semibold uppercase tracking-wider">
+                          {getSectionTitle(sec)}
+                        </h3>
+                        {editingIndex !== i && (
+                          <button
+                            type="button"
+                            onClick={() => startEdit(i)}
+                            title="Editar sección"
+                            className="opacity-0 group-hover:opacity-100 transition-opacity text-[#4A5568] hover:text-[#B8860B] p-1"
+                          >
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+
+                      {editingIndex === i ? (
+                        /* Edit mode */
+                        <div className="space-y-2">
+                          <textarea
+                            value={editValue}
+                            onChange={e => setEditValue(e.target.value)}
+                            rows={6}
+                            className="w-full bg-[#0A1128] border border-[#1E2A4A] focus:border-[#B8860B]/50 rounded-lg px-3 py-2 text-sm text-white leading-relaxed resize-none focus:outline-none"
+                          />
+
+                          {!showAiInput ? (
+                            <div className="flex gap-2">
+                              <button
+                                type="button"
+                                onClick={handleSave}
+                                disabled={saving}
+                                className="flex-1 py-1.5 bg-[#B8860B] hover:bg-[#A07710] disabled:opacity-40 text-black text-xs font-semibold rounded-lg transition-colors"
+                              >
+                                {saving ? 'Guardando...' : 'Guardar'}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => { setShowAiInput(true); setEditError('') }}
+                                className="flex-1 py-1.5 border border-[#B8860B]/40 hover:border-[#B8860B] text-[#B8860B] text-xs font-semibold rounded-lg transition-colors"
+                              >
+                                ✨ Mejorar con IA
+                              </button>
+                              <button
+                                type="button"
+                                onClick={cancelEdit}
+                                className="px-3 py-1.5 border border-[#1E2A4A] text-[#8892A4] hover:text-white text-xs rounded-lg transition-colors"
+                              >
+                                Cancelar
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              <input
+                                type="text"
+                                value={aiInstruction}
+                                onChange={e => setAiInstruction(e.target.value)}
+                                placeholder="¿Qué quieres cambiar? Ej: Agrega datos de mercado para México 2024"
+                                className="w-full bg-[#0A1128] border border-[#1E2A4A] focus:border-[#B8860B]/50 rounded-lg px-3 py-2 text-xs text-white placeholder-[#4A5568] focus:outline-none"
+                              />
+                              <div className="flex gap-2">
+                                <button
+                                  type="button"
+                                  onClick={handleAiImprove}
+                                  disabled={aiLoading || !aiInstruction.trim()}
+                                  className="flex-1 py-1.5 bg-[#B8860B] hover:bg-[#A07710] disabled:opacity-40 text-black text-xs font-semibold rounded-lg transition-colors"
+                                >
+                                  {aiLoading ? 'Procesando (~10s)...' : 'Aplicar con IA'}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setShowAiInput(false)}
+                                  className="px-3 py-1.5 border border-[#1E2A4A] text-[#8892A4] hover:text-white text-xs rounded-lg transition-colors"
+                                >
+                                  ←
+                                </button>
+                              </div>
+                            </div>
+                          )}
+
+                          {editError && (
+                            <p className="text-[11px] text-red-400">{editError}</p>
+                          )}
+                        </div>
+                      ) : (
+                        /* View mode */
+                        <>
+                          <p className="text-sm text-[#e0e0e5] leading-relaxed whitespace-pre-line">
+                            {sec.content}
+                          </p>
+                          {sec.key_points && sec.key_points.length > 0 && (
+                            <ul className="mt-2 space-y-1">
+                              {sec.key_points.map((pt, pi) => (
+                                <li key={pi} className="flex items-start gap-2 text-xs text-[#8892A4]">
+                                  <span className="text-[#B8860B] mt-0.5 shrink-0">•</span>
+                                  {pt}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </>
                       )}
                     </div>
                   ))}
