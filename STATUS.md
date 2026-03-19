@@ -8,7 +8,7 @@ Faber lo actualiza después de cada sesión de trabajo.
 ## Estado general
 
 Fecha última actualización: 2026-03-19
-Etapa actual: STORY 6.3 EN PROGRESO. Stripe 9/9 tests PASS. Session resume ya implementado (server-side query + initialSession prop). Error handling ya implementado en todos los puntos críticos. Páginas legales /privacy y /terms creadas. Batch system prompts: cofounders 124/124, specialists 325/325, buyer_personas 338/338, advisors 1246/1371 (91% — batch activo). TOTAL 2033/2158 (94%). Pendiente: advisors batch completa (~125 restantes), commit final con conteos. Pendiente SQL: ALTER TABLE projects ADD COLUMN nexo_custom_prompt text. Pendiente: BUG-Stripe (STRIPE_PRICE_* no configurados en Railway — configurar en Stripe Dashboard).
+Etapa actual: STORY 6.4 COMPLETO. RAG de archivos subidos en Semilla implementado: /api/files/extract (nuevo, URL-based, soporta pdf/docx/txt/md/images), /api/files/extract-text extendido con DOCX + Claude Vision para imágenes. IncubadoraChat actualizado: acepta .pdf/.docx/.doc/.txt/.md/.png/.jpg/.jpeg, persiste extracted_text en conversations.metadata.uploaded_files, muestra char_count al usuario. Contexto de archivos inyectado en /api/chat (system prompt Semilla), /api/session/question (advisors context), /api/compose (user message). Modal de salida en SesionConsejoView: beforeunload handler + confirmación interna con botones "Continuar sesión" / "Salir y guardar". Batch advisors: 1285/1371 (94%) activo. Pendiente: commit final batch cuando complete. Pendiente SQL: ALTER TABLE projects ADD COLUMN nexo_custom_prompt text. Pendiente: STRIPE_PRICE_* configurar en Stripe Dashboard → Railway.
 
 ---
 

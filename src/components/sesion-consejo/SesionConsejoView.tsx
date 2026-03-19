@@ -106,6 +106,8 @@ export default function SesionConsejoView({
   const [showFounderInput, setShowFounderInput] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [phaseCompletedName, setPhaseCompletedName] = useState<string | null>(null)
+  const [showExitModal, setShowExitModal] = useState(false)
+  const [pendingNavigation, setPendingNavigation] = useState<string | null>(null)
 
   // section_title → draft text for live preview
   const [sectionDrafts, setSectionDrafts] = useState<Record<string, string>>({})
@@ -156,6 +158,32 @@ export default function SesionConsejoView({
 
   const constructivo = cofounders.find(c => c.role === 'constructivo')
   const critico = cofounders.find(c => c.role === 'critico')
+
+  // Prevent accidental browser close/refresh during active session
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (session?.status === 'activa') {
+        e.preventDefault()
+        e.returnValue = '¿Seguro que quieres salir? Tu progreso se guardará pero la sesión quedará pausada.'
+      }
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [session?.status])
+
+  function handleNavigation(path: string) {
+    if (session?.status === 'activa') {
+      setPendingNavigation(path)
+      setShowExitModal(true)
+    } else {
+      router.push(path)
+    }
+  }
+
+  function confirmExit() {
+    setShowExitModal(false)
+    if (pendingNavigation) router.push(pendingNavigation)
+  }
 
   // ─── Handlers ─────────────────────────────────────────────────────────────
 
@@ -320,7 +348,7 @@ export default function SesionConsejoView({
       <header className="shrink-0 border-b border-[#1E2A4A] px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button
-            onClick={() => router.push(`/project/${project.id}`)}
+            onClick={() => handleNavigation(`/project/${project.id}`)}
             className="text-[#8892A4] hover:text-white text-sm transition-colors"
           >
             ← {project.name}
@@ -583,7 +611,7 @@ export default function SesionConsejoView({
                   Ver en Export Center →
                 </button>
                 <button
-                  onClick={() => router.push(`/project/${project.id}`)}
+                  onClick={() => handleNavigation(`/project/${project.id}`)}
                   className="text-sm text-[#8892A4] border border-[#1E2A4A] px-6 py-3 rounded-xl hover:text-white transition-colors"
                 >
                   Volver al proyecto
@@ -995,6 +1023,34 @@ export default function SesionConsejoView({
           )}
         </aside>
       </div>
+
+      {/* ── Exit confirmation modal ──────────────────────────────────── */}
+      {showExitModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-2xl px-8 py-7 max-w-md w-full mx-4 shadow-2xl">
+            <h2 className="text-white font-semibold text-lg mb-2">
+              ¿Salir de la Sesión de Consejo?
+            </h2>
+            <p className="text-sm text-[#8892A4] leading-relaxed mb-6">
+              Tu progreso está guardado. Puedes retomar la sesión cuando quieras desde la página del proyecto.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowExitModal(false)}
+                className="flex-1 bg-[#B8860B] hover:bg-[#b8963f] text-[#0A1128] font-semibold text-sm py-3 rounded-xl transition-colors"
+              >
+                Continuar sesión
+              </button>
+              <button
+                onClick={confirmExit}
+                className="flex-1 text-sm text-[#8892A4] border border-[#1E2A4A] py-3 rounded-xl hover:text-white hover:border-[#8892A4] transition-colors"
+              >
+                Salir y guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

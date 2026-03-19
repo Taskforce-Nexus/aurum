@@ -133,6 +133,26 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  // 5a. Load uploaded files from seed conversation metadata
+  let fileContext = ''
+  try {
+    const { data: seedConv } = await supabase
+      .from('conversations')
+      .select('metadata')
+      .eq('project_id', projectId)
+      .eq('type', 'semilla')
+      .single()
+    const uploadedFiles = ((seedConv?.metadata as Record<string, unknown> | null)?.uploaded_files ?? []) as Array<{ name: string; extracted_text: string }>
+    if (uploadedFiles.length > 0) {
+      fileContext = '\n\nDOCUMENTOS DE REFERENCIA DEL USUARIO:\n'
+      for (const file of uploadedFiles) {
+        fileContext += `\n--- ${file.name} ---\n${file.extracted_text}\n`
+      }
+    }
+  } catch (e) {
+    console.error('[session-question-file-context]', e)
+  }
+
   // 5. Load previous responses in this phase
   const { data: prevResponses } = await supabase
     .from('nexo_dual_responses')
@@ -165,7 +185,7 @@ export async function POST(req: NextRequest) {
     .replace('{section_description}', currentQ.section_description)
     .replace('{founder_brief}', project?.founder_brief ?? 'No disponible')
     .replace('{previous_responses}', previousResponsesText)
-    .replace('{active_advisors}', activeAdvisorsText + cofoundersContext + nexoCustomBlock)
+    .replace('{active_advisors}', activeAdvisorsText + cofoundersContext + nexoCustomBlock + fileContext)
     .replace('{current_question}', currentQ.question)
     .replace('{user_response}', user_response)
 

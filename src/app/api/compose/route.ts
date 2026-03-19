@@ -38,8 +38,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Founder brief not generated yet' }, { status: 400 })
   }
 
+  // 2a. Load uploaded files from seed conversation
+  let fileContext = ''
+  try {
+    const { data: seedConv } = await supabase
+      .from('conversations')
+      .select('metadata')
+      .eq('project_id', project_id)
+      .eq('type', 'semilla')
+      .single()
+    const uploadedFiles = ((seedConv?.metadata as Record<string, unknown> | null)?.uploaded_files ?? []) as Array<{ name: string; extracted_text: string }>
+    if (uploadedFiles.length > 0) {
+      fileContext = '\n\nDOCUMENTOS DE REFERENCIA:\n' + uploadedFiles.map(f => `--- ${f.name} ---\n${f.extracted_text}`).join('\n')
+    }
+  } catch (e) {
+    console.error('[compose-file-context]', e)
+  }
+
   // 2. Componer entregables con Claude (tier strong — composición estratégica)
-  const userMessage = `RESUMEN DEL FUNDADOR:\n${project.founder_brief}\n\nPROPÓSITO DEL CONSEJO:\n${project.purpose || 'No declarado — inferir del resumen'}\n\nPERFIL DEL VENTURE:\n${JSON.stringify(project.venture_profile || {})}`
+  const userMessage = `RESUMEN DEL FUNDADOR:\n${project.founder_brief}\n\nPROPÓSITO DEL CONSEJO:\n${project.purpose || 'No declarado — inferir del resumen'}\n\nPERFIL DEL VENTURE:\n${JSON.stringify(project.venture_profile || {})}${fileContext}`
 
   let response: string
   try {

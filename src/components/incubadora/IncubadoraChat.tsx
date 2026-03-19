@@ -12,6 +12,7 @@ interface UploadedFile {
   name: string
   size: string
   content: string
+  char_count?: number
 }
 
 interface Props {
@@ -221,40 +222,70 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
     setLoading(false)
   }
 
+  async function persistFileToMetadata(fileEntry: { name: string; type: string; url: string; extracted_text: string; char_count: number }) {
+    const convId = activeConversationId
+    if (!convId) return
+    try {
+      const { data: conv } = await supabase.from('conversations').select('metadata').eq('id', convId).single()
+      const existingFiles = ((conv?.metadata as Record<string, unknown> | null)?.uploaded_files ?? []) as typeof fileEntry[]
+      const updatedMeta = {
+        ...((conv?.metadata as Record<string, unknown>) ?? {}),
+        uploaded_files: [...existingFiles, fileEntry],
+      }
+      await supabase.from('conversations').update({ metadata: updatedMeta }).eq('id', convId)
+    } catch (e) {
+      console.error('[persist-file-metadata]', e)
+    }
+  }
+
   async function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
 
-    let content = ''
-    let truncated = false
+    // Upload to Supabase Storage first
+    const path = `${project.id}/${file.name}`
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('project-files')
+      .upload(path, file, { upsert: true })
+    if (uploadError) console.error('[upload]', uploadError.message)
 
-    const isPdf = file.name.toLowerCase().endsWith('.pdf')
-    const isText = file.name.toLowerCase().endsWith('.md') || file.name.toLowerCase().endsWith('.txt')
+    // Get public URL
+    const { data: { publicUrl } } = supabase.storage.from('project-files').getPublicUrl(path)
 
-    if (isText) {
-      content = await file.text()
-      if (content.length > 32000) { content = content.slice(0, 32000); truncated = true }
-    } else if (isPdf) {
-      try {
-        const form = new FormData()
-        form.append('file', file)
-        const res = await fetch('/api/files/extract-text', { method: 'POST', body: form })
-        const data = await res.json() as { text?: string; truncated?: boolean; error?: string }
-        if (data.text) { content = data.text; truncated = !!data.truncated }
-        else content = `[PDF cargado: ${file.name} — no se pudo extraer texto]`
-      } catch {
-        content = `[PDF cargado: ${file.name} — error al extraer texto]`
+    // Extract text via API (supports pdf, docx, txt, md, images)
+    let extractedText = ''
+    let charCount = 0
+    const ext = file.name.toLowerCase().split('.').pop() ?? ''
+
+    try {
+      const form = new FormData()
+      form.append('file', file)
+      const res = await fetch('/api/files/extract-text', { method: 'POST', body: form })
+      const data = await res.json() as { text?: string; truncated?: boolean; error?: string }
+      if (data.text) {
+        extractedText = data.text
+        charCount = data.text.length
+      } else {
+        extractedText = `[${file.name} — no se pudo extraer texto]`
       }
+    } catch {
+      extractedText = `[${file.name} — error al extraer texto]`
     }
 
-    const path = `${project.id}/${file.name}`
-    const { error } = await supabase.storage.from('project-files').upload(path, file, { upsert: true })
-    if (error) console.error('[upload]', error.message)
+    const fileEntry = {
+      name: file.name,
+      type: ext,
+      url: publicUrl ?? uploadData?.path ?? path,
+      extracted_text: extractedText,
+      char_count: charCount,
+    }
 
-    const displayContent = truncated ? `${content}\n\n[Nota: documento truncado a 32,000 caracteres]` : content
-    setUploadedFiles(prev => [...prev, { name: file.name, size: formatBytes(file.size), content: displayContent }])
-    if (displayContent) setPendingContext(prev => prev ? `${prev}\n\n${displayContent}` : displayContent)
+    setUploadedFiles(prev => [...prev, { name: file.name, size: formatBytes(file.size), content: extractedText, char_count: charCount }])
+    if (extractedText) setPendingContext(prev => prev ? `${prev}\n\n${extractedText}` : extractedText)
     if (fileInputRef.current) fileInputRef.current.value = ''
+
+    // Persist to conversations.metadata asynchronously
+    void persistFileToMetadata(fileEntry)
   }
 
   async function toggleVoice() {
@@ -386,16 +417,18 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
               <div className="space-y-1.5 mb-2">
                 {uploadedFiles.map((f, i) => (
                   <div key={i} className="bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-3 py-2">
-                    <p className="text-xs text-white font-medium truncate">{f.name}</p>
+                    <p className="text-xs text-white font-medium truncate">📄 {f.name}</p>
                     <div className="flex items-center justify-between mt-0.5">
                       <span className="text-xs text-[#8892A4]">{f.size}</span>
-                      <span className="text-xs text-green-400">Cargado</span>
+                      <span className="text-xs text-green-400">
+                        {f.char_count ? `leído (${f.char_count.toLocaleString('es-MX')} chars)` : 'Cargado'}
+                      </span>
                     </div>
                   </div>
                 ))}
               </div>
             )}
-            <input ref={fileInputRef} type="file" accept=".md,.txt,.pdf" className="hidden" onChange={handleFileSelect} aria-label="Cargar archivo" title="Cargar archivo" />
+            <input ref={fileInputRef} type="file" accept=".pdf,.docx,.doc,.txt,.md,.png,.jpg,.jpeg" className="hidden" onChange={handleFileSelect} aria-label="Cargar archivo" title="Cargar archivo" />
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}

@@ -124,7 +124,30 @@ export async function POST(req: NextRequest) {
       }, { status: 402 })
     }
 
-    const systemPrompt = NEXO_SEED_SYSTEM
+    // Read uploaded files from conversation metadata and inject into system prompt
+    let fileContext = ''
+    if (conversationId) {
+      try {
+        const adminForFiles = createAdminClient()
+        const { data: conv } = await adminForFiles
+          .from('conversations')
+          .select('metadata')
+          .eq('id', conversationId)
+          .single()
+        const uploadedFiles = ((conv?.metadata as Record<string, unknown> | null)?.uploaded_files ?? []) as Array<{ name: string; type: string; extracted_text: string }>
+        if (uploadedFiles.length > 0) {
+          fileContext = '\n\nDOCUMENTOS SUBIDOS POR EL USUARIO:\n'
+          for (const file of uploadedFiles) {
+            fileContext += `\n--- ${file.name} (${file.type}) ---\n${file.extracted_text}\n`
+          }
+          fileContext += '\nUSA esta información como contexto. Haz preguntas específicas sobre lo que leíste. No ignores estos documentos.\n'
+        }
+      } catch (e) {
+        console.error('[chat-file-context]', e)
+      }
+    }
+
+    const systemPrompt = NEXO_SEED_SYSTEM + fileContext
 
     // Build message history for Claude (exclude last empty if initial)
     const claudeMessages: Array<{ role: 'user' | 'assistant'; content: string }> =
