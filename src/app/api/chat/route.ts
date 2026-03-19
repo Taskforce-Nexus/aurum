@@ -5,6 +5,8 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { callClaude } from '@/lib/claude'
 import { NEXO_SEED_SYSTEM, NEXO_GAME_ANALYSIS_SYSTEM } from '@/lib/prompts'
 import { checkBalance, trackUsage } from '@/lib/usage'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 import type { Message } from '@/lib/types'
 
 const GITHUB_API = 'https://api.github.com'
@@ -124,6 +126,9 @@ export async function POST(req: NextRequest) {
       }, { status: 402 })
     }
 
+    const plan = await getUserPlan(user.id)
+    const seedModel = getModel(plan, 'seed_chat') ?? 'claude-haiku-4-5-20251001'
+
     // Read uploaded files from conversation metadata and inject into system prompt
     let fileContext = ''
     if (conversationId) {
@@ -183,7 +188,7 @@ export async function POST(req: NextRequest) {
         async start(controller) {
           try {
             const anthropicStream = anthropic.messages.stream({
-              model: 'claude-haiku-4-5-20251001',
+              model: seedModel,
               max_tokens: 512,
               system: systemPrompt,
               messages: claudeMessages,
@@ -275,7 +280,7 @@ export async function POST(req: NextRequest) {
       system: systemPrompt,
       messages: claudeMessages,
       max_tokens: voiceMode ? 512 : 2048,
-      tier: 'fast',
+      model: seedModel,
     })
     try { await trackUsage(user.id, projectId, 'seed_chat') } catch (e) { console.error('Usage tracking failed:', e) }
 

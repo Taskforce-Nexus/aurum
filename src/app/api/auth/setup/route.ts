@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
+import { PLAN_LIMITS } from '@/lib/stripe'
 
 export async function POST(req: NextRequest) {
   const { user_id, full_name } = await req.json()
@@ -25,15 +26,16 @@ export async function POST(req: NextRequest) {
     { onConflict: 'id' }
   )
 
-  // Create token_balances — column is `balance_usd`; $5 welcome credit
-  await supabase.from('token_balances').upsert(
-    { user_id, balance_usd: 5.00 },
+  // Create subscription — free plan, active status (no credit card required)
+  await supabase.from('subscriptions').upsert(
+    { user_id, plan: 'free', status: 'activa' },
     { onConflict: 'user_id' }
   )
 
-  // Create subscription — core plan, trial status
-  await supabase.from('subscriptions').upsert(
-    { user_id, plan: 'core', status: 'trial' },
+  // Create token_balances — free tier initial balance ($1.00)
+  const initialBalance = PLAN_LIMITS['free']?.initial_balance ?? 1.00
+  await supabase.from('token_balances').upsert(
+    { user_id, balance_usd: initialBalance },
     { onConflict: 'user_id' }
   )
 

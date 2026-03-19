@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { COMPOSE_DELIVERABLES_PROMPT } from '@/lib/prompts'
 import { checkBalance, trackUsage } from '@/lib/usage'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 
 export async function POST(req: NextRequest) {
   const { project_id } = await req.json()
@@ -38,6 +40,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Founder brief not generated yet' }, { status: 400 })
   }
 
+  const plan = await getUserPlan(user.id)
+  const model = getModel(plan, 'compose')
+  if (!model) {
+    return NextResponse.json({ error: 'upgrade_required', feature: 'compose', message: 'Esta función requiere plan Core o superior' }, { status: 403 })
+  }
+
   // 2a. Load uploaded files from seed conversation
   let fileContext = ''
   try {
@@ -64,7 +72,7 @@ export async function POST(req: NextRequest) {
       system: COMPOSE_DELIVERABLES_PROMPT,
       messages: [{ role: 'user', content: userMessage }],
       max_tokens: 4096,
-      tier: 'strong',
+      model,
     })
   } catch (e) {
     const err = e as Error

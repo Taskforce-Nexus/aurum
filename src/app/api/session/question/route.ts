@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { SESSION_QUESTION_PROMPT } from '@/lib/prompts'
 import { checkBalance, trackUsage } from '@/lib/usage'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 
 interface QuestionItem {
   section_title: string
@@ -42,6 +44,12 @@ export async function POST(req: NextRequest) {
       error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
       balance: 0,
     }, { status: 402 })
+  }
+
+  const plan = await getUserPlan(user.id)
+  const model = getModel(plan, 'session_question')
+  if (!model) {
+    return NextResponse.json({ error: 'upgrade_required', feature: 'session_question', message: 'Esta función requiere plan Core o superior' }, { status: 403 })
   }
 
   // 1. Load the phase with its document
@@ -196,7 +204,7 @@ export async function POST(req: NextRequest) {
       system: systemPrompt,
       messages: [{ role: 'user', content: `Responde con el proceso Nexo Dual para la respuesta del usuario.` }],
       max_tokens: 2048,
-      tier: 'strong',
+      model,
     })
     const jsonMatch = raw.match(/\{[\s\S]*\}/)
     if (!jsonMatch) throw new Error('No JSON in response')

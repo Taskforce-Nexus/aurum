@@ -1079,3 +1079,31 @@ Estas instrucciones se inyectan al final del system prompt en `session/question/
 **Fecha:** 2026-03-18
 
 ---
+
+## Free Tier + Model Router (Story 7.0)
+
+**Decisión:** Registro por defecto en plan `free` con $1.00 de saldo inicial. El plan se puede actualizar a Core/Pro/Enterprise via Stripe.
+
+**Tabla de modelos por plan y task** (`src/lib/model-router.ts`):
+- `free`: Haiku para seed_chat, compose, session, specialists, personas, file_extract, system_prompt. `null` (bloqueado) para: consultation, custom_advisor, edit_document.
+- `core`: Sonnet para seed_chat, compose, session (question + resolve), custom_advisor. Haiku para consultation, specialists, personas, edit_document, file_extract, system_prompt.
+- `pro`: Sonnet para todo excepto system_prompt (Haiku).
+- `enterprise`: Opus para compose, session_question, session_resolve. Sonnet para resto. Haiku para system_prompt.
+
+**Feature gates** (retornan 403 con `error: 'upgrade_required'`):
+- `consultation` — requiere Core+
+- `generate_custom_advisor` — requiere Core+
+- `edit_document` — requiere Core+
+
+**UpgradeModal**: Se dispara via evento `upgrade-required` desde `safeFetch` (403 + upgrade_required). Botón "Ver planes" → `/settings/planes`.
+
+**Registro free**: `/api/auth/setup` crea `plan: 'free'`, `status: 'activa'`, `balance_usd: 1.00`.
+
+**Offer Architecture** (brand):
+- Reason Core = tier `core` ($29/mo)
+- Reason Board = tier `pro` ($79/mo)
+- Reason Command = tier `enterprise` ($199/mo)
+
+**Fecha:** 2026-03-19
+
+---

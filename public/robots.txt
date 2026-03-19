@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /settings/
+Disallow: /project/
+
+Sitemap: https://reason.guru/sitemap.xml

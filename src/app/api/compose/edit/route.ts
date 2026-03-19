@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { checkBalance, trackUsage } from '@/lib/usage'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 
 const EDIT_DELIVERABLE_PROMPT = `Eres Nexo, arquitecto de entregables estratégicos.
 
@@ -69,6 +71,7 @@ export async function POST(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
 
+  let composeModel: string | null = null
   if (action !== 'remove') {
     const { canProceed } = await checkBalance(user.id)
     if (!canProceed) {
@@ -76,6 +79,11 @@ export async function POST(req: NextRequest) {
         error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
         balance: 0,
       }, { status: 402 })
+    }
+    const plan = await getUserPlan(user.id)
+    composeModel = getModel(plan, 'compose')
+    if (!composeModel) {
+      return NextResponse.json({ error: 'upgrade_required', feature: 'compose', message: 'Esta función requiere plan Core o superior' }, { status: 403 })
     }
   }
 
@@ -133,7 +141,7 @@ export async function POST(req: NextRequest) {
         system: prompt,
         messages: [{ role: 'user', content: 'Genera el entregable modificado.' }],
         max_tokens: 2048,
-        tier: 'strong',
+        model: composeModel ?? undefined,
       })
       const jsonMatch = raw.match(/\{[\s\S]*\}/)
       if (!jsonMatch) throw new Error('No JSON in response')
@@ -186,7 +194,7 @@ export async function POST(req: NextRequest) {
         system: prompt,
         messages: [{ role: 'user', content: 'Genera el nuevo entregable.' }],
         max_tokens: 2048,
-        tier: 'strong',
+        model: composeModel ?? undefined,
       })
       const jsonMatch = raw.match(/\{[\s\S]*\}/)
       if (!jsonMatch) throw new Error('No JSON in response')

@@ -4,6 +4,8 @@ import { callClaude } from '@/lib/claude'
 import { checkBalance, trackUsage } from '@/lib/usage'
 import { GENERATE_DOCUMENT_PROMPT } from '@/lib/prompts'
 import { createNotification } from '@/lib/notifications'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 
 export async function POST(req: NextRequest) {
   const { session_id, phase_id, dual_response_id, resolution, founder_response } = await req.json()
@@ -33,6 +35,12 @@ export async function POST(req: NextRequest) {
       error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
       balance: 0,
     }, { status: 402 })
+  }
+
+  const plan = await getUserPlan(user.id)
+  const resolveModel = getModel(plan, 'session_resolve')
+  if (!resolveModel) {
+    return NextResponse.json({ error: 'upgrade_required', feature: 'session_resolve', message: 'Esta función requiere plan Core o superior' }, { status: 403 })
   }
 
   // 1. Update the NexoDualResponse with the resolution
@@ -137,7 +145,7 @@ export async function POST(req: NextRequest) {
       system: prompt,
       messages: [{ role: 'user', content: 'Genera el documento final del entregable.' }],
       max_tokens: 4096,
-      tier: 'strong',
+      model: resolveModel,
     })
     const jsonMatch = raw.match(/\{[\s\S]*\}/)
     if (jsonMatch) contentJson = JSON.parse(jsonMatch[0])

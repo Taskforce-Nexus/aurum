@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { callClaude } from '@/lib/claude'
 import { GENERATE_ADVISOR_PROMPT, ELEMENT_DESCRIPTIONS, HAT_DESCRIPTIONS } from '@/lib/prompts'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 
 const GENERATE_PROFILE_SYSTEM = `Eres un generador de perfiles de consejeros para una plataforma de ventures.
 El usuario describe qué tipo de experto necesita. Tu tarea es crear un perfil completo y realista para ese advisor.
@@ -40,16 +42,22 @@ export async function POST(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
 
+  const plan = await getUserPlan(user.id)
+  const model = getModel(plan, 'generate_custom_advisor')
+  if (!model) {
+    return NextResponse.json({ error: 'upgrade_required', feature: 'generate_custom_advisor', message: 'Los consejeros personalizados requieren plan Core o superior' }, { status: 403 })
+  }
+
   const admin = createAdminClient()
 
-  // 1. Generate advisor profile with Sonnet
+  // 1. Generate advisor profile
   let profile: Record<string, unknown>
   try {
     const raw = await callClaude({
       system: GENERATE_PROFILE_SYSTEM,
       messages: [{ role: 'user', content: `Necesito un experto: ${description}` }],
       max_tokens: 1024,
-      tier: 'strong',
+      model,
     })
     const jsonMatch = raw.match(/\{[\s\S]*\}/)
     if (!jsonMatch) throw new Error('No JSON in response')

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { checkBalance, trackUsage } from '@/lib/usage'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
+import type { TaskType } from '@/lib/model-router'
 
 const SPECIALIST_SYSTEM = `Eres Nexo, el consejero IA de Reason. Generas propuestas de especialistas de industria relevantes para un proyecto específico.
 
@@ -83,6 +86,13 @@ export async function POST(req: NextRequest) {
       }, { status: 402 })
     }
 
+    const task: TaskType = type === 'specialist' ? 'generate_specialist' : 'generate_persona'
+    const plan = await getUserPlan(user.id)
+    const model = getModel(plan, task)
+    if (!model) {
+      return NextResponse.json({ error: 'upgrade_required', feature: task, message: 'Esta función requiere plan Core o superior' }, { status: 403 })
+    }
+
     const brief = founderBrief ?? project.founder_brief ?? 'No disponible'
     const existing = existingItems ?? []
     const batchCount = Math.min(Math.max(1, count), 5)
@@ -107,7 +117,7 @@ export async function POST(req: NextRequest) {
       system,
       messages: [{ role: 'user', content: prompt }],
       max_tokens: maxTokens,
-      tier: 'fast',
+      model,
     })
 
     const operation = type === 'specialist' ? 'generate_specialist' : 'generate_persona'

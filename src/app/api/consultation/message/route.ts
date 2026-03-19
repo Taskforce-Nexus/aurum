@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { callClaude } from '@/lib/claude'
 import { NEXO_CONSULTORIA_SYSTEM } from '@/lib/prompts'
 import { checkBalance, trackUsage } from '@/lib/usage'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 
 interface AdvisorResponse {
   role: 'nexo' | 'advisor'
@@ -36,6 +38,12 @@ export async function POST(req: NextRequest) {
       error: 'Saldo insuficiente. Recarga tu saldo para continuar.',
       balance: 0,
     }, { status: 402 })
+  }
+
+  const plan = await getUserPlan(user.id)
+  const model = getModel(plan, 'consultation')
+  if (!model) {
+    return NextResponse.json({ error: 'upgrade_required', feature: 'consultation', message: 'La consultoría activa requiere plan Core o superior' }, { status: 403 })
   }
 
   // 1. Load consultation + project
@@ -124,7 +132,7 @@ ${docsContext}`
     system: systemWithContext,
     messages: [...history, userMessage],
     max_tokens: 2048,
-    tier: 'strong',
+    model,
   })
 
   // 7. Parse response

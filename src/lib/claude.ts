@@ -9,6 +9,7 @@ interface CallClaudeOptions {
   messages: Array<{ role: string; content: string }>
   max_tokens?: number
   tier?: ModelTier
+  model?: string  // overrides tier when provided
 }
 
 const getModel = (tier: ModelTier): string => {
@@ -20,8 +21,8 @@ const getModel = (tier: ModelTier): string => {
   return models[tier]
 }
 
-export async function callClaude({ system, messages, max_tokens = 2048, tier = 'fast' }: CallClaudeOptions): Promise<string> {
-  const model = getModel(tier)
+export async function callClaude({ system, messages, max_tokens = 2048, tier = 'fast', model: modelOverride }: CallClaudeOptions): Promise<string> {
+  const model = modelOverride ?? getModel(tier)
   let attempt = 0
   while (attempt < 4) {
     try {

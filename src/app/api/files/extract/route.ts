@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { callClaude } from '@/lib/claude'
+import { createClient } from '@/lib/supabase/server'
+import { getModel } from '@/lib/model-router'
+import { getUserPlan } from '@/lib/plan'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -12,6 +15,17 @@ export async function POST(req: NextRequest) {
     if (!file_url || !file_type) {
       return NextResponse.json({ error: 'file_url and file_type required' }, { status: 400 })
     }
+
+    // Optional auth — used for model routing; defaults to free tier if not authenticated
+    let visionModel = 'claude-haiku-4-5-20251001'
+    try {
+      const supabase = await createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        const plan = await getUserPlan(user.id)
+        visionModel = getModel(plan, 'file_extract') ?? visionModel
+      }
+    } catch { /* non-blocking */ }
 
     // Download the file
     const response = await fetch(file_url)
@@ -53,7 +67,7 @@ export async function POST(req: NextRequest) {
             },
           ],
           max_tokens: 2048,
-          tier: 'fast',
+          model: visionModel,
         })
       } catch {
         text = `[Imagen: ${file_url.split('/').pop()} — no se pudo extraer texto]`

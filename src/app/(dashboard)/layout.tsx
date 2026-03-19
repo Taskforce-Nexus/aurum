@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import UserMenu from '@/components/dashboard/UserMenu'
 import LowBalanceBanner from '@/components/dashboard/LowBalanceBanner'
 import InsufficientFundsModal from '@/components/dashboard/InsufficientFundsModal'
+import UpgradeModal from '@/components/shared/UpgradeModal'
 
 export default async function DashboardLayout({
   children,
@@ -80,6 +81,8 @@ export default async function DashboardLayout({
 
       {/* Global 402 modal */}
       <InsufficientFundsModal />
+      {/* Global 403 upgrade modal */}
+      <UpgradeModal />
     </div>
   )
 }

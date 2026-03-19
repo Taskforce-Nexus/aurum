@@ -16,17 +16,26 @@
 
 ---
 
-## Modelos Claude — 3 tiers
+## Modelos Claude — Model Router por Plan
 
-| Tier | Variable | Modelo | Uso |
-|------|----------|--------|-----|
-| `fast` | `CLAUDE_MODEL` | `claude-haiku-4-5-20251001` | Semilla chat, preguntas, voice, topics |
-| `strong` | `CLAUDE_MODEL_STRONG` | `claude-sonnet-4-20250514` | Debate, secciones de documentos, consultoría, advisors |
-| `reasoning` | `CLAUDE_MODEL_REASONING` | `claude-opus-4-20250514` | founder_brief, game_analysis |
+`src/lib/model-router.ts` — tabla `MODEL_MAP[plan][task]` que retorna el modelo a usar o `null` si la feature está bloqueada para ese plan.
 
-- `callClaude({ system, messages, max_tokens?, tier? })` en `src/lib/claude.ts`
-- Default tier: `fast`. Cada llamada tiene su tier asignado explícitamente.
-- Reintentos con espera exponencial para errores 429
+`src/lib/plan.ts` — `getUserPlan(userId)` consulta `subscriptions.plan` donde `status = 'activa'`.
+
+| Plan | seed_chat | compose | session | consultation | custom_advisor | edit_document |
+|------|-----------|---------|---------|--------------|----------------|---------------|
+| free | Haiku | Haiku | Haiku | null (🔒) | null (🔒) | null (🔒) |
+| core | Sonnet | Sonnet | Sonnet | Haiku | Sonnet | Haiku |
+| pro | Sonnet | Sonnet | Sonnet | Sonnet | Sonnet | Sonnet |
+| enterprise | Sonnet | Opus | Opus | Sonnet | Sonnet | Sonnet |
+
+`system_prompt_generation` siempre usa Haiku en todos los planes.
+
+**Tiers legacy (backward compat):**
+- `callClaude({ system, messages, max_tokens?, tier?, model? })` — `model` override tiene prioridad sobre `tier`
+- Default tier: `fast`. Reintentos con espera exponencial para errores 429.
+
+**Feature gates:** 403 `{ error: 'upgrade_required', feature, message }` cuando `getModel(plan, task) === null`.
 
 ---
 
