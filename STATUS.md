@@ -7,8 +7,8 @@ Faber lo actualiza después de cada sesión de trabajo.
 
 ## Estado general
 
-Fecha última actualización: 2026-03-18
-Etapa actual: STORY 6.1 COMPLETO. Batch de system prompts con Haiku + few-shot: 5 prompts de referencia 10/10 extraídos y guardados en scripts/few-shot-examples/. Scripts actualizados: generate-advisor-prompts.ts (Haiku + few-shot mapping por categoría) + generate-cofounder-prompts.ts (nuevo, mismo patrón). 5 prompts de prueba generados y validados. Los 5 ejemplos de referencia actualizados en DB. Pendiente: correr batch completo (~1,368 advisors + ~122 cofounders sin prompt) con npx tsx scripts/generate-advisor-prompts.ts + npx tsx scripts/generate-cofounder-prompts.ts. Pendiente SQL: ALTER TABLE projects ADD COLUMN nexo_custom_prompt text (cofounders.system_prompt ya existe). Pendiente: BUG-A (Restricted Key), BUG-B (STRIPE_PRICE_*).
+Fecha última actualización: 2026-03-19
+Etapa actual: STORY 6.3 EN PROGRESO. Stripe 9/9 tests PASS. Session resume ya implementado (server-side query + initialSession prop). Error handling ya implementado en todos los puntos críticos. Páginas legales /privacy y /terms creadas. Batch system prompts: cofounders 124/124, specialists 325/325, buyer_personas 338/338, advisors 1246/1371 (91% — batch activo). TOTAL 2033/2158 (94%). Pendiente: advisors batch completa (~125 restantes), commit final con conteos. Pendiente SQL: ALTER TABLE projects ADD COLUMN nexo_custom_prompt text. Pendiente: BUG-Stripe (STRIPE_PRICE_* no configurados en Railway — configurar en Stripe Dashboard).
 
 ---
 
