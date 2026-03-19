@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
@@ -14,6 +14,15 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const supabase = createClient()
+
+  // Capture ?plan= param and store for post-registration checkout redirect
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const planParam = params.get('plan')
+    if (planParam && ['core', 'pro', 'enterprise'].includes(planParam)) {
+      localStorage.setItem('pending_plan', planParam)
+    }
+  }, [])
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault()
@@ -44,6 +53,28 @@ export default function RegisterPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: data.user.id, full_name: '' }),
       })
+
+      // If there's a pending plan from /pricing, redirect to Stripe Checkout
+      const pendingPlan = localStorage.getItem('pending_plan')
+      if (pendingPlan && pendingPlan !== 'free') {
+        try {
+          const res = await fetch('/api/stripe/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plan: pendingPlan }),
+          })
+          if (res.ok) {
+            const { url } = await res.json()
+            if (url) {
+              localStorage.removeItem('pending_plan')
+              window.location.href = url
+              return
+            }
+          }
+        } catch {
+          // Checkout failed — keep pending_plan so dashboard can retry
+        }
+      }
     }
 
     router.push(`/verify-email?email=${encodeURIComponent(email)}`)
@@ -94,9 +125,9 @@ export default function RegisterPage() {
             </button>
             <p className="text-xs text-[#4A5568] text-center">
               Al crear tu cuenta aceptas los{' '}
-              <span className="text-[#8892A4]">Términos de Servicio</span>{' '}
+              <Link href="/terms" className="text-[#8892A4] hover:text-white">Términos de Servicio</Link>{' '}
               y la{' '}
-              <span className="text-[#8892A4]">Política de Privacidad</span>
+              <Link href="/privacy" className="text-[#8892A4] hover:text-white">Política de Privacidad</Link>
             </p>
           </form>
 

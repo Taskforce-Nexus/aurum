@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
 import CreateProjectModal from './CreateProjectModal'
 
@@ -34,6 +34,23 @@ interface Props {
 
 export default function DashboardClient({ projects }: Props) {
   const [showModal, setShowModal] = useState(false)
+
+  // Post-registration checkout: if user came from /pricing via /register?plan=X
+  // and checkout couldn't fire immediately (e.g. email verification required),
+  // retry once they land on the dashboard with an active session.
+  useEffect(() => {
+    const pendingPlan = localStorage.getItem('pending_plan')
+    if (!pendingPlan || pendingPlan === 'free') return
+    localStorage.removeItem('pending_plan')
+    fetch('/api/stripe/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan: pendingPlan }),
+    })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data?.url) window.location.href = data.url })
+      .catch(() => {})
+  }, [])
 
   return (
     <main className="max-w-4xl mx-auto px-4 md:px-6 py-10">
