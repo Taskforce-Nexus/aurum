@@ -17,11 +17,11 @@ export default async function LandingPage() {
         </Link>
         <div className="flex items-center gap-4 md:gap-8">
           <a href="#caracteristicas" className="hidden md:block text-[14px] text-[#8B9DB7] hover:text-white transition-colors">
-            Características
+            Producto
           </a>
-          <a href="#precio" className="hidden md:block text-[14px] text-[#8B9DB7] hover:text-white transition-colors">
-            Precio
-          </a>
+          <Link href="/pricing" className="hidden md:block text-[14px] text-[#8B9DB7] hover:text-white transition-colors">
+            Precios
+          </Link>
           <Link
             href="/login"
             className="hidden md:block text-[14px] text-[#8B9DB7] hover:text-white transition-colors"
@@ -32,7 +32,7 @@ export default async function LandingPage() {
             href="/register"
             className="px-4 py-2 bg-[#B8860B] hover:bg-[#A07710] text-black font-semibold text-[14px] rounded-lg transition-colors"
           >
-            Comenzar →
+            Crear cuenta →
           </Link>
         </div>
       </nav>
@@ -389,14 +389,14 @@ export default async function LandingPage() {
             <Image src="/branding/logo-claro-reason.png" alt="Reason" width={70} height={22} />
           </Link>
           <div className="flex items-center gap-6">
-            <a href="#caracteristicas" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">
-              Características
-            </a>
-            <a href="#precio" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">
-              Precio
-            </a>
-            <Link href="/login" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">
-              Contacto
+            <Link href="/pricing" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">
+              Precios
+            </Link>
+            <Link href="/privacy" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">
+              Privacidad
+            </Link>
+            <Link href="/terms" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">
+              Términos
             </Link>
           </div>
           <p className="text-[12px] text-[#374151]">© 2025 AVA Suite</p>
