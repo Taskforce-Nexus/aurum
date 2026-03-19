@@ -30,22 +30,9 @@ export async function POST(req: NextRequest) {
     switch (step) {
 
       case 'entregables': {
-        if (!body.documentSpecIds?.length) break
-        // Upsert project_documents for each accepted spec
-        const docs = body.documentSpecIds.map(specId => ({
-          project_id: projectId,
-          spec_id: specId,
-          name: '', // will be updated from spec
-          status: 'pendiente',
-        }))
-        // Get spec names
-        const { data: specs } = await supabase
-          .from('document_specs').select('id, name').in('id', body.documentSpecIds)
-        const specNames = Object.fromEntries((specs ?? []).map(s => [s.id, s.name]))
-        const docsWithNames = docs.map(d => ({ ...d, name: specNames[d.spec_id ?? ''] ?? d.name }))
-        // Delete existing and re-insert
-        await admin.from('project_documents').delete().eq('project_id', projectId)
-        await admin.from('project_documents').insert(docsWithNames)
+        // compose/route.ts already saved project_documents — nothing to do here.
+        // documentSpecIds are project_document IDs, not document_spec IDs.
+        // Just acknowledge the step; do NOT delete or re-insert documents.
         break
       }
 
