@@ -4,6 +4,8 @@ import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { createNotification } from '@/lib/notifications'
+import { sendEmail } from '@/lib/email'
+import { paymentReceivedEmail } from '@/lib/email-templates'
 
 export async function POST(req: Request) {
   const body = await req.text()
@@ -78,6 +80,14 @@ export async function POST(req: Request) {
             title: `Pago de $${priceMonthly.toFixed(2)} procesado correctamente`,
           })
         } catch (e) { console.error('[notify] subscription paid:', e) }
+
+        // D5 — Email: payment received (subscription)
+        try {
+          const { data: profile } = await admin.from('profiles').select('name, email').eq('id', userId).single()
+          if (profile?.email) {
+            await sendEmail({ to: profile.email, ...paymentReceivedEmail(profile.name || 'ahí', priceMonthly, `Suscripción ${tier}`) })
+          }
+        } catch (e) { console.error('[EMAIL] payment subscription failed:', e) }
       }
 
       if (session.mode === 'payment') {
@@ -109,6 +119,14 @@ export async function POST(req: Request) {
             title: `Recarga de $${amount.toFixed(2)} acreditada a tu saldo`,
           })
         } catch (e) { console.error('[notify] token topup:', e) }
+
+        // D5 — Email: payment received (token top-up)
+        try {
+          const { data: profile } = await admin.from('profiles').select('name, email').eq('id', userId).single()
+          if (profile?.email) {
+            await sendEmail({ to: profile.email, ...paymentReceivedEmail(profile.name || 'ahí', amount, 'Recarga de saldo') })
+          }
+        } catch (e) { console.error('[EMAIL] payment topup failed:', e) }
       }
       break
     }
@@ -169,6 +187,14 @@ export async function POST(req: Request) {
             title: `Pago de $${amountPaid.toFixed(2)} procesado correctamente`,
           })
         } catch (e) { console.error('[notify] invoice.paid:', e) }
+
+        // D5 — Email: payment received (invoice renewal)
+        try {
+          const { data: profile } = await admin.from('profiles').select('name, email').eq('id', subscription.user_id).single()
+          if (profile?.email) {
+            await sendEmail({ to: profile.email, ...paymentReceivedEmail(profile.name || 'ahí', amountPaid, `Suscripción Reason — renovación`) })
+          }
+        } catch (e) { console.error('[EMAIL] payment invoice.paid failed:', e) }
       }
       break
     }

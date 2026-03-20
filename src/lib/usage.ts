@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { createNotification } from '@/lib/notifications'
+import { sendEmail } from '@/lib/email'
+import { lowBalanceEmail } from '@/lib/email-templates'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -60,6 +62,18 @@ export async function trackUsage(
         title: 'Tu saldo es menor a $5 — recarga para continuar usando Reason',
       })
     } catch (e) { console.error('[notify] saldo_bajo:', e) }
+
+    // D4 — Email: low balance
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('name, email')
+        .eq('id', userId)
+        .single()
+      if (profile?.email) {
+        await sendEmail({ to: profile.email, ...lowBalanceEmail(profile.name || 'ahí', newBalance) })
+      }
+    } catch (e) { console.error('[EMAIL] lowBalance failed:', e) }
   }
 
   return { cost, remaining: newBalance }

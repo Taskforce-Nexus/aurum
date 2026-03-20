@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { PLAN_LIMITS } from '@/lib/stripe'
+import { sendEmail } from '@/lib/email'
+import { welcomeEmail } from '@/lib/email-templates'
 
 export async function POST(req: NextRequest) {
   const { user_id, full_name } = await req.json()
@@ -38,6 +40,12 @@ export async function POST(req: NextRequest) {
     { user_id, balance_usd: initialBalance },
     { onConflict: 'user_id' }
   )
+
+  // Send welcome email (non-blocking)
+  try {
+    const email = welcomeEmail(full_name || 'ahí')
+    await sendEmail({ to: user.email!, ...email })
+  } catch (e) { console.error('[EMAIL] welcome failed:', e) }
 
   return NextResponse.json({ ok: true }, { status: 201 })
 }

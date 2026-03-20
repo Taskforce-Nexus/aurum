@@ -6,6 +6,8 @@ import { GENERATE_DOCUMENT_PROMPT } from '@/lib/prompts'
 import { createNotification } from '@/lib/notifications'
 import { getModel } from '@/lib/model-router'
 import { getUserPlan } from '@/lib/plan'
+import { sendEmail } from '@/lib/email'
+import { documentReadyEmail, sessionCompletedEmail } from '@/lib/email-templates'
 
 export async function POST(req: NextRequest) {
   const { session_id, phase_id, dual_response_id, resolution, founder_response } = await req.json()
@@ -162,6 +164,12 @@ export async function POST(req: NextRequest) {
     })
     .eq('id', phase.document_id)
 
+  // Fetch profile + project name for email (shared across D2 + D3)
+  const [{ data: emailProfile }, { data: emailProject }] = await Promise.all([
+    supabase.from('profiles').select('name, email').eq('id', user.id).single(),
+    supabase.from('projects').select('name').eq('id', session.project_id).single(),
+  ])
+
   // Notify: documento generado
   try {
     await createNotification({
@@ -171,6 +179,18 @@ export async function POST(req: NextRequest) {
       title: `Tu "${doc?.name ?? 'documento'}" está listo`,
     })
   } catch (e) { console.error('[notify] documento_generado:', e) }
+
+  // D3 — Email: document ready
+  try {
+    if (emailProfile?.email && doc?.name) {
+      const email = documentReadyEmail(
+        emailProfile.name || 'ahí',
+        emailProject?.name || 'tu proyecto',
+        doc.name,
+      )
+      await sendEmail({ to: emailProfile.email, ...email })
+    }
+  } catch (e) { console.error('[EMAIL] documentReady failed:', e) }
 
   // 5. Advance session to next phase
   const nextDocIndex = session.current_document_index + 1
@@ -196,6 +216,23 @@ export async function POST(req: NextRequest) {
         title: `Sesión de Consejo completada — ${session.total_documents} documentos generados`,
       })
     } catch (e) { console.error('[notify] sesion_completada:', e) }
+
+    // D2 — Email: session completed
+    try {
+      if (emailProfile?.email) {
+        const { count: docCount } = await supabase
+          .from('project_documents')
+          .select('id', { count: 'exact', head: true })
+          .eq('project_id', session.project_id)
+          .not('content_json', 'is', null)
+        const email = sessionCompletedEmail(
+          emailProfile.name || 'ahí',
+          emailProject?.name || 'tu proyecto',
+          docCount || session.total_documents,
+        )
+        await sendEmail({ to: emailProfile.email, ...email })
+      }
+    } catch (e) { console.error('[EMAIL] sessionCompleted failed:', e) }
   } else {
     // Mark next phase as en_progreso
     const { data: nextPhase } = await supabase
