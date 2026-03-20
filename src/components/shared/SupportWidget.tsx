@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface Message {
   role: 'user' | 'aria'
@@ -9,12 +10,15 @@ interface Message {
 
 const STORAGE_KEY = 'support_widget_messages'
 
-const INITIAL_MESSAGE: Message = {
-  role: 'aria',
-  content: '¡Hola! Soy Aria. Puedo ayudarte con dudas del producto, problemas técnicos, o registrar sugerencias. ¿En qué te puedo ayudar?',
-}
-
 export default function SupportWidget() {
+  const t = useTranslations('support')
+  const tc = useTranslations('common')
+
+  const INITIAL_MESSAGE: Message = {
+    role: 'aria',
+    content: t('greeting'),
+  }
+
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE])
   const [input, setInput] = useState('')
@@ -70,10 +74,10 @@ export default function SupportWidget() {
           setLastAction(data.actions[0])
         }
       } else {
-        setMessages(prev => [...prev, { role: 'aria', content: 'Ocurrió un error. Por favor intenta de nuevo.' }])
+        setMessages(prev => [...prev, { role: 'aria', content: t('error') }])
       }
     } catch {
-      setMessages(prev => [...prev, { role: 'aria', content: 'No pude conectarme. Verifica tu conexión e intenta de nuevo.' }])
+      setMessages(prev => [...prev, { role: 'aria', content: t('connectionError') }])
     } finally {
       setLoading(false)
     }
@@ -93,9 +97,9 @@ export default function SupportWidget() {
   }
 
   const actionLabel: Record<string, string> = {
-    create_ticket: 'Ticket creado ✓',
-    create_suggestion: 'Sugerencia registrada ✓',
-    escalate: 'Escalado al equipo ✓',
+    create_ticket: t('ticketCreated'),
+    create_suggestion: t('suggestionCreated'),
+    escalate: t('escalated'),
   }
 
   return (
@@ -104,7 +108,7 @@ export default function SupportWidget() {
       <button
         type="button"
         onClick={() => setIsOpen(v => !v)}
-        aria-label="Abrir soporte"
+        aria-label={t('openButton')}
         data-tour="support-widget"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#B8860B] text-white shadow-lg hover:bg-[#9A7209] transition-colors flex items-center justify-center text-2xl"
       >
@@ -120,17 +124,17 @@ export default function SupportWidget() {
               <div className="w-7 h-7 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/40 flex items-center justify-center text-xs text-[#B8860B] font-bold">A</div>
               <div>
                 <p className="text-[#F8F8F8] font-semibold text-sm leading-none">Aria</p>
-                <p className="text-[#8892A4] text-[10px]">Asistente de Reason</p>
+                <p className="text-[#8892A4] text-[10px]">{t('subtitle')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={clearChat}
-                title="Limpiar chat"
+                title={t('clearChatTitle')}
                 className="text-[#8892A4] hover:text-white text-xs transition-colors"
               >
-                Limpiar
+                {t('clearChat')}
               </button>
               <button
                 type="button"
@@ -145,7 +149,7 @@ export default function SupportWidget() {
           {/* Action badge */}
           {lastAction && (
             <div className="px-4 py-1.5 bg-green-500/10 border-b border-green-500/20 shrink-0">
-              <p className="text-green-400 text-xs">{actionLabel[lastAction] ?? 'Acción completada ✓'}</p>
+              <p className="text-green-400 text-xs">{actionLabel[lastAction] ?? t('actionDone')}</p>
             </div>
           )}
 
@@ -171,7 +175,7 @@ export default function SupportWidget() {
               <div className="flex justify-start">
                 <div className="w-6 h-6 rounded-full bg-[#B8860B]/20 border border-[#B8860B]/40 flex items-center justify-center text-[10px] text-[#B8860B] font-bold mr-2 mt-0.5 shrink-0">A</div>
                 <div className="bg-[#1E2A4A] rounded-xl px-3 py-2 text-sm text-[#8892A4]">
-                  <span className="animate-pulse">Aria está escribiendo...</span>
+                  <span className="animate-pulse">{t('typing')}</span>
                 </div>
               </div>
             )}
@@ -186,7 +190,7 @@ export default function SupportWidget() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Escribe tu mensaje..."
+                placeholder={t('placeholder')}
                 disabled={loading}
                 className="flex-1 bg-[#1E2A4A] text-white text-sm placeholder-[#8892A4] rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-[#B8860B] disabled:opacity-50"
               />
@@ -196,7 +200,7 @@ export default function SupportWidget() {
                 disabled={!input.trim() || loading}
                 className="bg-[#B8860B] hover:bg-[#9A7209] disabled:opacity-40 text-[#0A1128] rounded-lg px-3 py-2 text-sm font-medium transition-colors shrink-0"
               >
-                Enviar
+                {tc('send')}
               </button>
             </div>
           </div>

@@ -3,10 +3,13 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { createClient } from '@/lib/supabase/client'
 import AuthBrandPanel from '@/components/auth/AuthBrandPanel'
+import LocaleSelector from '@/components/shared/LocaleSelector'
 
 export default function RegisterPage() {
+  const t = useTranslations('auth')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -27,7 +30,7 @@ export default function RegisterPage() {
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault()
     if (password !== confirmPassword) {
-      setError('Las contraseñas no coinciden.')
+      setError(t('invalidCredentials'))
       return
     }
     setLoading(true)
@@ -81,17 +84,20 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex relative">
+      <div className="absolute top-4 right-4 z-10">
+        <LocaleSelector />
+      </div>
       <AuthBrandPanel variant="register" />
 
       <div className="flex-1 flex items-center justify-center p-8 lg:p-20 border-l border-[#27282B]">
         <div className="w-full max-w-md">
-          <h2 className="font-outfit text-3xl font-bold text-white mb-2">Crear Cuenta</h2>
-          <p className="text-sm text-[#8892A4] mb-8">Registrarte y dale vida a tu idea estratégica con tu consejería.</p>
+          <h2 className="font-outfit text-3xl font-bold text-white mb-2">{t('register')}</h2>
+          <p className="text-sm text-[#8892A4] mb-8">{t('registerSubtitle')}</p>
 
           <form onSubmit={handleRegister} className="space-y-5">
             <div>
-              <label className="block text-sm text-[#8892A4] mb-1.5">Correo electrónico</label>
+              <label className="block text-sm text-[#8892A4] mb-1.5">{t('email')}</label>
               <input
                 type="email" value={email} onChange={e => setEmail(e.target.value)}
                 placeholder="hola@ejemplo.com" required
@@ -99,15 +105,15 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <label className="block text-sm text-[#8892A4] mb-1.5">Contraseña</label>
+              <label className="block text-sm text-[#8892A4] mb-1.5">{t('password')}</label>
               <input
                 type="password" value={password} onChange={e => setPassword(e.target.value)}
-                placeholder="Mínimo 6 caracteres" required minLength={6}
+                placeholder={t('passwordMin')} required minLength={6}
                 className="w-full bg-[#0D1535] border border-[#1E2A4A] rounded-lg px-4 h-12 text-sm text-white placeholder-[#4A5568] focus:outline-none focus:border-[#B8860B] transition-colors"
               />
             </div>
             <div>
-              <label className="block text-sm text-[#8892A4] mb-1.5">Confirmar contraseña</label>
+              <label className="block text-sm text-[#8892A4] mb-1.5">{t('confirmPassword')}</label>
               <input
                 type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
                 placeholder="••••••••" required minLength={6}
@@ -121,19 +127,19 @@ export default function RegisterPage() {
             )}
             <button type="submit" disabled={loading}
               className="w-full h-12 bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-outfit">
-              {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
+              {loading ? t('creatingAccount') : t('register')}
             </button>
             <p className="text-xs text-[#4A5568] text-center">
-              Al crear tu cuenta aceptas los{' '}
-              <Link href="/terms" className="text-[#8892A4] hover:text-white">Términos de Servicio</Link>{' '}
-              y la{' '}
-              <Link href="/privacy" className="text-[#8892A4] hover:text-white">Política de Privacidad</Link>
+              {t('termsAccept')}{' '}
+              <Link href="/terms" className="text-[#8892A4] hover:text-white">{t('termsOfService')}</Link>{' '}
+              {t('and')}{' '}
+              <Link href="/privacy" className="text-[#8892A4] hover:text-white">{t('privacyPolicy')}</Link>
             </p>
           </form>
 
           <p className="text-center text-sm text-[#8892A4] mt-8">
-            ¿Ya tienes cuenta?{' '}
-            <Link href="/login" className="text-[#B8860B] hover:underline">Inicia sesión</Link>
+            {t('hasAccount')}{' '}
+            <Link href="/login" className="text-[#B8860B] hover:underline">{t('signIn')}</Link>
           </p>
         </div>
       </div>

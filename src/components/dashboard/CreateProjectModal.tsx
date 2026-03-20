@@ -2,24 +2,27 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
-const ENTRY_LEVELS = [
-  { value: 'raw_idea', label: 'Tengo una idea' },
-  { value: 'has_partial', label: 'Estoy desarrollándola' },
-  { value: 'has_prd', label: 'Ya estoy en el mercado' },
-]
+import { useTranslations } from 'next-intl'
 
 interface Props {
   onClose: () => void
 }
 
 export default function CreateProjectModal({ onClose }: Props) {
+  const t = useTranslations('project')
+  const tc = useTranslations('common')
   const [name, setName] = useState('')
   const [entryLevel, setEntryLevel] = useState('raw_idea')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+
+  const ENTRY_LEVELS = [
+    { value: 'raw_idea', label: t('rawIdea') },
+    { value: 'has_partial', label: t('someAdvance') },
+    { value: 'has_prd', label: t('docsReady') },
+  ]
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault()
@@ -40,7 +43,7 @@ export default function CreateProjectModal({ onClose }: Props) {
     const json = await res.json()
 
     if (!res.ok || !json.project) {
-      setError(json.error ?? 'Error creando proyecto')
+      setError(json.error ?? t('errorCreating'))
       setLoading(false)
       return
     }
@@ -52,18 +55,18 @@ export default function CreateProjectModal({ onClose }: Props) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A1128]/80 backdrop-blur-sm p-4">
       <div className="bg-[#0D1535] border border-[#1E2A4A] rounded-xl p-6 w-full max-w-md shadow-2xl">
-        <h2 className="text-lg font-semibold mb-5">Nuevo proyecto</h2>
+        <h2 className="text-lg font-semibold mb-5">{t('modalTitle')}</h2>
 
         <form onSubmit={handleCreate} className="space-y-5">
           <div>
             <label className="block text-xs text-[#8892A4] uppercase tracking-wider mb-1.5">
-              Nombre del proyecto
+              {t('name')}
             </label>
             <input
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
-              placeholder="ej. FinTrack, MiSaaS..."
+              placeholder={t('namePlaceholder')}
               required
               autoFocus
               className="w-full bg-[#0F0F11] border border-[#1E2A4A] rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#3a3b40] focus:outline-none focus:border-[#B8860B] transition-colors"
@@ -72,7 +75,7 @@ export default function CreateProjectModal({ onClose }: Props) {
 
           <div>
             <label className="block text-xs text-[#8892A4] uppercase tracking-wider mb-2">
-              ¿Dónde estás con tu proyecto?
+              {t('entryLevelQ')}
             </label>
             <div className="flex flex-wrap gap-2">
               {ENTRY_LEVELS.map(level => (
@@ -94,7 +97,7 @@ export default function CreateProjectModal({ onClose }: Props) {
 
           {success && (
             <p className="text-sm text-green-400 bg-green-400/10 border border-green-400/20 rounded-lg px-3 py-2">
-              Proyecto creado. Comenzando tu Semilla...
+              {t('created')}
             </p>
           )}
 
@@ -111,14 +114,14 @@ export default function CreateProjectModal({ onClose }: Props) {
               disabled={loading}
               className="px-4 py-2 text-sm text-[#8892A4] hover:text-white transition-colors"
             >
-              Cancelar
+              {tc('cancel')}
             </button>
             <button
               type="submit"
               disabled={loading || !name.trim()}
               className="bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold px-5 py-2 rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Creando...' : 'Crear proyecto'}
+              {loading ? t('creating') : t('createBtn')}
             </button>
           </div>
         </form>

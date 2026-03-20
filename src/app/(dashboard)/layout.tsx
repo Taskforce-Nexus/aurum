@@ -1,17 +1,20 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { createClient } from '@/lib/supabase/server'
 import UserMenu from '@/components/dashboard/UserMenu'
 import LowBalanceBanner from '@/components/dashboard/LowBalanceBanner'
 import InsufficientFundsModal from '@/components/dashboard/InsufficientFundsModal'
 import UpgradeModal from '@/components/shared/UpgradeModal'
 import SupportWidget from '@/components/shared/SupportWidget'
+import LocaleSelector from '@/components/shared/LocaleSelector'
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const t = await getTranslations('dashboard')
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
@@ -64,8 +67,10 @@ export default async function DashboardLayout({
             <span className={`font-medium text-sm ${balanceValue < 5 ? 'text-red-400' : 'text-white'}`}>
               {balanceFormatted}
             </span>
-            <span className="text-[10px] text-[#8892A4]">disponible</span>
+            <span className="text-[10px] text-[#8892A4]">{t('balance')}</span>
           </Link>
+
+          <LocaleSelector />
 
           {/* User menu */}
           <UserMenu

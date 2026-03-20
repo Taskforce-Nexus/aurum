@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import { ToastProvider } from '@/components/ui/Toast'
 import './globals.css'
 
@@ -35,13 +37,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="es" className="dark">
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className="dark">
       <head>
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
           <script
@@ -62,7 +67,9 @@ export default function RootLayout({
         )}
       </head>
       <body className={`${outfit.variable} ${openSans.variable} font-sans bg-[#0A1128] text-white antialiased`}>
-        <ToastProvider>{children}</ToastProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ToastProvider>{children}</ToastProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

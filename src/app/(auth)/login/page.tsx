@@ -3,16 +3,19 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { createClient } from '@/lib/supabase/client'
 import AuthBrandPanel from '@/components/auth/AuthBrandPanel'
+import LocaleSelector from '@/components/shared/LocaleSelector'
 
 type Mode = 'password' | 'magic'
 
 function ErrorMsg({ msg }: { msg: string }) {
+  const t = useTranslations('auth')
   const readable: Record<string, string> = {
-    'Invalid login credentials': 'Correo o contraseña incorrectos.',
-    'Email not confirmed': 'Confirma tu correo antes de entrar.',
-    'Too many requests': 'Demasiados intentos. Espera unos minutos.',
+    'Invalid login credentials': t('invalidCredentials'),
+    'Email not confirmed': t('emailNotConfirmed'),
+    'Too many requests': t('tooManyRequests'),
   }
   return (
     <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-3 py-2">
@@ -22,6 +25,7 @@ function ErrorMsg({ msg }: { msg: string }) {
 }
 
 export default function LoginPage() {
+  const t = useTranslations('auth')
   const [mode, setMode] = useState<Mode>('password')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -58,7 +62,7 @@ export default function LoginPage() {
     if (error) {
       setError(error.message)
     } else {
-      setSuccess('Revisa tu correo — te enviamos un enlace mágico.')
+      setSuccess(t('magicLinkSent'))
     }
     setLoading(false)
   }
@@ -71,17 +75,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex relative">
+      <div className="absolute top-4 right-4 z-10">
+        <LocaleSelector />
+      </div>
       <AuthBrandPanel variant="default" />
 
       {/* Right: form panel */}
       <div className="flex-1 flex items-center justify-center p-8 lg:p-20 border-l border-[#27282B]">
         <div className="w-full max-w-md">
-          <h2 className="font-outfit text-3xl font-bold text-white mb-2">Iniciar Sesión</h2>
-          <p className="text-sm text-[#8892A4] mb-8">Ingresa tus credenciales para continuar.</p>
+          <h2 className="font-outfit text-3xl font-bold text-white mb-2">{t('login')}</h2>
+          <p className="text-sm text-[#8892A4] mb-8">{t('loginSubtitle')}</p>
 
           {/* Mode toggle */}
-          <p className="text-xs text-[#8892A4] mb-2">Selecciona el tipo de acceso</p>
+          <p className="text-xs text-[#8892A4] mb-2">{t('selectMode')}</p>
           <div className="flex gap-1 bg-[#0D1535] border border-[#1E2A4A] p-1 rounded-full mb-7">
             <button
               type="button"
@@ -92,7 +99,7 @@ export default function LoginPage() {
                   : 'text-[#8892A4] hover:text-white'
               }`}
             >
-              Correo y contraseña
+              {t('passwordMode')}
             </button>
             <button
               type="button"
@@ -103,14 +110,14 @@ export default function LoginPage() {
                   : 'text-[#8892A4] hover:text-white'
               }`}
             >
-              Enlace al correo
+              {t('magicLinkMode')}
             </button>
           </div>
 
           {mode === 'password' ? (
             <form onSubmit={handleLogin} className="space-y-5">
               <div>
-                <label className="block text-sm text-[#8892A4] mb-1.5">Correo electrónico</label>
+                <label className="block text-sm text-[#8892A4] mb-1.5">{t('email')}</label>
                 <input
                   type="email" value={email} onChange={e => setEmail(e.target.value)}
                   placeholder="hola@ejemplo.com" required
@@ -119,9 +126,9 @@ export default function LoginPage() {
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="text-sm text-[#8892A4]">Contraseña</label>
+                  <label className="text-sm text-[#8892A4]">{t('password')}</label>
                   <Link href="/forgot-password" className="text-xs text-[#B8860B] hover:underline">
-                    ¿Olvidaste tu contraseña?
+                    {t('forgotPassword')}
                   </Link>
                 </div>
                 <div className="relative">
@@ -154,13 +161,13 @@ export default function LoginPage() {
               {error && <ErrorMsg msg={error} />}
               <button type="submit" disabled={loading}
                 className="w-full h-12 bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-outfit">
-                {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+                {loading ? t('loggingIn') : t('login')}
               </button>
             </form>
           ) : (
             <form onSubmit={handleMagicLink} className="space-y-5">
               <div>
-                <label className="block text-sm text-[#8892A4] mb-1.5">Correo electrónico</label>
+                <label className="block text-sm text-[#8892A4] mb-1.5">{t('email')}</label>
                 <input
                   type="email" value={email} onChange={e => setEmail(e.target.value)}
                   placeholder="hola@ejemplo.com" required
@@ -175,7 +182,7 @@ export default function LoginPage() {
               )}
               <button type="submit" disabled={loading || !!success}
                 className="w-full h-12 bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-outfit">
-                {loading ? 'Enviando...' : 'Enviar enlace'}
+                {loading ? t('sending') : t('sendLink')}
               </button>
             </form>
           )}
@@ -183,7 +190,7 @@ export default function LoginPage() {
           {/* Divider + Google */}
           <div className="flex items-center gap-3 my-6">
             <div className="flex-1 h-px bg-[#1E2A4A]" />
-            <span className="text-xs text-[#4A5568]">o continuar con</span>
+            <span className="text-xs text-[#4A5568]">{t('orWith')}</span>
             <div className="flex-1 h-px bg-[#1E2A4A]" />
           </div>
           <button
@@ -197,12 +204,12 @@ export default function LoginPage() {
               <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
               <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
             </svg>
-            Continuar con Google
+            {t('google')}
           </button>
 
           <p className="text-center text-sm text-[#8892A4] mt-8">
-            ¿No tienes cuenta?{' '}
-            <Link href="/register" className="text-[#B8860B] hover:underline">Crea cuenta</Link>
+            {t('noAccount')}{' '}
+            <Link href="/register" className="text-[#B8860B] hover:underline">{t('registerButton')}</Link>
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import LocaleSelector from '@/components/shared/LocaleSelector'
 
 export const metadata: Metadata = {
   title: 'Precios — Reason',
@@ -270,7 +271,10 @@ export default function PricingPage() {
             <Link href="/privacy" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">Privacidad</Link>
             <Link href="/terms" className="text-[13px] text-[#4A5568] hover:text-[#8B9DB7] transition-colors">Términos</Link>
           </div>
-          <p className="text-[12px] text-[#374151]">© 2025 AVA Suite</p>
+          <div className="flex items-center gap-4">
+            <LocaleSelector />
+            <p className="text-[12px] text-[#374151]">© 2026 Taskforce Global, LLC</p>
+          </div>
         </div>
       </footer>
     </div>

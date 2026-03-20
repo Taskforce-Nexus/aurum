@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
+import LocaleSelector from '@/components/shared/LocaleSelector'
 
 export default async function LandingPage() {
   const supabase = await createClient()
@@ -482,7 +483,10 @@ export default async function LandingPage() {
           </div>
           <div className="border-t border-[#1E2A4A] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-[12px] text-[#374151]">© 2026 Taskforce Global, LLC. All rights reserved.</p>
-            <p className="text-[11px] text-[#2C3244]">Reason · Strategic Reasoning Partner</p>
+            <div className="flex items-center gap-4">
+              <LocaleSelector />
+              <p className="text-[11px] text-[#2C3244]">Reason · Strategic Reasoning Partner</p>
+            </div>
           </div>
         </div>
       </footer>
