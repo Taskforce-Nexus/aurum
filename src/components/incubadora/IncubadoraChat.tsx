@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import { createClient } from '@/lib/supabase/client'
 import VoiceModePanel from './VoiceModePanel'
 import type { Project, Conversation, Message } from '@/lib/types'
+import { startSeedTour, shouldShowTour } from '@/lib/onboarding'
 
 interface UploadedFile {
   name: string
@@ -84,6 +85,13 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
   useEffect(() => {
     if (typeof window !== 'undefined' && !localStorage.getItem('nexo-onboarding-tip-seen')) {
       setShowOnboardingTip(true)
+    }
+  }, [])
+
+  // Seed tour — first time in Semilla
+  useEffect(() => {
+    if (shouldShowTour('seed')) {
+      setTimeout(() => startSeedTour(), 1200)
     }
   }, [])
 
@@ -441,6 +449,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             <input ref={fileInputRef} type="file" accept=".pdf,.docx,.doc,.txt,.md,.png,.jpg,.jpeg" className="hidden" onChange={handleFileSelect} aria-label="Cargar archivo" title="Cargar archivo" />
             <button
               type="button"
+              data-tour="seed-upload"
               onClick={() => fileInputRef.current?.click()}
               className="w-full text-xs text-[#8892A4] border border-dashed border-[#1E2A4A] rounded-lg px-3 py-2 hover:border-[#B8860B]/50 hover:text-[#B8860B] transition-colors"
             >
@@ -587,7 +596,7 @@ export default function IncubadoraChat({ project, conversation, userEmail }: Pro
             }}
           />
         ) : (
-        <main className="flex-1 flex flex-col overflow-hidden">
+        <main className="flex-1 flex flex-col overflow-hidden" data-tour="seed-chat">
           <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
             {showOnboardingTip && (
               <div className="flex items-start gap-3 bg-[#1E2A4A] border border-[#B8860B]/30 rounded-xl px-4 py-3">

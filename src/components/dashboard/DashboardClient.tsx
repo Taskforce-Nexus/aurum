@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
 import CreateProjectModal from './CreateProjectModal'
+import { startDashboardTour, shouldShowTour } from '@/lib/onboarding'
 
 const PHASE_LABELS: Record<string, { label: string; color: string }> = {
   semilla:          { label: 'Semilla',            color: 'bg-amber-500/20 text-amber-400' },
@@ -35,6 +36,13 @@ interface Props {
 export default function DashboardClient({ projects }: Props) {
   const [showModal, setShowModal] = useState(false)
 
+  // First-time tour
+  useEffect(() => {
+    if (shouldShowTour('dashboard')) {
+      setTimeout(() => startDashboardTour(), 1000)
+    }
+  }, [])
+
   // Post-registration checkout: if user came from /pricing via /register?plan=X
   // and checkout couldn't fire immediately (e.g. email verification required),
   // retry once they land on the dashboard with an active session.
@@ -63,6 +71,7 @@ export default function DashboardClient({ projects }: Props) {
         </div>
         <button
           type="button"
+          data-tour="create-project"
           onClick={() => setShowModal(true)}
           className="bg-[#B8860B] hover:bg-[#a07509] text-white font-semibold px-5 h-10 rounded-lg text-sm transition-colors font-outfit"
         >

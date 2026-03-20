@@ -17,6 +17,7 @@ export default function CreateProjectModal({ onClose }: Props) {
   const [name, setName] = useState('')
   const [entryLevel, setEntryLevel] = useState('raw_idea')
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
 
@@ -44,7 +45,8 @@ export default function CreateProjectModal({ onClose }: Props) {
       return
     }
 
-    router.push(`/project/${json.project.id}/semilla`)
+    setSuccess(true)
+    setTimeout(() => router.push(`/project/${json.project.id}/semilla`), 800)
   }
 
   return (
@@ -89,6 +91,12 @@ export default function CreateProjectModal({ onClose }: Props) {
               ))}
             </div>
           </div>
+
+          {success && (
+            <p className="text-sm text-green-400 bg-green-400/10 border border-green-400/20 rounded-lg px-3 py-2">
+              Proyecto creado. Comenzando tu Semilla...
+            </p>
+          )}
 
           {error && (
             <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-3 py-2">

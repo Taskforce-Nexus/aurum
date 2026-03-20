@@ -105,6 +105,7 @@ export default function SupportWidget() {
         type="button"
         onClick={() => setIsOpen(v => !v)}
         aria-label="Abrir soporte"
+        data-tour="support-widget"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#B8860B] text-white shadow-lg hover:bg-[#9A7209] transition-colors flex items-center justify-center text-2xl"
       >
         {isOpen ? '✕' : '💬'}

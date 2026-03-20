@@ -49,6 +49,70 @@ body {
   border-radius: 4px;
 }
 
+/* ── Driver.js tour styles — Reason palette ── */
+.reason-tour .driver-popover {
+  background-color: #0D1535 !important;
+  border: 1px solid #1E2A4A !important;
+  color: #F8F8F8 !important;
+  border-radius: 8px !important;
+  max-width: 340px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+}
+
+.reason-tour .driver-popover-title {
+  color: #F8F8F8 !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.reason-tour .driver-popover-description {
+  color: #C0C0C0 !important;
+  font-family: 'Open Sans', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.reason-tour .driver-popover-next-btn,
+.reason-tour .driver-popover-done-btn {
+  background-color: #B8860B !important;
+  color: #0A1128 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+  padding: 6px 16px !important;
+}
+
+.reason-tour .driver-popover-prev-btn {
+  color: #8892A4 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.reason-tour .driver-popover-progress-text {
+  color: #8892A4 !important;
+}
+
+/* Step fade transition in SeedSessionFlow */
+.seed-step-fade {
+  animation: seedFadeIn 200ms ease-in-out;
+}
+@keyframes seedFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton shimmer */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #0D1535 25%, #1E2A4A 50%, #0D1535 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* Markdown prose — Reason palette */
 .prose-invert h1, .prose-invert h2, .prose-invert h3 {
   color: #F8F8F8;

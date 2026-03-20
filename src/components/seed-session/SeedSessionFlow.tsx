@@ -182,7 +182,7 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
 
       <div className="flex flex-1 overflow-hidden">
         {/* Left sidebar */}
-        <aside className="w-72 border-r border-[#1E2A4A] p-5 flex flex-col gap-5 overflow-y-auto shrink-0">
+        <aside data-tour="seed-steps" className="w-72 border-r border-[#1E2A4A] p-5 flex flex-col gap-5 overflow-y-auto shrink-0">
           <div>
             <h2 className="font-semibold text-sm mb-0.5">Sesión de Consejo</h2>
             <p className="text-xs text-[#8892A4]">Configuración del consejo</p>
@@ -255,7 +255,8 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
         {/* Main content — relative container for floating button */}
         <div className="flex-1 flex flex-col overflow-hidden relative">
 
-          {/* Step content */}
+          {/* Step content — keyed for fade transition */}
+          <div key={currentStep} className="seed-step-fade contents">
           {currentStep === 'entregables' && (
             <EntregablesPropuesta
               {...sharedProps}
@@ -304,6 +305,8 @@ export default function SeedSessionFlow({ project, cofounders, userEmail, initia
               onComplete={clearStorage}
             />
           )}
+
+          </div>{/* end seed-step-fade */}
 
           {/* Floating "continue" button when viewing a past step */}
           {isViewingPast && (

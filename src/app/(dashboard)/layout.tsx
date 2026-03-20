@@ -58,6 +58,7 @@ export default async function DashboardLayout({
           {/* Token balance — clickable, red if low */}
           <Link
             href="/settings/facturacion"
+            data-tour="balance"
             className="hidden sm:flex flex-col items-end hover:opacity-80 transition-opacity"
           >
             <span className={`font-medium text-sm ${balanceValue < 5 ? 'text-red-400' : 'text-white'}`}>

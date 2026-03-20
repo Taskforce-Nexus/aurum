@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Project, Advisor, Cofounder } from '@/lib/types'
 import { safeFetch } from '@/lib/fetch402'
+import { startSessionTour, shouldShowTour } from '@/lib/onboarding'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -125,6 +126,13 @@ export default function SesionConsejoView({
   useEffect(() => {
     scrollToBottom()
   }, [dual, uiState, questionTimestamp, scrollToBottom])
+
+  // Session tour — first time
+  useEffect(() => {
+    if (shouldShowTour('session')) {
+      setTimeout(() => startSessionTour(), 1000)
+    }
+  }, [])
 
   // Prompts loading banner — shown while background generation is in progress
   const [promptsReady, setPromptsReady] = useState(
@@ -439,11 +447,32 @@ export default function SesionConsejoView({
         )}
       </header>
 
+      {/* Progress bar — Documento X de Y · Pregunta A de B */}
+      {session && (
+        <div className="shrink-0 border-b border-[#1E2A4A]/50 px-6 py-2 flex items-center gap-3 bg-[#0A1128]">
+          <div className="flex-1 h-1 bg-[#1E2A4A] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[#B8860B] rounded-full transition-all duration-500"
+              style={{
+                width: `${Math.round(
+                  ((currentDocIndex + (totalQuestions > 0 ? questionIndex / totalQuestions : 0)) /
+                    session.total_documents) * 100
+                )}%`,
+              }}
+            />
+          </div>
+          <p className="text-[11px] text-[#4A5568] shrink-0 whitespace-nowrap">
+            Documento {currentDocIndex + 1} de {session.total_documents}
+            {totalQuestions > 0 && ` · Pregunta ${questionIndex + 1} de ${totalQuestions}`}
+          </p>
+        </div>
+      )}
+
       {/* ── Body ────────────────────────────────────────────────────────── */}
       <div className="flex-1 flex overflow-hidden">
 
         {/* ── Left Sidebar: Fases (260px) ─────────────────────────────── */}
-        <aside className="w-[260px] shrink-0 border-r border-[#1E2A4A] overflow-y-auto px-4 py-5 flex flex-col gap-4">
+        <aside data-tour="session-phases" className="w-[260px] shrink-0 border-r border-[#1E2A4A] overflow-y-auto px-4 py-5 flex flex-col gap-4">
           {session ? (
             <>
               {/* General progress */}
@@ -777,7 +806,7 @@ export default function SesionConsejoView({
 
                 {/* Nexo Dual result */}
                 {(uiState === 'debate_ready' || uiState === 'resolving') && dual && (
-                  <div className="space-y-4">
+                  <div data-tour="session-debate" className="space-y-4">
 
                     {/* Auto-mode indicator */}
                     {mode !== 'normal' && uiState === 'debate_ready' && (
@@ -970,7 +999,7 @@ export default function SesionConsejoView({
         </main>
 
         {/* ── Right Sidebar: Advisors + Sections + Preview (280px) ────── */}
-        <aside className="w-[280px] shrink-0 border-l border-[#1E2A4A] overflow-y-auto px-4 py-5 flex flex-col gap-5">
+        <aside data-tour="session-advisors" className="w-[280px] shrink-0 border-l border-[#1E2A4A] overflow-y-auto px-4 py-5 flex flex-col gap-5">
 
           {/* Active advisors */}
           <div>
