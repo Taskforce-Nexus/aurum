@@ -16,28 +16,43 @@ function AuthConfirmInner() {
       const tokenHash = searchParams.get('token_hash')
       const type = searchParams.get('type') as 'signup' | 'magiclink' | 'recovery' | null
 
-      if (!tokenHash || !type) {
-        setStatus('error')
-        setMessage('Enlace inválido o expirado.')
+      // Primary path: token_hash + type (OTP flow)
+      if (tokenHash && type) {
+        const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type })
+        if (error) {
+          setStatus('error')
+          setMessage(
+            error.message.includes('expired')
+              ? 'El enlace expiró. Solicita uno nuevo.'
+              : 'No pudimos verificar tu cuenta. Intenta de nuevo.'
+          )
+          return
+        }
+        if (type === 'recovery') {
+          router.push('/auth/reset-password')
+        } else {
+          setStatus('success')
+          setTimeout(() => router.push('/dashboard'), 1500)
+        }
         return
       }
 
-      const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type })
-
-      if (error) {
-        setStatus('error')
-        setMessage(
-          error.message.includes('expired')
-            ? 'El enlace expiró. Solicita uno nuevo.'
-            : 'No pudimos verificar tu cuenta. Intenta de nuevo.'
-        )
-      } else if (type === 'recovery') {
-        // User is now authenticated — redirect to password reset page
-        router.push('/auth/reset-password')
-      } else {
+      // Fallback: code (PKCE flow — Supabase redirects with ?code=xxx)
+      const code = searchParams.get('code')
+      if (code) {
+        const { error } = await supabase.auth.exchangeCodeForSession(code)
+        if (error) {
+          setStatus('error')
+          setMessage('Enlace inválido o expirado.')
+          return
+        }
         setStatus('success')
-        setTimeout(() => router.push('/'), 1500)
+        setTimeout(() => router.push('/dashboard'), 1500)
+        return
       }
+
+      setStatus('error')
+      setMessage('Enlace inválido o expirado.')
     }
     confirm()
   }, [])
